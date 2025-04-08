@@ -1,0 +1,21 @@
+{
+  "UniqueName": "urufudoggo.Weth",
+  "Version": "0.0.1",
+  "Author": "urufudoggo",
+  "DisplayName": "Weth",
+  "Description": "Description goes here you pineapple head. Don't you dare forget.",
+  "RequiredApiVersion": "1.14.5",
+  "EntryPointAssembly": "Weth.dll",
+  "LoadPhase": "AfterDbInit",
+  "Dependencies": [
+    {
+      "UniqueName": "Shockah.Kokoro",
+      "Version": "2.6.0"
+    }
+  ],
+  "UpdateChecks": {
+    "NexusMods": {
+      "ID": 55
+    }
+  }
+}

@@ -1,0 +1,127 @@
+﻿{
+    "character": {
+        "Weth":
+        {
+            "name": "Weth",
+            "desc": "<c=93c4c8>WETH</c>\nA treasure hunter. His cards focus on <c=keyword>multi-attack</c> and <c=keyword>midrow elimination</c>. He also finds <c=heal>goodies</c> hidden in plain sight."
+        }
+    },
+    "status": {
+        "Pulsedrive": {
+            "name": "Pulsedrive",
+            "desc": "Add {0} damage to all attacks. <c=downside>Goes away at the start of next turn.</c>"
+        }
+    },
+    "action": {
+    },
+    "artifact": {
+        "Common": {
+            "RockPower": {
+                "name": "ROCK POWER",
+                "desc": "Gain 1 <c=status>PULSEDRIVE</c> when you destroy an asteroid."
+            },
+            "ResidualShot": {
+                "name": "RESIDUAL SHOT",
+                "desc": "Shoot for 1 damage when you play a <c=93c4c8>Weth</c> card."
+            },
+            "CannonRecharge": {
+                "name": "CANNON RECHARGE",
+                "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c>, gain 1 <c=status>STUN CHARGE</c>."
+            }
+        },
+        "Boss": {
+            "HiddenOptions": {
+                "name": "HIDDEN OPTIONS",
+                "desc": "Immediately choose 1 of 4 boss artifacts."
+            },
+            "HiddenOptions2": {
+                "name": "HIDDEN OPTIONS II",
+                "desc": "Immediately choose 1 of 5 boss artifacts."
+            },
+            "ArtifactExcursion": {
+                "name": "ARTIFACT EXCURSION",
+                "desc": "After 50 hits, gain an artifact."
+            }
+        },
+        "EventOnly": {
+        },
+        "Duo": {
+        }
+    },
+    "card": {
+        "Common": {
+            "TripleTap": {
+                "name": "Triple Tap"
+            },
+            "Puckshot": {
+                "name": "Puckshot"
+            },
+            "TrashDispenser": {
+                "name": "Trash Dispenser"
+            },
+            "Splitshot": {
+                "name": "Splitshot"
+            },
+            "CargoBlaster": {
+                "name": "Cargo Blaster"
+            },
+            "Pulsedrive": {
+                "name": "Pulsedrive"
+            },
+            "GiantTrash": {
+                "name": "Giant Trash"
+            },
+            "DoubleBlast": {
+                "name": "Double Blast"
+            },
+            "Overcompensator": {
+                "name": "Over- compensator"
+            },
+            "WethEXE": {
+                "name": "Weth.EXE"
+            }
+        },
+        "Uncommon": {
+            "DoubleTap": {
+                "name": "Double Tap"
+            },
+            "Disabler": {
+                "name": "Disabler"
+            },
+            "ScatterTrash": {
+                "name": "Scatter Trash"
+            },
+            "MegaTrash": {
+                "name": "Mega Trash"
+            },
+            "Powershot": {
+                "name": "Powershot"
+            },
+            "Wideshot": {
+                "name": "Wideshot"
+            },
+            "Bloom": {
+                "name": "Bloom"
+            }
+        },
+        "Rare": {
+            "UnstoppableForce": {
+                "name": "Unstoppable Force"
+            },
+            "PearlDispenser": {
+                "name": "Pearl Dispenser"
+            },
+            "CrisisCall": {
+                "name": "Crisis Call"
+            },
+            "PowPow": {
+                "name": "Pow Pow"
+            },
+            "ExtremeViolence": {
+                "name": "Extreme Violence"
+            }
+        },
+        "Token": {
+        }
+    }
+}
