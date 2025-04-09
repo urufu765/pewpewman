@@ -23,9 +23,19 @@ internal class ModEntry : SimpleMod
     internal Harmony Harmony;
     internal IKokoroApi KokoroApi;
     internal IDeckEntry WethDeck;
+    internal IDeckEntry GoodieDeck;
     public bool modDialogueInited;
     internal IStatusEntry PulseStatus { get; private set; } = null!;
-
+    // internal ICardTraitEntry AutoSU { get; private set; } = null!;
+    // internal Spr AutoSUSpr { get; private set; }
+    //internal ICardTraitEntry AutoE { get; private set; } = null!;
+    public Spr WethCommon { get; private set; }
+    public Spr WethUncommon { get; private set; }
+    public Spr WethRare { get; private set; }
+    public Spr GoodieCrystal { get; private set; }
+    public Spr GoodieCrystalA { get; private set; }
+    public Spr GoodieMech { get; private set; }
+    public Spr GoodieMechA { get; private set; }
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
@@ -37,13 +47,50 @@ internal class ModEntry : SimpleMod
      * In theory only one collection could be used, containing all registerable types, but it is seperated this way for ease of organization.
      */
     private static List<Type> WethCommonCardTypes = [
-        typeof(WethExe)
+        typeof(WethExe),
+        typeof(TripleTap),
+        typeof(Puckshot),
+        //typeof(Splitshot),
+        typeof(TrashDispenser),
+        //typeof(CargoBlaster),
+        typeof(Pulsedrive),
+        //typeof(GiantTrash),
+        //typeof(DoubleBlast),
+        typeof(Overcompensator)
     ];
     private static List<Type> WethUncommonCardTypes = [
+        typeof(DoubleTap),
+        //typeof(Disabler),
+        //typeof(ScatterTrash),
+        //typeof(MegaTrash),
+        typeof(Powershot),
+        //typeof(Wideshot),
+        typeof(Bloom)
     ];
     private static List<Type> WethRareCardTypes = [
+        typeof(UnstoppableForce),
+        typeof(PearlDispenser),
+        typeof(CrisisCall),
+        typeof(PowPow),
+        typeof(ExtremeViolence)
     ];
     private static List<Type> WethSpecialCardTypes = [
+        typeof(CryAhtack),
+        typeof(CryDuhfend),
+        typeof(CryDodge),
+        typeof(CryEnergy),
+        typeof(CryEvade),
+        typeof(CryFlux),
+        typeof(CryShield),
+        typeof(CrySwap),
+        typeof(MechAhtack),
+        typeof(MechDuhfend),
+        typeof(MechEvade),
+        typeof(MechHull),
+        typeof(MechMine),
+        typeof(MechMissile),
+        typeof(MechStun),
+        typeof(MechSwap)
     ];
     private static IEnumerable<Type> WethCardTypes =
         WethCommonCardTypes
@@ -126,7 +173,7 @@ internal class ModEntry : SimpleMod
          * A deck only defines how cards should be grouped, for things such as codex sorting and Second Opinions.
          * A character must be defined with a deck to allow the cards to be obtainable as a character's cards.
          */
-        WethDeck = helper.Content.Decks.RegisterDeck("illeana", new DeckConfiguration
+        WethDeck = helper.Content.Decks.RegisterDeck("weth", new DeckConfiguration
         {
             Definition = new DeckDef
             {
@@ -137,13 +184,41 @@ internal class ModEntry : SimpleMod
                  */
                 color = new Color("125f66"),
 
-                titleColor = new Color("93c4c8")
+                titleColor = new Color("93c4c8").addClarityBright()
             },
 
-            DefaultCardArt = StableSpr.cards_colorless,
+            DefaultCardArt = StableSpr.cards_MultiBlast,
             BorderSprite = RegisterSprite(package, "assets/frame_weth.png").Sprite,
-            Name = AnyLocalizations.Bind(["character", "Weth", "name"]).Localize
+            Name = AnyLocalizations.Bind(["character", "Weth", "name"]).Localize,
+            ShineColorOverride = _ => new Color(0, 0, 0),
         });
+        WethCommon = RegisterSprite(package, "assets/frame_wethcommon.png").Sprite;
+        WethUncommon = RegisterSprite(package, "assets/frame_wethuncommon.png").Sprite;
+        WethRare = RegisterSprite(package, "assets/frame_wethrare.png").Sprite;
+        
+        GoodieDeck = helper.Content.Decks.RegisterDeck("goodie", new DeckConfiguration
+        {
+            Definition = new DeckDef
+            {
+                /*
+                 * This color is used in a few places:
+                 * TODO On cards, it dictates the sheen on higher rarities, as well as influences the color of the energy cost.
+                 * If this deck is given to a playable character, their name will be this color, and their mini will have this color as their border.
+                 */
+                color = new Color("93c4c8"),
+
+                titleColor = new Color("000000")
+            },
+
+            DefaultCardArt = StableSpr.cards_MultiBlast,
+            BorderSprite = RegisterSprite(package, "assets/frame_goodies.png").Sprite,
+            Name = AnyLocalizations.Bind(["character", "Goodie", "name"]).Localize,
+            ShineColorOverride = _ => new Color(0, 0, 0),
+        });
+        GoodieCrystal = RegisterSprite(package, "assets/frame_goodiescrystal.png").Sprite;
+        GoodieCrystalA = RegisterSprite(package, "assets/frame_goodiescrystalA.png").Sprite;
+        GoodieMech = RegisterSprite(package, "assets/frame_goodiesmech.png").Sprite;
+        GoodieMechA = RegisterSprite(package, "assets/frame_goodiesmechA.png").Sprite;
 
         /*
          * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
@@ -187,6 +262,8 @@ internal class ModEntry : SimpleMod
             Starters = new StarterDeck
             {
                 cards = [
+                    new TripleTap(),
+                    new Puckshot(),
                 ],
                 /*
                  * Some characters have starting artifacts, in addition to starting cards.
@@ -202,6 +279,7 @@ internal class ModEntry : SimpleMod
         MoreDifficultiesApi?.RegisterAltStarters(WethDeck.Deck, new StarterDeck
         {
             cards = [
+                new TrashDispenser(),
             ],
             artifacts = 
             [
@@ -224,7 +302,23 @@ internal class ModEntry : SimpleMod
             Name = AnyLocalizations.Bind(["status", "Pulsedrive", "name"]).Localize,
             Description = AnyLocalizations.Bind(["status", "Pulsedrive", "desc"]).Localize
         });
-
+        // AutoSUSpr = RegisterSprite(package, "assets/autoplaysingle.png").Sprite;
+        // AutoSU = helper.Content.Cards.RegisterTrait("AutoSU", new CardTraitConfiguration
+        // {
+        //     Name = AnyLocalizations.Bind(["trait", "Autousedestroy", "name"]).Localize,
+        //     Tooltips = (state, card) =>
+        //     {
+        //         return [new GlossaryTooltip($"cardtrait.{MethodBase.GetCurrentMethod()!.DeclaringType!.Namespace!}::AutoSU")
+        //         {
+        //             Title = ModEntry.Instance.Localizations?.Localize(["trait", "Autousedestroy", "name"]),
+        //             Description = ModEntry.Instance.Localizations?.Localize(["trait", "Autousedestroy", "desc"]),
+        //             TitleColor = Colors.cardtrait,
+        //             Icon = AutoSUSpr
+        //         },
+        //         new TTGlossary("cardtrait.singleUse")];
+        //     },
+        //     Icon = (state, card) => AutoSUSpr
+        // });
         /*
          * Managers are typically made to register themselves when constructed.
          * _ = makes the compiler not complain about the fact that you are constructing something for seemingly no reason.

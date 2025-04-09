@@ -4,6 +4,11 @@
         {
             "name": "Weth",
             "desc": "<c=93c4c8>WETH</c>\nA treasure hunter. His cards focus on <c=keyword>multi-attack</c> and <c=keyword>midrow elimination</c>. He also finds <c=heal>goodies</c> hidden in plain sight."
+        },
+        "Goodie":
+        {
+            "name": "Goodies",
+            "desc": "Goodies discovered from breaking apart structures."
         }
     },
     "status": {
@@ -13,6 +18,16 @@
         }
     },
     "action": {
+    },
+    "trait": {
+        "Autouseexhaust": {
+            "name": "Auto Exhaust",
+            "desc": "Automatically plays upon discard if energy is sufficient.\n<c=downside>Exhausted after use.</c>"
+        },
+        "Autousedestroy": {
+            "name": "Auto Single-use",
+            "desc": "Automatically plays upon discard if energy is sufficient.\n<c=downside>Destroyed after use.</c>"
+        }
     },
     "artifact": {
         "Common": {
@@ -75,7 +90,7 @@
                 "name": "Double Blast"
             },
             "Overcompensator": {
-                "name": "Over- compensator"
+                "name": "Atonement"
             },
             "WethEXE": {
                 "name": "Weth.EXE"
@@ -112,7 +127,9 @@
                 "name": "Pearl Dispenser"
             },
             "CrisisCall": {
-                "name": "Crisis Call"
+                "name": "Crisis Call",
+                "desc": "Give 3 <c=status>PULSEDRIVE</c> on play,\n<c=downside>forcibly  exhausted on discard.</c>",
+                "descB": "Give 7 <c=status>PULSEDRIVE</c> on play,\n<c=downside>forcibly  exhausted on discard.</c>"
             },
             "PowPow": {
                 "name": "Pow Pow"
@@ -122,6 +139,42 @@
             }
         },
         "Token": {
+            "Ahtack": {
+                "name": "_tt_ck"
+            },
+            "Duhfend": {
+                "name": "Bl_ck"
+            },
+            "Evado": {
+                "name": "_v_d_"
+            },
+            "Swaparoo": {
+                "name": "Sw_p"
+            },
+            "Mime": {
+                "name": "M_n_"
+            },
+            "Mizzile": {
+                "name": "M_ss_l_"
+            },
+            "Stan": {
+                "name": "St_n"
+            },
+            "Hell": {
+                "name": "H_ll"
+            },
+            "Flox": {
+                "name": "Fl_x"
+            },
+            "Dodger": {
+                "name": "D_dg_"
+            },
+            "NRG": {
+                "name": "_n_rg_"
+            },
+            "Shoulder": {
+                "name": "Sh__ld"
+            }
         }
     }
 }

@@ -6,4 +6,5 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### Pre-release
 
+* **(0.0.2)**: Adding a bunch of easy to add cards
 * **(0.0.1)**: BAM! (Began Assured Mutilation)!
