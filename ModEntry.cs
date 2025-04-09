@@ -9,7 +9,7 @@ using System.Linq;
 //using Weth.Artifacts;
 using Weth.Cards;
 using Weth.External;
-//using Weth.Features;
+using Weth.Features;
 using System.Reflection;
 //using System.Reflection;
 
@@ -116,17 +116,26 @@ internal class ModEntry : SimpleMod
     private static List<string> Weth1Anims = [
         "gameover",
         "mini",
-        "neutral",
-        "squint",
         "placeholder"
     ];
     private static List<string> Weth3Anims = [
+        //"down",
+        //"tilt",
+        //"tiltalt",
     ];
     private static List<string> Weth4Anims = [
+        //"think",
     ];
     private static List<string> Weth5Anims = [
+        //"explain",
+        "neutral",
+        //"sad",
+        //"sparkle",
+        "squint",
+        //"up",
     ];
     private static List<string> Weth6Anims = [
+        //"plead",
     ];
     public readonly static IEnumerable<string> WethAnims =
         Weth1Anims
@@ -324,6 +333,7 @@ internal class ModEntry : SimpleMod
          * _ = makes the compiler not complain about the fact that you are constructing something for seemingly no reason.
          */
         //_ = new KnowledgeManager();
+        _ = new Pulsedriving();
 
         /*
          * Some classes require so little management that a manager may not be worth writing.
