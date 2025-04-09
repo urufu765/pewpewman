@@ -26,6 +26,7 @@ internal class ModEntry : SimpleMod
     internal IDeckEntry GoodieDeck;
     public bool modDialogueInited;
     internal IStatusEntry PulseStatus { get; private set; } = null!;
+    internal IStatusEntry UnknownStatus { get; private set; } = null!;
     // internal ICardTraitEntry AutoSU { get; private set; } = null!;
     // internal Spr AutoSUSpr { get; private set; }
     //internal ICardTraitEntry AutoE { get; private set; } = null!;
@@ -62,7 +63,7 @@ internal class ModEntry : SimpleMod
         typeof(DoubleTap),
         //typeof(Disabler),
         //typeof(ScatterTrash),
-        //typeof(MegaTrash),
+        typeof(Discovery),
         typeof(Powershot),
         //typeof(Wideshot),
         typeof(Bloom)
@@ -90,7 +91,9 @@ internal class ModEntry : SimpleMod
         typeof(MechMine),
         typeof(MechMissile),
         typeof(MechStun),
-        typeof(MechSwap)
+        typeof(MechSwap),
+        typeof(CryPlaceholder),
+        typeof(MechPlaceholder)
     ];
     private static IEnumerable<Type> WethCardTypes =
         WethCommonCardTypes
@@ -310,6 +313,18 @@ internal class ModEntry : SimpleMod
             },
             Name = AnyLocalizations.Bind(["status", "Pulsedrive", "name"]).Localize,
             Description = AnyLocalizations.Bind(["status", "Pulsedrive", "desc"]).Localize
+        });
+        UnknownStatus = helper.Content.Statuses.RegisterStatus("UnknStatrus", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = true,
+                color = new Color("4ab3ff"),
+                icon = ModEntry.RegisterSprite(package, "assets/unknownlol.png").Sprite
+            },
+            Name = AnyLocalizations.Bind(["status", "Unknown", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "Unknown", "desc"]).Localize
         });
         // AutoSUSpr = RegisterSprite(package, "assets/autoplaysingle.png").Sprite;
         // AutoSU = helper.Content.Cards.RegisterTrait("AutoSU", new CardTraitConfiguration

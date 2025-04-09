@@ -15,6 +15,10 @@
         "Pulsedrive": {
             "name": "Pulsedrive",
             "desc": "Add {0} damage to all attacks. <c=downside>Goes away at the start of next turn.</c>"
+        },
+        "Unknown": {
+            "name": "___",
+            "desc": "Does {0} of something."
         }
     },
     "action": {
@@ -106,8 +110,8 @@
             "ScatterTrash": {
                 "name": "Scatter Trash"
             },
-            "MegaTrash": {
-                "name": "Mega Trash"
+            "Discovery": {
+                "name": "Discovery"
             },
             "Powershot": {
                 "name": "Powershot"
@@ -174,6 +178,9 @@
             },
             "Shoulder": {
                 "name": "Sh__ld"
+            },
+            "Placeholder": {
+                "name": "___"
             }
         }
     }
