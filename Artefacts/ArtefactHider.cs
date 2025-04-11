@@ -29,11 +29,6 @@ public static class Artifacthider
             {
                 __result.Add(typeof(TreasureSeeker));
             }
-
-            if (!s.EnumerateAllArtifacts().Any(a => a is HiddenOptions))
-            {
-                __result.Add(typeof(HiddenOptions2));
-            }
         }
         catch (Exception err)
         {

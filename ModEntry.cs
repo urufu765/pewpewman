@@ -109,20 +109,38 @@ internal class ModEntry : SimpleMod
         typeof(TreasureSeeker),
         typeof(RockPower),
         typeof(ResidualShot),
+        typeof(HiddenOptions),
         typeof(CannonRecharge)
     ];
     private static List<Type> WethBossArtifacts = [
-        typeof(HiddenOptions),
         typeof(HiddenOptions2),
         typeof(ArtifactExcursion)
     ];
     private static List<Type> WethEventArtifacts = [
-        typeof(TreasureHunter)
+        typeof(TreasureHunter),
+        typeof(SpaceRelics)
+    ];
+    private static List<Type> WethSpecialArtifacts = [
+        typeof(RelicPulsedrive),
+        typeof(RelicAutododgeRight),
+        typeof(RelicBoost),
+        typeof(RelicDrawNextTurn),
+        typeof(RelicDroneShift),
+        typeof(RelicEnergyFragment),
+        typeof(RelicEvade),
+        typeof(RelicFlux),
+        typeof(RelicHermes),
+        typeof(RelicShard),
+        typeof(RelicShield),
+        typeof(RelicStunCharge),
+        typeof(RelicTempPayback),
+        typeof(RelicTempShield)
     ];
     private static IEnumerable<Type> WethArtifactTypes =
         WethCommonArtifacts
             .Concat(WethBossArtifacts)
-            .Concat(WethEventArtifacts);
+            .Concat(WethEventArtifacts)
+            .Concat(WethSpecialArtifacts);
 
     private static IEnumerable<Type> AllRegisterableTypes =
         WethCardTypes

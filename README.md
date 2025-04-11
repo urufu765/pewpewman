@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### Pre-release
 
+* **(0.0.6)**: Infinitely scaling artifacts!
 * **(0.0.5)**: Artifacts! As well as artifact hiders.
 * **(0.0.4)**: Goodies card giver.
 * **(0.0.3)**: Pulsedrive!

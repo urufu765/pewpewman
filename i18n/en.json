@@ -20,20 +20,61 @@
             "name": "___",
             "desc": "Does {0} of something."
         },
+        "shield": {
+            "name": "SHIELD",
+            "desc": "Gain {0} <c=status>SHIELD</c>."
+        },
+        "tempShield": {
+            "name": "TEMP SHIELD",
+            "desc": "Gain {0} <c=status>TEMPORARY SHIELD</c>."
+        },
+        "hermes": {
+            "name": "HERMES",
+            "desc": "Gain {0} <c=status>HERMES</c>."
+        },
         "evade": {
+            "name": "EVADE",
             "desc": "Gain {0} <c=status>EVADE</c>."
         },
-        "droneShift": {
-            "desc": "Gain {0} <c=status>DRONE SHIFT</c>."
-        },
         "autododgeRight": {
+            "name": "AUTODODGE RIGHT",
             "desc": "Gain {0} <c=status>AUTODODGE RIGHT</c>."
         },
+        "libra": {
+            "name": "FLUX",
+            "desc": "Gain {0} <c=status>FLUX</c>."
+        },
+        "stunCharge": {
+            "name": "STUN CHARGE",
+            "desc": "Gain {0} <c=status>STUN CHARGE</c>."
+        },
+        "drawNextTurn": {
+            "name": "DRAW NEXT TURN",
+            "desc": "Draw {0} card at the start of next turn."
+        },
         "energyFragment": {
-            "desc": "Gain {0} <c=status>ENERGY FRAGMENT</c>. Every third energy fragment, gain 1 <c=energy>ENERGY</c>."
+            "name": "ENERGY FRAGMENT",
+            "desc": "Gain {0} <c=status>ENERGY FRAGMENT</c>. For every 3 energy fragment, gain 1 <c=energy>ENERGY</c>."
+        },
+        "tempPayback": {
+            "name": "TEMPORARY PAYBACK",
+            "desc": "Gain {0} <c=status>TEMPORARY PAYBACK</c>."
+        },
+        "droneShift": {
+            "name": "DRONE SHIFT",
+            "desc": "Gain {0} <c=status>DRONE SHIFT</c>."
         },
         "shard": {
+            "name": "SHARD",
             "desc": "Gain {0} <c=status>SHARD</c>."
+        },
+        "boost": {
+            "name": "BOOST",
+            "desc": "Gain {0} <c=status>BOOST</c>."
+        },
+        "pulsedrive": {
+            "name": "PULSEDRIVE",
+            "desc": "Gain {0} <c=status>PULSEDRIVE</c>."
         }
     },
     "action": {
@@ -65,26 +106,88 @@
             "TreasureSeeker": {
                 "name": "TREASURE SEEKER",
                 "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nAfter <c=keyword>5 hits</c>, add a random <c=card>Goodie</c> to your hand. <c=downside>Count resets at the end of combat.</c>"
+            },
+            "HiddenOptions": {
+                "name": "HIDDEN OPTIONS",
+                "desc": "Immediately choose 1 of 3 common artifacts.\nThen choose 1 of 3 hidden Weth artifacts."
             }
         },
         "Boss": {
-            "HiddenOptions": {
-                "name": "HIDDEN OPTIONS",
-                "desc": "Immediately choose 1 of 4 boss artifacts."
-            },
             "HiddenOptions2": {
                 "name": "HIDDEN OPTIONS II",
-                "desc": "Immediately choose 1 of 5 boss artifacts."
+                "desc": "Immediately choose 1 of 4 boss artifacts.\nThen choose 1 of 4 hidden Weth artifacts."
             },
             "ArtifactExcursion": {
                 "name": "ARTIFACT EXCURSION",
-                "desc": "After 30 hits, gain 1 of 2 common artifacts.\nAfter 60 hits, gain 1 of 3 common artifacts.\nAfter 100 hits, gain 1 of 2 boss artifacts.\n<c=action>Hits only count if they deal more than 0 damage.</c>\n<c=keyword>Receieve these rewards at the end of combat.</c>\n<c=downside>Counter pauses whenever reward is available.</c>"
+                "desc": "At 30 hits, gain 1 of 2 common artifacts.\nAt 60 hits, gain 1 of 3 common artifacts.\nAt 100 hits, gain 1 of 2 boss artifacts.\nAfter every 20 hits beyond 100, gain 1 of 3 hidden Weth artifacts.\n<c=action>Hits only count if they deal more than 0 damage.</c>\n<c=keyword>Receieve these rewards at the end of combat.</c>\n<c=downside>Counter pauses whenever reward is available.</c>"
             }
         },
         "EventOnly": {
             "TreasureHunter": {
                 "name": "TREASURE HUNTER",
                 "desc": "After <c=keyword>10 hits</c>, add a random <c=cardtrait>temporary</c> <c=card>Goodie</c> to your hand. <c=downside>Count resets at the end of combat.</c>"
+            },
+            "SpaceRelics": {
+                "name": "SPACE RELICS",
+                "desc": "Weth found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nAt the start of combat:"
+            }
+        },
+        "Unreleased": {
+            "RelicShield": {
+                "name": "RELIC: SHIELD",
+                "desc": "Gain 1 <c=status>SHIELD</c> at the start of combat."
+            },
+            "RelicTempShield": {
+                "name": "RELIC: TEMP SHIELD",
+                "desc": "Gain 1 <c=status>TEMPORARY SHIELD</c> at the start of combat."
+            },
+            "RelicHermes": {
+                "name": "RELIC: HERMES",
+                "desc": "Gain 1 <c=status>HERMES</c> at the start of combat."
+            },
+            "RelicEvade": {
+                "name": "RELIC: EVADE",
+                "desc": "Gain 1 <c=status>EVADE</c> at the start of combat."
+            },
+            "RelicAutododgeRight": {
+                "name": "RELIC: AUTODODGE RIGHT",
+                "desc": "Gain 1 <c=status>AUTODODGE RIGHT</c> at the start of combat."
+            },
+            "RelicFlux": {
+                "name": "RELIC: FLUX",
+                "desc": "Gain 1 <c=status>FLUX</c> at the start of combat."
+            },
+            "RelicStunCharge": {
+                "name": "RELIC: STUN CHARGE",
+                "desc": "Gain 1 <c=status>STUN CHARGE</c> at the start of combat."
+            },
+            "RelicDrawNextTurn": {
+                "name": "RELIC: DRAW NEXT TURN",
+                "desc": "Draw 1 card at the start of combat."
+            },
+            "RelicEnergyFragment": {
+                "name": "RELIC: ENERGY FRAGMENT",
+                "desc": "Gain 1 <c=status>ENERGY FRAGMENT</c> at the start of combat."
+            },
+            "RelicTempPayback": {
+                "name": "RELIC: TEMP PAYBACK",
+                "desc": "Gain 1 <c=status>TEMPORARY PAYBACK</c> at the start of combat."
+            },
+            "RelicDroneShift": {
+                "name": "RELIC: DRONE SHIFT",
+                "desc": "Gain 1 <c=status>DRONE SHIFT</c> at the start of combat."
+            },
+            "RelicShard": {
+                "name": "RELIC: SHARD",
+                "desc": "Gain 1 <c=status>SHARD</c> at the start of combat."
+            },
+            "RelicBoost": {
+                "name": "RELIC: BOOST",
+                "desc": "Gain 1 <c=status>BOOST</c> at the start of combat."
+            },
+            "RelicPulsedrive": {
+                "name": "RELIC: PULSEDIVE",
+                "desc": "Gain 1 <c=status>PULSEDIVE</c> at the start of combat."
             }
         },
         "Duo": {

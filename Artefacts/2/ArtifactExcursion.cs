@@ -25,6 +25,7 @@ public class ArtifactExcursion : Artifact
     public ExcursionState Exstate { get; set; }
     public int Stage { get; set; }
     private List<int> Goals {get;} = [30, 60, 100];
+    public int LastGoal {get; set;} = 100;
     // private int _lastDamageDealt;
     // public int LastDamageDealt { get {return _lastDamageDealt;} set {_lastDamageDealt = Math.Max(0, value);} }
 
@@ -79,6 +80,19 @@ public class ArtifactExcursion : Artifact
                 Pulse();
             }
         }
+        else if (Exstate == ExcursionState.Depleted)
+        {
+            if (GetDamageDealt(combat, part) > 0)
+            {
+                TotalHits++;
+            }
+            if (TotalHits%20 == 0 && TotalHits > LastGoal)
+            {
+                LastGoal = TotalHits;
+                Exstate = ExcursionState.Ready;
+                Pulse();
+            }
+        }
     }
 
     private static int GetDamageDealt(Combat combat, Part? part)
@@ -128,7 +142,7 @@ public class ArtifactExcursion : Artifact
                 }
             );
             Stage++;
-            if (Stage == Goals.Count)
+            if (Stage >= Goals.Count)
             {
                 Exstate = ExcursionState.Depleted;
             }
