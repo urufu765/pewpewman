@@ -8,7 +8,7 @@ using Weth.Cards;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ ArtifactPool.EventOnly ])]
+[ArtifactMeta(pools = [ ArtifactPool.Unreleased ])]
 public class SpaceRelics : Artifact
 {
     public Dictionary<Status, int> Relics { get; set; } = new Dictionary<Status, int>
@@ -161,9 +161,13 @@ public class SpaceRelics : Artifact
             {
                 if (relic.Value > 0)
                 {
-                    if (relic.Key is Status.evade or Status.autododgeRight or Status.energyFragment or Status.droneShift or Status.shard)
+                    if (relic.Key is Status.evade or Status.autododgeRight or Status.energyFragment or Status.droneShift)
                     {
                         tt.Add(new TTGlossary($"status.{relic.Key}"));
+                    }
+                    else if (relic.Key is Status.shard)
+                    {
+                        tt.Add(new TTGlossary($"status.{relic.Key}", [$"{MG.inst.g.state.ship.GetMaxShard()}"]));
                     }
                     else
                     {

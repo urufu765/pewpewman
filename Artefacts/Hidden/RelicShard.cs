@@ -21,7 +21,7 @@ public class RelicShard : RelicShield
     public override List<Tooltip>? GetExtraTooltips()
     {
         return [
-            new TTGlossary($"status.{GetThing()}")
+            new TTGlossary($"status.{GetThing()}", [$"{MG.inst.g.state.ship.GetMaxShard()}"])
         ];
     }
 }

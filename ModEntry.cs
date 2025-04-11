@@ -401,6 +401,7 @@ internal class ModEntry : SimpleMod
 
         //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);
+        Artifacthider.Apply(Harmony);
     }
 
     /*

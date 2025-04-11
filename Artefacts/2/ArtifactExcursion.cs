@@ -26,6 +26,7 @@ public class ArtifactExcursion : Artifact
     public int Stage { get; set; }
     private List<int> Goals {get;} = [30, 60, 100];
     public int LastGoal {get; set;} = 100;
+    //public bool GotDaArtifact {get; set;};
     // private int _lastDamageDealt;
     // public int LastDamageDealt { get {return _lastDamageDealt;} set {_lastDamageDealt = Math.Max(0, value);} }
 
@@ -115,7 +116,8 @@ public class ArtifactExcursion : Artifact
     {
         if (Exstate == ExcursionState.Ready)
         {
-            state.GetCurrentQueue().Queue(
+            ModEntry.Instance.Logger.LogInformation("Money GET");
+            state.rewardsQueue.Queue(
                 Stage switch 
                 {
                     0 => new AArtifactOffering

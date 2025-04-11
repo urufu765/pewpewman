@@ -26,7 +26,7 @@
         },
         "tempShield": {
             "name": "TEMP SHIELD",
-            "desc": "{0} <c=status>TEMPORARY SHIELD</c>"
+            "desc": "{0} <c=status>TEMP SHIELD</c>"
         },
         "hermes": {
             "name": "HERMES",
@@ -37,8 +37,8 @@
             "desc": "{0} <c=status>EVADE</c>"
         },
         "autododgeRight": {
-            "name": "AUTODODGE RIGHT",
-            "desc": "{0} <c=status>AUTODODGE RIGHT</c>"
+            "name": "AUTODODGE R",
+            "desc": "{0} <c=status>AUTODODGE R</c>"
         },
         "libra": {
             "name": "FLUX",
@@ -130,13 +130,13 @@
             "TreasureHunter": {
                 "name": "TREASURE HUNTER",
                 "desc": "After <c=keyword>10 hits</c>, add a random <c=cardtrait>temporary</c> <c=card>Goodie</c> to your hand. <c=downside>Count resets at the end of combat.</c>"
-            },
-            "SpaceRelics": {
-                "name": "SPACE RELICS",
-                "desc": "<c=93c4c8>Weth</c> found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nEach combat, gain:"
             }
         },
         "Unreleased": {
+            "SpaceRelics": {
+                "name": "SPACE RELICS",
+                "desc": "<c=93c4c8>Weth</c> found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nEach combat, gain:"
+            },
             "RelicShield": {
                 "name": "RELIC: SHIELD",
                 "desc": "Gain 1 <c=status>SHIELD</c> at the start of combat."
@@ -224,7 +224,7 @@
                 "name": "Double Blast"
             },
             "Overcompensator": {
-                "name": "Atonement"
+                "name": "Compensate"
             },
             "WethEXE": {
                 "name": "Weth.EXE"

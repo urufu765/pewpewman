@@ -29,6 +29,7 @@ public static class Artifacthider
             {
                 __result.Add(typeof(TreasureSeeker));
             }
+            __result.Add(typeof(SpaceRelics));
         }
         catch (Exception err)
         {

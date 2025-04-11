@@ -9,7 +9,7 @@ using Weth.Cards;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ ArtifactPool.EventOnly ])]
+[ArtifactMeta(pools = [ ArtifactPool.Unreleased ])]
 public class RelicShield : Artifact
 {
     public virtual Status GetThing()
