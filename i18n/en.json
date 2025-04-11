@@ -22,59 +22,63 @@
         },
         "shield": {
             "name": "SHIELD",
-            "desc": "Gain {0} <c=status>SHIELD</c>."
+            "desc": "{0} <c=status>SHIELD</c>"
         },
         "tempShield": {
             "name": "TEMP SHIELD",
-            "desc": "Gain {0} <c=status>TEMPORARY SHIELD</c>."
+            "desc": "{0} <c=status>TEMPORARY SHIELD</c>"
         },
         "hermes": {
             "name": "HERMES",
-            "desc": "Gain {0} <c=status>HERMES</c>."
+            "desc": "{0} <c=status>HERMES</c>"
         },
         "evade": {
             "name": "EVADE",
-            "desc": "Gain {0} <c=status>EVADE</c>."
+            "desc": "{0} <c=status>EVADE</c>"
         },
         "autododgeRight": {
             "name": "AUTODODGE RIGHT",
-            "desc": "Gain {0} <c=status>AUTODODGE RIGHT</c>."
+            "desc": "{0} <c=status>AUTODODGE RIGHT</c>"
         },
         "libra": {
             "name": "FLUX",
-            "desc": "Gain {0} <c=status>FLUX</c>."
+            "desc": "{0} <c=status>FLUX</c>"
         },
         "stunCharge": {
             "name": "STUN CHARGE",
-            "desc": "Gain {0} <c=status>STUN CHARGE</c>."
+            "desc": "{0} <c=status>STUN CHARGE</c>"
         },
         "drawNextTurn": {
             "name": "DRAW NEXT TURN",
-            "desc": "Draw {0} card at the start of next turn."
+            "desc": "{0} <c=status>DRAW NEXT TURN</c>"
         },
         "energyFragment": {
             "name": "ENERGY FRAGMENT",
-            "desc": "Gain {0} <c=status>ENERGY FRAGMENT</c>. For every 3 energy fragment, gain 1 <c=energy>ENERGY</c>."
+            "desc": "{0} <c=status>ENERGY FRAGMENT</c>"
         },
         "tempPayback": {
             "name": "TEMPORARY PAYBACK",
-            "desc": "Gain {0} <c=status>TEMPORARY PAYBACK</c>."
+            "desc": "{0} <c=status>TEMP PAYBACK</c>"
         },
         "droneShift": {
             "name": "DRONE SHIFT",
-            "desc": "Gain {0} <c=status>DRONE SHIFT</c>."
+            "desc": "{0} <c=status>DRONE SHIFT</c>"
         },
         "shard": {
             "name": "SHARD",
-            "desc": "Gain {0} <c=status>SHARD</c>."
+            "desc": "{0} <c=status>SHARD</c>"
         },
         "boost": {
             "name": "BOOST",
-            "desc": "Gain {0} <c=status>BOOST</c>."
+            "desc": "{0} <c=status>BOOST</c>"
         },
         "pulsedrive": {
             "name": "PULSEDRIVE",
-            "desc": "Gain {0} <c=status>PULSEDRIVE</c>."
+            "desc": "{0} <c=status>PULSEDRIVE</c>"
+        },
+        "energy": {
+            "name": "ENERGY",
+            "desc": "{0} <c=status>ENERGY</c>"
         }
     },
     "action": {
@@ -129,7 +133,7 @@
             },
             "SpaceRelics": {
                 "name": "SPACE RELICS",
-                "desc": "Weth found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nAt the start of combat:"
+                "desc": "<c=93c4c8>Weth</c> found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nEach combat, gain:"
             }
         },
         "Unreleased": {

@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Text;
 using Microsoft.Extensions.Logging;
 using Nickel;
 
@@ -49,4 +50,50 @@ public static class UhDuhHundo
             }
         }
     }
+}
+
+public class TTTTTTText : TTText
+{
+    public TTTTTTText()
+    {
+    }
+
+    public TTTTTTText(string text)
+    {
+        this.text = text;
+    }
+    public override Rect Render(G g, bool dontDraw)
+    {
+        return new Rect(0, 0, 0, -10);
+    }
+}
+
+public class TTTTTTGlossary(string key) : TTGlossary(key)
+{
+	public Spr? Icon = null;
+	public string? Title = null;
+
+	public override Rect Render(G g, bool dontDraw)
+	{
+		var sb = new StringBuilder();
+		if (!string.IsNullOrEmpty(this.Title))
+		{
+			if (this.Icon is not null)
+			{
+				sb.Append(GetIndent());
+			}
+
+			sb.Append(this.Title);
+		}
+		var rect = Draw.Text(sb.ToString(), 0, 0, color: Colors.textMain, maxWidth: 100, dontDraw: true);
+		if (!dontDraw)
+		{
+			var xy = g.Push(null, rect).rect.xy;
+			if (this.Icon is { } icon)
+				Draw.Sprite(icon, xy.x - 1, xy.y + 2);
+			Draw.Text(sb.ToString(), xy.x, xy.y + 4, color: Colors.textMain, maxWidth: 100);
+			g.Pop();
+		}
+		return rect;
+	}
 }

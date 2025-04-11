@@ -77,15 +77,36 @@ public class SpaceRelics : Artifact
             {
                 if (relic.Value > 0)
                 {
-                    combat.Queue(
-                        new AStatus
-                        {
-                            status = relic.Key,
-                            statusAmount = relic.Value,
-                            targetPlayer = true,
-                            artifactPulse = Key()
-                        }
-                    );
+                    if (relic.Key is Status.energyFragment)
+                    {
+                        combat.Queue(
+                            new AEnergy
+                            {
+                                changeAmount = relic.Value / 3,
+                            }
+                        );
+                        combat.Queue(
+                            new AStatus
+                            {
+                                status = relic.Key,
+                                statusAmount = relic.Value % 3,
+                                targetPlayer = true,
+                                artifactPulse = Key()
+                            }
+                        );
+                    }
+                    else
+                    {
+                        combat.Queue(
+                            new AStatus
+                            {
+                                status = relic.Key,
+                                statusAmount = relic.Value,
+                                targetPlayer = true,
+                                artifactPulse = Key()
+                            }
+                        );
+                    }
                 }
             }
         }
@@ -95,25 +116,60 @@ public class SpaceRelics : Artifact
     {
         List<Tooltip> tt = new List<Tooltip>();
 
+        // string thing = "";
+        // if (ObtainPulsedrive > 0)
+        // {
+        //     thing += string.Format(ModEntry.Instance.Localizations.Localize(["status", "pulsedrive", "desc"]), $"<c=keyword>{ObtainPulsedrive}</c>") + "\n";
+        // }
+        // foreach (KeyValuePair<Status, int> relic in Relics)
+        // {
+        //     if (relic.Value > 0)
+        //     {
+        //         thing += string.Format(ModEntry.Instance.Localizations.Localize(["status", $"{relic.Key}", "desc"]), $"<c=keyword>{relic.Value}</c>") + "\n";
+        //     }
+        // }
+        // tt.Add(new TTText(thing));
         if (ObtainPulsedrive > 0)
         {
-            tt.Add(new GlossaryTooltip($"showStatus.pulsedrive")
+            tt.Add(new TTTTTTGlossary($"showStatus.pulsedrive")
             {
-                Title = ModEntry.Instance.Localizations.Localize(["status", "pulsedrive", "name"]),
-                Description = ModEntry.Instance.Localizations.Localize(["status", "pulsedrive", "description"]),
+                Title = string.Format(ModEntry.Instance.Localizations.Localize(["status", "pulsedrive", "desc"]), $"<c=keyword>{ObtainPulsedrive}</c>"),
                 Icon = ModEntry.Instance.PulseStatus.Configuration.Definition.icon,
             });
+            tt.Add(new TTTTTTText(" "));
         }
         foreach (KeyValuePair<Status, int> relic in Relics)
         {
             if (relic.Value > 0)
             {
-                tt.Add(new GlossaryTooltip($"showStatus.{relic.Key}")
+                tt.Add(new TTTTTTGlossary($"showStatus.{relic.Key}")
                 {
-                    Title = ModEntry.Instance.Localizations.Localize(["status", $"{relic.Key}", "name"]),
-                    Description = ModEntry.Instance.Localizations.Localize(["status", $"{relic.Key}", "description"]),
+                    Title = string.Format(ModEntry.Instance.Localizations.Localize(["status", $"{relic.Key}", "desc"]), $"<c=keyword>{relic.Value}</c>"),
                     Icon = RelicIcons[relic.Key],
                 });
+                tt.Add(new TTTTTTText(" "));
+            }
+        }
+        if (tt.Count > 0)
+        {
+            tt.Add(new TTDivider());
+            if (ObtainPulsedrive > 0)
+            {
+                tt.AddRange(StatusMeta.GetTooltips(ModEntry.Instance.PulseStatus.Status, ObtainPulsedrive));
+            }
+            foreach (KeyValuePair<Status, int> relic in Relics)
+            {
+                if (relic.Value > 0)
+                {
+                    if (relic.Key is Status.evade or Status.autododgeRight or Status.energyFragment or Status.droneShift or Status.shard)
+                    {
+                        tt.Add(new TTGlossary($"status.{relic.Key}"));
+                    }
+                    else
+                    {
+                        tt.Add(new TTGlossary($"status.{relic.Key}", [$"{relic.Value}"]));
+                    }
+                }
             }
         }
         return tt;
