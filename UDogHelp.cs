@@ -8,7 +8,7 @@ namespace Weth;
 /// <summary>
 /// Helps out with menial tasks
 /// </summary>
-public class UhDuhHundo
+public static class UhDuhHundo
 {
     public static ArtifactConfiguration ArtifactRegistrationHelper(Type a, Spr sprite)
     {
@@ -29,5 +29,24 @@ public class UhDuhHundo
             Sprite = sprite
         };
         return ac;
+    }
+
+    public static void ArtifactRemover(ref State state, string artifactName)
+    {
+        string artifactType = $"{ModEntry.Instance.UniqueName}::{artifactName}";
+        foreach (Character character in state.characters)
+        {
+            if (character.deckType == ModEntry.Instance.WethDeck.Deck)
+            {
+                foreach (Artifact artifact in character.artifacts)
+                {
+                    if (artifact.Key() == artifactType)
+                    {
+                        artifact.OnRemoveArtifact(state);
+                    }
+                }
+                character.artifacts.RemoveAll(a => a.Key() == artifactType);
+            }
+        }
     }
 }

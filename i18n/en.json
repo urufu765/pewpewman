@@ -19,6 +19,21 @@
         "Unknown": {
             "name": "___",
             "desc": "Does {0} of something."
+        },
+        "evade": {
+            "desc": "Gain {0} <c=status>EVADE</c>."
+        },
+        "droneShift": {
+            "desc": "Gain {0} <c=status>DRONE SHIFT</c>."
+        },
+        "autododgeRight": {
+            "desc": "Gain {0} <c=status>AUTODODGE RIGHT</c>."
+        },
+        "energyFragment": {
+            "desc": "Gain {0} <c=status>ENERGY FRAGMENT</c>. Every third energy fragment, gain 1 <c=energy>ENERGY</c>."
+        },
+        "shard": {
+            "desc": "Gain {0} <c=status>SHARD</c>."
         }
     },
     "action": {
@@ -41,11 +56,15 @@
             },
             "ResidualShot": {
                 "name": "RESIDUAL SHOT",
-                "desc": "Shoot for 1 damage when you play a <c=93c4c8>Weth</c> card."
+                "desc": "Shoot for 0 damage when you play a <c=93c4c8>Weth</c> card."
             },
             "CannonRecharge": {
                 "name": "CANNON RECHARGE",
                 "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c>, gain 1 <c=status>STUN CHARGE</c>."
+            },
+            "TreasureSeeker": {
+                "name": "TREASURE SEEKER",
+                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nAfter <c=keyword>5 hits</c>, add a random <c=card>Goodie</c> to your hand. <c=downside>Count resets at the end of combat.</c>"
             }
         },
         "Boss": {
@@ -59,10 +78,14 @@
             },
             "ArtifactExcursion": {
                 "name": "ARTIFACT EXCURSION",
-                "desc": "After 50 hits, gain an artifact."
+                "desc": "After 30 hits, gain 1 of 2 common artifacts.\nAfter 60 hits, gain 1 of 3 common artifacts.\nAfter 100 hits, gain 1 of 2 boss artifacts.\n<c=action>Hits only count if they deal more than 0 damage.</c>\n<c=keyword>Receieve these rewards at the end of combat.</c>\n<c=downside>Counter pauses whenever reward is available.</c>"
             }
         },
         "EventOnly": {
+            "TreasureHunter": {
+                "name": "TREASURE HUNTER",
+                "desc": "After <c=keyword>10 hits</c>, add a random <c=cardtrait>temporary</c> <c=card>Goodie</c> to your hand. <c=downside>Count resets at the end of combat.</c>"
+            }
         },
         "Duo": {
         }

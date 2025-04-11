@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-//using Weth.Artifacts;
+using Weth.Artifacts;
 using Weth.Cards;
 using Weth.External;
 using Weth.Features;
@@ -37,6 +37,10 @@ internal class ModEntry : SimpleMod
     public Spr GoodieCrystalA { get; private set; }
     public Spr GoodieMech { get; private set; }
     public Spr GoodieMechA { get; private set; }
+
+    public Spr SprArtExcCounting { get; private set; }
+    public Spr SprArtExcReady { get; private set; }
+    public Spr SprArtExcDepleated { get; private set; }
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
@@ -102,10 +106,18 @@ internal class ModEntry : SimpleMod
             .Concat(WethSpecialCardTypes);
 
     private static List<Type> WethCommonArtifacts = [
+        typeof(TreasureSeeker),
+        typeof(RockPower),
+        typeof(ResidualShot),
+        typeof(CannonRecharge)
     ];
     private static List<Type> WethBossArtifacts = [
+        typeof(HiddenOptions),
+        typeof(HiddenOptions2),
+        typeof(ArtifactExcursion)
     ];
     private static List<Type> WethEventArtifacts = [
+        typeof(TreasureHunter)
     ];
     private static IEnumerable<Type> WethArtifactTypes =
         WethCommonArtifacts
@@ -283,6 +295,7 @@ internal class ModEntry : SimpleMod
                  * This can be safely removed if you have no starting artifacts.
                  */
                 artifacts = [
+                    new TreasureHunter()
                 ]
             },
             Description = AnyLocalizations.Bind(["character", "Weth", "desc"]).Localize
@@ -295,6 +308,7 @@ internal class ModEntry : SimpleMod
             ],
             artifacts = 
             [
+                new TreasureHunter()
             ]
         });
 
@@ -363,6 +377,9 @@ internal class ModEntry : SimpleMod
         {
             helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite));
         }
+        SprArtExcCounting = RegisterSprite(package, "assets/Artifact/ArtifactExcursionCounting.png").Sprite;
+        SprArtExcReady = RegisterSprite(package, "assets/Artifact/ArtifactExcursionReady.png").Sprite;
+        SprArtExcDepleated = RegisterSprite(package, "assets/Artifact/ArtifactExcursionDepleated.png").Sprite;
 
         //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);

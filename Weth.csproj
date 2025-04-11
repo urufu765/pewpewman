@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Weth</RootNamespace>
-		<Version>0.0.4</Version>
+		<Version>0.0.5</Version>
 		<IncludedModProjectPaths>i18n;assets</IncludedModProjectPaths>
 
 		<TargetFramework>net8.0</TargetFramework>
@@ -15,7 +15,7 @@
 		<GameDllPath>$(MSBuildProjectDirectory)\..\..\..\Decompiled\CobaltCore.dll</GameDllPath>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Nickel.ModBuildConfig" Version="2.0.1" />
+		<PackageReference Include="Nickel.ModBuildConfig" Version="2.0.2" />
 		<PackageReference Include="EnumByNameSourceGenerator" Version="1.1.2" />
 	</ItemGroup> 
 	<ItemGroup>

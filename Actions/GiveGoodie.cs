@@ -9,7 +9,8 @@ namespace Weth.Actions;
 /// </summary>
 public class AGiveGoodieLikeAGoodBoy : CardAction
 {
-    bool? advancedArtifact;
+    public bool? advancedArtifact;
+    public string artifactKey = "";
 
     private static readonly List<Type> CrystalOfferings = [
         typeof(CryAhtack),
@@ -75,6 +76,7 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
                 {
                     card = cd,
                     destination = CardDestination.Hand,
+                    artifactPulse = artifactKey
                 }
             );
         }
@@ -84,7 +86,8 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
                 new AAddCard
                 {
                     card = cd,
-                    destination = CardDestination.Hand
+                    destination = CardDestination.Hand,
+                    artifactPulse = artifactKey
                 }
             );
         }
