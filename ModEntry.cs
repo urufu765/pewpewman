@@ -40,7 +40,8 @@ internal class ModEntry : SimpleMod
 
     public Spr SprArtExcCounting { get; private set; }
     public Spr SprArtExcReady { get; private set; }
-    public Spr SprArtExcDepleated { get; private set; }
+    public Spr SprArtExcBeyond { get; private set; }
+    public Spr SprArtExcPick { get; private set; }
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
@@ -397,7 +398,8 @@ internal class ModEntry : SimpleMod
         }
         SprArtExcCounting = RegisterSprite(package, "assets/Artifact/ArtifactExcursionCounting.png").Sprite;
         SprArtExcReady = RegisterSprite(package, "assets/Artifact/ArtifactExcursionReady.png").Sprite;
-        SprArtExcDepleated = RegisterSprite(package, "assets/Artifact/ArtifactExcursionDepleated.png").Sprite;
+        SprArtExcBeyond = RegisterSprite(package, "assets/Artifact/ArtifactExcursionBeyond.png").Sprite;
+        SprArtExcPick = RegisterSprite(package, "assets/Artifact/ArtifactExcursionPick.png").Sprite;
 
         //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);

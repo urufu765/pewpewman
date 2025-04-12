@@ -13,9 +13,10 @@ namespace Weth.Artifacts;
 
 public enum ExcursionState
 {
+    Pick,
     Counting,
     Ready,
-    Depleted
+    Beyond
 }
 
 [ArtifactMeta(pools = [ ArtifactPool.Boss ])]
@@ -62,8 +63,9 @@ public class ArtifactExcursion : Artifact
         return Exstate switch
         {
             ExcursionState.Ready => ModEntry.Instance.SprArtExcReady,
-            ExcursionState.Depleted => ModEntry.Instance.SprArtExcDepleated,
-            _ => ModEntry.Instance.SprArtExcCounting
+            ExcursionState.Beyond => ModEntry.Instance.SprArtExcBeyond,
+            ExcursionState.Counting => ModEntry.Instance.SprArtExcCounting,
+            _ => ModEntry.Instance.SprArtExcPick
         };
     }
 
@@ -81,7 +83,7 @@ public class ArtifactExcursion : Artifact
                 Pulse();
             }
         }
-        else if (Exstate == ExcursionState.Depleted)
+        else if (Exstate == ExcursionState.Beyond)
         {
             if (GetDamageDealt(combat, part) > 0)
             {
@@ -146,7 +148,7 @@ public class ArtifactExcursion : Artifact
             Stage++;
             if (Stage >= Goals.Count)
             {
-                Exstate = ExcursionState.Depleted;
+                Exstate = ExcursionState.Beyond;
             }
             else
             {

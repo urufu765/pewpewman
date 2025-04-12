@@ -20,6 +20,10 @@
             "name": "___",
             "desc": "Does {0} of something."
         },
+        "Recoil": {
+            "name": "Recoil",
+            "desc": "The next {0} attacks will deal 1 less damage."
+        },
         "shield": {
             "name": "SHIELD",
             "desc": "{0} <c=status>SHIELD</c>"
@@ -97,7 +101,7 @@
         "Common": {
             "RockPower": {
                 "name": "ROCK POWER",
-                "desc": "Gain 1 <c=status>PULSEDRIVE</c> when you destroy an asteroid."
+                "desc": "Gain 1 <c=status>PULSEDRIVE</c> when you destroy an <c=midrow>asteroid</c>."
             },
             "ResidualShot": {
                 "name": "RESIDUAL SHOT",
