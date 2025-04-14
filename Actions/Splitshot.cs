@@ -7,6 +7,7 @@ using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using Nanoray.Shrike;
 using Nanoray.Shrike.Harmony;
+using Nickel;
 using Weth.Cards;
 
 namespace Weth.Actions;
@@ -19,6 +20,71 @@ public static class SplitshotTranspiler
             original: typeof(AAttack).GetMethod("Begin", AccessTools.all),
             transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(IgnoreMissingDroneCheck))
         );
+        harmony.Patch(
+            original: typeof(AAttack).GetMethod("Begin", AccessTools.all),
+            transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(IgnoreDroneBloops))
+        );
+        harmony.Patch(
+            original: typeof(AAttack).GetMethod("Begin", AccessTools.all),
+            transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(DontDoDuplicateArtifactModifiers))
+        );
+        harmony.Patch(
+            original: typeof(Card).GetMethod("RenderAction", AccessTools.all),
+            prefix: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(IconRenderingStuff))
+        );
+    }
+
+    private static IEnumerable<CodeInstruction> DontDoDuplicateArtifactModifiers(IEnumerable<CodeInstruction> instructions, ILGenerator il)
+    {
+        try
+        {
+            return new SequenceBlockMatcher<CodeInstruction>(instructions)
+                .Find(SequenceBlockMatcherFindOccurence.First,
+                SequenceMatcherRelativeBounds.WholeSequence,
+                ILMatches.Ldarg(2),
+                ILMatches.AnyCall,
+                ILMatches.AnyCall,
+                ILMatches.AnyStloc)
+                .Find(SequenceBlockMatcherFindOccurence.Last,
+                SequenceMatcherRelativeBounds.BeforeOrEnclosed,
+                ILMatches.Ldarg(0),
+                ILMatches.Ldflda(AccessTools.DeclaredField(typeof(AAttack), "fromDroneX")),
+                ILMatches.AnyCall,
+                ILMatches.Brtrue.GetBranchTarget(out var target))
+                .Insert(SequenceMatcherPastBoundsDirection.After,
+                SequenceMatcherInsertionResultingBounds.JustInsertion,
+                [
+                    new(OpCodes.Ldarg_0),
+                    new(OpCodes.Call, AccessTools.DeclaredMethod(typeof(SplitshotTranspiler), nameof(IsSplit))),
+                    new(OpCodes.Brtrue_S, target.Value)
+                ]).AllElements();
+        }
+        catch (Exception err)
+        {
+            ModEntry.Instance.Logger.LogError(err, "HGDBDGEGIOEWRHFGUIOHAWEF");
+            throw;
+        }
+    }
+
+    private static bool IconRenderingStuff(G g, State state, CardAction action, bool dontDraw, int shardAvailable, int stunChargeAvailable, int bubbleJuiceAvailable, ref int __result)
+    {
+        if (action is not ASplitshot splitshot)
+        {
+            return true;
+        }
+
+        var copy = ASplitshot.ConvertSplitToAttack(splitshot, true);
+        var position = g.Push(rect: new()).rect.xy;
+        int initialX = (int)position.x;
+
+        position.x += Card.RenderAction(g, state, copy, dontDraw, shardAvailable, stunChargeAvailable, bubbleJuiceAvailable);
+        g.Pop();
+
+
+        __result = (int)position.x - initialX;
+
+        return false;
+
     }
 
     // private static IEnumerable<CodeInstruction> IgnoreMissingDroneCheck(IEnumerable<CodeInstruction> instructions, ILGenerator il)
@@ -123,20 +189,27 @@ public static class SplitshotTranspiler
 public class ASplitshot : CardAction
 {
     public int damage;
+    public int? givesEnergy;
     public Status? status;
     public int statusAmount;
     public Card? cardOnHit;
     public CardDestination destination;
     public bool stunEnemy;
+    public int moveEnemy;
     public bool weaken;
     public bool brittle;
     public bool armorise;
     public bool piercing;
-    public bool targetPlayer = false;
-    public int? fromX;
-    public bool multiCannonVolley;
+    public bool targetPlayer;
     public bool fast;
+    public bool paybackAttack;
+    public bool multiCannonVolley;
     public int paybackCounter;
+    public bool storyFromStrafe;
+    public bool storyFromPayback;
+    public List<CardAction>? onKillActions;
+    public int? fromX;
+
 
 
     public override void Begin(G g, State s, Combat c)
@@ -192,26 +265,6 @@ public class ASplitshot : CardAction
             stunEnemy = true;
         }
 
-        // Jupiter drone
-        // if (!multiCannonVolley && !targetPlayer)
-        // {
-        //     c.QueueImmediate(new AJupiterShoot
-        //     {
-        //         attackCopy = ConvertSplitToAttack(this)
-        //     });
-        // }
-
-        // if (raycastResult is null)
-        // {
-        //     timer = 0.0;
-        //     if (librahit) DoLibraEffect(c, fromShip);
-        //     foreach (Artifact artifact in s.EnumerateAllArtifacts())
-        //     {
-        //         artifact.OnPlayerAttack(s, c);
-        //     }
-        //     return;
-        // }
-
         if (raycastResult is not null && raycastResult.hitDrone)
         {
             bool invincible = c.stuff[raycastResult.worldX].Invincible();
@@ -251,143 +304,66 @@ public class ASplitshot : CardAction
                 return;
             }
         }
+        ModEntry.Instance.Helper.ModData.SetModData(this, "split", true);
         c.QueueImmediate(ConvertSplitToAttack(this));
         timer = 0.0;
-        // timer = fast? 0.2 : 0.4;
-        // DamageDone damageDone = new DamageDone();
-        // if (raycastResult.hitShip)
-        // {
-        //     damageDone = ship.NormalDamage(s, c, damage, raycastResult.worldX, piercing);
-        //     Part? part = toShip.GetPartAtWorldX(raycastResult.worldX);
-        //     if (part is not null && part.stunModifier == PStunMod.stunnable)
-        //     {
-        //         stunEnemy = true;
-        //     }
-        //     if ((toShip.Get(Status.payback) > 0 || toShip.Get(Status.tempPayback) > 0) && paybackCounter < 100)
-        //     {
-        //         c.QueueImmediate(new AAttack
-        //         {
-        //             paybackCounter = this.paybackCounter + 1,
-        //             damage = Card.GetActualDamage(s, toShip.Get(Status.payback) + toShip.Get(Status.tempPayback), !targetPlayer, null),
-        //             targetPlayer = !this.targetPlayer,
-        //             fast = true,
-        //             storyFromPayback = true
-        //         });
-        //     }
-
-        //     if (status is not null)
-        //     {
-        //         c.QueueImmediate(new AStatus
-        //         {
-        //             status = status.Value,
-        //             statusAmount = statusAmount,
-        //             targetPlayer = targetPlayer,
-        //         });
-        //     }
-        //     if (cardOnHit is not null)
-        //     {
-        //         c.QueueImmediate(new AAddCard
-        //         {
-        //             card = Mutil.DeepCopy<Card>(cardOnHit),
-        //             destination = destination
-        //         });
-        //     }
-        //     if (stunEnemy && !targetPlayer)
-        //     {
-        //         c.QueueImmediate(new AStunPart
-        //         {
-        //             worldX = raycastResult.worldX,
-        //         });
-        //     }
-        //     if (weaken)
-        //     {
-        //         c.QueueImmediate(new AWeaken{
-        //             worldX = raycastResult.worldX,
-        //             targetPlayer = targetPlayer
-        //         });
-        //     }
-        //     if (brittle)
-        //     {
-        //         c.QueueImmediate(new ABrittle
-        //         {
-        //             worldX = raycastResult.worldX,
-        //             targetPlayer = targetPlayer
-        //         });
-        //     }
-        //     if (toShip.Get(Status.reflexiveCoating) >= 1)
-        //     {
-        //         c.QueueImmediate(new AArmor
-        //         {
-        //             worldX = raycastResult.worldX,
-        //             targetPlayer = targetPlayer,
-        //             justTheActiveOverride = true
-        //         });
-        //     }
-        // }
-
-        // if (librahit)
-        // {
-        //     DoLibraEffect(c, fromShip);
-        // }
-        // if (!targetPlayer)
-        // {
-        //     Input.Rumble(0.5);
-        // }
-        
-        // if (targetPlayer)
-        // {
-        //     // Enemy splitshot?
-        // }
-
-        // if (raycastResult.hitDrone)
-        // {
-        //     g.state.storyVars.playerJustShotAMidrowObject = true;
-        // }
-        // if (!raycastResult.hitShip && !raycastResult.hitDrone)
-        // {
-        //     g.state.storyVars.playerShotJustMissed = true;
-        // }
-        // else
-        // {
-        //     g.state.storyVars.playerShotJustMissed = false;
-        // }        
-        // if (raycastResult.hitShip)
-        // {
-        //     g.state.storyVars.playerShotJustHit = true;
-        // }
-        // foreach (Artifact artifact in s.EnumerateAllArtifacts())
-        // {
-        //     artifact.OnPlayerAttack(s, c);
-        // }
-        // if (raycastResult.hitShip)
-        // {
-
-        // }
     }
 
 
 
-    public static AAttack ConvertSplitToAttack(ASplitshot splitshot)
+    public static AAttack ConvertSplitToAttack(ASplitshot splitshot, bool fake=false)
     {
-        AAttack attack = new AAttack
+        if (fake)
+        {
+            return new APseudoAttack
+            {
+                damage = splitshot.damage,
+                givesEnergy = splitshot.givesEnergy,
+                status = splitshot.status,
+                statusAmount = splitshot.statusAmount,
+                cardOnHit = splitshot.cardOnHit,
+                destination = splitshot.destination,
+                moveEnemy = splitshot.moveEnemy,
+                stunEnemy = splitshot.stunEnemy,
+                weaken = splitshot.weaken,
+                brittle = splitshot.brittle,
+                armorize = splitshot.armorise,
+                piercing = splitshot.piercing,
+                targetPlayer = splitshot.targetPlayer,
+                fast = splitshot.fast,
+                paybackAttack = splitshot.paybackAttack,
+                multiCannonVolley = splitshot.multiCannonVolley,
+                paybackCounter = splitshot.paybackCounter,
+                storyFromStrafe = splitshot.storyFromStrafe,
+                storyFromPayback = splitshot.storyFromPayback,
+                onKillActions = splitshot.onKillActions,
+                fromX = splitshot.fromX,
+            };
+        }
+        return new AAttack
         {
             damage = splitshot.damage,
+            givesEnergy = splitshot.givesEnergy,
             status = splitshot.status,
             statusAmount = splitshot.statusAmount,
             cardOnHit = splitshot.cardOnHit,
             destination = splitshot.destination,
+            moveEnemy = splitshot.moveEnemy,
             stunEnemy = splitshot.stunEnemy,
             weaken = splitshot.weaken,
             brittle = splitshot.brittle,
             armorize = splitshot.armorise,
             piercing = splitshot.piercing,
             targetPlayer = splitshot.targetPlayer,
-            fromX = splitshot.fromX,
-            multiCannonVolley = splitshot.multiCannonVolley,
             fast = splitshot.fast,
-            paybackCounter = splitshot.paybackCounter
+            paybackAttack = splitshot.paybackAttack,
+            multiCannonVolley = splitshot.multiCannonVolley,
+            paybackCounter = splitshot.paybackCounter,
+            storyFromStrafe = splitshot.storyFromStrafe,
+            storyFromPayback = splitshot.storyFromPayback,
+            onKillActions = splitshot.onKillActions,
+            fromX = splitshot.fromX,
         };
-        return attack;
     }
 
 
@@ -445,17 +421,19 @@ public class ASplitshot : CardAction
     public override List<Tooltip> GetTooltips(State s)
     {
         List<Tooltip> tooltips = new List<Tooltip>();
-        Combat combat = (Combat)s.route;
-        for (int n = s.ship.x; n < s.ship.parts.Count; n++)
+        Combat? combat = (Combat)s.route;
+        int n = s.ship.x;
+        foreach (Part part in s.ship.parts)
         {
-            if (s.ship.parts[n].type == PType.cannon && s.ship.parts[n].active)
+            if (part.type == PType.cannon && part.active)
             {
                 if (combat is not null && combat.stuff.ContainsKey(n))
                 {
                     combat.stuff[n].hilight = 2;
                 }
-                s.ship.parts[n].hilight = true;
+                part.hilight = true;
             }
+            n++;
         }
         if (combat is not null)
         {
@@ -466,11 +444,23 @@ public class ASplitshot : CardAction
         }
         if (piercing)
         {
-            // Custom piercing splitshot tooltip
+            tooltips.Add(new GlossaryTooltip("actiontooltip.piercingsplitshot")
+            {
+                Icon = ModEntry.Instance.SprSplitshotPiercing,
+                Title = ModEntry.Instance.Localizations.Localize(["action", "Splitshot", "name"]),
+                Description = ModEntry.Instance.Localizations.Localize(["action", "Splitshot", "pierceDesc"])
+
+            });
         }
         else
         {
-            // Custom splitshot tooltip
+            tooltips.Add(new GlossaryTooltip("actiontooltip.piercingsplitshot")
+            {
+                Icon = ModEntry.Instance.SprSplitshot,
+                Title = ModEntry.Instance.Localizations.Localize(["action", "Splitshot", "name"]),
+                Description = ModEntry.Instance.Localizations.Localize(["action", "Splitshot", "desc"])
+
+            });
         }
         if (status is not null)
         {
@@ -512,6 +502,16 @@ public class ASplitshot : CardAction
             return new Icon(this.piercing? ModEntry.Instance.SprSplitshotPiercing : ModEntry.Instance.SprSplitshot, damage, Colors.redd, false);
         }
         return new Icon(this.piercing? ModEntry.Instance.SprSplitshotPiercingFail : ModEntry.Instance.SprSplitshotFail, damage, Colors.attackFail, false);
+    }
+
+
+    public Spr GetSprite(State s)
+    {
+        if (DoWeHaveCannonsThough(s))
+        {
+            return this.piercing? ModEntry.Instance.SprSplitshotPiercing : ModEntry.Instance.SprSplitshot;
+        }
+        return this.piercing? ModEntry.Instance.SprSplitshotPiercingFail : ModEntry.Instance.SprSplitshotFail;
     }
 
 

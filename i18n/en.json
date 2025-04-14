@@ -86,6 +86,11 @@
         }
     },
     "action": {
+        "Splitshot": {
+            "name": "SPLITSHOT",
+            "desc": "If attack hits a midrow object, the attack splits into two: one to the left and one to the right.",
+            "pierceDesc": "If attack hits a midrow object, the attack goes through the midrow object."
+        }
     },
     "trait": {
         "Autouseexhaust": {

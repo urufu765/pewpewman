@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### Pre-release
 
+* **(0.0.11)**: Splitshot vfx!
 * **(0.0.10)**: Splitshot!
 * **(0.0.9)**: Artifact art!
 * **(0.0.8)**: Fixed issue where ArtifactExcursion would not give artifact at the end of an elite battle.
