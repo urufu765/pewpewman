@@ -36,23 +36,28 @@ public class ExtremeViolence : Card, IRegisterable
                 new AAttack
                 {
                     damage = GetDmg(s, 0),
-                    stunEnemy = true
+                    stunEnemy = true,
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 1),
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 2),
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 3),
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 4),
+                    fast = true
                 },
             ],
             Upgrade.A => 
@@ -60,25 +65,30 @@ public class ExtremeViolence : Card, IRegisterable
                 new AAttack
                 {
                     damage = GetDmg(s, 0),
-                    piercing = true
+                    piercing = true,
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 1),
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 2),
-                    piercing = true
+                    piercing = true,
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 3),
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 4),
-                    piercing = true
+                    piercing = true,
+                    fast = true
                 },
             ],
             _ => 
@@ -86,22 +96,27 @@ public class ExtremeViolence : Card, IRegisterable
                 new AAttack
                 {
                     damage = GetDmg(s, 0),
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 1),
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 2),
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 3),
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 4),
+                    fast = true
                 },
             ],
         };

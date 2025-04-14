@@ -35,12 +35,14 @@ public class DoubleTap : Card, IRegisterable
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 2)
+                    damage = GetDmg(s, 2),
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 2),
-                    stunEnemy = true
+                    stunEnemy = true,
+                    fast = true
                 }            
             ],
             Upgrade.A => 
@@ -48,23 +50,27 @@ public class DoubleTap : Card, IRegisterable
                 new AAttack
                 {
                     damage = GetDmg(s, 2),
-                    piercing = true
+                    piercing = true,
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 2),
-                    piercing = true
+                    piercing = true,
+                    fast = true
                 }
             ],
             _ => 
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 2)
+                    damage = GetDmg(s, 2),
+                    fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 2)
+                    damage = GetDmg(s, 2),
+                    fast = true
                 }
             ],
         };

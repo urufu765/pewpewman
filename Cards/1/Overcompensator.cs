@@ -54,7 +54,8 @@ public class Overcompensator : Card, IRegisterable
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 1),
+                    fast = true
                 },
                 new AAttack
                 {
@@ -62,7 +63,8 @@ public class Overcompensator : Card, IRegisterable
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 1),
+                    fast = true
                 },
                 new AAttack
                 {
@@ -73,7 +75,8 @@ public class Overcompensator : Card, IRegisterable
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 1),
+                    fast = true
                 },
                 new AAttack
                 {
@@ -81,7 +84,8 @@ public class Overcompensator : Card, IRegisterable
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 1),
+                    fast = true
                 },
                 new AAttack
                 {

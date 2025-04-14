@@ -36,47 +36,56 @@ public class TripleTap : Card, IRegisterable
                 new AAttack
                 {
                     damage = GetDmg(s, 0),
-                    piercing = true
+                    piercing = true,
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 1),
-                    piercing = true
+                    piercing = true,
+                    fast = true
                 },
                 new AAttack
                 {
                     damage = GetDmg(s, 1),
-                    piercing = true
+                    piercing = true,
+                    fast = true
                 },            
             ],
             Upgrade.A => 
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 1),
+                    fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 1),
+                    fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 1),
+                    fast = true
                 },
             ],
             _ => 
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 0)
+                    damage = GetDmg(s, 0),
+                    fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 1),
+                    fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 1),
+                    fast = true
                 },
             ],
         };

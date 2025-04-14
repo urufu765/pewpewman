@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### Pre-release
 
+* **(0.0.13)**: Triple tap, Double tap, Compensator, Extreme Violence shoot faster now
 * **(0.0.12)**: More splitshot cards! (Finished them all), Brightened Splitshot icon, rebalanced Crisis Call, Pow Pow, Pulsedrive (card).
   * Crisis Call: Base and A now give 2 pulsedrive and 2 goodies, B gives 3 pulsedrive and 2 exhaust Pulsedrive(card)s
   * Pow Pow: B now gives 2 Powershots,
