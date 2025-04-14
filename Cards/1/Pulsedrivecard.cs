@@ -9,7 +9,7 @@ namespace Weth.Cards;
 /// <summary>
 /// gives Pulsedrive
 /// </summary>
-public class Pulsedrive : Card, IRegisterable
+public class PulsedriveCard : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -38,7 +38,16 @@ public class Pulsedrive : Card, IRegisterable
                 {
                     status = ModEntry.Instance.PulseStatus.Status,
                     targetPlayer = true,
-                    statusAmount = 3
+                    statusAmount = 2
+                },
+                new AAddCard
+                {
+                    card = new PulsedriveCard{
+                        upgrade = Upgrade.B,
+                        temporaryOverride = true
+                    },
+                    amount = 2,
+                    destination = CardDestination.Discard
                 }
             ],
             Upgrade.A => 
@@ -49,6 +58,13 @@ public class Pulsedrive : Card, IRegisterable
                     targetPlayer = true,
                     statusAmount = 2
                 },
+                new AAddCard
+                {
+                    card = new PulsedriveCard{
+                        temporaryOverride = true
+                    },
+                    destination = CardDestination.Discard
+                }
             ],
             _ => 
             [
@@ -70,6 +86,13 @@ public class Pulsedrive : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 1,
+                exhaust = true,
+                artTint = "4ab3ff",
+                artOverlay = ModEntry.Instance.WethCommon
+            },
+            Upgrade.A => new CardData
+            {
+                cost = 0,
                 exhaust = true,
                 artTint = "4ab3ff",
                 artOverlay = ModEntry.Instance.WethCommon

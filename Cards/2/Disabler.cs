@@ -2,13 +2,14 @@ using System.Collections.Generic;
 using System.Reflection;
 using Nanoray.PluginManager;
 using Nickel;
+using Weth.Actions;
 
 namespace Weth.Cards;
 
 /// <summary>
-/// WHAM WHAM!!!
+/// Shoot a disabling round
 /// </summary>
-public class PowPow : Card, IRegisterable
+public class Disabler : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -18,10 +19,10 @@ public class PowPow : Card, IRegisterable
             Meta = new CardMeta
             {
                 deck = ModEntry.Instance.WethDeck.Deck,
-                rarity = Rarity.rare,
+                rarity = Rarity.uncommon,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Rare", "PowPow", "name"]).Localize,
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "Disabler", "name"]).Localize,
             //Art = ModEntry.RegisterSprite(package, "assets/Card/2/TripleTap.png").Sprite
         });
     }
@@ -33,36 +34,24 @@ public class PowPow : Card, IRegisterable
         {
             Upgrade.B => 
             [
-                new AAttack
+                new ASplitshot
                 {
-                    damage = GetDmg(s, 1),
-                    piercing = true
-                },
-                new AStatus
-                {
-                    status = Status.powerdrive,
-                    statusAmount = 1,
-                    targetPlayer = true
+                    damage = GetDmg(s, 0),
+                    stunEnemy = true,
+                    weaken = true
                 },
                 new AAddCard
                 {
-                    card = new Powershot(),
-                    amount = 2,
-                    destination = CardDestination.Discard
+                    card = new Disabler(),
+                    destination = CardDestination.Discard,
                 }
             ],
             _ => 
             [
-                new AAttack
+                new ASplitshot
                 {
-                    damage = GetDmg(s, 1),
-                    piercing = true
-                },
-                new AStatus
-                {
-                    status = Status.powerdrive,
-                    statusAmount = 1,
-                    targetPlayer = true
+                    damage = GetDmg(s, 0),
+                    stunEnemy = true
                 }
             ],
         };
@@ -77,19 +66,20 @@ public class PowPow : Card, IRegisterable
             {
                 cost = 1,
                 singleUse = true,
-                artOverlay = ModEntry.Instance.WethRare
+                artTint = "ffc47b",
+                artOverlay = ModEntry.Instance.WethUncommon
             },
             Upgrade.A => new CardData
             {
-                cost = 3,
-                exhaust = true,
-                artOverlay = ModEntry.Instance.WethRare
+                cost = 0,
+                artTint = "ffc47b",
+                artOverlay = ModEntry.Instance.WethUncommon
             },
             _ => new CardData
             {
-                cost = 4,
-                exhaust = true,
-                artOverlay = ModEntry.Instance.WethRare
+                cost = 1,
+                artTint = "ffc47b",
+                artOverlay = ModEntry.Instance.WethUncommon
             }
         };
     }

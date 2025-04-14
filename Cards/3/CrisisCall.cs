@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Nanoray.PluginManager;
 using Nickel;
+using Weth.Actions;
 
 namespace Weth.Cards;
 
@@ -29,6 +30,11 @@ public class CrisisCall : Card, IRegisterable
 
     public override List<CardAction> GetActions(State s, Combat c)
     {
+        string name = "";
+        if (c.otherShip?.ai?.character?.type is not null)
+        {
+            name = c.otherShip.ai.character.type;
+        }
         return upgrade switch
         {
             Upgrade.B => 
@@ -36,8 +42,18 @@ public class CrisisCall : Card, IRegisterable
                 new AStatus
                 {
                     status = ModEntry.Instance.PulseStatus.Status,
-                    statusAmount = 5,
+                    statusAmount = 3,
                     targetPlayer = true
+                },
+                new AAddCard
+                {
+                    card = new PulsedriveCard
+                    {
+                        exhaustOverride = true,
+                        exhaustOverrideIsPermanent = true
+                    },
+                    amount = 2,
+                    destination = CardDestination.Discard
                 }
             ],
             _ => 
@@ -45,9 +61,18 @@ public class CrisisCall : Card, IRegisterable
                 new AStatus
                 {
                     status = ModEntry.Instance.PulseStatus.Status,
-                    statusAmount = 3,
+                    statusAmount = 2,
                     targetPlayer = true
-                }
+                },
+                ModEntry.Instance.KokoroApi.V2.SpoofedActions.MakeAction(
+                    new AAddCard
+                    {
+                        card = name.ToLower().Contains("crystal")? new CryPlaceholder() : new MechPlaceholder(),
+                        destination = CardDestination.Discard,
+                        amount = 2,
+                    },
+                    new AGiveGoodieLikeAGoodBoy()
+                ).AsCardAction
             ],
         };
     }

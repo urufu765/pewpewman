@@ -472,15 +472,23 @@ public class ASplitshot : CardAction
         }
         if (weaken)
         {
-            tooltips.Add(new TTGlossary("action.weaken"));
+            tooltips.Add(new TTGlossary("parttrait.weaken"));
         }
         if (brittle)
         {
-            tooltips.Add(new TTGlossary("action.brittle"));
+            tooltips.Add(new TTGlossary("parttrait.brittle"));
         }
         if (armorise)
         {
-            tooltips.Add(new TTGlossary("action.armorize"));
+            tooltips.Add(new TTGlossary("parttrait.armorize"));
+        }
+        if (moveEnemy < 0)
+        {
+            tooltips.Add(new TTGlossary("action.moveLeftEnemy", [Math.Abs(moveEnemy)]));
+        }
+        if (moveEnemy > 0)
+        {
+            tooltips.Add(new TTGlossary("action.moveRightEnemy", [moveEnemy]));
         }
         if (s.route is Combat && !DoWeHaveCannonsThough(s))
         {

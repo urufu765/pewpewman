@@ -64,18 +64,18 @@ internal class ModEntry : SimpleMod
         typeof(SplitshotCard),
         typeof(TrashDispenser),
         //typeof(CargoBlaster),
-        typeof(Pulsedrive),
+        typeof(PulsedriveCard),
         //typeof(GiantTrash),
         //typeof(DoubleBlast),
         typeof(Overcompensator)
     ];
     private static List<Type> WethUncommonCardTypes = [
         typeof(DoubleTap),
-        //typeof(Disabler),
+        typeof(Disabler),
         //typeof(ScatterTrash),
         typeof(Discovery),
         typeof(Powershot),
-        //typeof(Wideshot),
+        typeof(Spreadshot),
         typeof(Bloom)
     ];
     private static List<Type> WethRareCardTypes = [

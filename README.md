@@ -6,6 +6,10 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### Pre-release
 
+* **(0.0.12)**: More splitshot cards! (Finished them all), Brightened Splitshot icon, rebalanced Crisis Call, Pow Pow, Pulsedrive (card).
+  * Crisis Call: Base and A now give 2 pulsedrive and 2 goodies, B gives 3 pulsedrive and 2 exhaust Pulsedrive(card)s
+  * Pow Pow: B now gives 2 Powershots,
+  * Pulsedrive: A and B now exhaust, A gives 2 pulsedrive and gives 1 base pulsedrive(card), B gives 2 pulsedrive and 2 temp B pulsedrive(card)
 * **(0.0.11)**: Splitshot vfx!
 * **(0.0.10)**: Splitshot!
 * **(0.0.9)**: Artifact art!
