@@ -11,6 +11,7 @@ using Weth.Cards;
 using Weth.External;
 using Weth.Features;
 using System.Reflection;
+using Weth.Actions;
 //using System.Reflection;
 
 namespace Weth;
@@ -42,6 +43,10 @@ internal class ModEntry : SimpleMod
     public Spr SprArtExcReady { get; private set; }
     public Spr SprArtExcBeyond { get; private set; }
     public Spr SprArtExcPick { get; private set; }
+    public Spr SprSplitshot { get; private set; }
+    public Spr SprSplitshotFail { get; private set; }
+    public Spr SprSplitshotPiercing { get; private set; }
+    public Spr SprSplitshotPiercingFail { get; private set; }
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
@@ -56,7 +61,7 @@ internal class ModEntry : SimpleMod
         typeof(WethExe),
         typeof(TripleTap),
         typeof(Puckshot),
-        //typeof(Splitshot),
+        typeof(SplitshotCard),
         typeof(TrashDispenser),
         //typeof(CargoBlaster),
         typeof(Pulsedrive),
@@ -324,6 +329,7 @@ internal class ModEntry : SimpleMod
         {
             cards = [
                 new TrashDispenser(),
+                new SplitshotCard()
             ],
             artifacts = 
             [
@@ -401,9 +407,15 @@ internal class ModEntry : SimpleMod
         SprArtExcBeyond = RegisterSprite(package, "assets/Artifact/ArtifactExcursionBeyond.png").Sprite;
         SprArtExcPick = RegisterSprite(package, "assets/Artifact/ArtifactExcursionPick.png").Sprite;
 
+
+        SprSplitshot = RegisterSprite(package, "assets/Splitshot.png").Sprite;
+        SprSplitshotFail = RegisterSprite(package, "assets/SplitshotFail.png").Sprite;
+        SprSplitshotPiercing = RegisterSprite(package, "assets/SplitshotPierce.png").Sprite;
+        SprSplitshotPiercingFail = RegisterSprite(package, "assets/SplitshotPierceFail.png").Sprite;
         //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);
         Artifacthider.Apply(Harmony);
+        SplitshotTranspiler.Apply(Harmony);
     }
 
     /*

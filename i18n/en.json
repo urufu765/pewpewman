@@ -171,7 +171,7 @@
             },
             "RelicDrawNextTurn": {
                 "name": "RELIC: DRAW NEXT TURN",
-                "desc": "Draw 1 card at the start of combat."
+                "desc": "Gain 1 <c=status>DRAW NEXT TURN</c> at the start of combat."
             },
             "RelicEnergyFragment": {
                 "name": "RELIC: ENERGY FRAGMENT",
