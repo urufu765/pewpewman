@@ -170,6 +170,7 @@ internal class ModEntry : SimpleMod
     ];
     private static List<string> Weth3Anims = [
         //"down",
+        //"pensive",
         //"tilt",
         //"tiltalt",
     ];
@@ -182,6 +183,7 @@ internal class ModEntry : SimpleMod
         //"sad",
         //"sparkle",
         "squint",
+        "tired",
         //"up",
     ];
     private static List<string> Weth6Anims = [

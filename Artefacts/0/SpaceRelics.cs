@@ -77,36 +77,15 @@ public class SpaceRelics : Artifact
             {
                 if (relic.Value > 0)
                 {
-                    if (relic.Key is Status.energyFragment)
-                    {
-                        combat.Queue(
-                            new AEnergy
-                            {
-                                changeAmount = relic.Value / 3,
-                            }
-                        );
-                        combat.Queue(
-                            new AStatus
-                            {
-                                status = relic.Key,
-                                statusAmount = relic.Value % 3,
-                                targetPlayer = true,
-                                artifactPulse = Key()
-                            }
-                        );
-                    }
-                    else
-                    {
-                        combat.Queue(
-                            new AStatus
-                            {
-                                status = relic.Key,
-                                statusAmount = relic.Value,
-                                targetPlayer = true,
-                                artifactPulse = Key()
-                            }
-                        );
-                    }
+                    combat.Queue(
+                        new AStatus
+                        {
+                            status = relic.Key,
+                            statusAmount = relic.Value,
+                            targetPlayer = true,
+                            artifactPulse = Key()
+                        }
+                    );
                 }
             }
         }
