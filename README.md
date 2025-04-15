@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### Pre-release
 
+* **(0.0.15)**: Bigger asteroids!
 * **(0.0.14)**: Bayblast!
 * **(0.0.13)**: Triple tap, Double tap, Compensator, Extreme Violence shoot faster now
 * **(0.0.12)**: More splitshot cards! (Finished them all), Brightened Splitshot icon, rebalanced Crisis Call, Pow Pow, Pulsedrive (card).

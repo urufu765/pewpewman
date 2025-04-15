@@ -121,6 +121,16 @@
             "desc": "Automatically plays upon discard if energy is sufficient.\n<c=downside>Destroyed after use.</c>"
         }
     },
+    "object": {
+        "GiantAsteroid": {
+            "name": "Giant Asteroid",
+            "desc": "When destroyed, splits into two <c=drone>asteroids</c> in adjacent spots."
+        },
+        "MegaAsteroid": {
+            "name": "Mega Asteroid",
+            "desc": "When destroyed, splits into two <c=drone>giant asteroids</c> in adjacent spots."
+        }
+    },
     "artifact": {
         "Common": {
             "RockPower": {

@@ -54,6 +54,11 @@ internal class ModEntry : SimpleMod
     public Spr SprBayBlastWide { get; private set; }
     public Spr SprBayBlastWideFail { get; private set; }
 
+    public Spr SprGiantAsteroidIcon { get; private set; }
+    public Spr SprGiantAsteroid { get; private set; }
+    public Spr SprMegaAsteroidIcon { get; private set; }
+    public Spr SprMegaAsteroid { get; private set; }
+
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
     internal IMoreDifficultiesApi? MoreDifficultiesApi {get; private set; } = null!;
@@ -71,14 +76,14 @@ internal class ModEntry : SimpleMod
         typeof(TrashDispenser),
         typeof(CargoBlaster),
         typeof(PulsedriveCard),
-        //typeof(GiantTrash),
+        typeof(GiantTrash),
         typeof(DoubleBlast),
         typeof(Overcompensator)
     ];
     private static List<Type> WethUncommonCardTypes = [
         typeof(DoubleTap),
         typeof(Disabler),
-        //typeof(ScatterTrash),
+        typeof(ScatterTrash),
         typeof(Discovery),
         typeof(Powershot),
         typeof(Spreadshot),
@@ -425,6 +430,11 @@ internal class ModEntry : SimpleMod
         SprBayBlastWideFail = RegisterSprite(package, "assets/bayblastwidefail.png").Sprite;
         //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);
+
+        SprGiantAsteroid = RegisterSprite(package, "assets/giantasteroid.png").Sprite;
+        SprMegaAsteroid = RegisterSprite(package, "assets/megaasteroid.png").Sprite;
+        SprGiantAsteroidIcon = RegisterSprite(package, "assets/giantasteroidicon.png").Sprite;
+        SprMegaAsteroidIcon = RegisterSprite(package, "assets/megaasteroidicon.png").Sprite;
         Artifacthider.Apply(Harmony);
         SplitshotTranspiler.Apply(Harmony);
     }
