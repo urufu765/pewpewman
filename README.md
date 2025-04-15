@@ -4,6 +4,9 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ## Changalog
 
+### ALPHA 1: It's Art Time
+* **(0.1.0)**: No change except version
+
 ### Pre-release
 
 * **(0.0.15)**: Bigger asteroids!
