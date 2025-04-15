@@ -90,6 +90,25 @@
             "name": "SPLITSHOT",
             "desc": "If attack hits a midrow object, the attack splits into two: one to the left and one to the right.",
             "pierceDesc": "If attack hits a midrow object, the attack goes through the midrow object."
+        },
+        "Bayblast": {
+            "name": "BAYBLAST",
+            "desc": "Shoots a blast from the missile bay, destroying whatever midrow object is in front <c=keyword>as if the foe destroyed them.</c>\nDeals {0} damage to invincible objects."
+        },
+        "WideBayblast": {
+            "name": "WIDE BAYBLAST",
+            "desc": "Shoots a blast from the missile bay, destroying whatever midrow objects are in the adjacent and front <c=keyword>as if the foe destroyed them.</c>\nDeals {0} damage to invincible objects."
+        },
+        "BubbleLeech": {
+            "name": "BUBBLE LEECH",
+            "desc": "Steals the midrow object's bubble, giving 1 <c=status>BUBBLE</c> to self."
+        },
+        "Harmless": {
+            "name": "HARMLESS",
+            "desc": "This Bayblast will deal no damage. <c=keyword>Instead, this will activate the drone this blast hits.</c>"
+        },
+        "BayBlastFail": {
+            "desc": "<c=downside>Warning:</c> no missile bays to channel this attack!"
         }
     },
     "trait": {

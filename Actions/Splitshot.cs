@@ -277,7 +277,7 @@ public class ASplitshot : CardAction
                     artifact.Pulse();
                 }
             }
-            if (c.stuff[raycastResult.worldX].bubbleShield && !piercing)
+            if (c.stuff[raycastResult.worldX].bubbleShield)
             {
                 c.stuff[raycastResult.worldX].bubbleShield = false;
             }
@@ -448,16 +448,18 @@ public class ASplitshot : CardAction
             {
                 Icon = ModEntry.Instance.SprSplitshotPiercing,
                 Title = ModEntry.Instance.Localizations.Localize(["action", "Splitshot", "name"]),
+                TitleColor = Colors.action,
                 Description = ModEntry.Instance.Localizations.Localize(["action", "Splitshot", "pierceDesc"])
 
             });
         }
         else
         {
-            tooltips.Add(new GlossaryTooltip("actiontooltip.piercingsplitshot")
+            tooltips.Add(new GlossaryTooltip("actiontooltip.splitshot")
             {
                 Icon = ModEntry.Instance.SprSplitshot,
                 Title = ModEntry.Instance.Localizations.Localize(["action", "Splitshot", "name"]),
+                TitleColor = Colors.action,
                 Description = ModEntry.Instance.Localizations.Localize(["action", "Splitshot", "desc"])
 
             });
@@ -510,16 +512,6 @@ public class ASplitshot : CardAction
             return new Icon(this.piercing? ModEntry.Instance.SprSplitshotPiercing : ModEntry.Instance.SprSplitshot, damage, Colors.redd, false);
         }
         return new Icon(this.piercing? ModEntry.Instance.SprSplitshotPiercingFail : ModEntry.Instance.SprSplitshotFail, damage, Colors.attackFail, false);
-    }
-
-
-    public Spr GetSprite(State s)
-    {
-        if (DoWeHaveCannonsThough(s))
-        {
-            return this.piercing? ModEntry.Instance.SprSplitshotPiercing : ModEntry.Instance.SprSplitshot;
-        }
-        return this.piercing? ModEntry.Instance.SprSplitshotPiercingFail : ModEntry.Instance.SprSplitshotFail;
     }
 
 

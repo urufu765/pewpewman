@@ -43,10 +43,16 @@ internal class ModEntry : SimpleMod
     public Spr SprArtExcReady { get; private set; }
     public Spr SprArtExcBeyond { get; private set; }
     public Spr SprArtExcPick { get; private set; }
+
     public Spr SprSplitshot { get; private set; }
     public Spr SprSplitshotFail { get; private set; }
     public Spr SprSplitshotPiercing { get; private set; }
     public Spr SprSplitshotPiercingFail { get; private set; }
+
+    public Spr SprBayBlast { get; private set; }
+    public Spr SprBayBlastFail { get; private set; }
+    public Spr SprBayBlastWide { get; private set; }
+    public Spr SprBayBlastWideFail { get; private set; }
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
@@ -63,10 +69,10 @@ internal class ModEntry : SimpleMod
         typeof(Puckshot),
         typeof(SplitshotCard),
         typeof(TrashDispenser),
-        //typeof(CargoBlaster),
+        typeof(CargoBlaster),
         typeof(PulsedriveCard),
         //typeof(GiantTrash),
-        //typeof(DoubleBlast),
+        typeof(DoubleBlast),
         typeof(Overcompensator)
     ];
     private static List<Type> WethUncommonCardTypes = [
@@ -412,6 +418,11 @@ internal class ModEntry : SimpleMod
         SprSplitshotFail = RegisterSprite(package, "assets/SplitshotFail.png").Sprite;
         SprSplitshotPiercing = RegisterSprite(package, "assets/SplitshotPierce.png").Sprite;
         SprSplitshotPiercingFail = RegisterSprite(package, "assets/SplitshotPierceFail.png").Sprite;
+
+        SprBayBlast = RegisterSprite(package, "assets/bayblast.png").Sprite;
+        SprBayBlastFail = RegisterSprite(package, "assets/bayblastfail.png").Sprite;
+        SprBayBlastWide = RegisterSprite(package, "assets/bayblastwide.png").Sprite;
+        SprBayBlastWideFail = RegisterSprite(package, "assets/bayblastwidefail.png").Sprite;
         //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);
         Artifacthider.Apply(Harmony);
