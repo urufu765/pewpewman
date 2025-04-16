@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using FMOD;
+using FSPRO;
 using Nickel;
 
 namespace Weth.Actions;
@@ -40,6 +42,7 @@ public class ABayBlast : CardAction
         }
         if (!raycastResult.hitDrone)
         {
+            Audio.Play(new GUID?(Event.Hits_HitDrone));
             c.fx.Add(new AsteroidExplosion 
             {
                 pos = new Vec(raycastResult.worldX * 16, 60.0) + new Vec(7.5, 4.0)
@@ -72,10 +75,12 @@ public class ABayBlast : CardAction
             }
             if (invincible)
             {
+                Audio.Play(new GUID?(Event.Hits_HitDrone));
                 c.QueueImmediate(c.stuff[raycastResult.worldX].GetActionsOnShotWhileInvincible(s, c, !targetPlayer, harmless? 0 : Card.GetActualDamage(s, 1, targetPlayer)));
             }
             else if (harmless)
             {
+                Audio.Play(new GUID?(Event.Hits_BeamHit));
                 c.fx.Add(new AsteroidExplosion 
                 {
                     pos = new Vec(raycastResult.worldX * 16, 60.0) + new Vec(7.5, 4.0)
@@ -92,6 +97,7 @@ public class ABayBlast : CardAction
             }
             else
             {
+                Audio.Play(new GUID?(Event.Hits_HitDrone));
                 c.DestroyDroneAt(s, raycastResult.worldX, targetPlayer);
             }
         }
