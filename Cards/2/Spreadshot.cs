@@ -11,6 +11,7 @@ namespace Weth.Cards;
 /// </summary>
 public class Spreadshot : Card, IRegisterable
 {
+    private static Spr altSprite {get; set;}
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -23,8 +24,9 @@ public class Spreadshot : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "Spreadshot", "name"]).Localize,
-            //Art = ModEntry.RegisterSprite(package, "assets/Card/2/TripleTap.png").Sprite
+            Art = ModEntry.RegisterSprite(package, "assets/Card/2/spreadshot.png").Sprite
         });
+        altSprite = ModEntry.RegisterSprite(package, "assets/Card/2/spreadshotalt.png").Sprite;
     }
 
 
@@ -73,6 +75,12 @@ public class Spreadshot : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 2,
+                art = altSprite,
+                artOverlay = ModEntry.Instance.WethUncommon
+            },
             _ => new CardData
             {
                 cost = 2,

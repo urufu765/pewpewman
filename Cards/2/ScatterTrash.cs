@@ -12,6 +12,7 @@ namespace Weth.Cards;
 /// </summary>
 public class ScatterTrash : Card, IRegisterable
 {
+    private static Spr altSprite {get; set;}
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -24,8 +25,9 @@ public class ScatterTrash : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "ScatterTrash", "name"]).Localize,
-            //Art = ModEntry.RegisterSprite(package, "assets/Card/2/TripleTap.png").Sprite
+            Art = ModEntry.RegisterSprite(package, "assets/Card/2/scattertrash.png").Sprite
         });
+        altSprite = ModEntry.RegisterSprite(package, "assets/Card/2/scattertrashalt.png").Sprite;
     }
 
 
@@ -98,6 +100,12 @@ public class ScatterTrash : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.A or Upgrade.B => new CardData
+            {
+                cost = 2,
+                art = altSprite,
+                artOverlay = ModEntry.Instance.WethUncommon
+            },
             _ => new CardData
             {
                 cost = 2,

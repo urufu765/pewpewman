@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### ALPHA 1: It's Art Time
 
+* **(0.1.3)**: Uncommon card arts!
 * **(0.1.2)**: Rare card arts! And changed Pearl Dispenser a little bit, and Pow Pow
 * **(0.1.1)**: Sprited main sprites + removed energy patch
 * **(0.1.0)**: No change except version
