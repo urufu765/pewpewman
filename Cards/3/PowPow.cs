@@ -22,7 +22,7 @@ public class PowPow : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Rare", "PowPow", "name"]).Localize,
-            //Art = ModEntry.RegisterSprite(package, "assets/Card/2/TripleTap.png").Sprite
+            Art = ModEntry.RegisterSprite(package, "assets/Card/3/powpow.png").Sprite
         });
     }
 
@@ -35,7 +35,8 @@ public class PowPow : Card, IRegisterable
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 0),
+                    stunEnemy = true,
                     piercing = true
                 },
                 new AStatus
@@ -55,7 +56,8 @@ public class PowPow : Card, IRegisterable
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 0),
+                    stunEnemy = true,
                     piercing = true
                 },
                 new AStatus
@@ -77,18 +79,21 @@ public class PowPow : Card, IRegisterable
             {
                 cost = 1,
                 singleUse = true,
+                artTint = "ffc47b",
                 artOverlay = ModEntry.Instance.WethRare
             },
             Upgrade.A => new CardData
             {
                 cost = 3,
                 exhaust = true,
+                artTint = "ffc47b",
                 artOverlay = ModEntry.Instance.WethRare
             },
             _ => new CardData
             {
                 cost = 4,
                 exhaust = true,
+                artTint = "ffc47b",
                 artOverlay = ModEntry.Instance.WethRare
             }
         };

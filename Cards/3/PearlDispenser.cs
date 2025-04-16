@@ -10,6 +10,7 @@ namespace Weth.Cards;
 /// </summary>
 public class PearlDispenser : Card, IRegisterable
 {
+    // private static Spr altSprite {get; set;}
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -22,8 +23,9 @@ public class PearlDispenser : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Rare", "PearlDispenser", "name"]).Localize,
-            //Art = ModEntry.RegisterSprite(package, "assets/Card/2/TripleTap.png").Sprite
+            Art = ModEntry.RegisterSprite(package, "assets/Card/3/pearldispenser.png").Sprite
         });
+        // altSprite = ModEntry.RegisterSprite(package, "assets/Card/3/pearldispenseralt.png").Sprite;
     }
 
 
@@ -56,7 +58,8 @@ public class PearlDispenser : Card, IRegisterable
                 {
                     thing = new RepairKit
                     {
-                        yAnimation = 0.0
+                        yAnimation = 0.0,
+                        bubbleShield = true
                     }
                 },
             ],
@@ -71,18 +74,19 @@ public class PearlDispenser : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 3,
-                exhaust = true,
-                artOverlay = ModEntry.Instance.WethRare
+                artOverlay = ModEntry.Instance.WethRare,
+                art = StableSpr.cards_Repairs,
             },            
             Upgrade.A => new CardData
             {
                 cost = 2,
-                artOverlay = ModEntry.Instance.WethRare
+                artOverlay = ModEntry.Instance.WethRare,
             },
             _ => new CardData
             {
-                cost = 3,
-                artOverlay = ModEntry.Instance.WethRare
+                cost = 2,
+                artOverlay = ModEntry.Instance.WethRare,
+                exhaust = true
             }
         };
     }

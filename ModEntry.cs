@@ -243,12 +243,12 @@ internal class ModEntry : SimpleMod
                  * TODO On cards, it dictates the sheen on higher rarities, as well as influences the color of the energy cost.
                  * If this deck is given to a playable character, their name will be this color, and their mini will have this color as their border.
                  */
-                color = new Color("125f66"),
+                color = new Color("2a767d"),
 
                 titleColor = new Color("93c4c8").addClarityBright()
             },
 
-            DefaultCardArt = StableSpr.cards_MultiBlast,
+            DefaultCardArt = StableSpr.cards_Cannon,
             BorderSprite = RegisterSprite(package, "assets/frame_weth.png").Sprite,
             Name = AnyLocalizations.Bind(["character", "Weth", "name"]).Localize,
             ShineColorOverride = _ => new Color(0, 0, 0),

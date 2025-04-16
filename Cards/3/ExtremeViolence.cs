@@ -10,6 +10,8 @@ namespace Weth.Cards;
 /// </summary>
 public class ExtremeViolence : Card, IRegisterable
 {
+    private static Spr altSprite {get; set;}
+    private static Spr altSpriteB {get; set;}
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -22,8 +24,10 @@ public class ExtremeViolence : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Rare", "ExtremeViolence", "name"]).Localize,
-            //Art = ModEntry.RegisterSprite(package, "assets/Card/2/TripleTap.png").Sprite
+            Art = ModEntry.RegisterSprite(package, "assets/Card/3/extremeviolence.png").Sprite
         });
+        altSprite = ModEntry.RegisterSprite(package, "assets/Card/3/extremeviolencealt.png").Sprite;
+        altSpriteB = ModEntry.RegisterSprite(package, "assets/Card/3/extremeviolencealtb.png").Sprite;
     }
 
 
@@ -131,13 +135,23 @@ public class ExtremeViolence : Card, IRegisterable
             {
                 cost = 3,
                 exhaust = true,
-                artTint = "ffc47b",
+                art = altSpriteB,
+                artTint = "689da2",
+                artOverlay = ModEntry.Instance.WethRare
+            },
+            Upgrade.A => new CardData
+            {
+                cost = 3,
+                exhaust = true,
+                art = altSprite,
+                artTint = "689da2",
                 artOverlay = ModEntry.Instance.WethRare
             },
             _ => new CardData
             {
                 cost = 3,
                 exhaust = true,
+                artTint = "689da2",
                 artOverlay = ModEntry.Instance.WethRare
             }
         };
