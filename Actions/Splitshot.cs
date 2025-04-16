@@ -474,7 +474,7 @@ public class ASplitshot : CardAction
         }
         if (weaken)
         {
-            tooltips.Add(new TTGlossary("parttrait.weaken"));
+            tooltips.Add(new TTGlossary("parttrait.weak"));
         }
         if (brittle)
         {
@@ -482,7 +482,7 @@ public class ASplitshot : CardAction
         }
         if (armorise)
         {
-            tooltips.Add(new TTGlossary("parttrait.armorize"));
+            tooltips.Add(new TTGlossary("parttrait.armor"));
         }
         if (moveEnemy < 0)
         {

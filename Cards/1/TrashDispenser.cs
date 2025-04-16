@@ -22,7 +22,7 @@ public class TrashDispenser : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "TrashDispenser", "name"]).Localize,
-            //Art = ModEntry.RegisterSprite(package, "assets/Card/1/TripleTap.png").Sprite
+            Art = StableSpr.cards_SmallBoulder
         });
     }
 

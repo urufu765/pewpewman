@@ -22,7 +22,7 @@ public class TripleTap : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "TripleTap", "name"]).Localize,
-            //Art = ModEntry.RegisterSprite(package, "assets/Card/1/TripleTap.png").Sprite
+            Art = ModEntry.RegisterSprite(package, "assets/Card/1/tripletap.png").Sprite
         });
     }
 

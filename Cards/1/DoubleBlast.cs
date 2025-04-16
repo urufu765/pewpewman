@@ -24,7 +24,7 @@ public class DoubleBlast : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "DoubleBlast", "name"]).Localize,
-            //Art = ModEntry.RegisterSprite(package, "assets/Card/1/Pulsedrive.png").Sprite
+            Art = ModEntry.RegisterSprite(package, "assets/Card/1/bayblast.png").Sprite
         });
     }
 

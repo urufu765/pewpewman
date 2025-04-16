@@ -22,7 +22,7 @@ public class WethExe : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "WethEXE", "name"]).Localize,
-            //Art = ModEntry.RegisterSprite(package, "assets/Card/0/EXE.png").Sprite
+            Art = ModEntry.RegisterSprite(package, "assets/Card/0/EXE.png").Sprite
         });
     }
 
