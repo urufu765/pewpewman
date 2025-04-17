@@ -325,8 +325,8 @@ internal class ModEntry : SimpleMod
             Starters = new StarterDeck
             {
                 cards = [
-                    new TripleTap(),
-                    new Puckshot(),
+                    new TrashDispenser(),
+                    new SplitshotCard()
                 ],
                 /*
                  * Some characters have starting artifacts, in addition to starting cards.
@@ -343,8 +343,8 @@ internal class ModEntry : SimpleMod
         MoreDifficultiesApi?.RegisterAltStarters(WethDeck.Deck, new StarterDeck
         {
             cards = [
-                new TrashDispenser(),
-                new SplitshotCard()
+                new TripleTap(),
+                new Puckshot(),
             ],
             artifacts = 
             [

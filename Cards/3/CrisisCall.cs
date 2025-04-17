@@ -71,7 +71,10 @@ public class CrisisCall : Card, IRegisterable
                         destination = CardDestination.Discard,
                         amount = 2,
                     },
-                    new AGiveGoodieLikeAGoodBoy()
+                    new AGiveGoodieLikeAGoodBoy
+                    {
+                        amount = 2
+                    }
                 ).AsCardAction
             ],
         };

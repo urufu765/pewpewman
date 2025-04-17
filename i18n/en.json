@@ -147,7 +147,7 @@
             },
             "TreasureSeeker": {
                 "name": "TREASURE SEEKER",
-                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nAfter <c=keyword>10 hits</c>, add a random <c=card>Goodie A</c> to your hand. <c=downside>Count resets at the end of combat.</c>\nGain special goodies from defeating zone bosses and elites!"
+                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nAfter <c=keyword>10 hits</c>, add a random <c=card>Goodie A</c> to your hand. <c=downside>Count resets at the end of combat.</c>\nGain special goodies from defeating zone bosses and elites!\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie.</c>"
             },
             "HiddenOptions": {
                 "name": "HIDDEN OPTIONS",
@@ -167,7 +167,7 @@
         "EventOnly": {
             "TreasureHunter": {
                 "name": "TREASURE HUNTER",
-                "desc": "Once per combat, after <c=keyword>10 hits</c>, add a random <c=card>Goodie</c> to your hand.\nGain special goodies from defeating zone bosses!"
+                "desc": "Once per combat, after <c=keyword>10 hits</c>, add a random <c=card>Goodie</c> to your hand.\nGain special goodies from defeating zone bosses!\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie.</c>"
             }
         },
         "Unreleased": {

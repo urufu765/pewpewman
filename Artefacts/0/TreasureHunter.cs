@@ -107,7 +107,7 @@ public class TreasureHunter : Artifact
         if (isBossNotElite is not null && (isBossNotElite.Value || GetAdvanced()))
         {
             state.rewardsQueue.QueueImmediate(
-                new AAddCard
+                new AWethCardOffering
                 {
                     card = isCrystal? new CryShield() : new MechHull()
                 }
