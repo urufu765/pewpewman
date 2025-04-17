@@ -56,6 +56,8 @@ public class MechMine : Card, IRegisterable
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieMechA,
                 exhaust = true,
+                retain = true,
+                temporary = true,
                 artTint = "a0a0a0"
             },
             _ => new CardData
@@ -63,6 +65,7 @@ public class MechMine : Card, IRegisterable
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieMech,
                 singleUse = true,
+                temporary = true,
                 artTint = "a0a0a0"
             }
         };

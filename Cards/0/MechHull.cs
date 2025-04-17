@@ -22,7 +22,7 @@ public class MechHull : Card, IRegisterable
                 dontOffer = true,
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Token", "Hell", "name"]).Localize,
-            Art = StableSpr.cards_Repairs
+            Art = StableSpr.cards_BoostCapacitors
         });
     }
 
@@ -53,7 +53,7 @@ public class MechHull : Card, IRegisterable
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieMechA,
                 singleUse = true,
-                temporary = true,
+                buoyant = true,
                 artTint = "a0a0a0"
             }
         };

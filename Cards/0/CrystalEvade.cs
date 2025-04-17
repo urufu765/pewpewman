@@ -55,6 +55,8 @@ public class CryEvade : Card, IRegisterable
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieCrystalA,
                 exhaust = true,
+                temporary = true,
+                retain = true,
                 artTint = "6284ff"
             },
             _ => new CardData
@@ -62,6 +64,7 @@ public class CryEvade : Card, IRegisterable
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieCrystal,
                 singleUse = true,
+                temporary = true,
                 artTint = "6284ff"
             }
         };

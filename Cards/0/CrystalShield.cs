@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.Xna.Framework.Graphics;
 using Nanoray.PluginManager;
 using Nickel;
+using OneOf.Types;
 
 namespace Weth.Cards;
 
@@ -53,7 +55,7 @@ public class CryShield : Card, IRegisterable
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieCrystalA,
                 singleUse = true,
-                temporary = true,
+                buoyant = true,
                 artTint = "6284ff"
             }
         };

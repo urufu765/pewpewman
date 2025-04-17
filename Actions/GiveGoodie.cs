@@ -9,8 +9,9 @@ namespace Weth.Actions;
 /// </summary>
 public class AGiveGoodieLikeAGoodBoy : CardAction
 {
-    public bool? advancedArtifact;
+    public bool fromArtifact;
     public string artifactKey = "";
+    public Upgrade upgrade;
 
     private static readonly List<Type> CrystalOfferings = [
         typeof(CryAhtack),
@@ -19,14 +20,12 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
         typeof(CryEnergy),
         typeof(CryEvade),
         typeof(CryFlux),
-        typeof(CryShield),
         typeof(CrySwap)
     ];
     private static readonly List<Type> MechOfferings = [
         typeof(MechAhtack),
         typeof(MechDuhfend),
         typeof(MechEvade),
-        typeof(MechHull),
         typeof(MechMine),
         typeof(MechMissile),
         typeof(MechStun),
@@ -67,20 +66,9 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
             }
         }
         Card cd = (Card)Activator.CreateInstance(offerings[rng.Next(offerings.Count)])!;
+        cd.upgrade = upgrade;
         // shove card into deck
-        if (advancedArtifact is false)
-        {
-            cd.temporaryOverride = true;
-            c.Queue(
-                new AAddCard
-                {
-                    card = cd,
-                    destination = CardDestination.Hand,
-                    artifactPulse = artifactKey
-                }
-            );
-        }
-        else if (advancedArtifact is true)
+        if (fromArtifact)
         {
             c.Queue(
                 new AAddCard

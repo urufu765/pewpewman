@@ -39,6 +39,8 @@ internal class ModEntry : SimpleMod
     public Spr GoodieMech { get; private set; }
     public Spr GoodieMechA { get; private set; }
 
+    public Spr SprArtTHDepleted { get; private set; }
+
     public Spr SprArtExcCounting { get; private set; }
     public Spr SprArtExcReady { get; private set; }
     public Spr SprArtExcBeyond { get; private set; }
@@ -419,6 +421,7 @@ internal class ModEntry : SimpleMod
         SprArtExcReady = RegisterSprite(package, "assets/Artifact/ArtifactExcursionReady.png").Sprite;
         SprArtExcBeyond = RegisterSprite(package, "assets/Artifact/ArtifactExcursionBeyond.png").Sprite;
         SprArtExcPick = RegisterSprite(package, "assets/Artifact/ArtifactExcursionPick.png").Sprite;
+        SprArtTHDepleted = RegisterSprite(package, "assets/Artifact/TreasureHunterDepleted.png").Sprite;
 
 
         SprSplitshot = RegisterSprite(package, "assets/Splitshot.png").Sprite;

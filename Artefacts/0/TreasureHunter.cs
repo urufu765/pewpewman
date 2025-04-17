@@ -11,7 +11,12 @@ namespace Weth.Artifacts;
 public class TreasureHunter : Artifact
 {
     public int SuccessfulHits {get; set;}
+    public bool Depleted { get; set; }
     public bool isCrystal;
+    /// <summary>
+    /// Null = normal, False = Elite, True = Boss
+    /// </summary>
+    public bool? isBossNotElite;
 
     public override int? GetDisplayNumber(State s)
     {
@@ -23,6 +28,10 @@ public class TreasureHunter : Artifact
         return 10;
     }
 
+    /// <summary>
+    /// Either allow just Boss rewards, or both Boss and Elite rewards
+    /// </summary>
+    /// <returns></returns>
     public virtual bool GetAdvanced()
     {
         return false;
@@ -33,19 +42,42 @@ public class TreasureHunter : Artifact
         return Key();
     }
 
+    public virtual bool CanBeDepleted()
+    {
+        return true;
+    }
+
+    public virtual Upgrade GetUpgrade()
+    {
+        return Upgrade.None;
+    }
+
+    public override Spr GetSprite()
+    {
+        return SuccessfulHits >= GetHitsRequired() ? ModEntry.Instance.SprArtTHDepleted : base.GetSprite();
+    }
+
     public override void OnEnemyGetHit(State state, Combat combat, Part? part)
     {
-        SuccessfulHits++;
-        if (SuccessfulHits >= GetHitsRequired())
+        if (SuccessfulHits < GetHitsRequired()) SuccessfulHits++;
+        if (SuccessfulHits >= GetHitsRequired() && !Depleted)
         {
             combat.QueueImmediate(
                 new AGiveGoodieLikeAGoodBoy
                 {
-                    advancedArtifact = GetAdvanced(),
+                    fromArtifact = true,
                     artifactKey = GetArtifactKey(),
+                    upgrade = GetUpgrade()
                 }
             );
-            SuccessfulHits = 0;
+            if (CanBeDepleted())
+            {
+                Depleted = true;
+            }
+            else
+            {
+                SuccessfulHits = 0;
+            }
         }
     }
 
@@ -57,11 +89,30 @@ public class TreasureHunter : Artifact
             name = combat.otherShip.ai.character.type;
         }
         isCrystal = name.Contains("crystal", StringComparison.CurrentCultureIgnoreCase);
+        if (state?.map?.markers[state.map.currentLocation]?.contents is MapBattle mb)
+        {
+            isBossNotElite = mb.battleType switch
+            {
+                BattleType.Elite => false,
+                BattleType.Boss => true,
+                _ => null
+            };
+        }
     }
 
     public override void OnCombatEnd(State state)
     {
         SuccessfulHits = 0;
+        Depleted = false;
+        if (isBossNotElite is not null && (isBossNotElite.Value || GetAdvanced()))
+        {
+            state.rewardsQueue.QueueImmediate(
+                new AAddCard
+                {
+                    card = isCrystal? new CryShield() : new MechHull()
+                }
+            );
+        }
     }
 
     public override List<Tooltip>? GetExtraTooltips()
@@ -72,7 +123,7 @@ public class TreasureHunter : Artifact
                 {
                     card = new CryPlaceholder
                     {
-                        temporaryOverride = GetAdvanced()? null : true
+                        upgrade = GetUpgrade()
                     },
                     showCardTraitTooltips = true
                 }] : 
@@ -81,7 +132,7 @@ public class TreasureHunter : Artifact
                 {
                     card = new MechPlaceholder
                     {
-                        temporaryOverride = GetAdvanced()? null : true
+                        upgrade = GetUpgrade()
                     },
                     showCardTraitTooltips = true
                 }

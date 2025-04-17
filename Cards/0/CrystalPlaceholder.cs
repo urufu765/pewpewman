@@ -19,6 +19,7 @@ public class CryPlaceholder : Card, IRegisterable
             {
                 deck = ModEntry.Instance.GoodieDeck.Deck,
                 rarity = Rarity.common,
+                upgradesTo = [Upgrade.A],
                 dontOffer = true,
                 unreleased = true
             },
@@ -50,11 +51,21 @@ public class CryPlaceholder : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.A => new CardData
+            {
+                cost = 0,
+                artOverlay = ModEntry.Instance.GoodieCrystalA,
+                exhaust = true,
+                retain = true,
+                temporary = true,
+                artTint = "6284ff"
+            },
             _ => new CardData
             {
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieCrystal,
                 singleUse = true,
+                temporary = true,
                 artTint = "6284ff"
             }
         };

@@ -55,6 +55,8 @@ public class MechEvade : Card, IRegisterable
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieMechA,
                 exhaust = true,
+                temporary = true,
+                retain = true,
                 artTint = "a0a0a0"
             },
             _ => new CardData
@@ -62,6 +64,7 @@ public class MechEvade : Card, IRegisterable
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieMech,
                 singleUse = true,
+                temporary = true,
                 artTint = "a0a0a0"
             }
         };

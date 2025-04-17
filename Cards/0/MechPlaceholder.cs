@@ -19,6 +19,7 @@ public class MechPlaceholder : Card, IRegisterable
             {
                 deck = ModEntry.Instance.GoodieDeck.Deck,
                 rarity = Rarity.common,
+                upgradesTo = [Upgrade.A],
                 dontOffer = true,
                 unreleased = true
             },
@@ -50,11 +51,21 @@ public class MechPlaceholder : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.A => new CardData
+            {
+                cost = 0,
+                artOverlay = ModEntry.Instance.GoodieMechA,
+                exhaust = true,
+                retain = true,
+                temporary = true,
+                artTint = "a0a0a0"
+            },
             _ => new CardData
             {
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieMech,
                 singleUse = true,
+                temporary = true,
                 artTint = "a0a0a0"
             }
         };

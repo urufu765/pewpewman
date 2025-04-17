@@ -53,6 +53,8 @@ public class CryAhtack : Card, IRegisterable
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieCrystalA,
                 exhaust = true,
+                retain = true,
+                temporary = true,
                 artTint = "6284ff"
             },
             _ => new CardData
@@ -60,6 +62,7 @@ public class CryAhtack : Card, IRegisterable
                 cost = 0,
                 artOverlay = ModEntry.Instance.GoodieCrystal,
                 singleUse = true,
+                temporary = true,
                 artTint = "6284ff"
             }
         };
