@@ -12,6 +12,7 @@ using Weth.External;
 using Weth.Features;
 using System.Reflection;
 using Weth.Actions;
+using Weth.Dialogue;
 //using System.Reflection;
 
 namespace Weth;
@@ -64,6 +65,7 @@ internal class ModEntry : SimpleMod
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
     internal IMoreDifficultiesApi? MoreDifficultiesApi {get; private set; } = null!;
+    public LocalDB localDB { get; set; } = null!;
 
     /*
      * The following lists contain references to all types that will be registered to the game.
@@ -161,9 +163,13 @@ internal class ModEntry : SimpleMod
             .Concat(WethEventArtifacts)
             .Concat(WethSpecialArtifacts);
 
+    private static List<Type> WethDialogues = [
+        typeof(StoryDialogue)
+    ];
     private static IEnumerable<Type> AllRegisterableTypes =
         WethCardTypes
-            .Concat(WethArtifactTypes);
+            .Concat(WethArtifactTypes)
+            .Concat(WethDialogues);
 
     private static List<string> Weth1Anims = [
         "gameover",
@@ -219,9 +225,15 @@ internal class ModEntry : SimpleMod
             if (phase == ModLoadPhase.AfterDbInit)
             {
                 Patch_EnemyPack = helper.ModRegistry.LoadedMods.ContainsKey("TheJazMaster.EnemyPack");
-                DialogueMachine.Apply();
+                localDB = new(package);
             }
-
+        };
+        helper.Events.OnLoadStringsForLocale += (_, thing) =>
+        {
+            foreach (KeyValuePair<string, string> entry in localDB.GetLocalizationResults())
+            {
+                thing.Localizations[entry.Key] = entry.Value;
+            }
         };
 
         AnyLocalizations = new JsonLocalizationProvider(
@@ -276,7 +288,7 @@ internal class ModEntry : SimpleMod
             DefaultCardArt = StableSpr.cards_MultiBlast,
             BorderSprite = RegisterSprite(package, "assets/frame_goodies.png").Sprite,
             Name = AnyLocalizations.Bind(["character", "Goodie", "name"]).Localize,
-            ShineColorOverride = _ => new Color(0, 0, 0),
+            //ShineColorOverride = _ => new Color(0, 0, 0),
         });
         GoodieCrystal = RegisterSprite(package, "assets/frame_goodiescrystal.png").Sprite;
         GoodieCrystalA = RegisterSprite(package, "assets/frame_goodiescrystalA.png").Sprite;
