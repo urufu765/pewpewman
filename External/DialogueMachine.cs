@@ -12,14 +12,26 @@ namespace Weth.External;
 public enum DMod
 {
     dialogue,
-    switchsay,
-    unswitchsay,
     retain,
     instruction,
     title
 }
 
-public class DialogueThings
+public interface IDialogueThing
+{
+}
+
+public class SwitchThing : IDialogueThing
+{
+    public List<SayThing> dialogue = new();
+
+    public SwitchThing(List<SayThing> things)
+    {
+        dialogue = things;
+    }
+}
+
+public class SayThing : IDialogueThing
 {
     public string? who;
     public string? loopTag;
@@ -33,7 +45,7 @@ public class DialogueThings
     /// <param name="who">Who speaketh?</param>
     /// <param name="loopTag">How emote?</param>
     /// <param name="what">What they sayeth?</param>
-    public DialogueThings(string who, string loopTag, string what)
+    public SayThing(string who, string loopTag, string what)
     {
         this.mode = DMod.dialogue;
         this.who = who;
@@ -45,7 +57,7 @@ public class DialogueThings
     /// </summary>
     /// <param name="who">Who speaketh?</param>
     /// <param name="what">What they sayeth?</param>
-    public DialogueThings(string who, string what)
+    public SayThing(string who, string what)
     {
         this.mode = DMod.dialogue;
         this.who = who;
@@ -55,7 +67,7 @@ public class DialogueThings
     /// Particulary for adding a spacer or turning on the switchsay mode
     /// </summary>
     /// <param name="mode">Mode of operation</param>
-    public DialogueThings(DMod mode)
+    public SayThing(DMod mode)
     {
         this.mode = mode;
     }
@@ -63,7 +75,7 @@ public class DialogueThings
     /// For adding any instructions unfulfilled by this dialogue thing
     /// </summary>
     /// <param name="instruction">Instructions to add</param>
-    public DialogueThings(Instruction instruction)
+    public SayThing(Instruction instruction)
     {
         this.mode = DMod.instruction;
         this.instruction = instruction;
@@ -72,7 +84,7 @@ public class DialogueThings
     /// For adding text to title cards
     /// </summary>
     /// <param name="title">The title to show (NULL for empty=true)</param>
-    public DialogueThings(string? title)
+    public SayThing(string? title)
     {
         this.mode = DMod.title;
         this.title = title;
@@ -82,72 +94,63 @@ public class DialogueThings
 public class DialogueMachine : StoryNode
 {
     // public List<(string whoOrCommand, string? loopTag, string? what)> dialogue = null!;
-    public List<DialogueThings> dialogue = null!;
+    public List<IDialogueThing> dialogue = null!;
     public void Convert()
     {
-        bool switchsayer = false;
-        SaySwitch ss = new SaySwitch
+        foreach (IDialogueThing d in dialogue)
         {
-            lines = new()
+            if (d is SwitchThing st)
+            {
+                SaySwitch ss = new()
+                {
+                    lines = new()
+                };
+                foreach (SayThing dial in st.dialogue)
+                {
+                    if (dial.mode == DMod.dialogue) ss.lines.Add(ConvertDialogueToSay(dial));
+                }
+                lines.Add(Mutil.DeepCopy(ss));
+            }
+            if (d is SayThing dt)
+            {
+                lines.Add(ConvertDialogueToLine(dt));
+            }
+        }
+    }
+
+    private static Say ConvertDialogueToSay(SayThing dt)
+    {
+        return new Say
+        {
+            who = dt.who ?? "",
+            loopTag = dt.loopTag,
+            hash = dt.what ?? ""
         };
-        foreach (DialogueThings dt in dialogue)
+    }
+
+    private static Instruction ConvertDialogueToLine(SayThing dt)
+    {
+        if (dt.mode == DMod.retain)
         {
-            if (dt.mode == DMod.switchsay)
+            return new RetainOrig();
+        }
+        if (dt.mode == DMod.instruction && dt.instruction is not null)
+        {
+            return dt.instruction;
+        }
+        if (dt.mode == DMod.title)
+        {
+            if (dt.title is null)
             {
-                switchsayer = true;
-                continue;
-            }
-            if (dt.mode == DMod.retain)
-            {
-                lines.Add(new RetainOrig());
-                continue;
-            }
-            if (dt.mode == DMod.unswitchsay)
-            {
-                switchsayer = false;
-                lines.Add(ss);
-                ss = new();
-                continue;
-            }
-            if (dt.mode == DMod.instruction && dt.instruction is not null)
-            {
-                lines.Add(dt.instruction);
-                continue;
-            }
-            if (dt.mode == DMod.title)
-            {
-                if (dt.title is null)
-                {
-                    lines.Add(new TitleCard { empty = true });
-                }
-                else
-                {
-                    lines.Add(new TitleCard { hash = dt.title });
-                }
-            }
-            if (switchsayer)
-            {
-                ss.lines.Add(new Say
-                {
-                    who = dt.who ?? "",
-                    loopTag = dt.loopTag,
-                    hash = dt.what ?? ""
-                });
+                return new TitleCard { empty = true };
             }
             else
             {
-                lines.Add(new Say
-                {
-                    who = dt.who ?? "",
-                    loopTag = dt.loopTag,
-                    hash = dt.what ?? ""
-                });
+                return new TitleCard { hash = dt.title };
             }
         }
-        if (switchsayer)
-        {
-            lines.Add(ss);
-        }
+
+        return ConvertDialogueToSay(dt);
     }
     
     /// <summary>

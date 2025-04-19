@@ -17,15 +17,15 @@ internal class StoryDialogue : IRegisterable
             allPresent = [AmWeth],
             priority = true,
             dialogue = [
-                new(AmWeth, "This is a dialogue test"),
-                new(AmCat, "I'm responding!"),
-                new(DMod.switchsay),
-                new(AmRiggs, "Woah!"),
-                new(AmDizzy, "Yay"),
-                new(DMod.unswitchsay),
-                new(AmCat, "squint", "Is this really it?"),
-                new(AmWeth, "explain", "Really for sure."),
-                new(AmWeth, "What do you think of this simplicity?")
+                new SayThing(AmWeth, "This is a dialogue test"),
+                new SayThing(AmCat, "I'm responding!"),
+                new SwitchThing([
+                    new(AmRiggs, "Woah!"),
+                    new(AmDizzy, "Yay"),
+                ]),
+                new SayThing(AmCat, "squint", "Is this really it?"),
+                new SayThing(AmWeth, "explain", "Really for sure."),
+                new SayThing(AmWeth, "What do you think of this simplicity?")
             ]
         };
 

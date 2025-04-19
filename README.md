@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 2: Chit Chat Time
 
+* *(0.2.3)*: Support for other languages, checking deck and warning players
 * **(0.2.2)**: Gave goodies shine, and developed new dialogue machine
 * **(0.2.1)**: Fixed goodies giver not having an amount, and you can only have one uncommon goodie at all times. And swapped Alt and Main starters.
 * **(0.2.0)**: Weth's starter artifact is now limited to once per combat. Treasure Seeker is not limited but now requires 10. All special cards are temporary. Rare type special cards are not offered randomly in artifacts anymore. Area bosses drop Max Shield and Max Hull (crystal boss, pirate boss respectively). Also ScatterTrash art tint corrected.
