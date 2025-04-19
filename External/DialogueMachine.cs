@@ -199,19 +199,28 @@ public class RetainOrig : Instruction
 public class LocalDB
 {
     public static Story LocalStory { get; set; } = new();
-    private static Story ConvertedStory { get; set; } = new();
-    private static Story OverrideStory { get; set; } = new();  // Find localisation from files and use that instead of LocalStory
+    public static Dictionary<string, Story> LocalStoryLocale { get; set; } = new();
+    private static Story ToUseStory { get; set; } = new();
     public int incrementingID = 1;
     public Dictionary<string, string> customLocalisation { get; private set; }
     //internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
 
     public LocalDB(IPluginPackage<IModManifest> package)
     {
-        // AddStory = Mutil.LoadJsonFile<Story>(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}/add_story.json").FullName);
-        // EditStory = Mutil.LoadJsonFile<Story>(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}/edit_story.json").FullName);
         customLocalisation = new();
-        PasteToDB(LocalStory, DB.story);
-        File.WriteAllText(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}_story.json").FullName, JsonSerializer.Serialize(customLocalisation));
+        if (LocalStoryLocale.ContainsKey(DB.currentLocale.locale))  // For other coded translated dialogues
+        {
+            ToUseStory = LocalStoryLocale[DB.currentLocale.locale];
+        }
+        else if (File.Exists(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}_story.json").FullName))  // For i18n translated story dialogue
+        {
+            ToUseStory = Mutil.LoadJsonFile<Story>(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}_story.json").FullName);
+        }
+        else  // For default
+        {
+            ToUseStory = LocalStory;
+        }
+        PasteToDB(ToUseStory, DB.story);
     }
 
     public Dictionary<string, string> GetLocalizationResults()
