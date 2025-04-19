@@ -164,7 +164,8 @@ internal class ModEntry : SimpleMod
             .Concat(WethSpecialArtifacts);
 
     private static List<Type> WethDialogues = [
-        typeof(StoryDialogue)
+        typeof(StoryDialogue),
+        typeof(EventDialogue)
     ];
     private static IEnumerable<Type> AllRegisterableTypes =
         WethCardTypes

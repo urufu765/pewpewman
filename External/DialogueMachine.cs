@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Nanoray.PluginManager;
 using Nickel;
@@ -15,42 +14,123 @@ public enum DMod
     switchsay,
     retain,
     instruction,
-    title
+    title,
+}
+public enum EMod
+{
+    countFromStart,
+    countFromEnd,
+    findSwitchWithHash
 }
 
 
-public class DialogueThing
+public class AbstractThing
 {
     public string? who;
     public string? loopTag;
     public string? what;
+    public bool flipped;
+    public bool ifCrew;
+    public double delay;
+    public string? choiceFunc;
+}
+
+
+public class EditThing : AbstractThing
+{
+    public int? switchNumber;
+    public EMod searchConfig;
+    public string? hashSearch;
+    public EditThing(EMod searchConfig, int switchNumber, string who, string loopTag, string what, bool flipped = false, bool ifCrew = false, double delay = 0.0, string? choiceFunc = null)
+    {
+        this.searchConfig = searchConfig;
+        this.who = who;
+        this.loopTag = loopTag;
+        this.what = what;
+        this.flipped = flipped;
+        this.ifCrew = ifCrew;
+        this.delay = delay;
+        this.choiceFunc = choiceFunc;
+        this.switchNumber = switchNumber;
+    }
+    public EditThing(EMod searchConfig, int switchNumber, string who, string what, bool flipped = false, bool ifCrew = false, double delay = 0.0, string? choiceFunc = null)
+    {
+        this.searchConfig = searchConfig;
+        this.who = who;
+        this.what = what;
+        this.flipped = flipped;
+        this.ifCrew = ifCrew;
+        this.delay = delay;
+        this.choiceFunc = choiceFunc;
+        this.switchNumber = switchNumber;
+    }
+    public EditThing(string hashToFind, string who, string loopTag, string what, bool flipped = false, bool ifCrew = false, double delay = 0.0, string? choiceFunc = null)
+    {
+        this.searchConfig = EMod.findSwitchWithHash;
+        this.who = who;
+        this.loopTag = loopTag;
+        this.what = what;
+        this.flipped = flipped;
+        this.ifCrew = ifCrew;
+        this.delay = delay;
+        this.choiceFunc = choiceFunc;
+        this.hashSearch = hashToFind;
+    }
+    public EditThing(string hashToFind, string who, string what, bool flipped = false, bool ifCrew = false, double delay = 0.0, string? choiceFunc = null)
+    {
+        this.searchConfig = EMod.findSwitchWithHash;
+        this.who = who;
+        this.what = what;
+        this.flipped = flipped;
+        this.ifCrew = ifCrew;
+        this.delay = delay;
+        this.choiceFunc = choiceFunc;
+        this.hashSearch = hashToFind;
+    }
+}
+
+
+/// <summary>
+/// Ver0.5
+/// </summary>
+public class DialogueThing : AbstractThing
+{
     public string? title;
     public List<DialogueThing>? saySwitch;
     public DMod mode;
     public Instruction? instruction;
+
     /// <summary>
     /// A dialogue with emotions and all
     /// </summary>
     /// <param name="who">Who speaketh?</param>
     /// <param name="loopTag">How emote?</param>
     /// <param name="what">What they sayeth?</param>
-    public DialogueThing(string who, string loopTag, string what)
+    public DialogueThing(string who, string loopTag, string what, bool flipped = false, bool ifCrew = false, double delay = 0.0, string? choiceFunc = null)
     {
         this.mode = DMod.dialogue;
         this.who = who;
         this.loopTag = loopTag;
         this.what = what;
+        this.flipped = flipped;
+        this.ifCrew = ifCrew;
+        this.delay = delay;
+        this.choiceFunc = choiceFunc;
     }
     /// <summary>
     /// A dialogue with neutral emotion
     /// </summary>
     /// <param name="who">Who speaketh?</param>
     /// <param name="what">What they sayeth?</param>
-    public DialogueThing(string who, string what)
+    public DialogueThing(string who, string what, bool flipped = false, bool ifCrew = false, double delay = 0.0, string? choiceFunc = null)
     {
         this.mode = DMod.dialogue;
         this.who = who;
         this.what = what;
+        this.flipped = flipped;
+        this.ifCrew = ifCrew;
+        this.delay = delay;
+        this.choiceFunc = choiceFunc;
     }
     /// <summary>
     /// Adds a spacer that will allow the original text to fill in if the mod order is suboptimal. ONLY USED FOR ADDING TO EXISTING DIALOGUE.
@@ -89,21 +169,29 @@ public class DialogueThing
     }
 
     /// <summary>
-    /// Practically anything goes.
+    /// For advanced stuff
     /// </summary>
-    /// <param name="mode"></param>
-    /// <param name="who"></param>
-    /// <param name="loopTag"></param>
-    /// <param name="what"></param>
-    /// <param name="saySwitch"></param>
-    /// <param name="instruction"></param>
-    /// <param name="title"></param>
-    public DialogueThing(DMod mode, string? who = null, string? loopTag = null, string? what = null, List<DialogueThing>? saySwitch = null, Instruction? instruction = null, string? title = null)
+    /// <param name="mode">Mode of dialogue</param>
+    /// <param name="who">Whomst'd've</param>
+    /// <param name="loopTag">Emotion</param>
+    /// <param name="what">What they say?</param>
+    /// <param name="flipped">Flipped to other side</param>
+    /// <param name="ifCrew">???</param>
+    /// <param name="delay">Delay</param>
+    /// <param name="choiceFunc">Route choose</param>
+    /// <param name="saySwitch">SaySwitch list</param>
+    /// <param name="instruction">Custom instruction</param>
+    /// <param name="title">Title</param>
+    public DialogueThing(DMod mode, string? who = null, string? loopTag = null, string? what = null, bool flipped = false, bool ifCrew = false, double delay = 0.0, string? choiceFunc = null, List<DialogueThing>? saySwitch = null, Instruction? instruction = null, string? title = null)
     {
         this.mode = mode;
         this.who = who;
         this.loopTag = loopTag;
         this.what = what;
+        this.flipped = flipped;
+        this.ifCrew = ifCrew;
+        this.delay = delay;
+        this.choiceFunc = choiceFunc;
         this.saySwitch = saySwitch;
         this.instruction = instruction;
         this.title = title;
@@ -113,22 +201,57 @@ public class DialogueThing
 public class DialogueMachine : StoryNode
 {
     // public List<(string whoOrCommand, string? loopTag, string? what)> dialogue = null!;
+    public List<EditThing> edit = null!;
     public List<DialogueThing> dialogue = null!;
     public void Convert()
     {
+        if (edit is not null)  // Skips dialogue conversion if edits are available
+        {
+            foreach (EditThing e in edit)
+            {
+                lines.Add(e.searchConfig switch
+                {
+                    EMod.countFromStart => new InsertDialogueInSwitch
+                    {
+                        say = ConvertDialogueToSay(e),
+                        whichSwitch = e.switchNumber
+                    },
+                    EMod.countFromEnd => new InsertDialogueInSwitch
+                    {
+                        say = ConvertDialogueToSay(e),
+                        whichSwitch = e.switchNumber,
+                        fromEnd = true
+                    },
+                    EMod.findSwitchWithHash => new InsertDialogueInSwitch
+                    {
+                        say = ConvertDialogueToSay(e),
+                        whichHash = e.hashSearch
+                    },                    
+                    _ => new InsertDialogueInSwitch
+                    {
+                        say = ConvertDialogueToSay(e),
+                    }
+                });
+            }
+            return;
+        }
         foreach (DialogueThing d in dialogue)
         {
             lines.Add(ConvertDialogueToLine(d));
         }
     }
 
-    private static Say ConvertDialogueToSay(DialogueThing dt)
+    private static Say ConvertDialogueToSay(AbstractThing at)
     {
         return new Say
         {
-            who = dt.who ?? "",
-            loopTag = dt.loopTag,
-            hash = dt.what ?? ""
+            who = at.who ?? "",
+            loopTag = at.loopTag,
+            hash = at.what ?? "",
+            flipped = at.flipped,
+            ifCrew = at.ifCrew,
+            delay = at.delay,
+            choiceFunc = at.choiceFunc
         };
     }
 
@@ -196,12 +319,20 @@ public class RetainOrig : Instruction
 {
 }
 
+public class InsertDialogueInSwitch : Instruction
+{
+    public Say say = null!;
+    public int? whichSwitch;
+    public bool fromEnd;
+    public string? whichHash;
+}
+
 public class LocalDB
 {
     public static Story LocalStory { get; set; } = new();
     public static Dictionary<string, Story> LocalStoryLocale { get; set; } = new();
     private static Story ToUseStory { get; set; } = new();
-    public int incrementingID = 1;
+    public int incrementingHash = 1;
     public Dictionary<string, string> customLocalisation { get; private set; }
     //internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
 
@@ -210,9 +341,10 @@ public class LocalDB
         customLocalisation = new();
         if (LocalStoryLocale.ContainsKey(DB.currentLocale.locale))  // For other coded translated dialogues
         {
+            ModEntry.Instance.Logger.LogInformation("1");
             ToUseStory = LocalStoryLocale[DB.currentLocale.locale];
         }
-        else if (File.Exists(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}_story.json").FullName))  // For i18n translated story dialogue
+        else if (File.Exists($"{package.PackageRoot}\\i18n\\{DB.currentLocale.locale}_story.json"))  // For i18n translated story dialogue
         {
             ToUseStory = Mutil.LoadJsonFile<Story>(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}_story.json").FullName);
         }
@@ -232,17 +364,25 @@ public class LocalDB
     {
         foreach (KeyValuePair<string, StoryNode> sn in from.all)
         {
+            bool editMode = false;
             // Convert all custom DialogueThings from DialogueMachine to StoryNode lines
             if (sn.Value is DialogueMachine dm)
             {
                 dm.Convert();
+                editMode = dm.edit is not null;
             }
+
+            if (editMode)
+            {
+                to.all[sn.Key] = InjectALineIn(sn.Value, to.all[sn.Key], sn.Key);
+                continue;
+            }
+
 
             // Copy storynodes from from to to
             if (to.all.ContainsKey(sn.Key))
             {
-                StoryNode existingStory = to.all[sn.Key];
-                to.all[sn.Key] = StitchNodesTogether(sn.Value, existingStory, sn.Key);
+                to.all[sn.Key] = StitchNodesTogether(sn.Value, to.all[sn.Key], sn.Key);
             }
             else
             {
@@ -253,6 +393,77 @@ public class LocalDB
                 to.all.Add(sn.Key, sn.Value);
             }
         }
+    }
+
+    /// <summary>
+    /// Safely inject a dialogue in an existing dialogue tree
+    /// </summary>
+    /// <param name="newStory"></param>
+    /// <param name="existingStory"></param>
+    /// <param name="script"></param>
+    /// <returns></returns>
+    private StoryNode InjectALineIn(in StoryNode newStory, in StoryNode existingStory, string script)
+    {
+        try
+        {
+            StoryNode result = existingStory;
+            if (result.lines is not null)
+            {
+                foreach (Instruction instruction in newStory.lines)
+                {
+                    if (instruction is InsertDialogueInSwitch idis)
+                    {
+                        for (int a = 0, b = 0, c = result.lines.Count - 1; b < result.lines.Count && c > 0; b++, c--)
+                        {
+                            if (!idis.fromEnd && result.lines[b] is SaySwitch ss)
+                            {
+                                a++;
+                                if (idis.whichHash is not null)
+                                {
+                                    foreach (Say say in ss.lines)
+                                    {
+                                        if (say.hash == idis.whichHash)
+                                        {
+                                            ss.lines.Add(GetSayFromIDIS(idis, script));
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (idis.whichSwitch is not null && a == idis.whichSwitch)
+                                {
+                                    ss.lines.Add(GetSayFromIDIS(idis, script));
+                                    break;
+                                }
+                            }
+                            else if (idis.fromEnd && result.lines[c] is SaySwitch bs)
+                            {
+                                a++;
+                                if (idis.whichSwitch is not null && a == idis.whichSwitch)
+                                {
+                                    bs.lines.Add(GetSayFromIDIS(idis, script));
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+        catch (Exception err)
+        {
+            ModEntry.Instance.Logger.LogError(err, "Failed to edit a line with key:" + script);
+            return existingStory;
+        }
+    }
+
+
+    private Say GetSayFromIDIS(InsertDialogueInSwitch idis, string script)
+    {
+        string what = idis.say.hash;
+        idis.say.hash = $"{GetType().FullName}:{incrementingHash++}";
+        customLocalisation[$"{script}:{idis.say.hash}"] = what;
+        return idis.say;
     }
 
 
@@ -351,7 +562,7 @@ public class LocalDB
         if (instruction is Say say)
         {
             string what = say.hash;
-            say.hash = $"{GetType().FullName}:{incrementingID++}";
+            say.hash = $"{GetType().FullName}:{incrementingHash++}";
             //say.who = TryDeckLookup(say.who);
             customLocalisation[$"{script}:{say.hash}"] = what;
         }
@@ -365,7 +576,7 @@ public class LocalDB
         else if (instruction is TitleCard title)
         {
             string what = title.hash;
-            title.hash = $"{GetType().FullName}:{incrementingID++}";
+            title.hash = $"{GetType().FullName}:{incrementingHash++}";
             if (title.empty is not true)
             {
                 customLocalisation[$"{script}:{title.hash}"] = what;
