@@ -12,31 +12,20 @@ namespace Weth.External;
 public enum DMod
 {
     dialogue,
+    switchsay,
     retain,
     instruction,
     title
 }
 
-public interface IDialogueThing
-{
-}
 
-public class SwitchThing : IDialogueThing
-{
-    public List<SayThing> dialogue = new();
-
-    public SwitchThing(List<SayThing> things)
-    {
-        dialogue = things;
-    }
-}
-
-public class SayThing : IDialogueThing
+public class DialogueThing
 {
     public string? who;
     public string? loopTag;
     public string? what;
     public string? title;
+    public List<DialogueThing>? saySwitch;
     public DMod mode;
     public Instruction? instruction;
     /// <summary>
@@ -45,7 +34,7 @@ public class SayThing : IDialogueThing
     /// <param name="who">Who speaketh?</param>
     /// <param name="loopTag">How emote?</param>
     /// <param name="what">What they sayeth?</param>
-    public SayThing(string who, string loopTag, string what)
+    public DialogueThing(string who, string loopTag, string what)
     {
         this.mode = DMod.dialogue;
         this.who = who;
@@ -57,25 +46,24 @@ public class SayThing : IDialogueThing
     /// </summary>
     /// <param name="who">Who speaketh?</param>
     /// <param name="what">What they sayeth?</param>
-    public SayThing(string who, string what)
+    public DialogueThing(string who, string what)
     {
         this.mode = DMod.dialogue;
         this.who = who;
         this.what = what;
     }
     /// <summary>
-    /// Particulary for adding a spacer or turning on the switchsay mode
+    /// Adds a spacer that will allow the original text to fill in if the mod order is suboptimal. ONLY USED FOR ADDING TO EXISTING DIALOGUE.
     /// </summary>
-    /// <param name="mode">Mode of operation</param>
-    public SayThing(DMod mode)
+    public DialogueThing()
     {
-        this.mode = mode;
+        this.mode = DMod.retain;
     }
     /// <summary>
     /// For adding any instructions unfulfilled by this dialogue thing
     /// </summary>
     /// <param name="instruction">Instructions to add</param>
-    public SayThing(Instruction instruction)
+    public DialogueThing(Instruction instruction)
     {
         this.mode = DMod.instruction;
         this.instruction = instruction;
@@ -84,9 +72,40 @@ public class SayThing : IDialogueThing
     /// For adding text to title cards
     /// </summary>
     /// <param name="title">The title to show (NULL for empty=true)</param>
-    public SayThing(string? title)
+    public DialogueThing(string? title)
     {
         this.mode = DMod.title;
+        this.title = title;
+    }
+
+    /// <summary>
+    /// Practically a SaySwitch. The list cannot contain anything but just dialogue.
+    /// </summary>
+    /// <param name="saySwitch">A list of Dialogue to go in 'ere</param>
+    public DialogueThing(List<DialogueThing> saySwitch)
+    {
+        this.mode = DMod.switchsay;
+        this.saySwitch = saySwitch;
+    }
+
+    /// <summary>
+    /// Practically anything goes.
+    /// </summary>
+    /// <param name="mode"></param>
+    /// <param name="who"></param>
+    /// <param name="loopTag"></param>
+    /// <param name="what"></param>
+    /// <param name="saySwitch"></param>
+    /// <param name="instruction"></param>
+    /// <param name="title"></param>
+    public DialogueThing(DMod mode, string? who = null, string? loopTag = null, string? what = null, List<DialogueThing>? saySwitch = null, Instruction? instruction = null, string? title = null)
+    {
+        this.mode = mode;
+        this.who = who;
+        this.loopTag = loopTag;
+        this.what = what;
+        this.saySwitch = saySwitch;
+        this.instruction = instruction;
         this.title = title;
     }
 }
@@ -94,31 +113,16 @@ public class SayThing : IDialogueThing
 public class DialogueMachine : StoryNode
 {
     // public List<(string whoOrCommand, string? loopTag, string? what)> dialogue = null!;
-    public List<IDialogueThing> dialogue = null!;
+    public List<DialogueThing> dialogue = null!;
     public void Convert()
     {
-        foreach (IDialogueThing d in dialogue)
+        foreach (DialogueThing d in dialogue)
         {
-            if (d is SwitchThing st)
-            {
-                SaySwitch ss = new()
-                {
-                    lines = new()
-                };
-                foreach (SayThing dial in st.dialogue)
-                {
-                    if (dial.mode == DMod.dialogue) ss.lines.Add(ConvertDialogueToSay(dial));
-                }
-                lines.Add(Mutil.DeepCopy(ss));
-            }
-            if (d is SayThing dt)
-            {
-                lines.Add(ConvertDialogueToLine(dt));
-            }
+            lines.Add(ConvertDialogueToLine(d));
         }
     }
 
-    private static Say ConvertDialogueToSay(SayThing dt)
+    private static Say ConvertDialogueToSay(DialogueThing dt)
     {
         return new Say
         {
@@ -128,7 +132,7 @@ public class DialogueMachine : StoryNode
         };
     }
 
-    private static Instruction ConvertDialogueToLine(SayThing dt)
+    private static Instruction ConvertDialogueToLine(DialogueThing dt)
     {
         if (dt.mode == DMod.retain)
         {
@@ -148,6 +152,18 @@ public class DialogueMachine : StoryNode
             {
                 return new TitleCard { hash = dt.title };
             }
+        }
+        if (dt.mode == DMod.switchsay && dt.saySwitch is not null)
+        {
+            SaySwitch ss = new()
+            {
+                lines = new()
+            };
+            foreach (DialogueThing dial in dt.saySwitch)
+            {
+                if (dial.mode == DMod.dialogue) ss.lines.Add(ConvertDialogueToSay(dial));
+            }
+            return ss;
         }
 
         return ConvertDialogueToSay(dt);
@@ -183,6 +199,7 @@ public class RetainOrig : Instruction
 public class LocalDB
 {
     public static Story LocalStory { get; set; } = new();
+    private static Story ConvertedStory { get; set; } = new();
     private static Story OverrideStory { get; set; } = new();  // Find localisation from files and use that instead of LocalStory
     public int incrementingID = 1;
     public Dictionary<string, string> customLocalisation { get; private set; }
@@ -194,7 +211,7 @@ public class LocalDB
         // EditStory = Mutil.LoadJsonFile<Story>(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}/edit_story.json").FullName);
         customLocalisation = new();
         PasteToDB(LocalStory, DB.story);
-        //File.WriteAllText(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}/add_story.json").FullName, JsonSerializer.Serialize(customLocalisation));
+        File.WriteAllText(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}_story.json").FullName, JsonSerializer.Serialize(customLocalisation));
     }
 
     public Dictionary<string, string> GetLocalizationResults()
