@@ -165,7 +165,9 @@ internal class ModEntry : SimpleMod
 
     private static List<Type> WethDialogues = [
         typeof(StoryDialogue),
-        typeof(EventDialogue)
+        typeof(EventDialogue),
+        typeof(CombatDialogue),
+        typeof(ArtifactDialogue)
     ];
     private static IEnumerable<Type> AllRegisterableTypes =
         WethCardTypes
@@ -190,6 +192,7 @@ internal class ModEntry : SimpleMod
     ];
     private static List<string> Weth5Anims = [
         "explain",
+        //"lockedin", >:)
         "neutral",
         "sad",
         "sparkle",

@@ -201,8 +201,19 @@ public class DialogueThing : AbstractThing
 public class DialogueMachine : StoryNode
 {
     // public List<(string whoOrCommand, string? loopTag, string? what)> dialogue = null!;
+
+    /// <summary>
+    /// Edits existing dialogue by finding the switch you want to insert your dialogue into. Best used for vanilla dialogue. WILL IGNORE 'dialogue' DICTIONARY IF 'edit' IS USED
+    /// </summary>
     public List<EditThing> edit = null!;
+    /// <summary>
+    /// Where all your dialogue *should* go. It can also support titles, mod dialogue edits, and custom instructions!
+    /// </summary>
     public List<DialogueThing> dialogue = null!;
+    
+    /// <summary>
+    /// Translates DialogueMachine into Instructions readable by LocalDB
+    /// </summary>
     public void Convert()
     {
         if (edit is not null)  // Skips dialogue conversion if edits are available
@@ -226,11 +237,8 @@ public class DialogueMachine : StoryNode
                     {
                         say = ConvertDialogueToSay(e),
                         whichHash = e.hashSearch
-                    },                    
-                    _ => new InsertDialogueInSwitch
-                    {
-                        say = ConvertDialogueToSay(e),
-                    }
+                    },
+                    _ => new InsertDialogueInSwitch()  // should never occur
                 });
             }
             return;
@@ -241,6 +249,11 @@ public class DialogueMachine : StoryNode
         }
     }
 
+    /// <summary>
+    /// Converts either DialogueThing or EditThing into a Say in a format the LocalDB converter will understand
+    /// </summary>
+    /// <param name="at"></param>
+    /// <returns></returns>
     private static Say ConvertDialogueToSay(AbstractThing at)
     {
         return new Say
@@ -255,6 +268,11 @@ public class DialogueMachine : StoryNode
         };
     }
 
+    /// <summary>
+    /// Converts a DialogueThing to an instruction so it can go in All[].lines
+    /// </summary>
+    /// <param name="dt"></param>
+    /// <returns></returns>
     private static Instruction ConvertDialogueToLine(DialogueThing dt)
     {
         if (dt.mode == DMod.retain)
@@ -293,7 +311,7 @@ public class DialogueMachine : StoryNode
     }
     
     /// <summary>
-    /// Eventually find a better way of tackling this
+    /// Eventually find a better way of tackling this (UNUSED)
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
@@ -319,6 +337,9 @@ public class RetainOrig : Instruction
 {
 }
 
+/// <summary>
+/// Inserts a Say in the switch you're looking for
+/// </summary>
 public class InsertDialogueInSwitch : Instruction
 {
     public Say say = null!;
@@ -327,21 +348,42 @@ public class InsertDialogueInSwitch : Instruction
     public string? whichHash;
 }
 
+
+/// <summary>
+/// Where the custom dialogue is saved, and shoved into the game at load
+/// </summary>
 public class LocalDB
 {
+    /// <summary>
+    /// Default custom dialogue
+    /// </summary>
     public static Story LocalStory { get; set; } = new();
+    /// <summary>
+    /// Coded custom dialogue for different locales. WARNING: Locale key must be inited first before any dialogue can be added in!
+    /// </summary>
     public static Dictionary<string, Story> LocalStoryLocale { get; set; } = new();
+    /// <summary>
+    /// Just a reference keeper that'll use either the localisations or the default
+    /// </summary>
     private static Story ToUseStory { get; set; } = new();
+    /// <summary>
+    /// An incrementing hash. WARNING: Hash may conflict if under the same namespace!
+    /// </summary>
     public int incrementingHash = 1;
+    /// <summary>
+    /// The localisation dictionary with the generated hashes and dialogue, which gets to be added to the game's locale
+    /// </summary>
     public Dictionary<string, string> customLocalisation { get; private set; }
-    //internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
 
+    /// <summary>
+    /// Should be instantiated *after* all the dialogues have been registered OR at Events.OnModLoadPhaseFinished, AfterDbInit.
+    /// </summary>
+    /// <param name="package"></param>
     public LocalDB(IPluginPackage<IModManifest> package)
     {
         customLocalisation = new();
         if (LocalStoryLocale.ContainsKey(DB.currentLocale.locale))  // For other coded translated dialogues
         {
-            ModEntry.Instance.Logger.LogInformation("1");
             ToUseStory = LocalStoryLocale[DB.currentLocale.locale];
         }
         else if (File.Exists($"{package.PackageRoot}\\i18n\\{DB.currentLocale.locale}_story.json"))  // For i18n translated story dialogue
@@ -355,12 +397,21 @@ public class LocalDB
         PasteToDB(ToUseStory, DB.story);
     }
 
+    /// <summary>
+    /// This one must be used in Events.OnLoadStringsForLocale.
+    /// </summary>
+    /// <returns></returns>
     public Dictionary<string, string> GetLocalizationResults()
     {
         return customLocalisation;
     }
 
-    public void PasteToDB(Story from, Story to)
+    /// <summary>
+    /// Copies the storynodes from from to to, while also converting it for the game to recognise and registering the locales.
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    private void PasteToDB(Story from, Story to)
     {
         foreach (KeyValuePair<string, StoryNode> sn in from.all)
         {
@@ -396,12 +447,12 @@ public class LocalDB
     }
 
     /// <summary>
-    /// Safely inject a dialogue in an existing dialogue tree
+    /// Safely inject a dialogue in an existing dialogue switch
     /// </summary>
     /// <param name="newStory"></param>
     /// <param name="existingStory"></param>
     /// <param name="script"></param>
-    /// <returns></returns>
+    /// <returns>StoryNode with the injected dialogue</returns>
     private StoryNode InjectALineIn(in StoryNode newStory, in StoryNode existingStory, string script)
     {
         try
@@ -458,6 +509,12 @@ public class LocalDB
     }
 
 
+    /// <summary>
+    /// Grabs the Say from IDIS, then converts the Say to be game recognisable as well as registering the locale.
+    /// </summary>
+    /// <param name="idis"></param>
+    /// <param name="script"></param>
+    /// <returns></returns>
     private Say GetSayFromIDIS(InsertDialogueInSwitch idis, string script)
     {
         string what = idis.say.hash;
@@ -474,7 +531,7 @@ public class LocalDB
     /// <param name="existingStory"></param>
     /// <param name="script"></param>
     /// <returns></returns>
-    public StoryNode StitchNodesTogether(in StoryNode newStory, in StoryNode existingStory, string script)
+    private StoryNode StitchNodesTogether(in StoryNode newStory, in StoryNode existingStory, string script)
     {
         try
         {
@@ -526,7 +583,14 @@ public class LocalDB
         }
     }
 
-    public SaySwitch CombineTwoSays(Instruction existingLine, Instruction newLine, string script)
+    /// <summary>
+    /// Combines two says, resulting in a SaySwitch
+    /// </summary>
+    /// <param name="existingLine"></param>
+    /// <param name="newLine"></param>
+    /// <param name="script"></param>
+    /// <returns></returns>
+    private SaySwitch CombineTwoSays(Instruction existingLine, Instruction newLine, string script)
     {
         SaySwitch result = new SaySwitch
         {
@@ -557,6 +621,11 @@ public class LocalDB
         return result;
     }
 
+    /// <summary>
+    /// Converts a Say, SaySwitch, or Title's hash into a generated one, while adding to the localisation.
+    /// </summary>
+    /// <param name="instruction"></param>
+    /// <param name="script"></param>
     public void MakeLinesRecognisable(Instruction instruction, string script)
     {
         if (instruction is Say say)

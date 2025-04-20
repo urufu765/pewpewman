@@ -22,6 +22,7 @@ static class CommonDefinitions
     internal const string AmShopkeeper = "nerd";
 
     internal static Status MissingWeth => ModEntry.WethTheSnep.MissingStatus.Status;
+    internal static Status Pulsedrive => ModEntry.Instance.PulseStatus.Status;
 
 
     /// <summary>

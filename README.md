@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 2: Chit Chat Time
 
+* **(0.2.6)**: Chatter time! Artifact edition
 * **(0.2.5)**: Added more sprites
 * **(0.2.4)**: Added support for dynamically finding and adding to a SaySwitch
 * **(0.2.3)**: Support for other languages
