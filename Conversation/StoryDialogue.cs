@@ -25,7 +25,7 @@ internal class StoryDialogue : IRegisterable
                 ]),
                 new(AmCat, "squint", "Is this really it?"),
                 new(AmWeth, "explain", "Really for sure."),
-                new(AmWeth, "What do you think of this simplicity?")
+                new(AmWeth, "sparkle", "What do you think of this simplicity?")
             ]
         };
 

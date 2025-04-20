@@ -173,12 +173,14 @@ internal class ModEntry : SimpleMod
             .Concat(WethDialogues);
 
     private static List<string> Weth1Anims = [
+        //"crystal",
         "gameover",
         "mini",
         "placeholder"
     ];
     private static List<string> Weth3Anims = [
         //"down",
+        //"facepalm",
         //"pensive",
         //"tilt",
         //"tiltalt",
@@ -187,10 +189,10 @@ internal class ModEntry : SimpleMod
         //"think",
     ];
     private static List<string> Weth5Anims = [
-        //"explain",
+        "explain",
         "neutral",
-        //"sad",
-        //"sparkle",
+        "sad",
+        "sparkle",
         "squint",
         "tired",
         //"up",
