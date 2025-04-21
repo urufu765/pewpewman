@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Nanoray.PluginManager;
 using Nickel;
+using Weth.Artifacts;
 using Weth.External;
 using static Weth.Dialogue.CommonDefinitions;
 
@@ -19,7 +20,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["AresCannonV2"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "sparkle", "Now that's what I'm talking about!")
+                    new(AmWeth, "Now that's what I'm talking about!")
                 ]
             }},
             {"ArtifactAresCannon_Weth_0", new(){
@@ -292,7 +293,7 @@ internal class ArtifactDialogue : IRegisterable
                 hasArtifacts = ["Recalibrator"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "sparkle", "Usually when I miss, nothing happens!")
+                    new(AmWeth, "Usually when I miss, nothing happens!")
                 ]
             }},
             {"ArtifactRevengeDrive_Weth_0", new(){
@@ -329,11 +330,202 @@ internal class ArtifactDialogue : IRegisterable
                 dialogue = [
                     new(AmWeth, "This is... disorienting.")
                 ]
+            }},
+
+
+            {"ArtifactTreasureHunterWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(TreasureHunter)],
+                playerShotJustHit = true,
+                oncePerRunTags = ["TreasureHunterWeth"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "With enough bits and pieces floating around, I bet I could find something useful!")
+                ]
+            }},
+            {"ArtifactTreasureHunterWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(TreasureHunter)],
+                playerShotJustHit = true,
+                oncePerRunTags = ["TreasureHunterWeth"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "I'll be keeping my eyes peeled for goodies!")
+                ]
+            }},
+            {"ArtifactTreasureHunterWeth_Multi_2", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(TreasureHunter)],
+                playerShotJustHit = true,
+                oncePerRunTags = ["TreasureHunterWeth"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "Batter them enough and I bet we'll salvage something useful.")
+                ]
+            }},
+            {"ArtifactTreasureSeekerWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(TreasureSeeker)],
+                playerShotJustHit = true,
+                oncePerRunTags = ["TreasureSeekerWeth"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "If finding goodies isn't a good enough incentive to keep shooting, I don't know what is!")
+                ]
+            }},
+            {"ArtifactTreasureSeekerWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(TreasureSeeker)],
+                playerShotJustHit = true,
+                oncePerRunTags = ["TreasureSeekerWeth"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "The more bits that fly off the enemy, the more chances I get to grabbing something useful!")
+                ]
+            }},
+            {"ArtifactTreasureSeekerWeth_Multi_2", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(TreasureSeeker)],
+                playerShotJustHit = true,
+                oncePerRunTags = ["TreasureSeekerWeth"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "Even scratched off paint could be useful for something.")
+                ]
+            }},
+            {"ArtifactRockPowerWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(RockPower)],
+                anyDrones = ["asteroid"],
+                oncePerCombatTags = ["rockPowerAdvice"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "Hey, I think I see something in the lumps of rock.")
+                ]
+            }},
+            {"ArtifactRockPowerWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(RockPower)],
+                anyDrones = ["asteroid"],
+                oncePerCombatTags = ["rockPowerAdvice"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "There might be something usable in even the least assuming lump of rock.")
+                ]
+            }},
+            {"ArtifactResidualShotNoDamageWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(ResidualShot)],
+                whoDidThat = AmWethDeck,
+                maxDamageDealtToEnemyThisAction = 0,
+                oncePerRunTags = ["wethsResidualShotUseless"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "It's the thought that counts.")
+                ]
+            }},
+            {"ArtifactResidualShotNoDamageWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(ResidualShot)],
+                whoDidThat = AmWethDeck,
+                maxDamageDealtToEnemyThisAction = 0,
+                oncePerRunTags = ["wethsResidualShotUseless"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "explain", "Better than not having it.")
+                ]
+            }},
+            {"ArtifactCannonRechargeWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(CannonRecharge)],
+                lookup = ["CannonRechargeTrigger"],
+                oncePerRun = true,
+                priority = true,
+                oncePerCombatTags = ["CannonRechargeTag"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "Energy successfully routed to stun shot!")
+                ]
+            }},
+            {"ArtifactCannonRechargeWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(CannonRecharge)],
+                lookup = ["CannonRechargeTrigger"],
+                oncePerRun = true,
+                priority = true,
+                oncePerCombatTags = ["CannonRechargeTag"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "Next shot should be shocking!")
+                ]
+            }},
+            {"ArtifactExcursionWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(ArtifactExcursion)],
+                turnStart = true,
+                maxTurnsThisCombat = 1,
+                oncePerRunTags = ["WethGoesOnAnExcursion"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "It's time to go on an excursion!")
+                ]
+            }},
+            {"ArtifactExcursionWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(ArtifactExcursion)],
+                turnStart = true,
+                maxTurnsThisCombat = 1,
+                oncePerRunTags = ["WethGoesOnAnExcursion"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "explain", "With experience comes more opportunities.")
+                ]
+            }},
+            {"ArtifactExcursionWeth_Multi_2", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(ArtifactExcursion)],
+                turnStart = true,
+                maxTurnsThisCombat = 1,
+                oncePerRunTags = ["WethGoesOnAnExcursion"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "There's always something new to discover from blowing up people you don't like.")
+                ]
+            }},
+            { "ArtifactSpaceRelicsWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(SpaceRelics)],
+                turnStart = true,
+                maxTurnsThisCombat = 1,
+                oncePerRunTags = ["WethsSpaceRelic"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "sparkle", "The shiny stuff is very shiny...")
+                ]
+            }},
+            { "ArtifactSpaceRelicsWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(SpaceRelics)],
+                turnStart = true,
+                maxTurnsThisCombat = 1,
+                oncePerRunTags = ["WethsSpaceRelic"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "The ship already feels like it's running better.")
+                ]
+            }},
+            { "ArtifactSpaceRelicsWeth_Multi_2", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(SpaceRelics)],
+                turnStart = true,
+                maxTurnsThisCombat = 1,
+                oncePerRunTags = ["WethsSpaceRelic"],
+                allPresent = [AmBooks, AmWeth],
+                dialogue = [
+                    new(AmBooks, "That's a shiny rock!"),
+                    new(AmWeth, "sparkle", "Very.")
+                ]
             }}
-
-
-
         });
-
     }
 }

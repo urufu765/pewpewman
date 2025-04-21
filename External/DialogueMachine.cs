@@ -466,7 +466,7 @@ public class LocalDB
                 {
                     if (!DialogueMachine.ArtifactExists(artifact))
                     {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game!");
+                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
                     }
                 }
             }
@@ -476,7 +476,7 @@ public class LocalDB
                 {
                     if (!DialogueMachine.ArtifactExists(artifact))
                     {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game!");
+                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
                     }
                 }
             }
@@ -488,7 +488,7 @@ public class LocalDB
                 {
                     if (!DialogueMachine.CharExists(characer))
                     {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game!");
+                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
                     }
                 }
             }
@@ -498,7 +498,7 @@ public class LocalDB
                 {
                     if (!DialogueMachine.CharExists(characer))
                     {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game!");
+                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
                     }
                 }
             }

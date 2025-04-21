@@ -30,7 +30,8 @@ public class CannonRecharge : Artifact
                     status = Status.stunCharge,
                     statusAmount = 1,
                     targetPlayer = true,
-                    artifactPulse = Key()
+                    artifactPulse = Key(),
+                    dialogueSelector = ".CannonRechargeTrigger"
                 }
             );
             ReadyToGive = false;

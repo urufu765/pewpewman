@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 2: Chit Chat Time
 
+* **(0.2.8)**: Artifact chatter Weth edition
 * **(0.2.7)**: Artifact chatter continuation + character and artifact double checker + artifact by type story variables
 * **(0.2.6)**: Chatter time! Artifact edition
 * **(0.2.5)**: Added more sprites
