@@ -186,6 +186,8 @@ internal class ModEntry : SimpleMod
         //"pensive",
         //"tilt",
         //"tiltalt",
+        //"touch",
+        //"yay"
     ];
     private static List<string> Weth4Anims = [
         //"think",
