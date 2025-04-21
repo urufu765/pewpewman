@@ -210,12 +210,37 @@ public class DialogueMachine : StoryNode
     /// Where all your dialogue *should* go. It can also support titles, mod dialogue edits, and custom instructions!
     /// </summary>
     public List<DialogueThing> dialogue = null!;
-    
+
+    /// <summary>
+    /// Add the type of the artifact rather than trying to use the string key. Gets converted to hasArtifacts later.
+    /// </summary>
+    public List<Type> hasArtifactTypes = null!;
+    /// <summary>
+    /// Add the type of the artifact rather than trying to use the string key. Gets converted to doesNotHaveArtifacts later.
+    /// </summary>
+    public List<Type> doesNotHaveArtifactTypes = null!;
+
     /// <summary>
     /// Translates DialogueMachine into Instructions readable by LocalDB
     /// </summary>
     public void Convert()
     {
+        if (hasArtifactTypes is not null)
+        {
+            hasArtifacts ??= [];
+            foreach (Type type in hasArtifactTypes)
+            {
+                if(ModEntry.Instance.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) hasArtifacts.Add(iae.UniqueName);
+            }
+        }
+        if (doesNotHaveArtifactTypes is not null)
+        {
+            doesNotHaveArtifacts ??= [];
+            foreach (Type type in doesNotHaveArtifactTypes)
+            {
+                if(ModEntry.Instance.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) doesNotHaveArtifacts.Add(iae.UniqueName);
+            }
+        }
         if (edit is not null)  // Skips dialogue conversion if edits are available
         {
             foreach (EditThing e in edit)
@@ -309,22 +334,36 @@ public class DialogueMachine : StoryNode
 
         return ConvertDialogueToSay(dt);
     }
-    
+
     /// <summary>
     /// Eventually find a better way of tackling this (UNUSED)
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static bool DeckExists(string name)
+    public static bool CharExists(string name)
     {
-        if (ModEntry.Instance.Helper.Content?.Decks?.LookupByUniqueName(name) is not null)
-        {
-            return true;
-        }
-        if (ModEntry.Instance.Helper.Content?.Decks?.LookupByUniqueName($"{ModEntry.Instance.UniqueName}::{name}") is not null)
-        {
-            return true;
-        }
+        if (ModEntry.Instance.Helper.Content?.Decks?.LookupByUniqueName(name) is not null) return true;
+
+        if (DB.currentLocale.strings.ContainsKey("char." + name)) return true;  // this probably doesn't even work
+
+        // if (ModEntry.Instance.Helper.Content?.Decks?.LookupByUniqueName($"{ModEntry.Instance.UniqueName}::{name}") is not null)
+        // {
+        //     return true;
+        // }
+        return false;
+    }
+
+    /// <summary>
+    /// Checks if inputted string is a valid Artifact
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public static bool ArtifactExists(string name)
+    {
+        // Modded artifacts
+        if (ModEntry.Instance.Helper.Content?.Artifacts?.LookupByUniqueName(name) is not null) return true;
+        // Game artifacts
+        if (DB.artifacts.ContainsKey(name)) return true;
         return false;
     }
 }
@@ -404,6 +443,78 @@ public class LocalDB
     public Dictionary<string, string> GetLocalizationResults()
     {
         return customLocalisation;
+    }
+
+    /// <summary>
+    /// Adds a list of DialogueMachines to the appropriate locale, creating a new if locale doesn't exist.
+    /// </summary>
+    /// <param name="locale">the locale the storynodes will go in</param>
+    /// <param name="storyStuff">Storynodes along with their keys to add to locale dictionary</param>
+    public static void DumpStoryToLocalLocale(string locale, Dictionary<string, DialogueMachine> storyStuff)
+    {
+        if (!LocalStoryLocale.ContainsKey(locale))
+        {
+            LocalStoryLocale[locale] = new Story();
+        }
+
+        foreach (KeyValuePair<string, DialogueMachine> dm in storyStuff)
+        {
+            // Checks if the inputted artifact is a valid one that the game can check
+            if (dm.Value.hasArtifacts is not null)
+            {
+                foreach (string artifact in dm.Value.hasArtifacts)
+                {
+                    if (!DialogueMachine.ArtifactExists(artifact))
+                    {
+                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game!");
+                    }
+                }
+            }
+            if (dm.Value.doesNotHaveArtifacts is not null)
+            {
+                foreach (string artifact in dm.Value.doesNotHaveArtifacts)
+                {
+                    if (!DialogueMachine.ArtifactExists(artifact))
+                    {
+                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game!");
+                    }
+                }
+            }
+
+            // Checks if the inputted character is a valid one
+            if (dm.Value.allPresent is not null)
+            {
+                foreach (string characer in dm.Value.allPresent)
+                {
+                    if (!DialogueMachine.CharExists(characer))
+                    {
+                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game!");
+                    }
+                }
+            }
+            if (dm.Value.nonePresent is not null)
+            {
+                foreach (string characer in dm.Value.nonePresent)
+                {
+                    if (!DialogueMachine.CharExists(characer))
+                    {
+                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game!");
+                    }
+                }
+            }
+
+            // Checks if the edit dialogue thing's key is valid
+            if (dm.Value.edit is not null && !DB.story.all.ContainsKey(dm.Key))
+            {
+                ModEntry.Instance.Logger.LogWarning(dm.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
+            }
+
+            // Tries to add the dialogue in the local locale local locale thing
+            if (!LocalStoryLocale[locale].all.TryAdd(dm.Key, dm.Value))
+            {
+                ModEntry.Instance.Logger.LogWarning("Could not add dialogue: " + dm.Key);
+            }
+        }
     }
 
     /// <summary>
