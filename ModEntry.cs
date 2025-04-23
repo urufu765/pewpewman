@@ -175,35 +175,41 @@ internal class ModEntry : SimpleMod
             .Concat(WethDialogues);
 
     private static List<string> Weth1Anims = [
-        //"crystal",
+        //"cryingcat",
+        //"crystallized",
         "gameover",
         "mini",
-        "placeholder"
+        "placeholder",
+        //"stareintounknown",
+        //"traumatised",
     ];
     private static List<string> Weth3Anims = [
-        //"down",
+        //"down",  (mumbling, crystallization advances)
         //"facepalm",
-        //"pensive",
-        //"tilt",
-        //"tiltalt",
-        //"touch",
-        //"yay"
+        //"mad"
+        //"touch",  (touching face crystal)
+        //"yay",  (Yippee!)
+        //"crystal"  (holding the Space Relic)
     ];
     private static List<string> Weth4Anims = [
+        //"pain",
         //"think",
     ];
     private static List<string> Weth5Anims = [
+        //"apple",
         "explain",
         //"lockedin", >:)
         "neutral",
+        //"panic",
         "sad",
         "sparkle",
         "squint",
         "tired",
-        //"up",
+        //"up",  (Baby doll eyes, almost crystallized)
     ];
     private static List<string> Weth6Anims = [
-        //"plead",
+        //"maniac",  (ace attorney big evil dude from game 1, including the clapping)
+        //"plead",  (tuch fingers together)
     ];
     public readonly static IEnumerable<string> WethAnims =
         Weth1Anims
@@ -462,6 +468,7 @@ internal class ModEntry : SimpleMod
         SprMegaAsteroidIcon = RegisterSprite(package, "assets/megaasteroidicon.png").Sprite;
         Artifacthider.Apply(Harmony);
         SplitshotTranspiler.Apply(Harmony);
+        ChoiceRelicRewardOfYourRelicChoice.Apply(Harmony);
     }
 
     /*

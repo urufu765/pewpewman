@@ -3,7 +3,7 @@
         "Weth":
         {
             "name": "Weth",
-            "desc": "<c=93c4c8>WETH</c>\nA treasure hunter. her cards focus on <c=keyword>multi-attack</c> and <c=keyword>midrow elimination</c>. She also finds <c=heal>goodies</c> hidden in plain sight."
+            "desc": "<c=2a767d>WETH</c>\nA treasure hunter. her cards focus on <c=keyword>multi-attack</c> and <c=keyword>midrow elimination</c>. She also finds <c=heal>goodies</c> hidden in plain sight."
         },
         "Goodie":
         {
@@ -111,6 +111,11 @@
             "desc": "<c=downside>Warning:</c> no missile bays to channel this attack!"
         }
     },
+    "event": {
+        "ChoiceRelicRewardOfYourRelicChoice_Yes": {
+            "desc": "Obtain one of {2} hidden <c={0}>{1}</c> relics."
+        }
+    },
     "trait": {
         "Autouseexhaust": {
             "name": "Auto Exhaust",
@@ -151,13 +156,13 @@
             },
             "HiddenOptions": {
                 "name": "HIDDEN OPTIONS",
-                "desc": "Immediately choose 1 of 3 common artifacts.\nThen choose 1 of 3 hidden Weth artifacts."
+                "desc": "Immediately choose 1 of 3 common artifacts.\nThen choose 1 of 3 hidden Weth relics."
             }
         },
         "Boss": {
             "HiddenOptions2": {
                 "name": "HIDDEN OPTIONS II",
-                "desc": "Immediately choose 1 of 4 boss artifacts.\nThen choose 1 of 4 hidden Weth artifacts."
+                "desc": "Immediately choose 1 of 4 boss artifacts.\nThen choose 1 of 4 hidden Weth relics."
             },
             "ArtifactExcursion": {
                 "name": "ARTIFACT EXCURSION",

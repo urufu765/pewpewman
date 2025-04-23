@@ -36,7 +36,6 @@ internal static class MemoryDialogue
                 new CustomSay
                 {
                     who = AmWeth,
-                    loopTag = "tilt".Check(),
                     what = "Are you in my head?"
                 },
                 new CustomSay
@@ -48,7 +47,6 @@ internal static class MemoryDialogue
                 new CustomSay
                 {
                     who = AmWeth,
-                    loopTag = "tiltalt".Check(),
                     what = "Are you a dragon?"
                 },
                 new CustomSay
@@ -87,7 +85,7 @@ internal static class MemoryDialogue
                 $"runWin_{AmWeth}"
             ],
             requiredScenes = [
-                $"RunWinWho_Weth_1"
+                "RunWinWho_Weth_1"
             ],
             lines = new()
             {
@@ -156,7 +154,7 @@ internal static class MemoryDialogue
                 $"runWin_{AmWeth}"
             ],
             requiredScenes = [
-                $"RunWinWho_Weth_2"
+                "RunWinWho_Weth_2"
             ],
             lines = new()
             {

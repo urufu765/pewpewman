@@ -1,12 +1,36 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using Nanoray.PluginManager;
 using Nickel;
 
 namespace Weth.External;
 
+/**
+ver.0.9
+
+To get DialogueMachine and the custom dialogue stuff working:
+- edit the namespace of this file to at least match your project namespace
+- Instantiate LocalDB in ModEntry.cs *after* all the dialogue has been added (or in a helper.Events.OnModLoadFinished AfterDbInit presented as such below):
+        helper.Events.OnModLoadPhaseFinished += (_, phase) =>
+        {
+            if (phase == ModLoadPhase.AfterDbInit)
+            {
+                localDB = new(package);
+            }
+        };
+- Then register the locale of your dialogue by calling the instantiated LocalDB's GetLocalizationResults() in helper.Events.OnLoadStringsForLocale:
+        helper.Events.OnLoadStringsForLocale += (_, thing) =>
+        {
+            foreach (KeyValuePair<string, string> entry in localDB.GetLocalizationResults())
+            {
+                thing.Localizations[entry.Key] = entry.Value;
+            }
+        };
+- You're all set!
+*/
 
 public enum DMod
 {
@@ -89,10 +113,6 @@ public class EditThing : AbstractThing
     }
 }
 
-
-/// <summary>
-/// Ver0.5
-/// </summary>
 public class DialogueThing : AbstractThing
 {
     public string? title;
@@ -230,7 +250,10 @@ public class DialogueMachine : StoryNode
             hasArtifacts ??= [];
             foreach (Type type in hasArtifactTypes)
             {
+                // Modded
                 if(ModEntry.Instance.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) hasArtifacts.Add(iae.UniqueName);
+                else if(DB.artifacts.ContainsValue(type)) hasArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
+                else ModEntry.Instance.Logger.LogWarning($"Error when moving {type.Name} from [hasArtifactTypes] to [hasArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
             }
         }
         if (doesNotHaveArtifactTypes is not null)
@@ -238,7 +261,10 @@ public class DialogueMachine : StoryNode
             doesNotHaveArtifacts ??= [];
             foreach (Type type in doesNotHaveArtifactTypes)
             {
+                // Modded
                 if(ModEntry.Instance.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) doesNotHaveArtifacts.Add(iae.UniqueName);
+                else if(DB.artifacts.ContainsValue(type)) doesNotHaveArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
+                else ModEntry.Instance.Logger.LogWarning($"Error when moving {type.Name} from [doesNotHaveArtifactTypes] to [doesNotHaveArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
             }
         }
         if (edit is not null)  // Skips dialogue conversion if edits are available
@@ -398,21 +424,21 @@ public class LocalDB
     /// </summary>
     public static Story LocalStory { get; set; } = new();
     /// <summary>
-    /// Coded custom dialogue for different locales. WARNING: Locale key must be inited first before any dialogue can be added in!
+    /// Coded custom dialogue for different locales. Please use DumpStoryToLocalLocale() to add your dialogue safely instead!
     /// </summary>
-    public static Dictionary<string, Story> LocalStoryLocale { get; set; } = new();
-    /// <summary>
-    /// Just a reference keeper that'll use either the localisations or the default
-    /// </summary>
-    private static Story ToUseStory { get; set; } = new();
+    public static Dictionary<string, Story> LocalStoryLocale { get; private set; } = new();
+    private int incrementingHash = 1;
     /// <summary>
     /// An incrementing hash. WARNING: Hash may conflict if under the same namespace!
     /// </summary>
-    public int incrementingHash = 1;
+    public int IncrementingHash
+    {
+        get => incrementingHash++;
+    }
     /// <summary>
     /// The localisation dictionary with the generated hashes and dialogue, which gets to be added to the game's locale
     /// </summary>
-    public Dictionary<string, string> customLocalisation { get; private set; }
+    private readonly Dictionary<string, string> customLocalisation;
 
     /// <summary>
     /// Should be instantiated *after* all the dialogues have been registered OR at Events.OnModLoadPhaseFinished, AfterDbInit.
@@ -421,19 +447,21 @@ public class LocalDB
     public LocalDB(IPluginPackage<IModManifest> package)
     {
         customLocalisation = new();
+        Story toUseStory;
         if (LocalStoryLocale.ContainsKey(DB.currentLocale.locale))  // For other coded translated dialogues
         {
-            ToUseStory = LocalStoryLocale[DB.currentLocale.locale];
+            toUseStory = LocalStoryLocale[DB.currentLocale.locale];
         }
         else if (File.Exists($"{package.PackageRoot}\\i18n\\{DB.currentLocale.locale}_story.json"))  // For i18n translated story dialogue
         {
-            ToUseStory = Mutil.LoadJsonFile<Story>(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}_story.json").FullName);
+            toUseStory = Mutil.LoadJsonFile<Story>(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}_story.json").FullName);
         }
         else  // For default
         {
-            ToUseStory = LocalStory;
+            toUseStory = LocalStory;
         }
-        PasteToDB(ToUseStory, DB.story);
+        
+        PasteToDB(toUseStory, DB.story);
     }
 
     /// <summary>
@@ -629,7 +657,7 @@ public class LocalDB
     private Say GetSayFromIDIS(InsertDialogueInSwitch idis, string script)
     {
         string what = idis.say.hash;
-        idis.say.hash = $"{GetType().FullName}:{incrementingHash++}";
+        idis.say.hash = $"{GetType().FullName}:{IncrementingHash}";
         customLocalisation[$"{script}:{idis.say.hash}"] = what;
         return idis.say;
     }
@@ -742,7 +770,7 @@ public class LocalDB
         if (instruction is Say say)
         {
             string what = say.hash;
-            say.hash = $"{GetType().FullName}:{incrementingHash++}";
+            say.hash = $"{GetType().FullName}:{IncrementingHash}";
             //say.who = TryDeckLookup(say.who);
             customLocalisation[$"{script}:{say.hash}"] = what;
         }
@@ -756,7 +784,7 @@ public class LocalDB
         else if (instruction is TitleCard title)
         {
             string what = title.hash;
-            title.hash = $"{GetType().FullName}:{incrementingHash++}";
+            title.hash = $"{GetType().FullName}:{IncrementingHash}";
             if (title.empty is not true)
             {
                 customLocalisation[$"{script}:{title.hash}"] = what;

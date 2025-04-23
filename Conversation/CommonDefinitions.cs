@@ -15,11 +15,14 @@ static class CommonDefinitions
     internal static string AmPeri => Deck.peri.Key();
     internal static string AmRiggs => Deck.riggs.Key();
     internal static string AmDrake => Deck.eunice.Key();
-    internal static string AmIssac => Deck.goat.Key();
+    internal static string AmIsaac => Deck.goat.Key();
     internal static string AmBooks => Deck.shard.Key();
     internal static string AmMax => Deck.hacker.Key();
     internal const string AmVoid = "void";
     internal const string AmShopkeeper = "nerd";
+    internal const string AmStardog = "wolf";
+    internal const string AmCrystalMiniboss = "crystal";
+    internal const string AmWizbo = "wizard";
 
     internal static Status MissingWeth => ModEntry.WethTheSnep.MissingStatus.Status;
     internal static Status Pulsedrive => ModEntry.Instance.PulseStatus.Status;
