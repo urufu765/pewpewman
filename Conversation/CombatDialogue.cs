@@ -481,6 +481,9 @@ internal class CombatDialogue : IRegisterable
             {"SkunkFirstTurnShouts_Multi_0", new(){
                 edit = [new("f47e8bf8", AmWeth, "I'm actually here to harvest that drill from you.")]
             }},
+            {"ShopKeepBattleInsult", new(){
+                edit = [new("66ea84d6", AmWeth, "cryingcat", "NOOOOOOOOOOOOoooooooooooooooo...")]
+            }},
             {"SogginsEscapeIntent_1", new(){
                 edit = [new("cb0e74d6", AmWeth, "Mission... complete?")]
             }},
@@ -518,9 +521,27 @@ internal class CombatDialogue : IRegisterable
                 minDamageDealtToEnemyThisTurn = 10,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "maniac", "AAAAAHAHAHAHAA!")
+                    new(AmWeth, "lockedin", "YEEEAH! DIE!")
                 ]
             }},
+            {"ThatsALotOfDamageToThem_Weth_2", new(){
+                type = NodeType.combat,
+                playerShotJustHit = true,
+                minDamageDealtToEnemyThisTurn = 10,
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "lockedin", "Break APART! Become salvage!")
+                ]
+            }},
+            // {"ThatsALotOfDamageToThem_Weth_3", new(){
+            //     type = NodeType.combat,
+            //     playerShotJustHit = true,
+            //     minDamageDealtToEnemyThisTurn = 10,
+            //     allPresent = [AmWeth],
+            //     dialogue = [
+            //         new(AmWeth, "maniac", "AAAAAHAHAHAHAA!")
+            //     ]
+            // }},
             {"TookDamageHave2HP_Multi_2", new(){
                 edit = [new(EMod.countFromStart, 1, AmWeth, "facepalm", "DON'T- Don't remind me.")]
             }},

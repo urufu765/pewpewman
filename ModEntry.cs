@@ -175,41 +175,40 @@ internal class ModEntry : SimpleMod
             .Concat(WethDialogues);
 
     private static List<string> Weth1Anims = [
-        //"cryingcat",
-        //"crystallized",
+        //"crystallized", MEMORY ONLY
         "gameover",
         "mini",
         "placeholder",
-        //"stareintounknown",
-        //"traumatised",
+        "traumatised",
     ];
     private static List<string> Weth3Anims = [
-        //"down",  (mumbling, crystallization advances)
-        //"facepalm",
-        //"mad"
-        //"touch",  (touching face crystal)
-        //"yay",  (Yippee!)
-        //"crystal"  (holding the Space Relic)
+        "cryingcat",
+        "crystal",
+        //"down",  (mumbling, crystallization advances) MEMORY ONLY
+        "facepalm",
+        "lockedin",
+        "mad",
+        "touch",
+        "yay",
     ];
     private static List<string> Weth4Anims = [
-        //"pain",
-        //"think",
+        "pain",
+        //"think",  (Thinkin man pose) MEMORY ONLY
     ];
     private static List<string> Weth5Anims = [
-        //"apple",
+        "apple",
         "explain",
-        //"lockedin", >:)
         "neutral",
-        //"panic",
+        "panic",
+        "plead",
         "sad",
         "sparkle",
         "squint",
         "tired",
-        //"up",  (Baby doll eyes, almost crystallized)
+        //"up",  (Baby doll eyes, almost crystallized) MEMORY ONLY
     ];
     private static List<string> Weth6Anims = [
         //"maniac",  (ace attorney big evil dude from game 1, including the clapping)
-        //"plead",  (tuch fingers together)
     ];
     public readonly static IEnumerable<string> WethAnims =
         Weth1Anims

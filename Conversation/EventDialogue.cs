@@ -95,9 +95,6 @@ internal class EventDialogue : IRegisterable
             {"Sasha_2_Multi_2", new(){
                 edit = [new("89fa9389", AmWeth, "yay", "Ball!")]
             }},
-            {"ShopKeepBattleInsult", new(){
-                edit = [new("66ea84d6", AmWeth, "cryingcat", "NOOOOOOOOOOOOooooooooooooooo...")]
-            }},
             {"ShopkeeperInfinite_Weth_Multi_0", new(){
                 type = NodeType.@event,
                 lookup = ["shopBefore"],

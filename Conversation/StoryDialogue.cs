@@ -169,7 +169,7 @@ internal class StoryDialogue : IRegisterable
                 once = true,
                 requiredScenes = ["Books_1", "RunWinWho_Weth_2"],
                 dialogue = [
-                    new(AmWeth, "stareintounknown", "..."),
+                    new(AmWeth, "touch", "..."),
                     new(AmBooks, "Umm, hello Miss Weth!", true),
                     new(AmWeth, "Hmm? Hey. What's up?"),
                     new(AmBooks, "You have a lot of cool stuff!", true),
