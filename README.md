@@ -4,6 +4,10 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ## Changalog
 
+### BETA 3: Balancing and adjustments + Final changes
+
+* **(0.3.0)**: Switched Pulsedrive to Kokoro edition
+
 ### BETA 2: Chit Chat Time
 
 * **(0.2.11)**: Sprites!

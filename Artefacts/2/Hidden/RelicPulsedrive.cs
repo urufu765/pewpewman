@@ -7,7 +7,7 @@ public class RelicPulsedrive : RelicShield
 {
     public override Status GetThing()
     {
-        return ModEntry.Instance.PulseStatus.Status;
+        return ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive;
     }
 
     public override void ArtifactRemoval(State state)
@@ -20,6 +20,6 @@ public class RelicPulsedrive : RelicShield
 
     public override List<Tooltip>? GetExtraTooltips()
     {
-        return StatusMeta.GetTooltips(ModEntry.Instance.PulseStatus.Status, 1);
+        return StatusMeta.GetTooltips(ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive, 1);
     }
 }

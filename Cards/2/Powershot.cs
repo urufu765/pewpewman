@@ -41,7 +41,7 @@ public class Powershot : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = ModEntry.Instance.PulseStatus.Status,
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     statusAmount = 1,
                     targetPlayer = true
                 },

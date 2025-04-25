@@ -25,7 +25,7 @@ static class CommonDefinitions
     internal const string AmWizbo = "wizard";
 
     internal static Status MissingWeth => ModEntry.WethTheSnep.MissingStatus.Status;
-    internal static Status Pulsedrive => ModEntry.Instance.PulseStatus.Status;
+    internal static Status Pulsedrive => ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive;
 
 
     /// <summary>

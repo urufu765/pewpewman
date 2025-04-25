@@ -40,7 +40,7 @@ public class UnstoppableForce : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = ModEntry.Instance.PulseStatus.Status,
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     statusAmount = 1,
                     targetPlayer = true
                 }
@@ -53,7 +53,7 @@ public class UnstoppableForce : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = ModEntry.Instance.PulseStatus.Status,
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     statusAmount = 1,
                     targetPlayer = true
                 }

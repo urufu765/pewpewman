@@ -47,7 +47,7 @@ public class SpaceRelics : Artifact
 
     public void ObtainRelic(Status status)
     {
-        if (status == ModEntry.Instance.PulseStatus.Status)
+        if (status == ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive)
         {
             ObtainPulsedrive++;
         }
@@ -66,7 +66,7 @@ public class SpaceRelics : Artifact
                 combat.Queue(
                     new AStatus
                     {
-                        status = ModEntry.Instance.PulseStatus.Status,
+                        status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                         statusAmount = ObtainPulsedrive,
                         targetPlayer = true,
                         artifactPulse = Key()
@@ -134,7 +134,7 @@ public class SpaceRelics : Artifact
             tt.Add(new TTDivider());
             if (ObtainPulsedrive > 0)
             {
-                tt.AddRange(StatusMeta.GetTooltips(ModEntry.Instance.PulseStatus.Status, ObtainPulsedrive));
+                tt.AddRange(StatusMeta.GetTooltips(ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive, ObtainPulsedrive));
             }
             foreach (KeyValuePair<Status, int> relic in Relics)
             {

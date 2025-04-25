@@ -18,7 +18,7 @@ public class RockPower : Artifact
             combat.Queue(
                 new AStatus
                 {
-                    status = ModEntry.Instance.PulseStatus.Status,
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     statusAmount = 1,
                     targetPlayer = true,
                     artifactPulse = Key()
@@ -28,7 +28,7 @@ public class RockPower : Artifact
     }
     public override List<Tooltip>? GetExtraTooltips()
     {
-        List<Tooltip> l = StatusMeta.GetTooltips(ModEntry.Instance.PulseStatus.Status, 1);
+        List<Tooltip> l = StatusMeta.GetTooltips(ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive, 1);
         l.Insert(0, new TTGlossary("midrow.asteroid"));
         return l;
     }

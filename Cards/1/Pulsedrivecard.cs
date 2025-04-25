@@ -36,7 +36,7 @@ public class PulsedriveCard : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = ModEntry.Instance.PulseStatus.Status,
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     targetPlayer = true,
                     statusAmount = 2
                 },
@@ -54,7 +54,7 @@ public class PulsedriveCard : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = ModEntry.Instance.PulseStatus.Status,
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     targetPlayer = true,
                     statusAmount = 2
                 },
@@ -70,7 +70,7 @@ public class PulsedriveCard : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = ModEntry.Instance.PulseStatus.Status,
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     targetPlayer = true,
                     statusAmount = 1
                 },

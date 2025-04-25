@@ -41,7 +41,7 @@ public class CrisisCall : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = ModEntry.Instance.PulseStatus.Status,
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     statusAmount = 3,
                     targetPlayer = true
                 },
@@ -60,7 +60,7 @@ public class CrisisCall : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = ModEntry.Instance.PulseStatus.Status,
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     statusAmount = 2,
                     targetPlayer = true
                 },
