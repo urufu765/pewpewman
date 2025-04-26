@@ -9,7 +9,7 @@ using Nickel;
 namespace Weth.External;
 
 /**
-ver.0.9
+ver.0.10
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -18,7 +18,7 @@ To get DialogueMachine and the custom dialogue stuff working:
         {
             if (phase == ModLoadPhase.AfterDbInit)
             {
-                localDB = new(package);
+                localDB = new(helper, package);
             }
         };
 - Then register the locale of your dialogue by calling the instantiated LocalDB's GetLocalizationResults() in helper.Events.OnLoadStringsForLocale:
@@ -427,6 +427,10 @@ public class LocalDB
     /// Coded custom dialogue for different locales. Please use DumpStoryToLocalLocale() to add your dialogue safely instead!
     /// </summary>
     public static Dictionary<string, Story> LocalStoryLocale { get; private set; } = new();
+    /// <summary>
+    /// Coded custom dialogue specifically for modded support. Please use DumpStoryToLocalLocale() to add your dialogue safely instead
+    /// </summary>
+    public static Dictionary<string, Dictionary<string, Story>> ModdedStoryLocale { get; private set; } = new();
     private int incrementingHash = 1;
     /// <summary>
     /// An incrementing hash. WARNING: Hash may conflict if under the same namespace!
@@ -444,13 +448,26 @@ public class LocalDB
     /// Should be instantiated *after* all the dialogues have been registered OR at Events.OnModLoadPhaseFinished, AfterDbInit.
     /// </summary>
     /// <param name="package"></param>
-    public LocalDB(IPluginPackage<IModManifest> package)
+    public LocalDB(IModHelper helper, IPluginPackage<IModManifest> package)
     {
         customLocalisation = new();
         Story toUseStory;
         if (LocalStoryLocale.ContainsKey(DB.currentLocale.locale))  // For other coded translated dialogues
         {
             toUseStory = LocalStoryLocale[DB.currentLocale.locale];
+            foreach (KeyValuePair<string, Dictionary<string, Story>> thing in ModdedStoryLocale)
+            {
+                if(helper.ModRegistry.LoadedMods.ContainsKey(thing.Key) && ModdedStoryLocale[thing.Key].TryGetValue(DB.currentLocale.locale, out Story? value))
+                {
+                    foreach (KeyValuePair<string, StoryNode> thing2 in value.all)
+                    {
+                        if (!toUseStory.all.TryAdd(thing2.Key, thing2.Value))
+                        {
+                            ModEntry.Instance.Logger.LogWarning("Could not add dialogue: " + thing2.Key);
+                        }
+                    }
+                }
+            }
         }
         else if (File.Exists($"{package.PackageRoot}\\i18n\\{DB.currentLocale.locale}_story.json"))  // For i18n translated story dialogue
         {
@@ -473,6 +490,30 @@ public class LocalDB
         return customLocalisation;
     }
 
+    public static void DumpStoryToLocalLocale(string locale, string modKey, Dictionary<string, DialogueMachine> storyStuff)
+    {
+        if (!ModdedStoryLocale.ContainsKey(modKey))
+        {
+            ModdedStoryLocale[modKey] = new();
+        }
+        if (!ModdedStoryLocale[modKey].ContainsKey(locale))
+        {
+            ModdedStoryLocale[modKey][locale] = new Story();
+        }
+
+        foreach (KeyValuePair<string, DialogueMachine> dm in storyStuff)
+        {
+            ExistenceChecker(dm);
+
+            // Tries to add the dialogue in the local locale local locale thing
+            if (!ModdedStoryLocale[modKey][locale].all.TryAdd(dm.Key, dm.Value))
+            {
+                ModEntry.Instance.Logger.LogWarning("Could not add dialogue: " + dm.Key);
+            }
+        }
+    }
+
+
     /// <summary>
     /// Adds a list of DialogueMachines to the appropriate locale, creating a new if locale doesn't exist.
     /// </summary>
@@ -487,61 +528,66 @@ public class LocalDB
 
         foreach (KeyValuePair<string, DialogueMachine> dm in storyStuff)
         {
-            // Checks if the inputted artifact is a valid one that the game can check
-            if (dm.Value.hasArtifacts is not null)
-            {
-                foreach (string artifact in dm.Value.hasArtifacts)
-                {
-                    if (!DialogueMachine.ArtifactExists(artifact))
-                    {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
-                    }
-                }
-            }
-            if (dm.Value.doesNotHaveArtifacts is not null)
-            {
-                foreach (string artifact in dm.Value.doesNotHaveArtifacts)
-                {
-                    if (!DialogueMachine.ArtifactExists(artifact))
-                    {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
-                    }
-                }
-            }
-
-            // Checks if the inputted character is a valid one
-            if (dm.Value.allPresent is not null)
-            {
-                foreach (string characer in dm.Value.allPresent)
-                {
-                    if (!DialogueMachine.CharExists(characer))
-                    {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
-                    }
-                }
-            }
-            if (dm.Value.nonePresent is not null)
-            {
-                foreach (string characer in dm.Value.nonePresent)
-                {
-                    if (!DialogueMachine.CharExists(characer))
-                    {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
-                    }
-                }
-            }
-
-            // Checks if the edit dialogue thing's key is valid
-            if (dm.Value.edit is not null && !DB.story.all.ContainsKey(dm.Key))
-            {
-                ModEntry.Instance.Logger.LogWarning(dm.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
-            }
+            ExistenceChecker(dm);
 
             // Tries to add the dialogue in the local locale local locale thing
             if (!LocalStoryLocale[locale].all.TryAdd(dm.Key, dm.Value))
             {
                 ModEntry.Instance.Logger.LogWarning("Could not add dialogue: " + dm.Key);
             }
+        }
+    }
+
+    private static void ExistenceChecker(KeyValuePair<string, DialogueMachine> dm)
+    {
+        // Checks if the inputted artifact is a valid one that the game can check
+        if (dm.Value.hasArtifacts is not null)
+        {
+            foreach (string artifact in dm.Value.hasArtifacts)
+            {
+                if (!DialogueMachine.ArtifactExists(artifact))
+                {
+                    ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                }
+            }
+        }
+        if (dm.Value.doesNotHaveArtifacts is not null)
+        {
+            foreach (string artifact in dm.Value.doesNotHaveArtifacts)
+            {
+                if (!DialogueMachine.ArtifactExists(artifact))
+                {
+                    ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                }
+            }
+        }
+
+        // Checks if the inputted character is a valid one
+        if (dm.Value.allPresent is not null)
+        {
+            foreach (string characer in dm.Value.allPresent)
+            {
+                if (!DialogueMachine.CharExists(characer))
+                {
+                    ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                }
+            }
+        }
+        if (dm.Value.nonePresent is not null)
+        {
+            foreach (string characer in dm.Value.nonePresent)
+            {
+                if (!DialogueMachine.CharExists(characer))
+                {
+                    ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                }
+            }
+        }
+
+        // Checks if the edit dialogue thing's key is valid
+        if (dm.Value.edit is not null && !DB.story.all.ContainsKey(dm.Key))
+        {
+            ModEntry.Instance.Logger.LogWarning(dm.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
         }
     }
 

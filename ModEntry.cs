@@ -239,7 +239,7 @@ internal class ModEntry : SimpleMod
             if (phase == ModLoadPhase.AfterDbInit)
             {
                 Patch_EnemyPack = helper.ModRegistry.LoadedMods.ContainsKey("TheJazMaster.EnemyPack");
-                localDB = new(package);
+                localDB = new(helper, package);
             }
         };
         helper.Events.OnLoadStringsForLocale += (_, thing) =>
