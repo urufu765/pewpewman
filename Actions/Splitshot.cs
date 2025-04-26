@@ -245,13 +245,13 @@ public class ASplitshot : CardAction
             foreach (Artifact artifact in s.EnumerateAllArtifacts())
             {
                 bool? toPierce = artifact.OnPlayerAttackMakeItPierce(s, c);
-                if (toPierce is not null && toPierce.Value)
+                if (toPierce == true)
                 {
                     piercing = true;
                     artifact.Pulse();
                 }
                 bool? tostun = artifact.ModifyAttacksToStun(s, c);
-                if (tostun is not null && tostun.Value)
+                if (tostun == true)
                 {
                     stunEnemy = true;
                     artifact.Pulse();
@@ -271,7 +271,7 @@ public class ASplitshot : CardAction
             foreach (Artifact artifact in s.EnumerateAllArtifacts())
             {
                 bool? droneInvincibilityModified = artifact.ModifyDroneInvincibility(s, c, c.stuff[raycastResult.worldX]);
-                if (droneInvincibilityModified is not null && droneInvincibilityModified.Value)
+                if (droneInvincibilityModified == true)
                 {
                     invincible = true;
                     artifact.Pulse();
@@ -464,9 +464,9 @@ public class ASplitshot : CardAction
 
             });
         }
-        if (status is not null)
+        if (status is Status stat)
         {
-            tooltips.AddRange(StatusMeta.GetTooltips(status.Value, statusAmount));
+            tooltips.AddRange(StatusMeta.GetTooltips(stat, statusAmount));
         }
         if (stunEnemy || s.ship.Get(Status.stunCharge) > 0)
         {

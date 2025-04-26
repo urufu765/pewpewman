@@ -23,13 +23,13 @@ public class Pulsedriving : IKokoroApi.IV2.IStatusLogicApi.IHook
         if (s.route is Combat c && c is not null)
         {
             Ship ship = targetPlayer ? c.otherShip : s.ship;
-            __result += ship.Get(ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive);
+            __result += ship.Get(ModEntry.Instance.PulseStatus.Status);
         }
     }
 
     public bool HandleStatusTurnAutoStep(IKokoroApi.IV2.IStatusLogicApi.IHook.IHandleStatusTurnAutoStepArgs args)
     {
-        if (args.Status != ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive) return false;
+        if (args.Status != ModEntry.Instance.PulseStatus.Status) return false;
         if (args.Timing != IKokoroApi.IV2.IStatusLogicApi.StatusTurnTriggerTiming.TurnStart) return false;
         args.Amount = 0;
         return false;

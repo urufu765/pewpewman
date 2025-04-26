@@ -70,18 +70,21 @@ public class WethExe : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 1,
+                exhaust = true,
                 description = ColorlessLoc.GetDesc(state, 3, ModEntry.Instance.WethDeck.Deck),
                 artTint = "125f66"
             },
             Upgrade.A => new CardData
             {
                 cost = 0,
+                exhaust = true,
                 description = ColorlessLoc.GetDesc(state, 2, ModEntry.Instance.WethDeck.Deck),
                 artTint = "125f66"
             },
             _ => new CardData
             {
                 cost = 1,
+                exhaust = true,
                 description = ColorlessLoc.GetDesc(state, 2, ModEntry.Instance.WethDeck.Deck),
                 artTint = "125f66"
             }

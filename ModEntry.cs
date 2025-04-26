@@ -135,7 +135,8 @@ internal class ModEntry : SimpleMod
     ];
     private static List<Type> WethBossArtifacts = [
         typeof(HiddenOptions2),
-        typeof(ArtifactExcursion)
+        typeof(ArtifactExcursion),
+        typeof(RelicJaunt)
     ];
     private static List<Type> WethEventArtifacts = [
         typeof(TreasureHunter),
@@ -396,7 +397,7 @@ internal class ModEntry : SimpleMod
          * Statuses are used to achieve many mechanics.
          * However, statuses themselves do not contain any code - they just keep track of how much you have.
          */
-        PulseStatus = helper.Content.Statuses.RegisterStatus("Pulsedrive", new StatusConfiguration
+        PulseStatus = helper.Content.Statuses.RegisterStatus("WethPulsedrive", new StatusConfiguration
         {
             Definition = new StatusDef
             {
@@ -483,6 +484,7 @@ internal class ModEntry : SimpleMod
         Artifacthider.Apply(Harmony);
         SplitshotTranspiler.Apply(Harmony);
         ChoiceRelicRewardOfYourRelicChoice.Apply(Harmony);
+        ArtiExcursionHullOperator.Apply(Harmony);
     }
 
     /*

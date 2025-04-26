@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using Nickel;
 using OneOf.Types;
@@ -12,67 +11,21 @@ using Weth.Cards;
 namespace Weth.Artifacts;
 
 
-public enum ExcursionState
-{
-    Pick,
-    Counting,
-    Ready,
-    Beyond
-}
-
-public static class ArtiExcursionHullOperator
-{
-    private static int LastEnemyHull;
-    public static void Apply(Harmony harmony)
-    {
-        harmony.Patch(
-            original: typeof(Ship).GetMethod("DirectHullDamage", AccessTools.all),
-            prefix: new HarmonyMethod(typeof(ArtiExcursionHullOperator), nameof(GetLastEnemyHull)),
-            postfix: new HarmonyMethod(typeof(ArtiExcursionHullOperator), nameof(InformAEofHullDamageStuff))
-        );
-    }
-
-    private static void GetLastEnemyHull(Ship __instance)
-    {
-        if (!__instance.isPlayerShip)
-        {
-            //ModEntry.Instance.Logger.LogInformation("a: " + __instance.hull);
-            LastEnemyHull = __instance.hull;
-        }
-    }
-
-    private static void InformAEofHullDamageStuff(Ship __instance, State s, int amt)
-    {
-        if (__instance.hull >= LastEnemyHull || __instance.isPlayerShip) return;
-        foreach (Artifact artifact in s.EnumerateAllArtifacts())
-        {
-            if (artifact is ArtifactExcursion ae)
-            {
-                //ModEntry.Instance.Logger.LogInformation("b: " + LastEnemyHull);
-                //ModEntry.Instance.Logger.LogInformation("c: " + amt);
-                ae.HitTheEnemy(__instance.hull == 0? LastEnemyHull : amt);
-                break;
-            }
-        }
-    }
-}
-
 [ArtifactMeta(pools = [ ArtifactPool.Boss ])]
-public class ArtifactExcursion : Artifact
+public class ArtifactExcursionOld : Artifact
 {
-    public int TotalDamage { get; set; }
+    public int TotalHits { get; set; }
     public ExcursionState Exstate { get; set; }
     public int Stage { get; set; }
-    private List<int> Goals {get;} = [15, 30, 50];
-    public int LastGoal {get; set;} = 50;
-    private const int BeyondGoals = 10;
+    private List<int> Goals {get;} = [30, 60, 100];
+    public int LastGoal {get; set;} = 100;
     //public bool GotDaArtifact {get; set;};
     // private int _lastDamageDealt;
     // public int LastDamageDealt { get {return _lastDamageDealt;} set {_lastDamageDealt = Math.Max(0, value);} }
 
     public override int? GetDisplayNumber(State s)
     {
-        return TotalDamage;
+        return TotalHits;
     }
 
     // public override void OnTurnStart(State state, Combat combat)
@@ -82,8 +35,7 @@ public class ArtifactExcursion : Artifact
 
     public override void OnReceiveArtifact(State state)
     {
-        TotalDamage = 0;
-        LastGoal = Goals[^1];
+        TotalHits = 0;
         Stage = 0;
         Exstate = ExcursionState.Counting;
     }
@@ -100,9 +52,6 @@ public class ArtifactExcursion : Artifact
 
     public override Spr GetSprite()
     {
-        switch(Exstate){
-            case var x when x is ExcursionState.Ready: break;
-        }
         return Exstate switch
         {
             ExcursionState.Ready => ModEntry.Instance.SprArtExcReady,
@@ -112,32 +61,50 @@ public class ArtifactExcursion : Artifact
         };
     }
 
-    public void HitTheEnemy(int DamageDone)
+    public override void OnEnemyGetHit(State state, Combat combat, Part? part)
     {
-        if (DamageDone <= 0) return;
         if (Exstate == ExcursionState.Counting)
         {
-            TotalDamage = Math.Min(TotalDamage + DamageDone, Goals[Stage]);
-            if (TotalDamage == Goals[Stage])
+            if (GetDamageDealt(combat, part) > 0)
+            {
+                TotalHits++;
+            }
+            if (TotalHits >= Goals[Stage])
             {
                 Exstate = ExcursionState.Ready;
                 Pulse();
-                // SFX for ready
             }
         }
         else if (Exstate == ExcursionState.Beyond)
         {
-            TotalDamage = Math.Min(TotalDamage + DamageDone, LastGoal + BeyondGoals);
-            if (TotalDamage%BeyondGoals == 0 && TotalDamage > LastGoal)
+            if (GetDamageDealt(combat, part) > 0)
             {
-                LastGoal = TotalDamage;
+                TotalHits++;
+            }
+            if (TotalHits%20 == 0 && TotalHits > LastGoal)
+            {
+                LastGoal = TotalHits;
                 Exstate = ExcursionState.Ready;
                 Pulse();
-                // SFX for ready
             }
         }
     }
 
+    private static int GetDamageDealt(Combat combat, Part? part)
+    {
+        int damage = 0;
+        bool piercing = false;
+        if (combat.currentCardAction is AAttack aa)
+        {
+            damage = aa.damage;
+            piercing = aa.piercing;
+        }
+        if (part is not null && part.GetDamageModifier() == PDamMod.armor && !piercing)
+        {
+            damage--;
+        }
+        return damage;
+    }
 
     public override void OnCombatEnd(State state)
     {

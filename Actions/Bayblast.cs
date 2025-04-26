@@ -25,7 +25,7 @@ public class ABayBlast : CardAction
         if (toShip is null || fromShip is null) return;
         if (toShip.hull <= 0) return;
         int? n = GetFromX(s, c);
-        RaycastResult? raycastResult = worldX != null? CombatUtils.RaycastGlobal(c, toShip, false, worldX.Value) : (n != null? CombatUtils.RaycastFromShipLocal(s, c, n.Value, targetPlayer) : null);
+        RaycastResult? raycastResult = worldX is int wx? CombatUtils.RaycastGlobal(c, toShip, false, wx) : (n is int nn? CombatUtils.RaycastFromShipLocal(s, c, nn, targetPlayer) : null);
         if (!targetPlayer && g.state.ship.GetPartTypeCount(PType.missiles, false) > 1 && !multiBayVolley)
         {
             c.QueueImmediate(new AVolleyBlastFromAllBays

@@ -166,11 +166,11 @@
             },
             "ArtifactExcursion": {
                 "name": "ARTIFACT EXCURSION",
-                "desc": "At 30 hits, gain 1 of 2 common artifacts.\nAt 60 hits, gain 1 of 3 common artifacts.\nAt 100 hits, gain 1 of 2 boss artifacts.\nAfter every 20 hits beyond 100, gain 1 of 3 hidden <c=2a767d>WETH</c> artifacts.\n<c=action>Hits only count if they deal more than 0 damage.</c>\n<c=keyword>Receieve these rewards at the end of combat.</c>\n<c=downside>Counter pauses whenever reward is available.\n<c=artifact>RELIC JAUNT</c> is not offered in boss artifact offerings.</c>"
+                "desc": "Dealing hull damage to enemy gives rewards!\nAt 15 damage, gain 1 of 2 common artifacts.\nAt 30 damage, gain 1 of 3 common artifacts.\nAt 50 damage, gain 1 of 2 boss artifacts.\nAfter every 10 damage beyond 50, gain 1 of 3 hidden <c=2a767d>WETH</c> relics.\n<c=action>Hits only count if they deal more than 0 damage.</c>\n<c=keyword>Receieve these rewards at the end of combat.</c>\n<c=downside>Counter pauses whenever reward is available.\n<c=artifact>RELIC JAUNT</c> is not offered in boss artifact offerings.</c>"
             },
             "RelicJaunt": {
                 "name": "RELIC JAUNT",
-                "desc": "1 random enemy part offers 1 <c=2a767d>WETH</c> relic when shot at.\nEvery 5 relics uncovered with this method, gain 1 of 2 common artifacts.\n<c=keyword>Receive these rewards at the end of combat.</c>\n<c=downside>You can only obtain one relic and one artifact per battle.\n<c=artifact>ARTIFACT EXCURSION</c> is not offered in boss artifact offerings.</c>"
+                "desc": "1 random enemy part offers 1 of 3 <c=2a767d>WETH</c> relics when shot at.\nEvery 5th relic uncovered, instead gain 1 of 3 common artifacts.\n<c=keyword>Receive these rewards at the end of combat.</c>\n<c=downside>You can only obtain one relic and one artifact per battle.\n<c=artifact>ARTIFACT EXCURSION</c> is not offered in boss artifact offerings.</c>"
             }
         },
         "EventOnly": {

@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.2)**: Relic Jaunt added to boss artifacts as an alternative to Artifact Excursion and Artifact Excursion slight rework and EXE now exhaust as it should, fixed builtin pulsedrive giving kokoro pulsedrive a boost unintentionally
 * **(0.3.1)**: EXE not offered as starter issue, solo start deck, Pulsedrive(card) B now no longer exhausts. Alt starter Triple Tap replaced by Pulsedrive(card)
 * **(0.3.0)**: Switched Pulsedrive to Kokoro edition
 
