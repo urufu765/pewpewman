@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.5)**: Forgot Weth is missing thing dialogue and adjusted plead animation
 * **(0.3.4)**: Fixed DM's edge case
 * **(0.3.3)**: Dialogue machine modded support
 * **(0.3.2)**: Relic Jaunt added to boss artifacts as an alternative to Artifact Excursion and Artifact Excursion slight rework and EXE now exhaust as it should, fixed builtin pulsedrive giving kokoro pulsedrive a boost unintentionally

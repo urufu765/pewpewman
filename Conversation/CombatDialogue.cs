@@ -436,7 +436,7 @@ internal class CombatDialogue : IRegisterable
                 oncePerCombatTags = ["maxWentMissing"],
                 oncePerRun = true,
                 dialogue = [
-                    new(AmWeth, "tilt", "Where's Max?")
+                    new(AmWeth, "plead", "Where's Max?")
                 ]
             }},
             {"OneHitPointThisIsFine_Weth_0", new(){
@@ -680,7 +680,84 @@ internal class CombatDialogue : IRegisterable
                     new(AmWizbo, "Habadiba!"),
                     new(AmWeth, "facepalm", "Please stop...")
                 ]
-            }}
+            }},
+            {"WethWentMissing_Multi_0", new(){
+                type = NodeType.combat,
+                allPresent = [AmBooks],
+                lastTurnPlayerStatuses = [MissingWeth],
+                priority = true,
+                oncePerCombatTags = ["wethWentMissing"],
+                oncePerRun = true,
+                dialogue = [
+                    new(AmBooks, "intense", "Where did crystal lady go?")
+                ]
+            }},
+            {"WethWentMissing_Multi_1", new(){
+                type = NodeType.combat,
+                allPresent = [AmBooks],
+                lastTurnPlayerStatuses = [MissingWeth],
+                priority = true,
+                oncePerCombatTags = ["wethWentMissing"],
+                oncePerRun = true,
+                dialogue = [
+                    new(AmBooks, "intense", "Where did crystal lady go?")
+                ]
+            }},
+            {"WethWentMissing_Multi_2", new(){
+                type = NodeType.combat,
+                allPresent = [AmDizzy],
+                lastTurnPlayerStatuses = [MissingWeth],
+                priority = true,
+                oncePerCombatTags = ["wethWentMissing"],
+                oncePerRun = true,
+                dialogue = [
+                    new(AmDizzy, "serious", "That's not good.")
+                ]
+            }},
+            {"WethWentMissing_Multi_3", new(){
+                type = NodeType.combat,
+                allPresent = [AmIsaac],
+                lastTurnPlayerStatuses = [MissingWeth],
+                priority = true,
+                oncePerCombatTags = ["wethWentMissing"],
+                oncePerRun = true,
+                dialogue = [
+                    new(AmIsaac, "panic", "Weth!")
+                ]
+            }},
+            {"WethWentMissing_Multi_4", new(){
+                type = NodeType.combat,
+                allPresent = [AmDrake],
+                lastTurnPlayerStatuses = [MissingWeth],
+                priority = true,
+                oncePerCombatTags = ["wethWentMissing"],
+                oncePerRun = true,
+                dialogue = [
+                    new(AmDrake, "panic", "Did she turn into a crystal?!")
+                ]
+            }},
+            {"WethWentMissing_Multi_5", new(){
+                type = NodeType.combat,
+                allPresent = [AmPeri],
+                lastTurnPlayerStatuses = [MissingWeth],
+                priority = true,
+                oncePerCombatTags = ["wethWentMissing"],
+                oncePerRun = true,
+                dialogue = [
+                    new(AmPeri, "mad", "Hey! Bring her back!")
+                ]
+            }},
+            {"WethWentMissing_Multi_6", new(){
+                type = NodeType.combat,
+                allPresent = [AmRiggs],
+                lastTurnPlayerStatuses = [MissingWeth],
+                priority = true,
+                oncePerCombatTags = ["wethWentMissing"],
+                oncePerRun = true,
+                dialogue = [
+                    new(AmRiggs, "serious", "Umm?")
+                ]
+            }},
         });
     }
 }
