@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.1)**: EXE not offered as starter issue, solo start deck, Pulsedrive(card) B now no longer exhausts. Alt starter Triple Tap replaced by Pulsedrive(card)
 * **(0.3.0)**: Switched Pulsedrive to Kokoro edition
 
 ### BETA 2: Chit Chat Time

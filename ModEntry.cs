@@ -295,7 +295,7 @@ internal class ModEntry : SimpleMod
                  */
                 color = new Color("93c4c8"),
 
-                titleColor = new Color("000000")
+                titleColor = new Color("000000"),
             },
 
             DefaultCardArt = StableSpr.cards_MultiBlast,
@@ -362,13 +362,28 @@ internal class ModEntry : SimpleMod
                     new TreasureHunter()
                 ]
             },
-            Description = AnyLocalizations.Bind(["character", "Weth", "desc"]).Localize
+            Description = AnyLocalizations.Bind(["character", "Weth", "desc"]).Localize,
+            SoloStarters = new StarterDeck
+            {
+                cards = [
+                    new Bloom(),
+                    new DodgeColorless(),
+                    new TrashDispenser(),
+                    new GiantTrash(),
+                    new SplitshotCard(),
+                    new SplitshotCard()
+                ],
+                artifacts = [
+                    new TreasureHunter()
+                ]
+            },
+            ExeCardType = typeof(WethExe)
         });
 
         MoreDifficultiesApi?.RegisterAltStarters(WethDeck.Deck, new StarterDeck
         {
             cards = [
-                new TripleTap(),
+                new PulsedriveCard(),
                 new Puckshot(),
             ],
             artifacts = 

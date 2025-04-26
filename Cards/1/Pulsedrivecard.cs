@@ -86,7 +86,6 @@ public class PulsedriveCard : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 1,
-                exhaust = true,
                 artTint = "4ab3ff",
                 artOverlay = ModEntry.Instance.WethCommon
             },
