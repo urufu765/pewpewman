@@ -9,7 +9,7 @@ using Nickel;
 namespace Weth.External;
 
 /**
-ver.0.10
+ver.0.11
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -30,6 +30,7 @@ To get DialogueMachine and the custom dialogue stuff working:
             }
         };
 - You're all set!
+(when you're adding dialogue, you should use LocalDB.DumpStoryToLocalLocale())
 */
 
 public enum DMod
@@ -490,8 +491,21 @@ public class LocalDB
         return customLocalisation;
     }
 
+    /// <summary>
+    /// A modded version that adds separate dictionaries for each mod key so they could be included/excluded on load
+    /// </summary>
+    /// <param name="locale"></param>
+    /// <param name="modKey"></param>
+    /// <param name="storyStuff"></param>
     public static void DumpStoryToLocalLocale(string locale, string modKey, Dictionary<string, DialogueMachine> storyStuff)
     {
+        // Just to trigger the modded part on load lol
+        if (!LocalStoryLocale.ContainsKey(locale))
+        {
+            LocalStoryLocale[locale] = new Story();
+        }
+
+
         if (!ModdedStoryLocale.ContainsKey(modKey))
         {
             ModdedStoryLocale[modKey] = new();
