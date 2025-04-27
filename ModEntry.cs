@@ -309,12 +309,6 @@ internal class ModEntry : SimpleMod
         GoodieMech = RegisterSprite(package, "assets/frame_goodiesmech.png").Sprite;
         GoodieMechA = RegisterSprite(package, "assets/frame_goodiesmechA.png").Sprite;
 
-        /*
-         * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
-         * This snippet invokes all of them, allowing them to register themselves with the package and helper.
-         */
-        foreach (var type in AllRegisterableTypes)
-            AccessTools.DeclaredMethod(type, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
         
         /*
          * Characters have required animations, recommended animations, and you have the option to add more.
@@ -481,6 +475,14 @@ internal class ModEntry : SimpleMod
         SprMegaAsteroid = RegisterSprite(package, "assets/megaasteroid.png").Sprite;
         SprGiantAsteroidIcon = RegisterSprite(package, "assets/giantasteroidicon.png").Sprite;
         SprMegaAsteroidIcon = RegisterSprite(package, "assets/megaasteroidicon.png").Sprite;
+
+        /*
+         * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
+         * This snippet invokes all of them, allowing them to register themselves with the package and helper.
+         */
+        foreach (var type in AllRegisterableTypes)
+            AccessTools.DeclaredMethod(type, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
+
         Artifacthider.Apply(Harmony);
         SplitshotTranspiler.Apply(Harmony);
         ChoiceRelicRewardOfYourRelicChoice.Apply(Harmony);
