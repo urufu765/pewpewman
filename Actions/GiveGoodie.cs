@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Weth.Artifacts;
 using Weth.Cards;
 
 namespace Weth.Actions;
@@ -48,6 +49,10 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
         if (c.otherShip?.ai?.character?.type is not null)
         {
             name = c.otherShip.ai.character.type;
+        }
+        if (!s.EnumerateAllArtifacts().Any(a => a is TreasureHunter or TreasureSeeker))
+        {
+            ignoreUncommonRestriction = true;
         }
         for (int x = 0; x < amount; x++)
         {

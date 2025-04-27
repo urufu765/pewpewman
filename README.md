@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.7)**: Uncommon goodies are infinitely available if either Treasure Hunter or Seeker is not present
 * **(0.3.6)**: Fixed Weth error due to order of definition
 * **(0.3.5)**: Forgot Weth is missing thing dialogue and adjusted plead animation
 * **(0.3.4)**: Fixed DM's edge case
