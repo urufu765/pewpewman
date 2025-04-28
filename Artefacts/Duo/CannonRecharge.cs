@@ -8,10 +8,12 @@ using Weth.Cards;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ ArtifactPool.Common ])]
+[ArtifactMeta(pools = [ ArtifactPool.Common ]), DuoArtifactMeta(duoDeck = Deck.dizzy)]
 public class CannonRecharge : Artifact
 {
+    
     public bool ReadyToGive {get; set;}
+
     public override void OnTurnEnd(State state, Combat combat)
     {
         if (combat.energy > 0)

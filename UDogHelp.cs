@@ -11,7 +11,7 @@ namespace Weth;
 /// </summary>
 public static class UhDuhHundo
 {
-    public static ArtifactConfiguration ArtifactRegistrationHelper(Type a, Spr sprite)
+    public static ArtifactConfiguration ArtifactRegistrationHelper(Type a, Spr sprite, Deck deck)
     {
         ArtifactMeta? attrs = a.GetCustomAttribute<ArtifactMeta>();
         ArtifactPool[] artpl = attrs?.pools ?? new ArtifactPool[1];
@@ -20,7 +20,7 @@ public static class UhDuhHundo
             ArtifactType = a,
             Meta = new ArtifactMeta
             {
-                owner = ModEntry.Instance.WethDeck.Deck,
+                owner = deck,
                 pools = artpl,
                 unremovable = attrs is not null && attrs.unremovable,
                 extraGlossary = attrs?.extraGlossary ?? []

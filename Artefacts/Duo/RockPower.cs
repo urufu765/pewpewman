@@ -8,7 +8,7 @@ using Weth.Cards;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ ArtifactPool.Common ])]
+[ArtifactMeta(pools = [ ArtifactPool.Common ]), DuoArtifactMeta(duoDeck = Deck.goat)]
 public class RockPower : Artifact
 {
     public override void OnAsteroidIsDestroyed(State state, Combat combat, bool wasPlayer, int worldX)

@@ -70,6 +70,7 @@ internal class ModEntry : SimpleMod
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
     internal IMoreDifficultiesApi? MoreDifficultiesApi {get; private set; } = null!;
+    internal IDuoArtifactsApi? DuoArtifactsApi {get; private set;} = null!;
     public LocalDB localDB { get; set; } = null!;
 
     /*
@@ -133,7 +134,6 @@ internal class ModEntry : SimpleMod
 
     private static List<Type> WethCommonArtifacts = [
         typeof(TreasureSeeker),
-        typeof(ResidualShot),
         typeof(HiddenOptions),
     ];
     private static List<Type> WethBossArtifacts = [
@@ -163,13 +163,15 @@ internal class ModEntry : SimpleMod
     ];
     private static List<Type> WethDuoArtifacts = [
         typeof(CannonRecharge),  // Dizzy
+        typeof(ResidualShot),  // Peri
         typeof(RockPower),  // Isaac
     ];
     private static IEnumerable<Type> WethArtifactTypes =
         WethCommonArtifacts
             .Concat(WethBossArtifacts)
             .Concat(WethEventArtifacts)
-            .Concat(WethSpecialArtifacts);
+            .Concat(WethSpecialArtifacts)
+            .Concat(WethDuoArtifacts);
 
     private static List<Type> WethDialogues = [
         typeof(StoryDialogue),
@@ -179,7 +181,6 @@ internal class ModEntry : SimpleMod
     ];
     private static IEnumerable<Type> AllRegisterableTypes =
         WethCardTypes
-            .Concat(WethDuoArtifacts)
             .Concat(WethDialogues);
 
     private static List<string> Weth1Anims = [
@@ -241,10 +242,26 @@ internal class ModEntry : SimpleMod
          */
         KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!;
         MoreDifficultiesApi = helper.ModRegistry.GetApi<IMoreDifficultiesApi>("TheJazMaster.MoreDifficulties");
+        DuoArtifactsApi = helper.ModRegistry.GetApi<IDuoArtifactsApi>("Shockah.DuoArtifacts");
         helper.Events.OnModLoadPhaseFinished += (_, phase) =>
         {
             if (phase == ModLoadPhase.AfterDbInit)
             {
+                if (DuoArtifactsApi is not null)
+                {
+                    foreach (Type type in WethDuoArtifacts)
+                    {
+                        DuoArtifactMeta dam = type.GetCustomAttribute<DuoArtifactMeta>()?? new DuoArtifactMeta();
+                        if (dam.duoModDeck is null)
+                        {
+                            DuoArtifactsApi.RegisterDuoArtifact(type, [WethDeck!.Deck, dam.duoDeck]);
+                        }
+                        else
+                        {
+                            DuoArtifactsApi.RegisterDuoArtifact(type, [WethDeck!.Deck, helper.Content.Decks.LookupByUniqueName(dam.duoModDeck)!.Deck]);
+                        }
+                    }
+                }
                 Patch_EnemyPack = helper.ModRegistry.LoadedMods.ContainsKey("TheJazMaster.EnemyPack");
                 localDB = new(helper, package);
             }
@@ -460,7 +477,12 @@ internal class ModEntry : SimpleMod
         // Artifact Section
         foreach (Type ta in WethArtifactTypes)
         {
-            helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite));
+            Deck deck = WethDeck.Deck;
+            if (DuoArtifactsApi is not null && WethDuoArtifacts.Contains(ta))
+            {
+                deck = DuoArtifactsApi.DuoArtifactVanillaDeck;
+            }
+            helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite, deck));
         }
         SprArtTermMileCommon = RegisterSprite(package, "assets/Artifact/TerminusMilestonCommone.png").Sprite;
         SprArtTermMileBoss = RegisterSprite(package, "assets/Artifact/TerminusMilestoneBoss.png").Sprite;
