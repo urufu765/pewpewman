@@ -164,13 +164,13 @@
                 "name": "HIDDEN OPTIONS II",
                 "desc": "Immediately choose 1 of 4 boss artifacts.\nThen choose 1 of 4 hidden <c=2a767d>WETH</c> relics."
             },
-            "ArtifactExcursion": {
-                "name": "ARTIFACT EXCURSION",
-                "desc": "Dealing hull damage to enemy gives rewards!\nAt 15 damage, gain 1 of 2 common artifacts.\nAt 30 damage, gain 1 of 3 common artifacts.\nAt 50 damage, gain 1 of 2 boss artifacts.\nAfter every 10 damage beyond 50, gain 1 of 3 hidden <c=2a767d>WETH</c> relics.\n<c=action>Hits only count if they deal more than 0 damage.</c>\n<c=keyword>Receieve these rewards at the end of combat.</c>\n<c=downside>Counter pauses whenever reward is available.\n<c=artifact>RELIC JAUNT</c> is not offered in boss artifact offerings.</c>"
+            "TerminusMilestone": {
+                "name": "TERMINUS: MILESTONE",
+                "desc": "Get rewards for reaching milestones from defeating enemies!\nEarn <c=keyword>4 points</c> for boss, <c=keyword>2 points</c> for elites, <c=keyword>1 point</c> for the rest.\nFor every 2 points past the last milestone, gain 1 of 3 hidden <c=2a767d>WETH</c> relics.\n<c=downside>You are limited to 1 <c=artifact>TERMINUS</c> artifact.</c>"
             },
-            "RelicJaunt": {
-                "name": "RELIC JAUNT",
-                "desc": "1 random enemy part offers 1 of 3 <c=2a767d>WETH</c> relics when shot at.\nEvery 5th relic uncovered, instead gain 1 of 3 common artifacts.\n<c=keyword>Receive these rewards at the end of combat.</c>\n<c=downside>You can only obtain one relic and one artifact per battle.\n<c=artifact>ARTIFACT EXCURSION</c> is not offered in boss artifact offerings.</c>"
+            "TerminusJaunt": {
+                "name": "TERMINUS: JAUNT",
+                "desc": "1 random enemy part offers 1 of 3 <c=2a767d>WETH</c> relics when shot at.\nFor every 5th relic uncovered, instead gain 1 of 3 common artifacts.\n<c=keyword>Receive these rewards at the end of combat.</c>\n<c=downside>You can only obtain one relic or artifact per battle.\nYou are limited to 1 <c=artifact>TERMINUS</c> artifact.</c>"
             }
         },
         "EventOnly": {
@@ -242,6 +242,23 @@
             }
         },
         "Duo": {
+        },
+        "Tooltips": {
+            "TerminusReward": "Your reward is available!",
+            "TerminusAltReward": "Your alternative reward is available!",
+            "JauntActive" : "One of the enemy's parts will grant you a reward if struck!",
+            "JauntInactive" : "None of the enemy's parts will grant you a reward.",
+            "JauntReward" : "You hit the jackpot! Finish the battle to collect your relic!",
+            "JauntAltReward" : "You hit the jackpot! Finish the battle to collect your artifact!",
+            "MilestoneStart" : "You have yet to receive:",
+            "Milestone" : 
+            {
+                "0" : "<c=keyword>3</c>:  1 of 2 Common Artifacts",
+                "1" : "<c=keyword>6</c>:  1 of 3 Common Artifacts",
+                "2" : "<c=keyword>10</c>: 1 of 2 Boss Artifacts",
+                "3" : "<c=keyword>14</c>: 1 of 3 Boss Artifacts"
+            },
+            "MilestoneEnd" : "You've got them all! Any additional advancements will give you <c=2a767d>WETH</c> relics."
         }
     },
     "card": {

@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using Nickel;
-using OneOf.Types;
 using Weth.Actions;
 using Weth.Cards;
 
@@ -12,173 +11,150 @@ using Weth.Cards;
 namespace Weth.Artifacts;
 
 
-public enum ExcursionState
-{
-    Pick,
-    Counting,
-    Ready,
-    Beyond
-}
-
-public static class ArtiExcursionHullOperator
-{
-    private static int LastEnemyHull;
-    public static void Apply(Harmony harmony)
-    {
-        harmony.Patch(
-            original: typeof(Ship).GetMethod("DirectHullDamage", AccessTools.all),
-            prefix: new HarmonyMethod(typeof(ArtiExcursionHullOperator), nameof(GetLastEnemyHull)),
-            postfix: new HarmonyMethod(typeof(ArtiExcursionHullOperator), nameof(InformAEofHullDamageStuff))
-        );
-    }
-
-    private static void GetLastEnemyHull(Ship __instance)
-    {
-        if (!__instance.isPlayerShip)
-        {
-            //ModEntry.Instance.Logger.LogInformation("a: " + __instance.hull);
-            LastEnemyHull = __instance.hull;
-        }
-    }
-
-    private static void InformAEofHullDamageStuff(Ship __instance, State s, int amt)
-    {
-        if (__instance.hull >= LastEnemyHull || __instance.isPlayerShip) return;
-        foreach (Artifact artifact in s.EnumerateAllArtifacts())
-        {
-            if (artifact is ArtifactExcursion ae)
-            {
-                //ModEntry.Instance.Logger.LogInformation("b: " + LastEnemyHull);
-                //ModEntry.Instance.Logger.LogInformation("c: " + amt);
-                ae.HitTheEnemy(__instance.hull == 0? LastEnemyHull : amt);
-                break;
-            }
-        }
-    }
-}
-
 [ArtifactMeta(pools = [ ArtifactPool.Boss ])]
-public class ArtifactExcursion : Artifact
+public class TerminusMilestone : TheTerminus
 {
-    public int TotalDamage { get; set; }
-    public ExcursionState Exstate { get; set; }
-    public int Stage { get; set; }
-    private List<int> Goals {get;} = [15, 30, 50];
-    public int LastGoal {get; set;} = 50;
-    private const int BeyondGoals = 10;
-    //public bool GotDaArtifact {get; set;};
-    // private int _lastDamageDealt;
-    // public int LastDamageDealt { get {return _lastDamageDealt;} set {_lastDamageDealt = Math.Max(0, value);} }
-
-    public override int? GetDisplayNumber(State s)
-    {
-        return TotalDamage;
-    }
-
-    // public override void OnTurnStart(State state, Combat combat)
-    // {
-    //     LastDamageDealt = 0;
-    // }
+    public int Stage {get; set;}
+    private List<int> Goals {get;} = [3, 6, 10, 14];
+    public int LastGoal {get; set;} = 14;
+    public int EnemyType {get; set;} = 0;
+    private List<int> Points {get;} = [1, 2, 4];  // Normal, Elite, Boss
+    private const int BeyondGoals = 2;
 
     public override void OnReceiveArtifact(State state)
     {
-        TotalDamage = 0;
+        Counter = 0;
         LastGoal = Goals[^1];
         Stage = 0;
-        Exstate = ExcursionState.Counting;
+        Mode = Terminus.Active;
     }
-
-    // public override void OnPlayerPlayCard(int energyCost, Deck deck, Card card, State state, Combat combat, int handPosition, int handCount)
-    // {
-    //     ModEntry.Instance.Logger.LogInformation("PlayerPlayedCard!");
-        
-    //     if ()
-    //     {
-    //         ModEntry.Instance.Logger.LogInformation($"PlayerPlayedCard! DamageDealtTurn: {state.storyVars.damageDealtToEnemyThisTurn}");
-    //     }
-    // }
 
     public override Spr GetSprite()
     {
-        switch(Exstate){
-            case var x when x is ExcursionState.Ready: break;
-        }
-        return Exstate switch
-        {
-            ExcursionState.Ready => ModEntry.Instance.SprArtExcReady,
-            ExcursionState.Beyond => ModEntry.Instance.SprArtExcBeyond,
-            ExcursionState.Counting => ModEntry.Instance.SprArtExcCounting,
+        return Mode switch {
+            Terminus.Active => ModEntry.Instance.SprArtTermMileCommon,
+            Terminus.Reward => ModEntry.Instance.SprArtTermMileBoss,
+            Terminus.AltReward => ModEntry.Instance.SprArtTermMileRelic,
             _ => base.GetSprite()
         };
     }
 
-    public void HitTheEnemy(int DamageDone)
+    public override void OnCombatStart(State state, Combat combat)
     {
-        if (DamageDone <= 0) return;
-        if (Exstate == ExcursionState.Counting)
+        if (state?.map?.markers[state.map.currentLocation]?.contents is MapBattle mb)
         {
-            TotalDamage = Math.Min(TotalDamage + DamageDone, Goals[Stage]);
-            if (TotalDamage == Goals[Stage])
+            EnemyType = mb.battleType switch
             {
-                Exstate = ExcursionState.Ready;
-                Pulse();
-                // SFX for ready
-            }
-        }
-        else if (Exstate == ExcursionState.Beyond)
-        {
-            TotalDamage = Math.Min(TotalDamage + DamageDone, LastGoal + BeyondGoals);
-            if (TotalDamage%BeyondGoals == 0 && TotalDamage > LastGoal)
-            {
-                LastGoal = TotalDamage;
-                Exstate = ExcursionState.Ready;
-                Pulse();
-                // SFX for ready
-            }
+                BattleType.Elite => 1,
+                BattleType.Boss => 2,
+                _ => 0
+            };
         }
     }
 
-
     public override void OnCombatEnd(State state)
     {
-        if (Exstate == ExcursionState.Ready)
+        ModEntry.Instance.Logger.LogInformation("Money GET");
+        List<CardAction> rewards = [];
+        DetermineRewards(ref rewards);
+        foreach (CardAction ca in rewards)
         {
-            ModEntry.Instance.Logger.LogInformation("Money GET");
-            state.rewardsQueue.Queue(
-                Stage switch 
+            state.rewardsQueue.Queue(ca);
+        }
+    }
+
+    private void DetermineRewards(ref List<CardAction> result, int stop = 0)
+    {
+        if (stop > 1)
+        {
+            ModEntry.Instance.Logger.LogInformation("Infinite Recursion Detected");
+            return;
+        }
+        Counter += Points[EnemyType];
+        if (GiveCondition(true))
+        {
+            result.Add(Stage switch
+            {
+                0 => new AArtifactOffering
                 {
-                    0 => new AArtifactOffering
-                    {
-                        amount = 2,
-                        limitPools = [ ArtifactPool.Common ]
-                    },
-                    1 => new AArtifactOffering
-                    {
-                        amount = 3,
-                        limitPools = [ ArtifactPool.Common ]
-                    },
-                    2 => new AArtifactOffering
-                    {
-                        amount = 2,
-                        limitPools = [ ArtifactPool.Boss ]
-                    },
-                    _ => new AArtifactOffering
-                    {
-                        amount = 3,
-                        limitPools = [ ArtifactPool.Unreleased ],
-                        limitDeck = ModEntry.Instance.WethDeck.Deck
-                    }
-                }
-            );
+                    amount = 2,
+                    limitPools = [ArtifactPool.Common]
+                },
+                1 => new AArtifactOffering
+                {
+                    amount = 3,
+                    limitPools = [ArtifactPool.Common]
+                },
+                2 => new AArtifactOffering
+                {
+                    amount = 2,
+                    limitPools = [ArtifactPool.Boss]
+                },
+                3 => new AArtifactOffering
+                {
+                    amount = 3,
+                    limitPools = [ArtifactPool.Boss]
+                },
+                _ => new AArtifactOffering
+                {
+                    amount = 3,
+                    limitPools = [ArtifactPool.Unreleased],
+                    limitDeck = ModEntry.Instance.WethDeck.Deck
+                },
+            });
             Stage++;
-            if (Stage >= Goals.Count)
+        }
+        if (GiveCondition())
+        {
+            DetermineRewards(ref result, ++stop);
+        }
+        Mode = Stage switch
+        {
+            >3 => Terminus.AltReward,
+            >1 => Terminus.Reward,
+            _ => Terminus.Active
+        };
+    }
+
+    private bool GiveCondition(bool advanceGoal = false)
+    {
+        if (Stage < Goals.Count && Counter >= Goals[Stage])
+        {
+            return true;
+        }
+        else if ((Counter - LastGoal)/BeyondGoals > 0)
+        {
+            if (advanceGoal) LastGoal += BeyondGoals;
+            return true;
+        }
+        return false;
+    }
+
+    public override List<Tooltip>? GetExtraTooltips()
+    {
+        List<Tooltip> tips = [];
+        if (Stage < Goals.Count)
+        {
+            tips.Add(new GlossaryTooltip("terminusmilestone.start")
             {
-                Exstate = ExcursionState.Beyond;
-            }
-            else
+                Description = ModEntry.Instance.Localizations.Localize(["artifact", "Tooltips", "MilestoneStart"])
+            });
+            for (int x = Stage; x < Goals.Count; x++)
             {
-                Exstate = ExcursionState.Counting;
+                tips.Add(new GlossaryTooltip("terminusmilestone." + x)
+                {
+                    Description = ModEntry.Instance.Localizations.Localize(["artifact", "Tooltips", "Milestone", x.ToString()])
+                });
+                if (x < Goals.Count - 1) tips.Add(new TTTTTTText(" "));
             }
         }
+        else
+        {
+            tips.Add(new GlossaryTooltip("terminusmilestone.infinite")
+            {
+                Description = ModEntry.Instance.Localizations.Localize(["artifact", "Tooltips", "MilestoneEnd"])
+            });
+        }
+        return tips;
     }
 }

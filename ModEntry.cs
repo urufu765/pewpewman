@@ -29,6 +29,7 @@ internal class ModEntry : SimpleMod
     public bool modDialogueInited;
     internal IStatusEntry PulseStatus { get; private set; } = null!;
     internal IStatusEntry UnknownStatus { get; private set; } = null!;
+    internal ISoundEntry JauntSlapSound { get; private set; } = null!;
     // internal ICardTraitEntry AutoSU { get; private set; } = null!;
     // internal Spr AutoSUSpr { get; private set; }
     //internal ICardTraitEntry AutoE { get; private set; } = null!;
@@ -42,10 +43,14 @@ internal class ModEntry : SimpleMod
 
     public Spr SprArtTHDepleted { get; private set; }
 
-    public Spr SprArtExcCounting { get; private set; }
-    public Spr SprArtExcReady { get; private set; }
-    public Spr SprArtExcBeyond { get; private set; }
-    public Spr SprArtExcPick { get; private set; }
+    public Spr SprArtTermMileCommon { get; private set; }
+    public Spr SprArtTermMileBoss { get; private set; }
+    public Spr SprArtTermMileRelic { get; private set; }
+
+    public Spr SprArtTermJActive { get; private set; }
+    public Spr SprArtTermJInactive { get; private set; }
+    public Spr SprArtTermJReward { get; private set; }
+    public Spr SprArtTermJAltReward { get; private set; }
 
     public Spr SprSplitshot { get; private set; }
     public Spr SprSplitshotFail { get; private set; }
@@ -128,15 +133,13 @@ internal class ModEntry : SimpleMod
 
     private static List<Type> WethCommonArtifacts = [
         typeof(TreasureSeeker),
-        typeof(RockPower),
         typeof(ResidualShot),
         typeof(HiddenOptions),
-        typeof(CannonRecharge)
     ];
     private static List<Type> WethBossArtifacts = [
         typeof(HiddenOptions2),
-        typeof(ArtifactExcursion),
-        typeof(RelicJaunt)
+        typeof(TerminusMilestone),
+        typeof(TerminusJaunt)
     ];
     private static List<Type> WethEventArtifacts = [
         typeof(TreasureHunter),
@@ -158,6 +161,10 @@ internal class ModEntry : SimpleMod
         typeof(RelicTempPayback),
         typeof(RelicTempShield)
     ];
+    private static List<Type> WethDuoArtifacts = [
+        typeof(CannonRecharge),  // Dizzy
+        typeof(RockPower),  // Isaac
+    ];
     private static IEnumerable<Type> WethArtifactTypes =
         WethCommonArtifacts
             .Concat(WethBossArtifacts)
@@ -172,7 +179,7 @@ internal class ModEntry : SimpleMod
     ];
     private static IEnumerable<Type> AllRegisterableTypes =
         WethCardTypes
-            .Concat(WethArtifactTypes)
+            .Concat(WethDuoArtifacts)
             .Concat(WethDialogues);
 
     private static List<string> Weth1Anims = [
@@ -415,6 +422,9 @@ internal class ModEntry : SimpleMod
             Name = AnyLocalizations.Bind(["status", "Unknown", "name"]).Localize,
             Description = AnyLocalizations.Bind(["status", "Unknown", "desc"]).Localize
         });
+
+        JauntSlapSound = helper.Content.Audio.RegisterSound("spaceSlap", package.PackageRoot.GetRelativeFile("assets/SpaceSlap.wav"));
+        //JauntSlapSound = RegisterSound(package, "assets/SpaceSlap.wav");
         // AutoSUSpr = RegisterSprite(package, "assets/autoplaysingle.png").Sprite;
         // AutoSU = helper.Content.Cards.RegisterTrait("AutoSU", new CardTraitConfiguration
         // {
@@ -452,10 +462,13 @@ internal class ModEntry : SimpleMod
         {
             helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite));
         }
-        SprArtExcCounting = RegisterSprite(package, "assets/Artifact/ArtifactExcursionCounting.png").Sprite;
-        SprArtExcReady = RegisterSprite(package, "assets/Artifact/ArtifactExcursionReady.png").Sprite;
-        SprArtExcBeyond = RegisterSprite(package, "assets/Artifact/ArtifactExcursionBeyond.png").Sprite;
-        SprArtExcPick = RegisterSprite(package, "assets/Artifact/ArtifactExcursionPick.png").Sprite;
+        SprArtTermMileCommon = RegisterSprite(package, "assets/Artifact/TerminusMilestonCommone.png").Sprite;
+        SprArtTermMileBoss = RegisterSprite(package, "assets/Artifact/TerminusMilestoneBoss.png").Sprite;
+        SprArtTermMileRelic = RegisterSprite(package, "assets/Artifact/TerminusMilestoneRelic.png").Sprite;
+        SprArtTermJActive = RegisterSprite(package, "assets/Artifact/TerminusJauntActive.png").Sprite;
+        SprArtTermJInactive = RegisterSprite(package, "assets/Artifact/TerminusJauntInactive.png").Sprite;
+        SprArtTermJReward = RegisterSprite(package, "assets/Artifact/TerminusJauntReward.png").Sprite;
+        SprArtTermJAltReward = RegisterSprite(package, "assets/Artifact/TerminusJauntAltReward.png").Sprite;
         SprArtTHDepleted = RegisterSprite(package, "assets/Artifact/TreasureHunterDepleted.png").Sprite;
 
 
@@ -486,7 +499,6 @@ internal class ModEntry : SimpleMod
         Artifacthider.Apply(Harmony);
         SplitshotTranspiler.Apply(Harmony);
         ChoiceRelicRewardOfYourRelicChoice.Apply(Harmony);
-        ArtiExcursionHullOperator.Apply(Harmony);
     }
 
     /*
@@ -499,6 +511,10 @@ internal class ModEntry : SimpleMod
         return Instance.Helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile(dir));
     }
 
+    public static ISoundEntry RegisterSound(IPluginPackage<IModManifest> package, string dir)
+    {
+        return Instance.Helper.Content.Audio.RegisterSound(package.PackageRoot.GetRelativeFile(dir));
+    }
 
     /*
      * Animation frames are typically named very similarly, only differing by the number of the frame itself.

@@ -12,90 +12,63 @@ using Weth.Cards;
 namespace Weth.Artifacts;
 
 
-public enum JauntState
-{
-    Pick,
-    Hidden,
-    Ready,
-    SuperReady
-}
-
 [ArtifactMeta(pools = [ ArtifactPool.Boss ])]
-public class RelicJaunt : Artifact
+public class TerminusJaunt : TheTerminus
 {
-    public int TotalRelics { get; set; }
-    public JauntState Jstate { get; set; }
     private const int Goal = 5;
-    //public bool GotDaArtifact {get; set;};
-    // private int _lastDamageDealt;
-    // public int LastDamageDealt { get {return _lastDamageDealt;} set {_lastDamageDealt = Math.Max(0, value);} }
-
-    public override int? GetDisplayNumber(State s)
-    {
-        return TotalRelics;
-    }
-
-    // public override void OnTurnStart(State state, Combat combat)
-    // {
-    //     LastDamageDealt = 0;
-    // }
-
-    public override void OnReceiveArtifact(State state)
-    {
-        TotalRelics = 0;
-        Jstate = JauntState.Pick;
-    }
-
-    // public override void OnPlayerPlayCard(int energyCost, Deck deck, Card card, State state, Combat combat, int handPosition, int handCount)
-    // {
-    //     ModEntry.Instance.Logger.LogInformation("PlayerPlayedCard!");
-        
-    //     if ()
-    //     {
-    //         ModEntry.Instance.Logger.LogInformation($"PlayerPlayedCard! DamageDealtTurn: {state.storyVars.damageDealtToEnemyThisTurn}");
-    //     }
-    // }
+    private Random random = new();
+    public (int total, int selected) SavedParts{get; set;} = (0,0);
 
     public override Spr GetSprite()
     {
-        return Jstate switch
+        return Mode switch
         {
-            JauntState.Hidden => ModEntry.Instance.SprArtExcBeyond,
-            JauntState.Ready => ModEntry.Instance.SprArtExcReady,
-            JauntState.SuperReady => ModEntry.Instance.SprArtExcCounting,
-            _ => ModEntry.Instance.SprArtExcPick
-            //_ => base.GetSprite()
+            Terminus.Active => ModEntry.Instance.SprArtTermJActive,
+            Terminus.Inactive => ModEntry.Instance.SprArtTermJInactive,
+            Terminus.Reward => ModEntry.Instance.SprArtTermJReward,
+            Terminus.AltReward => ModEntry.Instance.SprArtTermJAltReward,
+            _ => base.GetSprite()
         };
     }
 
     public override void OnCombatStart(State state, Combat combat)
     {
-        List<int> partRando = [];
-        for (int x = 0; x < combat.otherShip.parts.Count; x++) partRando.Add(x);
-        partRando.Shuffle();
-        foreach (int y in partRando)
+        Mode = Terminus.Inactive;
+        foreach (int y in Enumerable.Range(0, combat.otherShip.parts.Count).Shuffle(state.rngActions))
         {
             if (combat.otherShip.parts?[y] is not null && combat.otherShip.parts[y].type is not PType.empty)
             {
                 ModEntry.Instance.Helper.ModData.SetModData(combat.otherShip.parts[y], "jauntable", true);
-                Jstate = JauntState.Hidden;
+                SavedParts = (combat.otherShip.parts.Count - 1, y);
+                Mode = Terminus.Active;
                 break;
             }
         }
+        Pulse();
     }
 
     public override void OnEnemyGetHit(State state, Combat combat, Part? part)
     {
-        if (part is not null && ModEntry.Instance.Helper.ModData.TryGetModData(part, "jauntable", out bool b) && b && Jstate == JauntState.Hidden)
+        if (part is not null && ModEntry.Instance.Helper.ModData.TryGetModData(part, "jauntable", out bool b) && b && Mode == Terminus.Active)
         {
-            TotalRelics++;
-            if (TotalRelics % Goal == 0)
+            if (SavedParts != (0, 0))
             {
-                Jstate = JauntState.SuperReady;
+                ISoundInstance isi = ModEntry.Instance.JauntSlapSound.CreateInstance();
+                isi.Volume = 0.55f;
+                double lerpVal = Math.Abs(((SavedParts.selected / SavedParts.total) - 0.5) * 2);
+                isi.Pitch = (float)Mutil.Lerp(
+                    Mutil.Lerp(0.9, 0.75, lerpVal),
+                    Mutil.Lerp(1.15, 1, lerpVal),
+                    random.NextDouble());
+            }
+            Counter++;
+            if (Counter % Goal == 0)
+            {
+                Mode = Terminus.AltReward;
             }
             else
             {
-                Jstate = JauntState.Ready;
+                Mode = Terminus.Reward;
             }
             // Custom space bone-breaking sfx
             Pulse();
@@ -104,7 +77,7 @@ public class RelicJaunt : Artifact
 
     public override void OnCombatEnd(State state)
     {
-        if (Jstate == JauntState.Ready)
+        if (Mode == Terminus.Reward)
         {
             ModEntry.Instance.Logger.LogInformation("Riches GET");
             state.rewardsQueue.Queue(new AArtifactOffering
@@ -114,7 +87,7 @@ public class RelicJaunt : Artifact
                 limitDeck = ModEntry.Instance.WethDeck.Deck
             });
         }
-        if (Jstate == JauntState.SuperReady)
+        if (Mode == Terminus.AltReward)
         {
             ModEntry.Instance.Logger.LogInformation("Bonus Riches GET");
             state.rewardsQueue.Queue(new AArtifactOffering
@@ -123,6 +96,30 @@ public class RelicJaunt : Artifact
                 limitPools = [ArtifactPool.Common]
             });
         }
-        Jstate = JauntState.Pick;
+        Mode = Terminus.Pick;
+    }
+
+    public override List<Tooltip>? GetExtraTooltips()
+    {
+        return Mode switch
+        {
+            Terminus.Active => [new GlossaryTooltip("terminusjaunt.active")
+            {
+                Description = ModEntry.Instance.Localizations.Localize(["artifact", "Tooltips", "JauntActive"])
+            }],
+            Terminus.Inactive => [new GlossaryTooltip("terminusjaunt.inactive")
+            {
+                Description = ModEntry.Instance.Localizations.Localize(["artifact", "Tooltips", "JauntInactive"])
+            }],
+            Terminus.Reward => [new GlossaryTooltip("terminusjaunt.reward")
+            {
+                Description = ModEntry.Instance.Localizations.Localize(["artifact", "Tooltips", "JauntReward"])
+            }],
+            Terminus.AltReward => [new GlossaryTooltip("terminusjaunt.altreward")
+            {
+                Description = ModEntry.Instance.Localizations.Localize(["artifact", "Tooltips", "JauntAltReward"])
+            }],
+            _ => base.GetExtraTooltips()
+        };
     }
 }

@@ -29,13 +29,10 @@ public static class Artifacthider
             {
                 __result.Add(typeof(TreasureSeeker));
             }
-            if (s.EnumerateAllArtifacts().Any(a => a is ArtifactExcursion))
+            if (s.EnumerateAllArtifacts().Any(a => a is TheTerminus))
             {
-                __result.Add(typeof(RelicJaunt));
-            }
-            if (s.EnumerateAllArtifacts().Any(a => a is RelicJaunt))
-            {
-                __result.Add(typeof(ArtifactExcursion));
+                __result.Add(typeof(TerminusJaunt));
+                __result.Add(typeof(TerminusMilestone));
             }
             __result.Add(typeof(SpaceRelics));
         }

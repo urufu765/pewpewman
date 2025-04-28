@@ -9,7 +9,7 @@ using Nickel;
 namespace Weth.External;
 
 /**
-ver.0.11
+ver.0.12
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -244,7 +244,7 @@ public class DialogueMachine : StoryNode
     /// <summary>
     /// Translates DialogueMachine into Instructions readable by LocalDB
     /// </summary>
-    public void Convert()
+    public void Convert(SimpleMod inst)
     {
         if (hasArtifactTypes is not null)
         {
@@ -252,9 +252,9 @@ public class DialogueMachine : StoryNode
             foreach (Type type in hasArtifactTypes)
             {
                 // Modded
-                if(ModEntry.Instance.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) hasArtifacts.Add(iae.UniqueName);
+                if(inst.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) hasArtifacts.Add(iae.UniqueName);
                 else if(DB.artifacts.ContainsValue(type)) hasArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
-                else ModEntry.Instance.Logger.LogWarning($"Error when moving {type.Name} from [hasArtifactTypes] to [hasArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
+                else inst.Logger.LogWarning($"Error when moving {type.Name} from [hasArtifactTypes] to [hasArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
             }
         }
         if (doesNotHaveArtifactTypes is not null)
@@ -263,9 +263,9 @@ public class DialogueMachine : StoryNode
             foreach (Type type in doesNotHaveArtifactTypes)
             {
                 // Modded
-                if(ModEntry.Instance.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) doesNotHaveArtifacts.Add(iae.UniqueName);
+                if(inst.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) doesNotHaveArtifacts.Add(iae.UniqueName);
                 else if(DB.artifacts.ContainsValue(type)) doesNotHaveArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
-                else ModEntry.Instance.Logger.LogWarning($"Error when moving {type.Name} from [doesNotHaveArtifactTypes] to [doesNotHaveArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
+                else inst.Logger.LogWarning($"Error when moving {type.Name} from [doesNotHaveArtifactTypes] to [doesNotHaveArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
             }
         }
         if (edit is not null)  // Skips dialogue conversion if edits are available
@@ -367,9 +367,9 @@ public class DialogueMachine : StoryNode
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static bool CharExists(string name)
+    public static bool CharExists(string name, SimpleMod inst)
     {
-        if (ModEntry.Instance.Helper.Content?.Decks?.LookupByUniqueName(name) is not null) return true;
+        if (inst.Helper.Content?.Decks?.LookupByUniqueName(name) is not null) return true;
 
         if (DB.currentLocale.strings.ContainsKey("char." + name)) return true;  // this probably doesn't even work
 
@@ -385,10 +385,10 @@ public class DialogueMachine : StoryNode
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static bool ArtifactExists(string name)
+    public static bool ArtifactExists(string name, SimpleMod inst)
     {
         // Modded artifacts
-        if (ModEntry.Instance.Helper.Content?.Artifacts?.LookupByUniqueName(name) is not null) return true;
+        if (inst.Helper.Content?.Artifacts?.LookupByUniqueName(name) is not null) return true;
         // Game artifacts
         if (DB.artifacts.ContainsKey(name)) return true;
         return false;
@@ -446,6 +446,11 @@ public class LocalDB
     private readonly Dictionary<string, string> customLocalisation;
 
     /// <summary>
+    /// Change ModEntry.Instance if necessary
+    /// </summary>
+    private static SimpleMod Inst => ModEntry.Instance;
+
+    /// <summary>
     /// Should be instantiated *after* all the dialogues have been registered OR at Events.OnModLoadPhaseFinished, AfterDbInit.
     /// </summary>
     /// <param name="package"></param>
@@ -464,7 +469,7 @@ public class LocalDB
                     {
                         if (!toUseStory.all.TryAdd(thing2.Key, thing2.Value))
                         {
-                            ModEntry.Instance.Logger.LogWarning("Could not add dialogue: " + thing2.Key);
+                            Inst.Logger.LogWarning("Could not add dialogue: " + thing2.Key);
                         }
                     }
                 }
@@ -522,7 +527,7 @@ public class LocalDB
             // Tries to add the dialogue in the local locale local locale thing
             if (!ModdedStoryLocale[modKey][locale].all.TryAdd(dm.Key, dm.Value))
             {
-                ModEntry.Instance.Logger.LogWarning("Could not add dialogue: " + dm.Key);
+                Inst.Logger.LogWarning("Could not add dialogue: " + dm.Key);
             }
         }
     }
@@ -547,7 +552,7 @@ public class LocalDB
             // Tries to add the dialogue in the local locale local locale thing
             if (!LocalStoryLocale[locale].all.TryAdd(dm.Key, dm.Value))
             {
-                ModEntry.Instance.Logger.LogWarning("Could not add dialogue: " + dm.Key);
+                Inst.Logger.LogWarning("Could not add dialogue: " + dm.Key);
             }
         }
     }
@@ -559,9 +564,9 @@ public class LocalDB
         {
             foreach (string artifact in dm.Value.hasArtifacts)
             {
-                if (!DialogueMachine.ArtifactExists(artifact))
+                if (!DialogueMachine.ArtifactExists(artifact, Inst))
                 {
-                    ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                    Inst.Logger.LogWarning(dm.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
                 }
             }
         }
@@ -569,9 +574,9 @@ public class LocalDB
         {
             foreach (string artifact in dm.Value.doesNotHaveArtifacts)
             {
-                if (!DialogueMachine.ArtifactExists(artifact))
+                if (!DialogueMachine.ArtifactExists(artifact, Inst))
                 {
-                    ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                    Inst.Logger.LogWarning(dm.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
                 }
             }
         }
@@ -581,9 +586,9 @@ public class LocalDB
         {
             foreach (string characer in dm.Value.allPresent)
             {
-                if (!DialogueMachine.CharExists(characer))
+                if (!DialogueMachine.CharExists(characer, Inst))
                 {
-                    ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                    Inst.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
                 }
             }
         }
@@ -591,9 +596,9 @@ public class LocalDB
         {
             foreach (string characer in dm.Value.nonePresent)
             {
-                if (!DialogueMachine.CharExists(characer))
+                if (!DialogueMachine.CharExists(characer, Inst))
                 {
-                    ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                    Inst.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
                 }
             }
         }
@@ -601,7 +606,7 @@ public class LocalDB
         // Checks if the edit dialogue thing's key is valid
         if (dm.Value.edit is not null && !DB.story.all.ContainsKey(dm.Key))
         {
-            ModEntry.Instance.Logger.LogWarning(dm.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
+            Inst.Logger.LogWarning(dm.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
         }
     }
 
@@ -618,7 +623,7 @@ public class LocalDB
             // Convert all custom DialogueThings from DialogueMachine to StoryNode lines
             if (sn.Value is DialogueMachine dm)
             {
-                dm.Convert();
+                dm.Convert(Inst);
                 editMode = dm.edit is not null;
             }
 
@@ -702,7 +707,7 @@ public class LocalDB
         }
         catch (Exception err)
         {
-            ModEntry.Instance.Logger.LogError(err, "Failed to edit a line with key:" + script);
+            Inst.Logger.LogError(err, "Failed to edit a line with key:" + script);
             return existingStory;
         }
     }
@@ -777,7 +782,7 @@ public class LocalDB
         }
         catch (Exception err)
         {
-            ModEntry.Instance.Logger.LogError(err, "Failed to edit a line with key:" + script);
+            Inst.Logger.LogError(err, "Failed to edit a line with key:" + script);
             return existingStory;
         }
     }

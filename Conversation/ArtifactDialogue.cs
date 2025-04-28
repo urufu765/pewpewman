@@ -461,7 +461,7 @@ internal class ArtifactDialogue : IRegisterable
             }},
             {"ArtifactExcursionWeth_Multi_0", new(){
                 type = NodeType.combat,
-                hasArtifactTypes = [typeof(ArtifactExcursion)],
+                hasArtifactTypes = [typeof(TerminusMilestone)],
                 turnStart = true,
                 maxTurnsThisCombat = 1,
                 oncePerRunTags = ["WethGoesOnAnExcursion"],
@@ -472,7 +472,7 @@ internal class ArtifactDialogue : IRegisterable
             }},
             {"ArtifactExcursionWeth_Multi_1", new(){
                 type = NodeType.combat,
-                hasArtifactTypes = [typeof(ArtifactExcursion)],
+                hasArtifactTypes = [typeof(TerminusMilestone)],
                 turnStart = true,
                 maxTurnsThisCombat = 1,
                 oncePerRunTags = ["WethGoesOnAnExcursion"],
@@ -483,7 +483,7 @@ internal class ArtifactDialogue : IRegisterable
             }},
             {"ArtifactExcursionWeth_Multi_2", new(){
                 type = NodeType.combat,
-                hasArtifactTypes = [typeof(ArtifactExcursion)],
+                hasArtifactTypes = [typeof(TerminusMilestone)],
                 turnStart = true,
                 maxTurnsThisCombat = 1,
                 oncePerRunTags = ["WethGoesOnAnExcursion"],
