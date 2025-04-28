@@ -162,9 +162,13 @@ internal class ModEntry : SimpleMod
         typeof(RelicTempShield)
     ];
     private static List<Type> WethDuoArtifacts = [
-        typeof(CannonRecharge),  // Dizzy
+        typeof(CannonRecharge),  // CAT
         typeof(ResidualShot),  // Peri
-        typeof(RockPower),  // Isaac
+        typeof(RockPower),  // Isaac,
+        typeof(PowerCrystals),  // Books
+        typeof(PyroCannon),  // Drake
+        typeof(MadcapCharge),  // Dizzy
+        typeof(PowerSprint),  // Riggs
     ];
     private static IEnumerable<Type> WethArtifactTypes =
         WethCommonArtifacts
@@ -251,14 +255,17 @@ internal class ModEntry : SimpleMod
                 {
                     foreach (Type type in WethDuoArtifacts)
                     {
-                        DuoArtifactMeta dam = type.GetCustomAttribute<DuoArtifactMeta>()?? new DuoArtifactMeta();
-                        if (dam.duoModDeck is null)
+                        DuoArtifactMeta? dam = type.GetCustomAttribute<DuoArtifactMeta>();
+                        if (dam is not null)
                         {
-                            DuoArtifactsApi.RegisterDuoArtifact(type, [WethDeck!.Deck, dam.duoDeck]);
-                        }
-                        else
-                        {
-                            DuoArtifactsApi.RegisterDuoArtifact(type, [WethDeck!.Deck, helper.Content.Decks.LookupByUniqueName(dam.duoModDeck)!.Deck]);
+                            if (dam.duoModDeck is null)
+                            {
+                                DuoArtifactsApi.RegisterDuoArtifact(type, [WethDeck!.Deck, dam.duoDeck]);
+                            }
+                            else
+                            {
+                                DuoArtifactsApi.RegisterDuoArtifact(type, [WethDeck!.Deck, helper.Content.Decks.LookupByUniqueName(dam.duoModDeck)!.Deck]);
+                            }
                         }
                     }
                 }
@@ -465,6 +472,7 @@ internal class ModEntry : SimpleMod
          */
         //_ = new KnowledgeManager();
         _ = new Pulsedriving();
+        //_ = new Otherdriving();
 
         /*
          * Some classes require so little management that a manager may not be worth writing.
@@ -521,6 +529,8 @@ internal class ModEntry : SimpleMod
         Artifacthider.Apply(Harmony);
         SplitshotTranspiler.Apply(Harmony);
         ChoiceRelicRewardOfYourRelicChoice.Apply(Harmony);
+        ArtifactMadcapPartOperator.Apply(Harmony);
+        ArtifactPowersprintEvadeOperator.Apply(Harmony);
     }
 
     /*

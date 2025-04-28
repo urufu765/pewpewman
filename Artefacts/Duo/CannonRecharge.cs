@@ -8,7 +8,7 @@ using Weth.Cards;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ ArtifactPool.Common ]), DuoArtifactMeta(duoDeck = Deck.dizzy)]
+[ArtifactMeta(pools = [ ArtifactPool.Common ]), DuoArtifactMeta(duoDeck = Deck.colorless)]
 public class CannonRecharge : Artifact
 {
     

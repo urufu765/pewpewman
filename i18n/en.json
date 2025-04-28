@@ -138,6 +138,14 @@
     },
     "artifact": {
         "Common": {
+            "TreasureSeeker": {
+                "name": "TREASURE SEEKER",
+                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nAfter <c=keyword>10 hits</c>, add a random <c=card>Goodie A</c> to your hand. <c=downside>Count resets at the end of combat.</c>\nGain special goodies from defeating zone bosses and elites!\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
+            },
+            "HiddenOptions": {
+                "name": "HIDDEN OPTIONS",
+                "desc": "Immediately choose 1 of 3 common artifacts.\nThen choose 1 of 3 hidden <c=2a767d>WETH</c> relics."
+            },
             "RockPower": {
                 "name": "ROCK POWER",
                 "desc": "Gain 1 <c=status>PULSEDRIVE</c> when you destroy an <c=midrow>asteroid</c>."
@@ -150,13 +158,25 @@
                 "name": "CANNON RECHARGE",
                 "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c>, gain 1 <c=status>STUN CHARGE</c> next turn."
             },
-            "TreasureSeeker": {
-                "name": "TREASURE SEEKER",
-                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nAfter <c=keyword>10 hits</c>, add a random <c=card>Goodie A</c> to your hand. <c=downside>Count resets at the end of combat.</c>\nGain special goodies from defeating zone bosses and elites!\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
+            "PowerCrystals": {
+                "name": "POWER CRYSTALS",
+                "desc": "Whenever you gain <c=status>PULSEDRIVE</c>, gain <c=status>SHARD</c> instead. Increase attack damage by the amount of <c=status>SHARD</c> you have.\n<c=downside>Lose 1 <c=status>SHARD</c> at start of turn</c>"
             },
-            "HiddenOptions": {
-                "name": "HIDDEN OPTIONS",
-                "desc": "Immediately choose 1 of 3 common artifacts.\nThen choose 1 of 3 hidden <c=2a767d>WETH</c> relics."
+            "PyroCannon": {
+                "name": "PYRO-CANNON",
+                "desc": "Heat affects damage done.\n<c=downside>Overheat limit is reduced by 1.</c>"
+            },
+            "MadcapTarge": {
+                "name": "MADCAP TARGE",
+                "desc": "The first time you gain <c=status>SHIELD</c>, increase all damage by shield gained.\n<c=downside>The first time you gain <c=status>TEMP SHIELD</c>, decrease all <c=keyword>base</c> damage by 1.\nResets on turn end.</c>"
+            },
+            "MadcapCharge": {
+                "name": "MADCAP CHARGE",
+                "desc": "Once per turn, stunning an enemy intent gives 1 <c=status>PULSEDRIVE</c>."
+            },
+            "PowerSprint": {
+                "name": "POWERSPRINT",
+                "desc": "<c=downside>Your <c=status>EVADE</c> is capped at 5.</c>\nOnce per turn, convert excess <c=status>EVADE</c> into <c=status>PULSEDRIVE</c>."
             }
         },
         "Boss": {
