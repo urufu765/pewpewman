@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using OneOf.Types;
 using Weth.Actions;
+using Weth.API;
 using Weth.Cards;
 
 
 namespace Weth.Artifacts;
 
 [ArtifactMeta(pools = [ ArtifactPool.EventOnly ])]
-public class TreasureHunter : Artifact
+public class TreasureHunter : Artifact, IArtifactWethGoodieUncommonRestrictor
 {
     public int SuccessfulHits {get; set;}
     public bool Depleted { get; set; }
@@ -109,7 +110,7 @@ public class TreasureHunter : Artifact
             state.rewardsQueue.QueueImmediate(
                 new AWethCardOffering
                 {
-                    card = isCrystal? new CryShield() : new MechHull()
+                    cards = [isCrystal? new CryShield() : new MechHull()]
                 }
             );
         }
@@ -137,5 +138,15 @@ public class TreasureHunter : Artifact
                     showCardTraitTooltips = true
                 }
             ];
+    }
+
+    public bool DoIImposeGoodieUncommonRestriction()
+    {
+        return true;
+    }
+
+    public bool DoIOverrideGoodieUncommonRestriction()
+    {
+        return false;
     }
 }

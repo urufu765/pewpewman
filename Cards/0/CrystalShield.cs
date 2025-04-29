@@ -12,6 +12,7 @@ namespace Weth.Cards;
 /// </summary>
 public class CryShield : Card, IRegisterable
 {
+    public int Age {get;set;} = 0;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -26,6 +27,12 @@ public class CryShield : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Token", "Shoulder", "name"]).Localize,
             Art = StableSpr.cards_BoostCapacitors
         });
+    }
+
+
+    public override void OnDraw(State s, Combat c)
+    {
+        Age++;
     }
 
 

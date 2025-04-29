@@ -176,7 +176,11 @@
             },
             "PowerSprint": {
                 "name": "POWERSPRINT",
-                "desc": "<c=downside>Your <c=status>EVADE</c> is capped at 5.</c>\nOnce per turn, convert excess <c=status>EVADE</c> into <c=status>PULSEDRIVE</c>."
+                "desc": "<c=downside>Your <c=status>EVADE</c> is capped at 5.</c> Once per turn, convert excess <c=status>EVADE</c> into <c=status>PULSEDRIVE</c>."
+            },
+            "HiddenGem": {
+                "name": "HIDDEN GEM",
+                "desc": "Choose 1 of 3 Uncommon <c=trait>non-temp</c> <c=card>Goodie</c>. Instead of <c=trait>Single Use</c>, it has <c=trait>Exhaust</c>.\nBypass any restrictions to gaining uncommon goodies."
             }
         },
         "Boss": {
@@ -373,8 +377,8 @@
             "Mizzile": {
                 "name": "M_ss_l_"
             },
-            "Stan": {
-                "name": "St_n"
+            "Captain": {
+                "name": "C_p_c_ty"
             },
             "Hell": {
                 "name": "H_ll"

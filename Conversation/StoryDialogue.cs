@@ -149,7 +149,7 @@ internal class StoryDialogue : IRegisterable
                     new(AmMax, "Hey Weth?", true),
                     new(AmWeth, "Hmm?"),
                     new(AmMax, "Can I see that crystal?", true),
-                    new(AmWeth, "Sure!"),
+                    new(AmWeth, "crystallolipop", "Sure!"),
                     new(AmWeth, "May I ask what for?"),
                     new(AmMax, "To take a picture of it and record it.", true),
                     new(AmWeth, "crystal", "..."),

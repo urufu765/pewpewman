@@ -52,6 +52,9 @@ internal class ModEntry : SimpleMod
     public Spr SprArtTermJReward { get; private set; }
     public Spr SprArtTermJAltReward { get; private set; }
 
+    public Spr SprArtMadcapDepleted {get; private set;}
+    public Spr SprArtPowerSprintDepleted {get; private set;}
+
     public Spr SprSplitshot { get; private set; }
     public Spr SprSplitshotFail { get; private set; }
     public Spr SprSplitshotPiercing { get; private set; }
@@ -109,7 +112,7 @@ internal class ModEntry : SimpleMod
     private static List<Type> WethSpecialCardTypes = [
         typeof(CryAhtack),
         typeof(CryDuhfend),
-        typeof(CryDodge),
+        typeof(CryCapacity),
         typeof(CryEnergy),
         typeof(CryEvade),
         typeof(CryFlux),
@@ -121,7 +124,7 @@ internal class ModEntry : SimpleMod
         typeof(MechHull),
         typeof(MechMine),
         typeof(MechMissile),
-        typeof(MechStun),
+        typeof(MechDodge),
         typeof(MechSwap),
         typeof(CryPlaceholder),
         typeof(MechPlaceholder)
@@ -164,11 +167,12 @@ internal class ModEntry : SimpleMod
     private static List<Type> WethDuoArtifacts = [
         typeof(CannonRecharge),  // CAT
         typeof(ResidualShot),  // Peri
-        typeof(RockPower),  // Isaac,
+        typeof(RockPower),  // Isaac
         typeof(PowerCrystals),  // Books
         typeof(PyroCannon),  // Drake
         typeof(MadcapCharge),  // Dizzy
         typeof(PowerSprint),  // Riggs
+        typeof(HiddenGem),  // Max
     ];
     private static IEnumerable<Type> WethArtifactTypes =
         WethCommonArtifacts
@@ -197,6 +201,7 @@ internal class ModEntry : SimpleMod
     private static List<string> Weth3Anims = [
         "cryingcat",
         "crystal",
+        "crystallolipop",
         //"down",  (mumbling, crystallization advances) MEMORY ONLY
         "facepalm",
         "lockedin",
@@ -492,7 +497,7 @@ internal class ModEntry : SimpleMod
             }
             helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite, deck));
         }
-        SprArtTermMileCommon = RegisterSprite(package, "assets/Artifact/TerminusMilestonCommone.png").Sprite;
+        SprArtTermMileCommon = RegisterSprite(package, "assets/Artifact/TerminusMilestoneCommon.png").Sprite;
         SprArtTermMileBoss = RegisterSprite(package, "assets/Artifact/TerminusMilestoneBoss.png").Sprite;
         SprArtTermMileRelic = RegisterSprite(package, "assets/Artifact/TerminusMilestoneRelic.png").Sprite;
         SprArtTermJActive = RegisterSprite(package, "assets/Artifact/TerminusJauntActive.png").Sprite;
@@ -500,6 +505,8 @@ internal class ModEntry : SimpleMod
         SprArtTermJReward = RegisterSprite(package, "assets/Artifact/TerminusJauntReward.png").Sprite;
         SprArtTermJAltReward = RegisterSprite(package, "assets/Artifact/TerminusJauntAltReward.png").Sprite;
         SprArtTHDepleted = RegisterSprite(package, "assets/Artifact/TreasureHunterDepleted.png").Sprite;
+        SprArtMadcapDepleted = RegisterSprite(package, "assets/Artifact/MadcapDepleted.png").Sprite;
+        SprArtPowerSprintDepleted = RegisterSprite(package, "assets/Artifact/PowerSprintDepleted.png").Sprite;
 
 
         SprSplitshot = RegisterSprite(package, "assets/Splitshot.png").Sprite;

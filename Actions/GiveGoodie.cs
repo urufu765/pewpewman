@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Weth.API;
 using Weth.Artifacts;
 using Weth.Cards;
 
@@ -17,27 +18,27 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
     public int amount = 1;
     public bool ignoreUncommonRestriction;
 
-    private static readonly List<Type> CrystalOfferings = [
+    public static readonly List<Type> CrystalOfferings = [
         typeof(CryAhtack),
         typeof(CryDuhfend),
-        typeof(CryDodge),
+        typeof(CryCapacity),
         typeof(CrySwap)
     ];
-    private static readonly List<Type> CrystalUncommonOfferings = [
+    public static readonly List<Type> CrystalUncommonOfferings = [
         typeof(CryEnergy),
         typeof(CryEvade),
         typeof(CryFlux)
     ];
-    private static readonly List<Type> MechOfferings = [
+    public static readonly List<Type> MechOfferings = [
         typeof(MechAhtack),
         typeof(MechDuhfend),
         typeof(MechEvade),
         typeof(MechSwap)
     ];
-    private static readonly List<Type> MechUncommonOfferings = [
+    public static readonly List<Type> MechUncommonOfferings = [
         typeof(MechMine),
         typeof(MechMissile),
-        typeof(MechStun),
+        typeof(MechDodge),
     ];
 
 
@@ -50,13 +51,22 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
         {
             name = c.otherShip.ai.character.type;
         }
-        if (!s.EnumerateAllArtifacts().Any(a => a is TreasureHunter or TreasureSeeker))
+        bool restrictUncommon = false;
+        bool overruleRestriction = false;
+        foreach (Artifact artifact in s.EnumerateAllArtifacts())
         {
-            ignoreUncommonRestriction = true;
+            if (artifact is IArtifactWethGoodieUncommonRestrictor iwgur)
+            {
+                if (iwgur.DoIImposeGoodieUncommonRestriction()) restrictUncommon = true;
+                if (iwgur.DoIOverrideGoodieUncommonRestriction()) overruleRestriction = true;
+            }
         }
+
+        if (ignoreUncommonRestriction || overruleRestriction) restrictUncommon = false;
+
         for (int x = 0; x < amount; x++)
         {
-            List<Type> offerings = GetPossibleOffering(c, name.ToLower().Contains("crystal"), ignoreUncommonRestriction);
+            List<Type> offerings = GetPossibleOffering(c, name.ToLower().Contains("crystal"), restrictUncommon);
             Card cd = (Card)Activator.CreateInstance(offerings[rng.Next(offerings.Count)])!;
             cd.upgrade = upgrade;
             // shove card into deck
@@ -84,7 +94,7 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
         }
     }
 
-    private static List<Type> GetPossibleOffering(Combat c, bool isCrystal, bool ignore = false)
+    private static List<Type> GetPossibleOffering(Combat c, bool isCrystal, bool restrictUncommon)
     {
         List<Type> offerings = isCrystal ? CrystalOfferings : MechOfferings;
         bool hasUncommon = false;
@@ -107,13 +117,13 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
         }
         foreach (Card card in c.exhausted)
         {
-            if (card.GetMeta().deck == ModEntry.Instance.GoodieDeck.Deck && (card.GetMeta().rarity == Rarity.uncommon || card.GetMeta().rarity == Rarity.rare))
+            if (card.GetMeta().deck == ModEntry.Instance.GoodieDeck.Deck && (card.GetMeta().rarity == Rarity.uncommon))
             {
                 hasUncommon = true;
             }
         }
     skipCheck:
-        if (!hasUncommon)
+        if (!hasUncommon || !restrictUncommon)
         {
             offerings = offerings.Concat(isCrystal ? CrystalUncommonOfferings : MechUncommonOfferings).ToList();
         }

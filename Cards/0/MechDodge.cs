@@ -6,9 +6,9 @@ using Nickel;
 namespace Weth.Cards;
 
 /// <summary>
-/// CRYSTAL: Attack
+/// MECH: Defence
 /// </summary>
-public class CryDodge : Card, IRegisterable
+public class MechDodge : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -23,7 +23,7 @@ public class CryDodge : Card, IRegisterable
                 dontOffer = true,
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Token", "Dodger", "name"]).Localize,
-            Art = StableSpr.cards_BranchPredictionFlipped
+            Art = StableSpr.cards_BranchPrediction
         });
     }
 
@@ -36,7 +36,7 @@ public class CryDodge : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Status.autododgeLeft,
+                    status = Status.autododgeRight,
                     statusAmount = 1,
                     targetPlayer = true
                 }
@@ -53,19 +53,19 @@ public class CryDodge : Card, IRegisterable
             Upgrade.A => new CardData
             {
                 cost = 0,
-                artOverlay = ModEntry.Instance.GoodieCrystalA,
+                artOverlay = ModEntry.Instance.GoodieMechA,
                 exhaust = true,
-                temporary = true,
                 retain = true,
-                artTint = "6284ff"
+                temporary = true,
+                artTint = "a0a0a0"
             },
             _ => new CardData
             {
                 cost = 0,
-                artOverlay = ModEntry.Instance.GoodieCrystal,
+                artOverlay = ModEntry.Instance.GoodieMech,
                 singleUse = true,
                 temporary = true,
-                artTint = "6284ff"
+                artTint = "a0a0a0"
             }
         };
     }

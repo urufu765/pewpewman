@@ -30,6 +30,11 @@ public class MadcapCharge : Artifact
         }
     }
 
+    public override Spr GetSprite()
+    {
+        return Depleted? ModEntry.Instance.SprArtMadcapDepleted : base.GetSprite();
+    }
+
     public override void OnTurnStart(State state, Combat combat)
     {
         Depleted = false;

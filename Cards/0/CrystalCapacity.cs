@@ -6,9 +6,9 @@ using Nickel;
 namespace Weth.Cards;
 
 /// <summary>
-/// MECH: Defence
+/// CRYSTAL: Attack
 /// </summary>
-public class MechStun : Card, IRegisterable
+public class CryCapacity : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -22,8 +22,8 @@ public class MechStun : Card, IRegisterable
                 upgradesTo = [Upgrade.A],
                 dontOffer = true,
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Token", "Stan", "name"]).Localize,
-            Art = StableSpr.cards_StunCharge
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Token", "Captain", "name"]).Localize,
+            Art = StableSpr.cards_BoostCapacitors
         });
     }
 
@@ -36,7 +36,7 @@ public class MechStun : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Status.stunCharge,
+                    status = Status.maxShield,
                     statusAmount = 1,
                     targetPlayer = true
                 }
@@ -53,19 +53,19 @@ public class MechStun : Card, IRegisterable
             Upgrade.A => new CardData
             {
                 cost = 0,
-                artOverlay = ModEntry.Instance.GoodieMechA,
+                artOverlay = ModEntry.Instance.GoodieCrystalA,
                 exhaust = true,
-                retain = true,
                 temporary = true,
-                artTint = "a0a0a0"
+                retain = true,
+                artTint = "6284ff"
             },
             _ => new CardData
             {
                 cost = 0,
-                artOverlay = ModEntry.Instance.GoodieMech,
+                artOverlay = ModEntry.Instance.GoodieCrystal,
                 singleUse = true,
                 temporary = true,
-                artTint = "a0a0a0"
+                artTint = "6284ff"
             }
         };
     }

@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.11)**: Finished vanilla duos AND sprites, redid some animation sprites
 * **(0.3.10)**: More duos!
 * **(0.3.9)**: Readded gone artifacts as duos
 * **(0.3.8)**: Removed a few artifacts (duo time) and changed Artifact Excursion and Relic Jaunt to have Terminus type, reworked Terminus: Excursion once again. New sprites for the artifacts

@@ -20,6 +20,11 @@ public class PowerSprint : Artifact
         Depleted = false;
     }
 
+    public override Spr GetSprite()
+    {
+        return Depleted? ModEntry.Instance.SprArtPowerSprintDepleted : base.GetSprite();
+    }
+
     public override void OnReceiveArtifact(State state)
     {
         Depleted = false;

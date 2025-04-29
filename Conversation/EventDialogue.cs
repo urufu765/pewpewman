@@ -23,7 +23,7 @@ internal class EventDialogue : IRegisterable
                 dialogue = [
                     new(AmWeth, "panic", "ACK! Ow?!"),
                     new(AmVoid, "You have been a good girl. Have a crystal."),
-                    new(AmWeth, "crystal", "Oh. Yay!"),
+                    new(AmWeth, "crystallolipop", "Oh. Yay!"),
                     new(AmCat, "Energy readings are back to normal.")
                 ]
             }},
