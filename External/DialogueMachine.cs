@@ -9,7 +9,7 @@ using Nickel;
 namespace Weth.External;
 
 /**
-ver.0.12
+ver.0.13
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -226,20 +226,24 @@ public class DialogueMachine : StoryNode
     /// <summary>
     /// Edits existing dialogue by finding the switch you want to insert your dialogue into. Best used for vanilla dialogue. WILL IGNORE 'dialogue' DICTIONARY IF 'edit' IS USED
     /// </summary>
-    public List<EditThing> edit = null!;
+    public List<EditThing>? edit;
     /// <summary>
     /// Where all your dialogue *should* go. It can also support titles, mod dialogue edits, and custom instructions!
     /// </summary>
-    public List<DialogueThing> dialogue = null!;
+    public List<DialogueThing>? dialogue;
 
     /// <summary>
     /// Add the type of the artifact rather than trying to use the string key. Gets converted to hasArtifacts later.
     /// </summary>
-    public List<Type> hasArtifactTypes = null!;
+    public List<Type>? hasArtifactTypes;
     /// <summary>
     /// Add the type of the artifact rather than trying to use the string key. Gets converted to doesNotHaveArtifacts later.
     /// </summary>
-    public List<Type> doesNotHaveArtifactTypes = null!;
+    public List<Type>? doesNotHaveArtifactTypes;
+    /// <summary>
+    /// Though any fields you declare will replace existing fields if you're modifying the original, lists and hashsets will be appended by default. Add the name of the list/hashset field if you want to completely replace them.
+    /// </summary>
+    public List<string>? replaceFields;
 
     /// <summary>
     /// Translates DialogueMachine into Instructions readable by LocalDB
@@ -295,7 +299,7 @@ public class DialogueMachine : StoryNode
             }
             return;
         }
-        foreach (DialogueThing d in dialogue)
+        foreach (DialogueThing d in dialogue??=[])
         {
             lines.Add(ConvertDialogueToLine(d));
         }
@@ -650,6 +654,53 @@ public class LocalDB
         }
     }
 
+
+    /// <summary>
+    /// Overrides the original field if source is different, and appends list fields (unless specified)
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="source"></param>
+    private void CombineFields(ref StoryNode target, StoryNode source)
+    {
+        if(target is null || source is null) return;
+        StoryNode defaultSource = new();
+        List<Type> additionList = [typeof(List<string>), typeof(HashSet<string>), typeof(HashSet<Status>)];
+        foreach (var field in typeof(StoryNode).GetFields(System.Reflection.BindingFlags.Public))
+        {
+            if (field.Name == "lines") continue;
+
+            var sourceValue = field.GetValue(source);
+            var defaultValue = field.GetValue(defaultSource);
+
+            if(sourceValue is not null && !EqualityComparer<object>.Default.Equals(defaultValue, sourceValue))
+            {
+                if(!additionList.Contains(field.FieldType) || (source is DialogueMachine dm && dm.replaceFields is not null && dm.replaceFields.Contains(field.Name)))
+                {
+                    field.SetValue(target, sourceValue);
+                }
+                else
+                {
+                    var targetValue = field.GetValue(target);
+                    if(sourceValue is List<string> l2)
+                    {
+                        List<string> l1 = (targetValue as List<string>)??[];
+                        field.SetValue(target, l1.Concat(l2).ToList());
+                    }
+                    else if(sourceValue is HashSet<string> h2)
+                    {
+                        HashSet<string> h1 = (targetValue as HashSet<string>)??[];
+                        field.SetValue(target, h1.Concat(h2).ToHashSet());
+                    }
+                    else if(sourceValue is HashSet<Status> h4)
+                    {
+                        HashSet<Status> h3 = (targetValue as HashSet<Status>)??[];
+                        field.SetValue(target, h3.Concat(h4).ToHashSet());
+                    }
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// Safely inject a dialogue in an existing dialogue switch
     /// </summary>
@@ -703,6 +754,7 @@ public class LocalDB
                     }
                 }
             }
+            CombineFields(ref result, newStory);
             return result;
         }
         catch (Exception err)
@@ -739,7 +791,7 @@ public class LocalDB
     {
         try
         {
-            StoryNode result = new();
+            StoryNode result = existingStory;
             if (existingStory.lines is not null)
             {
                 bool newIsOriginal = false;
@@ -777,6 +829,7 @@ public class LocalDB
                         result.lines.Add(start.lines[y]);
                     }
                 }
+                CombineFields(ref result, start);
             }
             return result;
         }

@@ -533,15 +533,6 @@ internal class CombatDialogue : IRegisterable
                     new(AmWeth, "lockedin", "Break APART! Become salvage!")
                 ]
             }},
-            // {"ThatsALotOfDamageToThem_Weth_3", new(){
-            //     type = NodeType.combat,
-            //     playerShotJustHit = true,
-            //     minDamageDealtToEnemyThisTurn = 10,
-            //     allPresent = [AmWeth],
-            //     dialogue = [
-            //         new(AmWeth, "maniac", "AAAAAHAHAHAHAA!")
-            //     ]
-            // }},
             {"TookDamageHave2HP_Multi_2", new(){
                 edit = [new(EMod.countFromStart, 1, AmWeth, "facepalm", "DON'T- Don't remind me.")]
             }},
@@ -758,6 +749,18 @@ internal class CombatDialogue : IRegisterable
                     new(AmRiggs, "serious", "Umm?")
                 ]
             }},
+
+
+            // {"ThatsALotOfDamageToThem_Weth_3", new(){
+            //     type = NodeType.combat,
+            //     playerShotJustHit = true,
+            //     minDamageDealtToEnemyThisTurn = 10,
+            //     allPresent = [AmWeth],
+            //     dialogue = [
+            //         new(AmWeth, "maniac", "AAAAAHAHAHAHAA!")
+            //     ]
+            // }},
+
         });
     }
 }

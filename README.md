@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.12)**: New version of DialogueMachine (0.13) that allows you to override fields of existing dialogue
 * **(0.3.11)**: Finished vanilla duos AND sprites, redid some animation sprites
 * **(0.3.10)**: More duos!
 * **(0.3.9)**: Readded gone artifacts as duos
