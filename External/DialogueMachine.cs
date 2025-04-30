@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Microsoft.Extensions.Logging;
@@ -9,7 +10,7 @@ using Nickel;
 namespace Weth.External;
 
 /**
-ver.0.13
+ver.0.14
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -665,7 +666,7 @@ public class LocalDB
         if(target is null || source is null) return;
         StoryNode defaultSource = new();
         List<Type> additionList = [typeof(List<string>), typeof(HashSet<string>), typeof(HashSet<Status>)];
-        foreach (var field in typeof(StoryNode).GetFields(System.Reflection.BindingFlags.Public))
+        foreach (var field in typeof(StoryNode).GetFields(System.Reflection.BindingFlags.Public| System.Reflection.BindingFlags.Instance))
         {
             if (field.Name == "lines") continue;
 
@@ -815,7 +816,7 @@ public class LocalDB
                         MakeLinesRecognisable(start.lines[x], script);
                         result.lines[x] = start.lines[x];
                     }
-                    else if (result.lines[x] is Say or SaySwitch)
+                    else if (result.lines[x] is Say or SaySwitch && start.lines[x] is Say or SaySwitch)
                     {
                         result.lines[x] = CombineTwoSays(result.lines[x], start.lines[x], script);
                     }

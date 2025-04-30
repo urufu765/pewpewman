@@ -4,13 +4,13 @@
   "Author": "urufudoggo",
   "DisplayName": "Weth",
   "Description": "Description goes here you pineapple head. Don't you dare forget.",
-  "RequiredApiVersion": "1.14.5",
+  "RequiredApiVersion": "1.15.0",
   "EntryPointAssembly": "Weth.dll",
   "LoadPhase": "AfterDbInit",
   "Dependencies": [
     {
       "UniqueName": "Shockah.Kokoro",
-      "Version": "2.6.0"
+      "Version": "2.8.0"
     }
   ],
   "UpdateChecks": {
