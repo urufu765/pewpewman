@@ -13,7 +13,7 @@ public class ResidualShot : Artifact
 {
     public override void OnPlayerPlayCard(int energyCost, Deck deck, Card card, State state, Combat combat, int handPosition, int handCount)
     {
-        if (deck == ModEntry.Instance.WethDeck.Deck)
+        if (deck == ModEntry.Instance.WethDeck.Deck || deck is Deck.peri)
         {
             combat.Queue(
                 new AAttack
