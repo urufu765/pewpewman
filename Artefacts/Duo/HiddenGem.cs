@@ -27,16 +27,19 @@ public class HiddenGem : Artifact, IArtifactWethGoodieUncommonRestrictor
                 new CryEnergy{
                     singleUseOverride = false,
                     exhaustOverride = true,
+                    exhaustOverrideIsPermanent = true,
                     temporaryOverride = false
                 },
                 new CryCapacity{
                     singleUseOverride = false,
                     exhaustOverride = true,
+                    exhaustOverrideIsPermanent = true,
                     temporaryOverride = false
                 },
                 new CryFlux{
                     singleUseOverride = false,
                     exhaustOverride = true,
+                    exhaustOverrideIsPermanent = true,
                     temporaryOverride = false
                 },
             ]
@@ -50,6 +53,7 @@ public class HiddenGem : Artifact, IArtifactWethGoodieUncommonRestrictor
             {
                 singleUseOverride = false,
                 exhaustOverride = true,
+                exhaustOverrideIsPermanent = true,
                 temporaryOverride = false
             },
             showCardTraitTooltips = true

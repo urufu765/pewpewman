@@ -15,7 +15,7 @@ public class PowerCrystals : Artifact
     {
         if (fromPlayer)
         {
-            state.ship.Get(Status.shard);
+            return state.ship.Get(Status.shard);
         }
         return 0;
     }
