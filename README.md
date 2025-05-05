@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.16)**: Dialogue bugfixes and Piercing Splitshot now forks into three instead of just going through
 * **(0.3.15)**: Fixed HiddenGem not giving permanent exhausts and PowerCrystals not powering.
 * **(0.3.14)**: Forgot that ResidualShot should also proc for Peri.
 * **(0.3.13)**: Fixed DialogueMachine's bugs (0.14), updated required api version stuff in nickel.json

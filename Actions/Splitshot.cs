@@ -289,22 +289,29 @@ public class ASplitshot : CardAction
             {
                 c.DestroyDroneAt(s, raycastResult.worldX, !targetPlayer);
             }
-            if (!piercing)
+            ModEntry.Instance.Logger.LogInformation("Split!");
+            AAttack left = ConvertSplitToAttack(this);
+            AAttack right = ConvertSplitToAttack(this);
+            ModEntry.Instance.Helper.ModData.SetModData(left, "split", true);
+            ModEntry.Instance.Helper.ModData.SetModData(right, "split", true);
+            left.fast = right.fast = true;
+            left.fromDroneX = raycastResult.worldX - 1;
+            right.fromDroneX = raycastResult.worldX + 1;
+            if (piercing)
             {
-                ModEntry.Instance.Logger.LogInformation("Split!");
-                AAttack left = ConvertSplitToAttack(this);
-                AAttack right = ConvertSplitToAttack(this);
-                ModEntry.Instance.Helper.ModData.SetModData(left, "split", true);
-                ModEntry.Instance.Helper.ModData.SetModData(right, "split", true);
-                left.fast = right.fast = true;
-                left.fromDroneX = raycastResult.worldX - 1;
-                right.fromDroneX = raycastResult.worldX + 1;
-                c.QueueImmediate([left, right]);
-                timer = 0.0;
-                return;
+                AAttack center = ConvertSplitToAttack(this);
+                center.fast = true;
+                center.fromDroneX = raycastResult.worldX;
+                ModEntry.Instance.Helper.ModData.SetModData(center, "split", true);
+                c.QueueImmediate([left, center, right]);
             }
+            else
+            {
+                c.QueueImmediate([left, right]);
+            }
+            timer = 0.0;
+            return;
         }
-        ModEntry.Instance.Helper.ModData.SetModData(this, "split", true);
         c.QueueImmediate(ConvertSplitToAttack(this));
         timer = 0.0;
     }

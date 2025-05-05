@@ -190,12 +190,12 @@ internal class EventDialogue : IRegisterable
                 dialogue = [
                     new(AmWizbo, "Wizbo here! You here to insult again?", true),
                     new(AmWeth, "Actually, I wanted to say sorry... magic is actually pretty cool..."),
-                    new(AmWizbo, "That's it?"),
+                    new(AmWizbo, "That's it?", true),
                     new(AmWeth, "plead", "No, I would wish to learn more about this magic sometime? Please?"),
-                    new(AmWizbo, "Hmm, this great Wizbo accepts your apology AND your wish!"),
-                    new(AmWeth, "Thanks."),
+                    new(AmWizbo, "Hmm, this great Wizbo accepts your apology AND your wish!", true),
+                    new(AmWeth, "sparkle", "Thank you."),
                     new(AmWizbo, "But unfortunately I still have to kill you.", true),
-                    new(AmWeth, "Damn.")
+                    new(AmWeth, "sad", "Damn.")
                 ]
             }}
         });
