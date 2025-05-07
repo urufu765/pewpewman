@@ -109,7 +109,16 @@
         },
         "BayBlastFail": {
             "desc": "<c=downside>Warning:</c> no missile bays to channel this attack!"
+        },
+        "BayblastV2": {
+            "name": "BAYBLAST",
+            "desc": "Shoots a blast from the missile bay, destroying whatever midrow object is in a {1} unit radius of the bay.\nDeals {0} damage to invincible objects."
+        },
+        "FlaredBayblast": {
+            "name": "BAYBLAST",
+            "desc": "Shoots a blast from the missile bay, destroying whatever midrow object is in a {1} unit radius of the bay <c=keyword>as if the foe destroyed them.</c>\nDeals {0} damage to invincible objects."
         }
+
     },
     "event": {
         "ChoiceRelicRewardOfYourRelicChoice_Yes": {

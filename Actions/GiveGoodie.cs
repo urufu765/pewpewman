@@ -17,6 +17,8 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
     public Upgrade upgrade;
     public int amount = 1;
     public bool ignoreUncommonRestriction;
+    public CardDestination? destination = null;
+    public bool asAnOffering = false;
 
     public static readonly List<Type> CrystalOfferings = [
         typeof(CryAhtack),
@@ -63,34 +65,51 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
         }
 
         if (ignoreUncommonRestriction || overruleRestriction) restrictUncommon = false;
-
+        List<Card> cardz = [];
         for (int x = 0; x < amount; x++)
         {
             List<Type> offerings = GetPossibleOffering(c, name.ToLower().Contains("crystal"), restrictUncommon);
-            Card cd = (Card)Activator.CreateInstance(offerings[rng.Next(offerings.Count)])!;
+            offerings.Shuffle(s.rngCardOfferingsMidcombat);
+            Card cd = (Card)Activator.CreateInstance(offerings[0])!;
             cd.upgrade = upgrade;
             // shove card into deck
-            if (fromArtifact)
+            if (asAnOffering)
             {
-                c.Queue(
-                    new AAddCard
-                    {
-                        card = cd,
-                        destination = CardDestination.Hand,
-                        artifactPulse = artifactKey
-                    }
-                );
+                cardz.Add(cd);
             }
             else
             {
-                c.Queue(
-                    new AAddCard
-                    {
-                        card = cd,
-                        destination = CardDestination.Deck
-                    }
-                );
+                if (fromArtifact)
+                {
+                    c.Queue(
+                        new AAddCard
+                        {
+                            card = cd,
+                            destination = destination??CardDestination.Hand,
+                            artifactPulse = artifactKey
+                        }
+                    );
+                }
+                else
+                {
+                    c.Queue(
+                        new AAddCard
+                        {
+                            card = cd,
+                            destination = destination??CardDestination.Deck
+                        }
+                    );
+                }
             }
+        }
+        if (asAnOffering)
+        {
+            c.Queue(new AWethCardOffering
+            {
+                cards = cardz,
+                artifactPulse = fromArtifact? artifactKey : null,
+                canSkip = true,
+            });
         }
     }
 
