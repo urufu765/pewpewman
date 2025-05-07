@@ -68,7 +68,8 @@ public class TreasureHunter : Artifact, IArtifactWethGoodieUncommonRestrictor
                 {
                     fromArtifact = true,
                     artifactKey = GetArtifactKey(),
-                    upgrade = GetUpgrade()
+                    upgrade = GetUpgrade(),
+                    betterOdds = GetAdvanced()
                 }
             );
             if (CanBeDepleted())

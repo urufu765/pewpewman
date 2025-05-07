@@ -35,36 +35,36 @@ public class ExtremeViolence : Card, IRegisterable
     {
         return upgrade switch
         {
+            // Upgrade.B => 
+            // [
+            //     new AAttack
+            //     {
+            //         damage = GetDmg(s, 0),
+            //         stunEnemy = true,
+            //         fast = true
+            //     },
+            //     new AAttack
+            //     {
+            //         damage = GetDmg(s, 1),
+            //         fast = true
+            //     },
+            //     new AAttack
+            //     {
+            //         damage = GetDmg(s, 2),
+            //         fast = true
+            //     },
+            //     new AAttack
+            //     {
+            //         damage = GetDmg(s, 3),
+            //         fast = true
+            //     },
+            //     new AAttack
+            //     {
+            //         damage = GetDmg(s, 4),
+            //         fast = true
+            //     },
+            // ],
             Upgrade.B => 
-            [
-                new AAttack
-                {
-                    damage = GetDmg(s, 0),
-                    stunEnemy = true,
-                    fast = true
-                },
-                new AAttack
-                {
-                    damage = GetDmg(s, 1),
-                    fast = true
-                },
-                new AAttack
-                {
-                    damage = GetDmg(s, 2),
-                    fast = true
-                },
-                new AAttack
-                {
-                    damage = GetDmg(s, 3),
-                    fast = true
-                },
-                new AAttack
-                {
-                    damage = GetDmg(s, 4),
-                    fast = true
-                },
-            ],
-            Upgrade.A => 
             [
                 new AAttack
                 {
@@ -133,9 +133,9 @@ public class ExtremeViolence : Card, IRegisterable
         {
             Upgrade.B => new CardData
             {
-                cost = 3,
+                cost = 4,
                 exhaust = true,
-                art = altSpriteB,
+                art = altSprite,
                 artTint = "689da2",
                 artOverlay = ModEntry.Instance.WethRare
             },
@@ -143,13 +143,12 @@ public class ExtremeViolence : Card, IRegisterable
             {
                 cost = 3,
                 exhaust = true,
-                art = altSprite,
                 artTint = "689da2",
                 artOverlay = ModEntry.Instance.WethRare
             },
             _ => new CardData
             {
-                cost = 3,
+                cost = 4,
                 exhaust = true,
                 artTint = "689da2",
                 artOverlay = ModEntry.Instance.WethRare

@@ -42,7 +42,8 @@ public class Spreadshot : Card, IRegisterable
                 },
                 new ASplitshot
                 {
-                    damage = GetDmg(s, 2)
+                    damage = GetDmg(s, 2),
+                    piercing = true
                 }            
             ],
             Upgrade.A => 
@@ -53,7 +54,7 @@ public class Spreadshot : Card, IRegisterable
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 2)
                 }
             ],
             _ => 
@@ -64,7 +65,7 @@ public class Spreadshot : Card, IRegisterable
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 2)
                 }
             ],
         };

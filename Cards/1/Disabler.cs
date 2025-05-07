@@ -19,7 +19,7 @@ public class Disabler : Card, IRegisterable
             Meta = new CardMeta
             {
                 deck = ModEntry.Instance.WethDeck.Deck,
-                rarity = Rarity.uncommon,
+                rarity = Rarity.common,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "Disabler", "name"]).Localize,
@@ -67,19 +67,19 @@ public class Disabler : Card, IRegisterable
                 cost = 1,
                 singleUse = true,
                 artTint = "ffc47b",
-                artOverlay = ModEntry.Instance.WethUncommon
+                artOverlay = ModEntry.Instance.WethCommon
             },
             Upgrade.A => new CardData
             {
                 cost = 0,
                 artTint = "ffc47b",
-                artOverlay = ModEntry.Instance.WethUncommon
+                artOverlay = ModEntry.Instance.WethCommon
             },
             _ => new CardData
             {
                 cost = 1,
                 artTint = "ffc47b",
-                artOverlay = ModEntry.Instance.WethUncommon
+                artOverlay = ModEntry.Instance.WethCommon
             }
         };
     }

@@ -64,6 +64,9 @@ internal class ModEntry : SimpleMod
     public Spr SprBayBlastFail { get; private set; }
     public Spr SprBayBlastWide { get; private set; }
     public Spr SprBayBlastWideFail { get; private set; }
+    public Spr SprBayBlastFlared { get; private set; }
+    public Spr SprBayBlastFlaredFail { get; private set; }
+    public Spr SprBayBlastGeneralFail { get; private set; }
 
     public Spr SprGiantAsteroidIcon { get; private set; }
     public Spr SprGiantAsteroid { get; private set; }
@@ -100,7 +103,8 @@ internal class ModEntry : SimpleMod
         typeof(Discovery),
         typeof(Powershot),
         typeof(Spreadshot),
-        typeof(Bloom)
+        typeof(Bloom),
+        typeof(FeralBlast)
     ];
     private static List<Type> WethRareCardTypes = [
         typeof(UnstoppableForce),
@@ -491,9 +495,16 @@ internal class ModEntry : SimpleMod
         foreach (Type ta in WethArtifactTypes)
         {
             Deck deck = WethDeck.Deck;
-            if (DuoArtifactsApi is not null && WethDuoArtifacts.Contains(ta))
+            if (WethDuoArtifacts.Contains(ta))
             {
-                deck = DuoArtifactsApi.DuoArtifactVanillaDeck;
+                if (DuoArtifactsApi is null)
+                {
+                    continue;
+                }
+                else
+                {
+                    deck = DuoArtifactsApi.DuoArtifactVanillaDeck;
+                }
             }
             helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite, deck));
         }
@@ -518,6 +529,9 @@ internal class ModEntry : SimpleMod
         SprBayBlastFail = RegisterSprite(package, "assets/bayblastfail.png").Sprite;
         SprBayBlastWide = RegisterSprite(package, "assets/bayblastwide.png").Sprite;
         SprBayBlastWideFail = RegisterSprite(package, "assets/bayblastwidefail.png").Sprite;
+        SprBayBlastFlared = RegisterSprite(package, "assets/bayblastflared.png").Sprite;
+        SprBayBlastFlaredFail = RegisterSprite(package, "assets/bayblastflaredfail.png").Sprite;
+        SprBayBlastGeneralFail = RegisterSprite(package, "assets/bayblastgeneralfail.png").Sprite;
         //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);
 
@@ -535,6 +549,7 @@ internal class ModEntry : SimpleMod
 
         Artifacthider.Apply(Harmony);
         SplitshotTranspiler.Apply(Harmony);
+        //BayBlastIconography.Apply(Harmony);
         ChoiceRelicRewardOfYourRelicChoice.Apply(Harmony);
         ArtifactMadcapPartOperator.Apply(Harmony);
         ArtifactPowersprintEvadeOperator.Apply(Harmony);

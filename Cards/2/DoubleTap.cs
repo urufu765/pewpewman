@@ -10,6 +10,8 @@ namespace Weth.Cards;
 /// </summary>
 public class DoubleTap : Card, IRegisterable
 {
+    private static Spr altSprite {get; set;}
+
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -24,6 +26,7 @@ public class DoubleTap : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "DoubleTap", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/2/doubletap.png").Sprite
         });
+        altSprite = ModEntry.RegisterSprite(package, "assets/Card/2/doubletapalt.png").Sprite;
     }
 
 
@@ -35,12 +38,12 @@ public class DoubleTap : Card, IRegisterable
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 2),
+                    damage = GetDmg(s, 0),
                     fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 2),
+                    damage = GetDmg(s, 4),
                     stunEnemy = true,
                     fast = true
                 }            
@@ -49,13 +52,13 @@ public class DoubleTap : Card, IRegisterable
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 2),
+                    damage = GetDmg(s, 0),
                     piercing = true,
                     fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 2),
+                    damage = GetDmg(s, 4),
                     piercing = true,
                     fast = true
                 }
@@ -64,12 +67,12 @@ public class DoubleTap : Card, IRegisterable
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 2),
+                    damage = GetDmg(s, 0),
                     fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 2),
+                    damage = GetDmg(s, 4),
                     fast = true
                 }
             ],
@@ -85,6 +88,7 @@ public class DoubleTap : Card, IRegisterable
             {
                 cost = 2,
                 artTint = "ffc47b",
+                art = altSprite,
                 artOverlay = ModEntry.Instance.WethUncommon
             },
             _ => new CardData

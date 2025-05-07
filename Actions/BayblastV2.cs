@@ -7,45 +7,45 @@ using Nickel;
 
 namespace Weth.Actions;
 
-public static class BayBlastIconography
-{
-    public static void Apply(Harmony harmony)
-    {
-        harmony.Patch(
-            original: typeof(Card).GetMethod("RenderAction", AccessTools.all),
-            prefix: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(IconRenderingStuff))
-        );
-    }
+// public static class BayBlastIconography
+// {
+//     public static void Apply(Harmony harmony)
+//     {
+//         harmony.Patch(
+//             original: typeof(Card).GetMethod("RenderAction", AccessTools.all),
+//             prefix: new HarmonyMethod(typeof(BayBlastIconography), nameof(IconRenderingStufff))
+//         );
+//     }
 
-    private static bool IconRenderingStuff(G g, State state, CardAction action, bool dontDraw, int shardAvailable, int stunChargeAvailable, int bubbleJuiceAvailable, ref int __result)
-    {
-        if (action is not ABayBlastV2 bayblast)
-        {
-            return true;
-        }
+//     private static bool IconRenderingStufff(G g, State state, CardAction action, bool dontDraw, int shardAvailable, int stunChargeAvailable, int bubbleJuiceAvailable, ref int __result)
+//     {
+//         if (action is not ABayBlastV2 bayblast)
+//         {
+//             return true;
+//         }
 
-        var copy = ABayBlastV2.GetFakeAttackFromBayBlast(bayblast);
-        var position = g.Push(rect: new()).rect.xy;
-        int initialX = (int)position.x;
+//         var copy = ABayBlastV2.GetFakeAttackFromBayBlast(bayblast);
+//         var position = g.Push(rect: new()).rect.xy;
+//         int initialX = (int)position.x;
 
-        position.x += Card.RenderAction(g, state, copy, dontDraw, shardAvailable, stunChargeAvailable, bubbleJuiceAvailable);
-        g.Pop();
+//         position.x += Card.RenderAction(g, state, copy, dontDraw, shardAvailable, stunChargeAvailable, bubbleJuiceAvailable);
+//         g.Pop();
 
 
-        __result = (int)position.x - initialX;
+//         __result = (int)position.x - initialX;
 
-        return false;
+//         return false;
 
-    }
+//     }
 
-}
+// }
 
 public class ABayBlastV2 : CardAction
 {
     public bool flared;
-    public bool bubbleLeech;
+    public bool bubbleLeech = true;
     public bool harmless;
-    public bool fromPlayer;
+    public bool fromPlayer = true;
     public bool TargetPlayer => flared? fromPlayer:!fromPlayer;
     public bool multiBayVolley;
     public int range = 1;
@@ -59,7 +59,17 @@ public class ABayBlastV2 : CardAction
         {
             flared = bayblast.flared,
             damage = bayblast.range,
-            targetPlayer = bayblast.TargetPlayer
+            targetPlayer = bayblast.TargetPlayer,
+            xHint = bayblast.xHint,
+            whoDidThis = bayblast.whoDidThis,
+            artifactPulse = bayblast.artifactPulse,
+            statusPulse = bayblast.statusPulse,
+            omitFromTooltips = bayblast.omitFromTooltips,
+            dialogueSelector = bayblast.dialogueSelector,
+            disabled = bayblast.disabled,
+            selectedCard = bayblast.selectedCard,
+            canRunAfterKill = bayblast.canRunAfterKill,
+            shardcost = bayblast.shardcost
         };
     }
 
@@ -73,10 +83,10 @@ public class ABayBlastV2 : CardAction
         RaycastResult? raycastResult = worldX is int wx? CombatUtils.RaycastGlobal(c, toShip, false, wx) : (n is int nn? CombatUtils.RaycastFromShipLocal(s, c, nn, !fromPlayer) : null);
         if (fromPlayer && g.state.ship.GetPartTypeCount(PType.missiles, false) > 1 && !multiBayVolley)
         {
-            // c.QueueImmediate(new AVolleyBlastFromAllBays
-            // {
-            //     bayblast = Mutil.DeepCopy(this)
-            // });
+            c.QueueImmediate(new AVolleyBlastFromAllBays2
+            {
+                bayblast = Mutil.DeepCopy(this)
+            });
             this.timer = 0.0;
             return;
         }
@@ -149,10 +159,10 @@ public class ABayBlastV2 : CardAction
         this.timer = fast? 0.2 : 0.4;
         if (range > 1)
         {
-            IEnumerable<CardAction> actions = [];
+            List<CardAction> actions = [];
             for (int i = 1; i < range; i++)
             {
-                actions.AddItem(
+                actions.Add(
                     new ABayBlastV2
                     {
                         worldX = raycastResult != null? raycastResult.worldX - i : FromLocalToWorld(s, c, n, !fromPlayer, -i),
@@ -165,7 +175,7 @@ public class ABayBlastV2 : CardAction
                         multiBayVolley = this.multiBayVolley
                     }
                 );
-                actions.AddItem(
+                actions.Add(
                     new ABayBlastV2
                     {
                         worldX = raycastResult != null? raycastResult.worldX + i : FromLocalToWorld(s, c, n, !fromPlayer, i),
@@ -180,6 +190,7 @@ public class ABayBlastV2 : CardAction
                 );
             }
             c.QueueImmediate(actions);
+            timer = 0.2;
         }
     }
 
@@ -195,9 +206,9 @@ public class ABayBlastV2 : CardAction
     {
         if (HaveWeGotAnyMissileBays(s))
         {
-            return new Icon(this.flared? ModEntry.Instance.SprBayBlastWide : ModEntry.Instance.SprBayBlast, null, Colors.attack, false);
+            return new Icon(this.flared? ModEntry.Instance.SprBayBlastFlared : ModEntry.Instance.SprBayBlastWide, range, Colors.cheevoGold, false);
         }
-        return new Icon(this.flared? ModEntry.Instance.SprBayBlastWideFail : ModEntry.Instance.SprBayBlastFail, null, Colors.attackFail, false);
+        return new Icon(ModEntry.Instance.SprBayBlastGeneralFail, range, Colors.attackFail, false);
     }
 
     private int? GetFromX(State s, Combat c)
@@ -238,7 +249,7 @@ public class ABayBlastV2 : CardAction
         {
             tooltips.Add(new GlossaryTooltip("actiontooltip.flaredbayblast")
             {
-                Icon = ModEntry.Instance.SprBayBlastWide,
+                Icon = ModEntry.Instance.SprBayBlastFlared,
                 Title = ModEntry.Instance.Localizations.Localize(["action", "FlaredBayblast", "name"]),
                 TitleColor = Colors.action,
                 Description = string.Format(ModEntry.Instance.Localizations.Localize(["action", "FlaredBayblast", "desc"]), $"<c=boldPink>{Card.GetActualDamage(s, 1, !fromPlayer)}</c>", $"<c=boldPink>{this.range}</c>")
@@ -248,7 +259,7 @@ public class ABayBlastV2 : CardAction
         {
             tooltips.Add(new GlossaryTooltip("actiontooltip.bayblasttwo")
             {
-                Icon = ModEntry.Instance.SprBayBlast,
+                Icon = ModEntry.Instance.SprBayBlastWide,
                 Title = ModEntry.Instance.Localizations.Localize(["action", "BayblastV2", "name"]),
                 TitleColor = Colors.action,
                 Description = string.Format(ModEntry.Instance.Localizations.Localize(["action", "BayblastV2", "desc"]), $"<c=boldPink>{Card.GetActualDamage(s, 1, !fromPlayer)}</c>", $"<c=boldPink>{this.range}</c>")

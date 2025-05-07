@@ -104,13 +104,13 @@ public class ScatterTrash : Card, IRegisterable
             {
                 cost = 2,
                 art = altSprite,
-                artTint = "696969",
+                artTint = "ffffff",
                 artOverlay = ModEntry.Instance.WethUncommon
             },
             _ => new CardData
             {
                 cost = 2,
-                artTint = "696969",
+                artTint = "ffffff",
                 artOverlay = ModEntry.Instance.WethUncommon
             }
         };

@@ -101,7 +101,7 @@
         },
         "BubbleLeech": {
             "name": "BUBBLE LEECH",
-            "desc": "Steals the midrow object's bubble, giving 1 <c=status>BUBBLE</c> to self."
+            "desc": "Steals the midrow object's bubble, giving 1 <c=status>BUBBLE</c> to whoever shot the Bayblast."
         },
         "Harmless": {
             "name": "HARMLESS",
@@ -112,11 +112,11 @@
         },
         "BayblastV2": {
             "name": "BAYBLAST",
-            "desc": "Shoots a blast from the missile bay, destroying whatever midrow object is in a {1} unit radius of the bay.\nDeals {0} damage to invincible objects."
+            "desc": "Shoots a blast from the missile bay, dealing 1 piercing damage to midrow object is in a {1} unit radius of the bay."
         },
         "FlaredBayblast": {
-            "name": "BAYBLAST",
-            "desc": "Shoots a blast from the missile bay, destroying whatever midrow object is in a {1} unit radius of the bay <c=keyword>as if the foe destroyed them.</c>\nDeals {0} damage to invincible objects."
+            "name": "FLARED BAYBLAST",
+            "desc": "Shoots a blast from the missile bay, dealing 1 piercing damage to whatever midrow object is in a {1} unit radius of the bay <c=keyword>as if the foe destroyed them."
         }
 
     },
@@ -336,16 +336,21 @@
                 "name": "Scatter Trash"
             },
             "Discovery": {
-                "name": "Discovery"
+                "name": "Discovery",
+                "desc": "Add 1 of {0} <c=card>Goodie</c> to your hand.",
+                "descA": "Add 1 of {0} <c=card>Goodie A</c> to your hand."
             },
             "Powershot": {
                 "name": "Powershot"
             },
             "Spreadshot": {
-                "name": "Spreadshot"
+                "name": "Strewshot"
             },
             "Bloom": {
                 "name": "Bloom"
+            },
+            "FeralBlast": {
+                "name": "Feral Blast"
             }
         },
         "Rare": {

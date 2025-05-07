@@ -6,7 +6,19 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
-* *(0.3.18)*: Weth Card Rework 1
+* **(0.3.18)**: Weth Card Rework 1 + Goodie giver RNG rework
+  * Splitshot: Buffed damage +1 across all upgrades
+  * Cargo Blaster: Uses BayblastV2 and B is a dual
+  * Disabler: Rarity reduced to Common
+  * Compensate: Reduced overall damage, and only last hit deals damage.
+  * Double Tap: Deals damage only on the last hit
+  * Spreadshot: Renamed to Strewshot and buffed to match Splitshot's power level.
+  * Discovery: Instead of giving 1 random card, offers a choice.
+  * NEW Feral Blast: Replaces Double Blast, now an X energy card that is a midrow destroyer.
+  * Extreme Violence: Cost +1, A is now B, A is reduced cost Base.
+  * Double Blast: Removed.
+  * All rock dispensing card's art tint is brighter
+  * Most of the cardart has been brightened
 * **(0.3.17)**: Bayblast Rework & Weth goodie giver now allows it to be offered as a card choice
 * **(0.3.16)**: Dialogue bugfixes and Piercing Splitshot now forks into three instead of just going through
 * **(0.3.15)**: Fixed HiddenGem not giving permanent exhausts and PowerCrystals not powering.

@@ -37,7 +37,7 @@ public class SplitshotCard : Card, IRegisterable
             [
                 new ASplitshot
                 {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 2),
                     piercing = true
                 }
             ],
@@ -45,14 +45,14 @@ public class SplitshotCard : Card, IRegisterable
             [
                 new ASplitshot
                 {
-                    damage = GetDmg(s, 2)
+                    damage = GetDmg(s, 3)
                 }
             ],
             _ => 
             [
                 new ASplitshot
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 2)
                 },
             ],
         };

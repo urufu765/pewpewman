@@ -1,5 +1,6 @@
 {
     "[dockercompose]": {
     },
-    "editor.autoIndent": "full"
+    "editor.autoIndent": "full",
+    "C_Cpp.dimInactiveRegions": false
 }

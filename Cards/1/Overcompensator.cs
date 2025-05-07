@@ -35,61 +35,66 @@ public class Overcompensator : Card, IRegisterable
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 0),
+                    fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 2)
+                    damage = GetDmg(s, 0),
+                    fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 3)
+                    damage = GetDmg(s, 6)
                 },            
             ],
             Upgrade.A => 
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
-                },
-                new AAttack
-                {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 0),
                     fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
-                },
-                new AAttack
-                {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 0),
                     fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 0),
+                    fast = true
+                },
+                new AAttack
+                {
+                    damage = GetDmg(s, 0),
+                    fast = true
+                },
+                new AAttack
+                {
+                    damage = GetDmg(s, 3)
                 },
             ],
             _ => 
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 0),
                     fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
-                },
-                new AAttack
-                {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 0),
                     fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1)
+                    damage = GetDmg(s, 0),
+                    fast = true
+                },
+                new AAttack
+                {
+                    damage = GetDmg(s, 2)
                 },
             ],
         };

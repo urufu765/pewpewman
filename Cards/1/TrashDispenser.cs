@@ -74,13 +74,13 @@ public class TrashDispenser : Card, IRegisterable
             Upgrade.A => new CardData
             {
                 cost = 0,
-                artTint = "696969",
+                artTint = "ffffff",
                 artOverlay = ModEntry.Instance.WethCommon
             },
             _ => new CardData
             {
                 cost = 1,
-                artTint = "696969",
+                artTint = "ffffff",
                 artOverlay = ModEntry.Instance.WethCommon
             }
         };

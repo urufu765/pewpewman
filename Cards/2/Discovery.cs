@@ -30,24 +30,34 @@ public class Discovery : Card, IRegisterable
 
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        string name = "";
-        if (c.otherShip?.ai?.character?.type is not null)
-        {
-            name = c.otherShip.ai.character.type;
-        }
         return upgrade switch
         {
+            Upgrade.B => 
+            [
+                new AGiveGoodieLikeAGoodBoy
+                {
+                    asAnOffering = true,
+                    amount = 2,
+                    betterOdds = true,
+                }
+            ],
+            Upgrade.A => 
+            [
+                new AGiveGoodieLikeAGoodBoy
+                {
+                    asAnOffering = true,
+                    betterOdds = true,
+                    amount = 3,
+                    upgrade = Upgrade.A
+                }
+            ],
             _ => 
             [
-                ModEntry.Instance.KokoroApi.V2.SpoofedActions.MakeAction(
-                    new AAddCard
-                    {
-                        card = name.ToLower().Contains("crystal")? new CryPlaceholder() : new MechPlaceholder(),
-                        destination = CardDestination.Deck,
-                        amount = 1,
-                    },
-                    new AGiveGoodieLikeAGoodBoy()
-                ).AsCardAction
+                new AGiveGoodieLikeAGoodBoy
+                {
+                    asAnOffering = true,
+                    amount = 3
+                }
             ],
         };
     }
@@ -59,20 +69,23 @@ public class Discovery : Card, IRegisterable
         {
             Upgrade.B => new CardData
             {
-                cost = 1,
-                artOverlay = ModEntry.Instance.WethUncommon
+                cost = 0,
+                artOverlay = ModEntry.Instance.WethUncommon,
+                description = string.Format(ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Discovery", "desc"]), 2),
             },
             Upgrade.A => new CardData
             {
                 cost = 0,
                 exhaust = true,
-                artOverlay = ModEntry.Instance.WethUncommon
+                artOverlay = ModEntry.Instance.WethUncommon,
+                description = string.Format(ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Discovery", "descA"]), 3),
             },
             _ => new CardData
             {
-                cost = 1,
+                cost = 0,
                 exhaust = true,
-                artOverlay = ModEntry.Instance.WethUncommon
+                artOverlay = ModEntry.Instance.WethUncommon,
+                description = string.Format(ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Discovery", "desc"]), 3),
             }
         };
     }

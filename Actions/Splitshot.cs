@@ -345,6 +345,16 @@ public class ASplitshot : CardAction
                 storyFromPayback = splitshot.storyFromPayback,
                 onKillActions = splitshot.onKillActions,
                 fromX = splitshot.fromX,
+                xHint = splitshot.xHint,
+                whoDidThis = splitshot.whoDidThis,
+                artifactPulse = splitshot.artifactPulse,
+                statusPulse = splitshot.statusPulse,
+                omitFromTooltips = splitshot.omitFromTooltips,
+                dialogueSelector = splitshot.dialogueSelector,
+                disabled = splitshot.disabled,
+                selectedCard = splitshot.selectedCard,
+                canRunAfterKill = splitshot.canRunAfterKill,
+                shardcost = splitshot.shardcost,
             };
         }
         return new AAttack
@@ -370,6 +380,16 @@ public class ASplitshot : CardAction
             storyFromPayback = splitshot.storyFromPayback,
             onKillActions = splitshot.onKillActions,
             fromX = splitshot.fromX,
+            xHint = splitshot.xHint,
+            whoDidThis = splitshot.whoDidThis,
+            artifactPulse = splitshot.artifactPulse,
+            statusPulse = splitshot.statusPulse,
+            omitFromTooltips = splitshot.omitFromTooltips,
+            dialogueSelector = splitshot.dialogueSelector,
+            disabled = splitshot.disabled,
+            selectedCard = splitshot.selectedCard,
+            canRunAfterKill = splitshot.canRunAfterKill,
+            shardcost = splitshot.shardcost,
         };
     }
 

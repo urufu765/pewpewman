@@ -12,6 +12,9 @@ namespace Weth.Cards;
 /// </summary>
 public class CargoBlaster : Card, IRegisterable
 {
+    private static Spr nonFlipSprite {get; set;}
+    private static Spr flipSprite {get; set;}
+
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -26,6 +29,8 @@ public class CargoBlaster : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "CargoBlaster", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/1/bayblast.png").Sprite
         });
+        nonFlipSprite = ModEntry.RegisterSprite(package, "assets/Card/1/bayblasta.png").Sprite;
+        flipSprite = ModEntry.RegisterSprite(package, "assets/Card/1/bayblastb.png").Sprite;
     }
 
 
@@ -33,16 +38,28 @@ public class CargoBlaster : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => 
+            Upgrade.B =>
             [
-                new ABayBlast
+                new ABayBlastV2
                 {
-                    wide = true
+                    disabled = flipped
+                },
+                new ABayBlastV2
+                {
+                    flared = true,
+                    disabled = !flipped,
+                },
+            ],
+            Upgrade.A => 
+            [
+                new ABayBlastV2
+                {
+                    range = 2
                 }
             ],
             _ => 
             [
-                new ABayBlast(),
+                new ABayBlastV2(),
             ],
         };
     }
@@ -52,10 +69,12 @@ public class CargoBlaster : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.A => new CardData
+            Upgrade.B => new CardData
             {
-                cost = 0,
+                cost = 1,
                 retain = true,
+                floppable = true,
+                art = flipped ? flipSprite : nonFlipSprite,
                 artOverlay = ModEntry.Instance.WethCommon
             },
             _ => new CardData
