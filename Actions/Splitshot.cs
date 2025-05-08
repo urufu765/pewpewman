@@ -29,9 +29,47 @@ public static class SplitshotTranspiler
             transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(DontDoDuplicateArtifactModifiers))
         );
         harmony.Patch(
-            original: typeof(Card).GetMethod("RenderAction", AccessTools.all),
-            prefix: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(IconRenderingStuff))
+            original: typeof(Card).GetMethod("MakeAllActionIcons", AccessTools.all),
+            transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(RenderSplitshotAsAttack))
         );
+            
+    }
+
+    private static IEnumerable<CodeInstruction> RenderSplitshotAsAttack(IEnumerable<CodeInstruction> instructions, ILGenerator il)
+    {
+        try
+        {
+            return new SequenceBlockMatcher<CodeInstruction>(instructions)
+                .Find(SequenceBlockMatcherFindOccurence.First,
+                SequenceMatcherRelativeBounds.WholeSequence,
+                ILMatches.AnyLdloc,
+                ILMatches.Isinst(typeof(AAttack)),
+                ILMatches.AnyStloc)
+                .Find(SequenceBlockMatcherFindOccurence.Last,
+                SequenceMatcherRelativeBounds.BeforeOrEnclosed,
+                ILMatches.AnyLdloc.GetLocalIndex(out var loc))
+                .Insert(SequenceMatcherPastBoundsDirection.Before,
+                SequenceMatcherInsertionResultingBounds.JustInsertion,
+                [
+                    new(OpCodes.Ldloc_S, loc.Value),
+                    new(OpCodes.Call, AccessTools.DeclaredMethod(typeof(SplitshotTranspiler), nameof(FakeSplitshotAsAttack))),
+                    new(OpCodes.Stloc_S, loc.Value)
+                ]).AllElements();
+        }
+        catch (Exception err)
+        {
+            ModEntry.Instance.Logger.LogError(err, "damn.");
+            throw;
+        }
+    }
+
+    private static CardAction? FakeSplitshotAsAttack(CardAction? action)
+    {
+        if (action is ASplitshot splitshot)
+        {
+            return ASplitshot.ConvertSplitToAttack(splitshot, true);
+        }
+        return action;
     }
 
     private static IEnumerable<CodeInstruction> DontDoDuplicateArtifactModifiers(IEnumerable<CodeInstruction> instructions, ILGenerator il)
@@ -371,7 +409,7 @@ public class ASplitshot : CardAction
                 shardcost = splitshot.shardcost,
             };
         }
-        return new AAttack
+        AAttack aAttack = new()
         {
             damage = splitshot.damage,
             givesEnergy = splitshot.givesEnergy,
@@ -405,6 +443,8 @@ public class ASplitshot : CardAction
             canRunAfterKill = splitshot.canRunAfterKill,
             shardcost = splitshot.shardcost,
         };
+        ModEntry.Instance.Helper.ModData.CopyAllModData(splitshot, aAttack);
+        return aAttack;
     }
 
 
