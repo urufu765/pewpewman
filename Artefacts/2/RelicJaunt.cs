@@ -54,7 +54,7 @@ public class TerminusJaunt : TheTerminus
             if (SavedParts != (0, 0))
             {
                 ISoundInstance isi = ModEntry.Instance.JauntSlapSound.CreateInstance();
-                isi.Volume = 0.55f;
+                isi.Volume = 0.45f;
                 double lerpVal = Math.Abs(((SavedParts.selected / SavedParts.total) - 0.5) * 2);
                 isi.Pitch = (float)Mutil.Lerp(
                     Mutil.Lerp(0.9, 0.75, lerpVal),

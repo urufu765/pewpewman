@@ -226,7 +226,7 @@ public class ASplitshot : CardAction
         }
         int? n = GetFromX(s, c);
         RaycastResult? raycastResult = n is not null ? CombatUtils.RaycastFromShipLocal(s, c, n.Value, targetPlayer) : null;
-        //bool librahit = fromShip.Get(Status.libra) > 0;
+        bool librahit = fromShip.Get(Status.libra) > 0;
 
         // Checks if attack is multicannon then separates them
         if (!targetPlayer && g.state.ship.GetPartTypeCount(PType.cannon, false) > 1 && !multiCannonVolley)
@@ -303,11 +303,25 @@ public class ASplitshot : CardAction
                 center.fast = true;
                 center.fromDroneX = raycastResult.worldX;
                 ModEntry.Instance.Helper.ModData.SetModData(center, "split", true);
-                c.QueueImmediate([left, center, right]);
+                if (librahit)
+                {
+                    c.QueueImmediate([left, GiveLibraEffect(fromShip), center, GiveLibraEffect(fromShip), right, GiveLibraEffect(fromShip)]);
+                }
+                else
+                {
+                    c.QueueImmediate([left, center, right]);
+                }
             }
             else
             {
-                c.QueueImmediate([left, right]);
+                if (librahit)
+                {
+                    c.QueueImmediate([left, GiveLibraEffect(fromShip), right, GiveLibraEffect(fromShip)]);
+                }
+                else
+                {
+                    c.QueueImmediate([left, right]);
+                }
             }
             timer = 0.0;
             return;
@@ -588,13 +602,13 @@ public class ASplitshot : CardAction
     /// </summary>
     /// <param name="c"></param>
     /// <param name="source"></param>
-    private void DoLibraEffect(Combat c, Ship source)
+    private AStatus GiveLibraEffect(Ship source)
     {
-        c.QueueImmediate(new AStatus
+        return new AStatus
         {
             targetPlayer = !this.targetPlayer,
             status = Status.tempShield,
             statusAmount = source.Get(Status.libra)
-        });
+        };
     }
 }
