@@ -30,6 +30,7 @@ public class MegaAsteroid : Asteroid
             new GlossaryTooltip("objecttooltip.megaasteroid")
             {
                 Icon = ModEntry.Instance.SprMegaAsteroidIcon,
+                IsWideIcon = true,
                 Title = ModEntry.Instance.Localizations.Localize(["object", "MegaAsteroid", "name"]),
                 TitleColor = Colors.midrow,
                 Description = ModEntry.Instance.Localizations.Localize(["object", "MegaAsteroid", "desc"]),
@@ -37,6 +38,7 @@ public class MegaAsteroid : Asteroid
             new GlossaryTooltip("objecttooltip.giantasteroid")
             {
                 Icon = ModEntry.Instance.SprGiantAsteroidIcon,
+                IsWideIcon = true,
                 Title = ModEntry.Instance.Localizations.Localize(["object", "GiantAsteroid", "name"]),
                 TitleColor = Colors.midrow,
                 Description = ModEntry.Instance.Localizations.Localize(["object", "GiantAsteroid", "desc"]),

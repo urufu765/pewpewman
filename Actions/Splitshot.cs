@@ -9,6 +9,7 @@ using Nanoray.Shrike;
 using Nanoray.Shrike.Harmony;
 using Nickel;
 using Weth.Cards;
+using Weth.Objects;
 
 namespace Weth.Actions;
 
@@ -31,6 +32,10 @@ public static class SplitshotTranspiler
         harmony.Patch(
             original: typeof(Card).GetMethod("MakeAllActionIcons", AccessTools.all),
             transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(RenderSplitshotAsAttack))
+        );
+        harmony.Patch(
+            original: typeof(Card).GetMethod("RenderAction", AccessTools.all),
+            prefix: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(IconRenderingStuff))
         );
             
     }
@@ -106,12 +111,21 @@ public static class SplitshotTranspiler
 
     private static bool IconRenderingStuff(G g, State state, CardAction action, bool dontDraw, int shardAvailable, int stunChargeAvailable, int bubbleJuiceAvailable, ref int __result)
     {
-        if (action is not ASplitshot splitshot)
+        if (action is not ASpawn spawn)
         {
             return true;
         }
 
-        var copy = ASplitshot.ConvertSplitToAttack(splitshot, true);
+        if (spawn.thing is not GiantAsteroid and not MegaAsteroid)
+        {
+            return true;
+        }
+        if (ModEntry.Instance.Helper.ModData.TryGetModData<bool>(action, "issagiantmegagiant", out bool b) && b)
+        {
+            return true;
+        }
+        var copy = Mutil.DeepCopy(action);
+        ModEntry.Instance.Helper.ModData.SetModData(copy, "issagiantmegagiant", true);
         var position = g.Push(rect: new()).rect.xy;
         int initialX = (int)position.x;
 
@@ -120,10 +134,36 @@ public static class SplitshotTranspiler
 
 
         __result = (int)position.x - initialX;
-
+        __result += 2;
+        if (!dontDraw)
+        {
+            //Draw.Sprite(ModEntry.Instance.SprGiantAsteroidIcon, initialX + __result, position.y);
+            Draw.Text(" ", initialX + __result, position.y, dontSubstituteLocFont: true);
+        }
+        __result += 8;
         return false;
 
     }
+    // private static bool IconRenderingStuff(G g, State state, CardAction action, bool dontDraw, int shardAvailable, int stunChargeAvailable, int bubbleJuiceAvailable, ref int __result)
+    // {
+    //     if (action is not ASplitshot splitshot)
+    //     {
+    //         return true;
+    //     }
+
+    //     var copy = ASplitshot.ConvertSplitToAttack(splitshot, true);
+    //     var position = g.Push(rect: new()).rect.xy;
+    //     int initialX = (int)position.x;
+
+    //     position.x += Card.RenderAction(g, state, copy, dontDraw, shardAvailable, stunChargeAvailable, bubbleJuiceAvailable);
+    //     g.Pop();
+
+
+    //     __result = (int)position.x - initialX;
+
+    //     return false;
+
+    // }
 
     // private static IEnumerable<CodeInstruction> IgnoreMissingDroneCheck(IEnumerable<CodeInstruction> instructions, ILGenerator il)
     // {

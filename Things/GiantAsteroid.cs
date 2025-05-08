@@ -30,6 +30,7 @@ public class GiantAsteroid : Asteroid
             new GlossaryTooltip("objecttooltip.giantasteroid")
             {
                 Icon = ModEntry.Instance.SprGiantAsteroidIcon,
+                IsWideIcon = true,
                 Title = ModEntry.Instance.Localizations.Localize(["object", "GiantAsteroid", "name"]),
                 TitleColor = Colors.midrow,
                 Description = ModEntry.Instance.Localizations.Localize(["object", "GiantAsteroid", "desc"]),
