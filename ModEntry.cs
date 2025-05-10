@@ -30,6 +30,9 @@ internal class ModEntry : SimpleMod
     internal IStatusEntry PulseStatus { get; private set; } = null!;
     internal IStatusEntry UnknownStatus { get; private set; } = null!;
     internal ISoundEntry JauntSlapSound { get; private set; } = null!;
+    internal ISoundEntry SodaOpening { get; private set; } = null!;
+    internal ISoundEntry SodaOpened { get; private set; } = null!;
+    public Spr PulseQuestionMark { get; private set; }
     // internal ICardTraitEntry AutoSU { get; private set; } = null!;
     // internal Spr AutoSUSpr { get; private set; }
     //internal ICardTraitEntry AutoE { get; private set; } = null!;
@@ -94,7 +97,8 @@ internal class ModEntry : SimpleMod
         typeof(PulsedriveCard),
         typeof(GiantTrash),
         typeof(DoubleBlast),
-        typeof(Overcompensator)
+        typeof(Overcompensator),
+        typeof(MilkSoda)
     ];
     private static List<Type> WethUncommonCardTypes = [
         typeof(DoubleTap),
@@ -189,7 +193,8 @@ internal class ModEntry : SimpleMod
         typeof(StoryDialogue),
         typeof(EventDialogue),
         typeof(CombatDialogue),
-        typeof(ArtifactDialogue)
+        typeof(ArtifactDialogue),
+        typeof(CardDialogue)
     ];
     private static IEnumerable<Type> AllRegisterableTypes =
         WethCardTypes
@@ -200,6 +205,13 @@ internal class ModEntry : SimpleMod
         "gameover",
         "mini",
         "placeholder",
+        "sodadrink",
+        "sodagone",
+        "sodaexplode",
+        "sodaexplodeup",
+        "sodaexplodedown",
+        "sodashakedown",
+        "sodashakeup",
         "traumatised",
     ];
     private static List<string> Weth3Anims = [
@@ -455,8 +467,11 @@ internal class ModEntry : SimpleMod
             Name = AnyLocalizations.Bind(["status", "Unknown", "name"]).Localize,
             Description = AnyLocalizations.Bind(["status", "Unknown", "desc"]).Localize
         });
-
         JauntSlapSound = helper.Content.Audio.RegisterSound("spaceSlap", package.PackageRoot.GetRelativeFile("assets/SpaceSlap.wav"));
+        SodaOpening = helper.Content.Audio.RegisterSound("sodaopening", package.PackageRoot.GetRelativeFile("assets/sodaopening.wav"));
+        SodaOpened = helper.Content.Audio.RegisterSound("sodaopened", package.PackageRoot.GetRelativeFile("assets/sodaopen.wav"));
+        PulseQuestionMark = RegisterSprite(package, "assets/questionmark.png").Sprite;
+
         //JauntSlapSound = RegisterSound(package, "assets/SpaceSlap.wav");
         // AutoSUSpr = RegisterSprite(package, "assets/autoplaysingle.png").Sprite;
         // AutoSU = helper.Content.Cards.RegisterTrait("AutoSU", new CardTraitConfiguration

@@ -323,6 +323,17 @@
             },
             "WethEXE": {
                 "name": "Weth.EXE"
+            },
+            "MilkSoda": {
+                "name": "Milk Soda",
+                "desc": "Shake to <c=keyword>potentially</c> gain more <c=status>Pulsedrive</c>! <c=status>(<c=boldPink>{0}</c>)</c>\n<c=downside>Caution:</c> May have a chance to explode! <c=downside>(<c=boldPink>{1:p}</c>)</c>",
+                "desca": "Shake to <c=keyword>potentially</c> gain more <c=status>Pulsedrive</c>! <c=status>(<c=boldPink>{0}</c>)</c>\n<c=downside>Caution:</c> May have a <c=keyword>low</c> chance to explode! <c=downside>(<c=boldPink>{1:p}</c>)</c>",
+                "descb": "Shake to gain more <c=status>Pulsedrive</c>! <c=status>(<c=boldPink>{0}</c>)</c>\n<c=downside>Caution:</c> May have a <c=keyword>very high</c> chance to explode! <c=downside>(<c=boldPink>{1:p}</c>)</c>",
+                "descc": "You've shaken the soda <c=boldPink>{0}</c> times.",
+                "desce": "Oh no! It exploded!\n\n<c=downside>Take 2 hull damage.</c>",
+                "descf": "<c=downside>Take 2 hull damage if it explodes.</c> Also refund energy spent.",
+                "descp": "Every shake increases chance of explosion by {0}%.",
+                "descu": "It's empty..."
             }
         },
         "Uncommon": {

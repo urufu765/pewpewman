@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.22)**: Fuck bayblast. Gone. Removed. Dead. Replaced by Death-By-Destruction and Soda Pop cards
 * **(0.3.21)**: Fixed giant asteroid and mega asteroid icons
 * **(0.3.20)**: Fixed rendering not applied correctly
 * **(0.3.19)**: Fixed splitshot not applying flux + sfx attack change

@@ -111,37 +111,59 @@ public static class SplitshotTranspiler
 
     private static bool IconRenderingStuff(G g, State state, CardAction action, bool dontDraw, int shardAvailable, int stunChargeAvailable, int bubbleJuiceAvailable, ref int __result)
     {
-        if (action is not ASpawn spawn)
+        if (action is ASpawn spawn && spawn.thing is GiantAsteroid or MegaAsteroid)
         {
-            return true;
-        }
+            if (ModEntry.Instance.Helper.ModData.TryGetModData<bool>(action, "issagiantmegagiant", out bool b) && b)
+            {
+                return true;
+            }
+            var copy = Mutil.DeepCopy(action);
+            ModEntry.Instance.Helper.ModData.SetModData(copy, "issagiantmegagiant", true);
+            var position = g.Push(rect: new()).rect.xy;
+            int initialX = (int)position.x;
 
-        if (spawn.thing is not GiantAsteroid and not MegaAsteroid)
-        {
-            return true;
-        }
-        if (ModEntry.Instance.Helper.ModData.TryGetModData<bool>(action, "issagiantmegagiant", out bool b) && b)
-        {
-            return true;
-        }
-        var copy = Mutil.DeepCopy(action);
-        ModEntry.Instance.Helper.ModData.SetModData(copy, "issagiantmegagiant", true);
-        var position = g.Push(rect: new()).rect.xy;
-        int initialX = (int)position.x;
-
-        position.x += Card.RenderAction(g, state, copy, dontDraw, shardAvailable, stunChargeAvailable, bubbleJuiceAvailable);
-        g.Pop();
+            position.x += Card.RenderAction(g, state, copy, dontDraw, shardAvailable, stunChargeAvailable, bubbleJuiceAvailable);
+            g.Pop();
 
 
-        __result = (int)position.x - initialX;
-        __result += 2;
-        if (!dontDraw)
-        {
-            //Draw.Sprite(ModEntry.Instance.SprGiantAsteroidIcon, initialX + __result, position.y);
-            Draw.Text(" ", initialX + __result, position.y, dontSubstituteLocFont: true);
+            __result = (int)position.x - initialX;
+            __result += 2;
+            if (!dontDraw)
+            {
+                //Draw.Sprite(ModEntry.Instance.SprGiantAsteroidIcon, initialX + __result, position.y);
+                Draw.Text(" ", initialX + __result, position.y, dontSubstituteLocFont: true);
+            }
+            __result += 8;
+            return false;
         }
-        __result += 8;
-        return false;
+
+        if (action is APseudoPulsedriveGiver)
+        {
+            if (ModEntry.Instance.Helper.ModData.TryGetModData<bool>(action, "ispulsedrive", out bool b) && b)
+            {
+                return true;
+            }
+            var copy = Mutil.DeepCopy(action);
+            ModEntry.Instance.Helper.ModData.SetModData(copy, "ispulsedrive", true);
+            var position = g.Push(rect: new()).rect.xy;
+            int initialX = (int)position.x;
+
+            position.x += Card.RenderAction(g, state, copy, dontDraw, shardAvailable, stunChargeAvailable, bubbleJuiceAvailable);
+            g.Pop();
+
+
+            __result = (int)position.x - initialX;
+            __result += 1;
+            if (!dontDraw)
+            {
+                //Draw.Sprite(StableSpr.icons_questionMark, initialX + __result, position.y, color: Colors.textMain);
+                Draw.Sprite(ModEntry.Instance.PulseQuestionMark, initialX + __result, position.y, color: Colors.textMain);
+                //Draw.Text("?", initialX + __result, position.y, dontSubstituteLocFont: true, color: Colors.textMain);
+            }
+            __result += 9;
+            return false;
+        }
+        return true;
 
     }
     // private static bool IconRenderingStuff(G g, State state, CardAction action, bool dontDraw, int shardAvailable, int stunChargeAvailable, int bubbleJuiceAvailable, ref int __result)
