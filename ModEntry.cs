@@ -98,7 +98,8 @@ internal class ModEntry : SimpleMod
         typeof(GiantTrash),
         typeof(DoubleBlast),
         typeof(Overcompensator),
-        typeof(MilkSoda)
+        typeof(MilkSoda),
+        typeof(Feral)
     ];
     private static List<Type> WethUncommonCardTypes = [
         typeof(DoubleTap),
@@ -108,7 +109,8 @@ internal class ModEntry : SimpleMod
         typeof(Powershot),
         typeof(Spreadshot),
         typeof(Bloom),
-        typeof(FeralBlast)
+        typeof(FeralBlast),
+        typeof(MirageBlast)
     ];
     private static List<Type> WethRareCardTypes = [
         typeof(UnstoppableForce),

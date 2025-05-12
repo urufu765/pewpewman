@@ -334,6 +334,9 @@
                 "descf": "<c=downside>Take 2 hull damage if it explodes.</c> Also refund energy spent.",
                 "descp": "Every shake increases chance of explosion by {0}%.",
                 "descu": "It's empty..."
+            },
+            "Feral": {
+                "name": "Feral"
             }
         },
         "Uncommon": {
@@ -362,6 +365,9 @@
             },
             "FeralBlast": {
                 "name": "Feral Blast"
+            },
+            "MirageBlast": {
+                "name": "Mirage Blast"
             }
         },
         "Rare": {

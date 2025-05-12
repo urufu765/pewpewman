@@ -24,7 +24,9 @@ public class FeralBlast : Card, IRegisterable
             {
                 deck = ModEntry.Instance.WethDeck.Deck,
                 rarity = Rarity.uncommon,
-                upgradesTo = [Upgrade.A, Upgrade.B]
+                upgradesTo = [Upgrade.A, Upgrade.B],
+                unreleased = true,
+                dontOffer = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "FeralBlast", "name"]).Localize,
             Art = StableSpr.cards_ColorlessTrash,

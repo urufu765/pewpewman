@@ -24,7 +24,9 @@ public class CargoBlaster : Card, IRegisterable
             {
                 deck = ModEntry.Instance.WethDeck.Deck,
                 rarity = Rarity.common,
-                upgradesTo = [Upgrade.A, Upgrade.B]
+                upgradesTo = [Upgrade.A, Upgrade.B],
+                unreleased = true,
+                dontOffer = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "CargoBlaster", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/1/bayblast.png").Sprite
