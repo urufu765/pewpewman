@@ -393,72 +393,6 @@ internal class ArtifactDialogue : IRegisterable
                     new(AmWeth, "Even scratched off paint could be useful for something.")
                 ]
             }},
-            {"ArtifactRockPowerWeth_Multi_0", new(){
-                type = NodeType.combat,
-                hasArtifactTypes = [typeof(RockPower)],
-                anyDrones = ["asteroid"],
-                oncePerCombatTags = ["rockPowerAdvice"],
-                allPresent = [AmWeth],
-                dialogue = [
-                    new(AmWeth, "Hey, I think I see something in the lumps of rock.")
-                ]
-            }},
-            {"ArtifactRockPowerWeth_Multi_1", new(){
-                type = NodeType.combat,
-                hasArtifactTypes = [typeof(RockPower)],
-                anyDrones = ["asteroid"],
-                oncePerCombatTags = ["rockPowerAdvice"],
-                allPresent = [AmWeth],
-                dialogue = [
-                    new(AmWeth, "There might be something usable in even the least assuming lump of rock.")
-                ]
-            }},
-            {"ArtifactResidualShotNoDamageWeth_Multi_0", new(){
-                type = NodeType.combat,
-                hasArtifactTypes = [typeof(ResidualShot)],
-                whoDidThat = AmWethDeck,
-                maxDamageDealtToEnemyThisAction = 0,
-                oncePerRunTags = ["wethsResidualShotUseless"],
-                allPresent = [AmWeth],
-                dialogue = [
-                    new(AmWeth, "It's the thought that counts.")
-                ]
-            }},
-            {"ArtifactResidualShotNoDamageWeth_Multi_1", new(){
-                type = NodeType.combat,
-                hasArtifactTypes = [typeof(ResidualShot)],
-                whoDidThat = AmWethDeck,
-                maxDamageDealtToEnemyThisAction = 0,
-                oncePerRunTags = ["wethsResidualShotUseless"],
-                allPresent = [AmWeth],
-                dialogue = [
-                    new(AmWeth, "explain", "Better than not having it.")
-                ]
-            }},
-            {"ArtifactCannonRechargeWeth_Multi_0", new(){
-                type = NodeType.combat,
-                hasArtifactTypes = [typeof(CannonRecharge)],
-                lookup = ["CannonRechargeTrigger"],
-                oncePerRun = true,
-                priority = true,
-                oncePerCombatTags = ["CannonRechargeTag"],
-                allPresent = [AmWeth],
-                dialogue = [
-                    new(AmWeth, "Energy successfully routed to stun shot!")
-                ]
-            }},
-            {"ArtifactCannonRechargeWeth_Multi_1", new(){
-                type = NodeType.combat,
-                hasArtifactTypes = [typeof(CannonRecharge)],
-                lookup = ["CannonRechargeTrigger"],
-                oncePerRun = true,
-                priority = true,
-                oncePerCombatTags = ["CannonRechargeTag"],
-                allPresent = [AmWeth],
-                dialogue = [
-                    new(AmWeth, "Next shot should be shocking!")
-                ]
-            }},
             {"ArtifactExcursionWeth_Multi_0", new(){
                 type = NodeType.combat,
                 hasArtifactTypes = [typeof(TerminusMilestone)],
@@ -526,6 +460,75 @@ internal class ArtifactDialogue : IRegisterable
                     new(AmWeth, "sparkle", "Very.")
                 ]
             }}
+        });
+
+        LocalDB.DumpStoryToLocalLocale("en", "Shockah.DuoArtifacts", new Dictionary<string, DialogueMachine>(){
+            {"ArtifactRockPowerWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(RockPower)],
+                anyDrones = ["asteroid"],
+                oncePerCombatTags = ["rockPowerAdvice"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "Hey, I think I see something in the lumps of rock.")
+                ]
+            }},
+            {"ArtifactRockPowerWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(RockPower)],
+                anyDrones = ["asteroid"],
+                oncePerCombatTags = ["rockPowerAdvice"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "There might be something usable in even the least assuming lump of rock.")
+                ]
+            }},
+            {"ArtifactResidualShotNoDamageWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(ResidualShot)],
+                whoDidThat = AmWethDeck,
+                maxDamageDealtToEnemyThisAction = 0,
+                oncePerRunTags = ["wethsResidualShotUseless"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "It's the thought that counts.")
+                ]
+            }},
+            {"ArtifactResidualShotNoDamageWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(ResidualShot)],
+                whoDidThat = AmWethDeck,
+                maxDamageDealtToEnemyThisAction = 0,
+                oncePerRunTags = ["wethsResidualShotUseless"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "explain", "Better than not having it.")
+                ]
+            }},
+            {"ArtifactCannonRechargeWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(CannonRecharge)],
+                lookup = ["CannonRechargeTrigger"],
+                oncePerRun = true,
+                priority = true,
+                oncePerCombatTags = ["CannonRechargeTag"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "Energy successfully routed to stun shot!")
+                ]
+            }},
+            {"ArtifactCannonRechargeWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(CannonRecharge)],
+                lookup = ["CannonRechargeTrigger"],
+                oncePerRun = true,
+                priority = true,
+                oncePerCombatTags = ["CannonRechargeTag"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "Next shot should be shocking!")
+                ]
+            }},
         });
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Microsoft.Extensions.Logging;
@@ -10,7 +9,7 @@ using Nickel;
 namespace Weth.External;
 
 /**
-ver.0.14
+ver.0.15
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -593,7 +592,7 @@ public class LocalDB
             {
                 if (!DialogueMachine.CharExists(characer, Inst))
                 {
-                    Inst.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                    Inst.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
                 }
             }
         }
@@ -603,7 +602,39 @@ public class LocalDB
             {
                 if (!DialogueMachine.CharExists(characer, Inst))
                 {
-                    Inst.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                    Inst.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                }
+            }
+        }
+
+        // Checks whether the who part in the edit or dialogues is not typo-d
+        if (dm.Value.edit is not null)
+        {
+            foreach (EditThing et in dm.Value.edit)
+            {
+                if (et.who is not null && !DialogueMachine.CharExists(et.who, Inst))
+                {
+                    Inst.Logger.LogWarning(dm.Key + "'s <edit> contains a line with an invalid character [" + et.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                }
+            }
+        }
+        else if (dm.Value.dialogue is not null)
+        {
+            foreach (DialogueThing dt in dm.Value.dialogue)
+            {
+                if (dt.saySwitch is not null)
+                {
+                    foreach (DialogueThing dtss in dt.saySwitch)
+                    {
+                        if (dtss.who is not null && !DialogueMachine.CharExists(dtss.who, Inst))
+                        {
+                            Inst.Logger.LogWarning(dm.Key + "'s <dialogue(sayswitch)> contains a line with an invalid character [" + dtss.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                        }
+                    }
+                }
+                else if (dt.who is not null && !DialogueMachine.CharExists(dt.who, Inst))
+                {
+                    Inst.Logger.LogWarning(dm.Key + "'s <dialogue> contains a line with an invalid character [" + dt.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
                 }
             }
         }
@@ -720,7 +751,7 @@ public class LocalDB
                 {
                     if (instruction is InsertDialogueInSwitch idis)
                     {
-                        for (int a = 0, b = 0, c = result.lines.Count - 1; b < result.lines.Count && c > 0; b++, c--)
+                        for (int a = 0, b = 0, c = result.lines.Count - 1; b < result.lines.Count && c >= 0; b++, c--)
                         {
                             if (!idis.fromEnd && result.lines[b] is SaySwitch ss)
                             {
@@ -732,14 +763,14 @@ public class LocalDB
                                         if (say.hash == idis.whichHash)
                                         {
                                             ss.lines.Add(GetSayFromIDIS(idis, script));
-                                            break;
+                                            goto endofloop;
                                         }
                                     }
                                 }
                                 else if (idis.whichSwitch is not null && a == idis.whichSwitch)
                                 {
                                     ss.lines.Add(GetSayFromIDIS(idis, script));
-                                    break;
+                                    goto endofloop;
                                 }
                             }
                             else if (idis.fromEnd && result.lines[c] is SaySwitch bs)
@@ -748,11 +779,13 @@ public class LocalDB
                                 if (idis.whichSwitch is not null && a == idis.whichSwitch)
                                 {
                                     bs.lines.Add(GetSayFromIDIS(idis, script));
-                                    break;
+                                    goto endofloop;
                                 }
                             }
                         }
+                        Inst.Logger.LogWarning(script + "'s IDIS failed to find a switch to insert the dialogue into!");
                     }
+                    endofloop:;
                 }
             }
             CombineFields(ref result, newStory);

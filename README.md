@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.23)**: DialogueMachine fix (0.15) (wasn't editing switchsays correctly) + dialogue lines "who" part is also checked for invalid characters + Warnings of failed edits + Duo artifacts are now excluded from dialogues if Duo is not enabled
 * **(0.3.22)**: Fuck bayblast. Gone. Removed. Dead. Replaced by Death-By-Destruction and Soda Pop cards
 * **(0.3.21)**: Fixed giant asteroid and mega asteroid icons
 * **(0.3.20)**: Fixed rendering not applied correctly
