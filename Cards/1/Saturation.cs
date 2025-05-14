@@ -67,7 +67,7 @@ public class Feral : Card, IRegisterable, IHasCustomCardTraits
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 2),
+                    damage = GetDmg(s, 1),
                     stunEnemy = true,
                     fast = true
                 },
@@ -83,11 +83,12 @@ public class Feral : Card, IRegisterable, IHasCustomCardTraits
                 new AAttack
                 {
                     damage = GetDmg(s, 1),
+                    piercing = true,
                     fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 2),
+                    damage = GetDmg(s, 1),
                     piercing = true,
                     fast = true
                 },            
@@ -106,7 +107,7 @@ public class Feral : Card, IRegisterable, IHasCustomCardTraits
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 2),
+                    damage = GetDmg(s, 1),
                     fast = true
                 },
             ],

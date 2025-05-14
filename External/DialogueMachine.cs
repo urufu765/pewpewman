@@ -9,7 +9,7 @@ using Nickel;
 namespace Weth.External;
 
 /**
-ver.0.16
+ver.0.17
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -561,7 +561,7 @@ public class LocalDB
 
     private static void ExistenceChecker(KeyValuePair<string, StoryNode> sn)
     {
-        if (!FeatureFlags.Debug) return;
+        #if DEBUG
         // Checks if the inputted artifact is a valid one that the game can check
         if (sn.Value.hasArtifacts is not null)
         {
@@ -645,8 +645,8 @@ public class LocalDB
             {
                 Inst.Logger.LogWarning(sn.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
             }
-        }
-
+        }   
+        #endif
     }
 
     /// <summary>

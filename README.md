@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.26)**: DM0.17: Uses preprocessor debug instaed && release version, Feral now does 2 damage.
 * **(0.3.25)**: Missing period in a description, more artifact dialogue, Feral drive potential reduced but base damage kept, DialogueMachine 0.16: Made the harmless warnings shut up and moved dialogue validators after mod existence checks
 * **(0.3.24)**: Cancelled DbD and Sodapop, instead have Feral and Mirage Blast
 * **(0.3.23)**: DialogueMachine fix (0.15) (wasn't editing switchsays correctly) + dialogue lines "who" part is also checked for invalid characters + Warnings of failed edits + Duo artifacts are now excluded from dialogues if Duo is not enabled
