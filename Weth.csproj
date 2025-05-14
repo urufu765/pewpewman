@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Weth</RootNamespace>
-		<Version>0.3.26</Version>
+		<Version>0.3.27</Version>
 		<ModFiles>i18n;assets</ModFiles>
 
 		<TargetFramework>net8.0</TargetFramework>

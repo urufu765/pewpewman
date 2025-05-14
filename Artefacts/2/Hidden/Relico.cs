@@ -31,20 +31,15 @@ public class RelicShield : Artifact
 
     public override void OnRemoveArtifact(State state)
     {
-        foreach (Character character in state.characters)
+        foreach (Artifact artifact in state.EnumerateAllArtifacts())
         {
-            if (character.deckType == ModEntry.Instance.WethDeck.Deck)
+            if (artifact is SpaceRelics sr)
             {
-                foreach (Artifact artifact in character.artifacts)
-                {
-                    if (artifact is SpaceRelics sr)
-                    {
-                        sr.ObtainRelic(GetThing());
-                        ModEntry.Instance.Logger.LogInformation("GotDaRelic!");
-                    }
-                }
+                sr.ObtainRelic(GetThing());
+                //ModEntry.Instance.Logger.LogInformation("GotDaRelic!");
+                return;
             }
-        }    
+        }
     }
 
     public virtual void ArtifactRemoval(State state)

@@ -215,6 +215,7 @@ internal class ModEntry : SimpleMod
         "sodashakedown",
         "sodashakeup",
         "traumatised",
+        //"pastwait",  (tom and jerry Tom looking up from newspaper kind of face)
     ];
     private static List<string> Weth3Anims = [
         "cryingcat",
@@ -226,10 +227,17 @@ internal class ModEntry : SimpleMod
         "mad",
         "touch",
         "yay",
+        //"pastscream",
+        //"pastfacepalm",
+        //"pastlockedin",
+        //"pastmad",
+        //"pasteyeroll",
+        //"pastdonewithit",
+        //"pastsilly",
     ];
     private static List<string> Weth4Anims = [
-        "pain",
-        //"think",  (Thinkin man pose) MEMORY ONLY
+        "pain"
+        //"pastsurprise",
     ];
     private static List<string> Weth5Anims = [
         "apple",
@@ -242,8 +250,16 @@ internal class ModEntry : SimpleMod
         "squint",
         "tired",
         //"up",  (Baby doll eyes, almost crystallized) MEMORY ONLY
+        //"pastneutral",
+        //"pastsquint",
+        //"pastplead",
+        //"pastexplain",
+        //"pastsparkle",
+        //"pasttired",
+        //"pasthappy",
     ];
     private static List<string> Weth6Anims = [
+        //"pastputoutfire",  (every frame except the second is Weth lifting a fire extinghisher above her head. second frame is Weth slamming the fire extinguisher at the fire)
         //"maniac",  (ace attorney big evil dude from game 1, including the clapping)
     ];
     public readonly static IEnumerable<string> WethAnims =
