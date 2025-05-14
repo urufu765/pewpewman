@@ -285,9 +285,9 @@ internal class ModEntry : SimpleMod
                             {
                                 DuoArtifactsApi.RegisterDuoArtifact(type, [WethDeck!.Deck, dam.duoDeck]);
                             }
-                            else
+                            else if (helper.Content.Decks.LookupByUniqueName(dam.duoModDeck) is IDeckEntry ide)
                             {
-                                DuoArtifactsApi.RegisterDuoArtifact(type, [WethDeck!.Deck, helper.Content.Decks.LookupByUniqueName(dam.duoModDeck)!.Deck]);
+                                DuoArtifactsApi.RegisterDuoArtifact(type, [WethDeck!.Deck, ide.Deck]);
                             }
                         }
                     }

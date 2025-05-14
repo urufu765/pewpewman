@@ -52,7 +52,8 @@ public class PowerSprint : Artifact
                     status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     statusAmount = amount,
                     targetPlayer = true,
-                    artifactPulse = Key()
+                    artifactPulse = Key(),
+                    dialogueSelector = ".sprintmobiled"
                 }
             );
             Depleted = true;

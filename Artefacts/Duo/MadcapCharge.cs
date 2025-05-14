@@ -26,6 +26,7 @@ public class MadcapCharge : Artifact
                 statusAmount = 1,
                 targetPlayer = true,
                 artifactPulse = Key(),
+                dialogueSelector = ".madcapped"
             });
         }
     }

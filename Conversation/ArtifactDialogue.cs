@@ -328,7 +328,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRun = true,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "This is... disorienting.")
+                    new(AmWeth, "squint", "This is... disorienting.")
                 ]
             }},
 
@@ -459,7 +459,40 @@ internal class ArtifactDialogue : IRegisterable
                     new(AmBooks, "That's a shiny rock!"),
                     new(AmWeth, "sparkle", "Very.")
                 ]
-            }}
+            }},
+            {"ArtifactJauntWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(TerminusJaunt)],
+                turnStart = true,
+                maxTurnsThisCombat = 1,
+                oncePerRunTags = ["JauntAllTheWay"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "Let's go on an adventure!")
+                ]
+            }},
+            {"ArtifactJauntWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(TerminusJaunt)],
+                turnStart = true,
+                maxTurnsThisCombat = 1,
+                oncePerRunTags = ["JauntAllTheWay"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "I can smell the hidden treasure, just gotta light them up to find it!")
+                ]
+            }},
+            {"ArtifactJauntWeth_Multi_2", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(TerminusJaunt)],
+                turnStart = true,
+                maxTurnsThisCombat = 1,
+                oncePerRunTags = ["JauntAllTheWay"],
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "squint", "It's hidden somewhere. The thing. I can feel it.")
+                ]
+            }},
         });
 
         LocalDB.DumpStoryToLocalLocale("en", "Shockah.DuoArtifacts", new Dictionary<string, DialogueMachine>(){
@@ -468,9 +501,10 @@ internal class ArtifactDialogue : IRegisterable
                 hasArtifactTypes = [typeof(RockPower)],
                 anyDrones = ["asteroid"],
                 oncePerCombatTags = ["rockPowerAdvice"],
-                allPresent = [AmWeth],
+                allPresent = [AmWeth, AmIsaac],
                 dialogue = [
-                    new(AmWeth, "Hey, I think I see something in the lumps of rock.")
+                    new(AmWeth, "Hey, I think I see something in the lumps of rock."),
+                    new(AmIsaac, "Well, what are you waiting for?")
                 ]
             }},
             {"ArtifactRockPowerWeth_Multi_1", new(){
@@ -478,9 +512,10 @@ internal class ArtifactDialogue : IRegisterable
                 hasArtifactTypes = [typeof(RockPower)],
                 anyDrones = ["asteroid"],
                 oncePerCombatTags = ["rockPowerAdvice"],
-                allPresent = [AmWeth],
+                allPresent = [AmWeth, AmIsaac],
                 dialogue = [
-                    new(AmWeth, "There might be something usable in even the least assuming lump of rock.")
+                    new(AmWeth, "There might be something usable in even the least assuming lump of rock."),
+                    new(AmIsaac, "explains", "Took you long enough to figure that out.")
                 ]
             }},
             {"ArtifactResidualShotNoDamageWeth_Multi_0", new(){
@@ -489,9 +524,10 @@ internal class ArtifactDialogue : IRegisterable
                 whoDidThat = AmWethDeck,
                 maxDamageDealtToEnemyThisAction = 0,
                 oncePerRunTags = ["wethsResidualShotUseless"],
-                allPresent = [AmWeth],
+                allPresent = [AmWeth, AmPeri],
                 dialogue = [
-                    new(AmWeth, "It's the thought that counts.")
+                    new(AmWeth, "It's the thought that counts."),
+                    new(AmPeri, "mad", "Try again.")
                 ]
             }},
             {"ArtifactResidualShotNoDamageWeth_Multi_1", new(){
@@ -500,9 +536,34 @@ internal class ArtifactDialogue : IRegisterable
                 whoDidThat = AmWethDeck,
                 maxDamageDealtToEnemyThisAction = 0,
                 oncePerRunTags = ["wethsResidualShotUseless"],
-                allPresent = [AmWeth],
+                allPresent = [AmWeth, AmPeri],
                 dialogue = [
-                    new(AmWeth, "explain", "Better than not having it.")
+                    new(AmWeth, "explain", "Better than not having it."),
+                    new(AmPeri, "squint", "Not very helpful either.")
+                ]
+            }},
+            {"ArtifactResidualShotNoDamageWeth_Multi_2", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(ResidualShot)],
+                whoDidThat = Deck.peri,
+                maxDamageDealtToEnemyThisAction = 0,
+                oncePerRunTags = ["perisResidualShotUseless"],
+                allPresent = [AmWeth, AmPeri],
+                dialogue = [
+                    new(AmPeri, "mad", "What was that?!"),
+                    new(AmWeth, "explain", "You missing.")
+                ]
+            }},
+            {"ArtifactResidualShotNoDamageWeth_Multi_3", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(ResidualShot)],
+                whoDidThat = Deck.peri,
+                maxDamageDealtToEnemyThisAction = 0,
+                oncePerRunTags = ["perisResidualShotUseless"],
+                allPresent = [AmWeth, AmPeri],
+                dialogue = [
+                    new(AmPeri, "mad", "Who tampered with the cannon?"),
+                    new(AmWeth, "Don't blame the equipment.")
                 ]
             }},
             {"ArtifactCannonRechargeWeth_Multi_0", new(){
@@ -524,9 +585,100 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRun = true,
                 priority = true,
                 oncePerCombatTags = ["CannonRechargeTag"],
-                allPresent = [AmWeth],
+                allPresent = [AmWeth, AmCat],
                 dialogue = [
-                    new(AmWeth, "Next shot should be shocking!")
+                    new(AmWeth, "lockedin", "Next shot should be shocking!"),
+                    new(AmCat, "squint", "Get out.")
+                ]
+            }},
+            {"ArtifactMadcapChargeWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(MadcapCharge)],
+                whoDidThat = Deck.dizzy,
+                oncePerRunTags = ["Madcapper"],
+                lookup = ["madcapped"],
+                allPresent = [AmWeth, AmDizzy],
+                dialogue = [
+                    new(AmDizzy, "Your turn."),
+                    new(AmWeth, "Tag team!")
+                ]
+            }},
+            {"ArtifactMadcapChargeWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(MadcapCharge)],
+                whoDidThat = Deck.dizzy,
+                oncePerRunTags = ["Madcapper"],
+                lookup = ["madcapped"],
+                allPresent = [AmWeth, AmDizzy],
+                dialogue = [
+                    new(AmDizzy, "Let 'er rip!"),
+                    new(AmWeth, "lockedin", "Yessir!")
+                ]
+            }},
+            {"ArtifactSprintSprintBabyWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(PowerSprint)],
+                oncePerRunTags = ["SprintToTheEnd"],
+                lookup = ["sprintmobiled"],
+                allPresent = [AmWeth, AmRiggs],
+                dialogue = [
+                    new(AmRiggs, "squint", "Hey, where did the power go?"),
+                    new(AmWeth, "Guns ready!")
+                ]
+            }},
+            {"ArtifactSprintSprintBabyWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(PowerSprint)],
+                oncePerRunTags = ["SprintToTheEnd"],
+                lookup = ["sprintmobiled"],
+                allPresent = [AmWeth, AmRiggs],
+                dialogue = [
+                    new(AmRiggs, "squint", "Hey, I was gonna use that."),
+                    new(AmWeth, "lockedin", "Mine now.")
+                ]
+            }},
+            {"ArtifactPyeorocanonWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(PyroCannon)],
+                oncePerRunTags = ["PyroGoBoom"],
+                lastTurnPlayerStatuses = [Status.heat],
+                allPresent = [AmWeth, AmDrake],
+                dialogue = [
+                    new(AmWeth, "squint", "Did I connect this right?"),
+                    new(AmDrake, "I dunno, but heat equals more power now!")
+                ]
+            }},
+            {"ArtifactPyeorocanonWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(PyroCannon)],
+                oncePerRunTags = ["PyroGoBoom"],
+                lastTurnPlayerStatuses = [Status.heat],
+                allPresent = [AmWeth, AmDrake],
+                dialogue = [
+                    new(AmDrake, "sly", "I just do what I usually do and you get more power, right?"),
+                    new(AmWeth, "panic", "I fear I've made a critical mistake."),
+                ]
+            }},
+            // {"ArtifactHiddenGamWeth_Multi_0", new(){
+            //     type = NodeType.combat,
+            //     hasArtifactTypes = [typeof(HiddenGem)],
+            //     oncePerRunTags = ["oohshiny"],
+
+            //     allPresent = [AmWeth, AmMax],
+            //     dialogue = [
+            //         new(AmMax, "Hey Weth, look what I found!"),
+            //         new(AmWeth, "Don't bring that near me.")
+            //     ]
+            // }},
+            {"ArtifactMoPowahBabyWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(PowerCrystals)],
+                oncePerRunTags = ["crystalweth"],
+                lastTurnPlayerStatuses = [ Status.shard ],
+                allPresent = [AmWeth, AmBooks],
+                dialogue = [
+                    new(AmBooks, "Wow! These shards are vibrating!"),
+                    new(AmWeth, "Quick! Load them into the cannon!")
                 ]
             }},
         });

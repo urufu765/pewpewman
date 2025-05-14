@@ -9,7 +9,7 @@ using Nickel;
 namespace Weth.External;
 
 /**
-ver.0.15
+ver.0.16
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -526,7 +526,7 @@ public class LocalDB
 
         foreach (KeyValuePair<string, DialogueMachine> dm in storyStuff)
         {
-            ExistenceChecker(dm);
+            //ExistenceChecker(dm);
 
             // Tries to add the dialogue in the local locale local locale thing
             if (!ModdedStoryLocale[modKey][locale].all.TryAdd(dm.Key, dm.Value))
@@ -551,8 +551,6 @@ public class LocalDB
 
         foreach (KeyValuePair<string, DialogueMachine> dm in storyStuff)
         {
-            ExistenceChecker(dm);
-
             // Tries to add the dialogue in the local locale local locale thing
             if (!LocalStoryLocale[locale].all.TryAdd(dm.Key, dm.Value))
             {
@@ -561,89 +559,94 @@ public class LocalDB
         }
     }
 
-    private static void ExistenceChecker(KeyValuePair<string, DialogueMachine> dm)
+    private static void ExistenceChecker(KeyValuePair<string, StoryNode> sn)
     {
+        if (!FeatureFlags.Debug) return;
         // Checks if the inputted artifact is a valid one that the game can check
-        if (dm.Value.hasArtifacts is not null)
+        if (sn.Value.hasArtifacts is not null)
         {
-            foreach (string artifact in dm.Value.hasArtifacts)
+            foreach (string artifact in sn.Value.hasArtifacts)
             {
                 if (!DialogueMachine.ArtifactExists(artifact, Inst))
                 {
-                    Inst.Logger.LogWarning(dm.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                    Inst.Logger.LogWarning(sn.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
                 }
             }
         }
-        if (dm.Value.doesNotHaveArtifacts is not null)
+        if (sn.Value.doesNotHaveArtifacts is not null)
         {
-            foreach (string artifact in dm.Value.doesNotHaveArtifacts)
+            foreach (string artifact in sn.Value.doesNotHaveArtifacts)
             {
                 if (!DialogueMachine.ArtifactExists(artifact, Inst))
                 {
-                    Inst.Logger.LogWarning(dm.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                    Inst.Logger.LogWarning(sn.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
                 }
             }
         }
 
         // Checks if the inputted character is a valid one
-        if (dm.Value.allPresent is not null)
+        if (sn.Value.allPresent is not null)
         {
-            foreach (string characer in dm.Value.allPresent)
+            foreach (string characer in sn.Value.allPresent)
             {
                 if (!DialogueMachine.CharExists(characer, Inst))
                 {
-                    Inst.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                    Inst.Logger.LogWarning(sn.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
                 }
             }
         }
-        if (dm.Value.nonePresent is not null)
+        if (sn.Value.nonePresent is not null)
         {
-            foreach (string characer in dm.Value.nonePresent)
+            foreach (string characer in sn.Value.nonePresent)
             {
                 if (!DialogueMachine.CharExists(characer, Inst))
                 {
-                    Inst.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                    Inst.Logger.LogWarning(sn.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
                 }
             }
         }
 
-        // Checks whether the who part in the edit or dialogues is not typo-d
-        if (dm.Value.edit is not null)
+        if (sn.Value is DialogueMachine dm)
         {
-            foreach (EditThing et in dm.Value.edit)
+            // Checks whether the who part in the edit or dialogues is not typo-d
+            if (dm.edit is not null)
             {
-                if (et.who is not null && !DialogueMachine.CharExists(et.who, Inst))
+                foreach (EditThing et in dm.edit)
                 {
-                    Inst.Logger.LogWarning(dm.Key + "'s <edit> contains a line with an invalid character [" + et.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
-                }
-            }
-        }
-        else if (dm.Value.dialogue is not null)
-        {
-            foreach (DialogueThing dt in dm.Value.dialogue)
-            {
-                if (dt.saySwitch is not null)
-                {
-                    foreach (DialogueThing dtss in dt.saySwitch)
+                    if (et.who is not null && !DialogueMachine.CharExists(et.who, Inst))
                     {
-                        if (dtss.who is not null && !DialogueMachine.CharExists(dtss.who, Inst))
-                        {
-                            Inst.Logger.LogWarning(dm.Key + "'s <dialogue(sayswitch)> contains a line with an invalid character [" + dtss.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
-                        }
+                        Inst.Logger.LogWarning(sn.Key + "'s <edit> contains a line with an invalid character [" + et.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
                     }
                 }
-                else if (dt.who is not null && !DialogueMachine.CharExists(dt.who, Inst))
+            }
+            else if (dm.dialogue is not null)
+            {
+                foreach (DialogueThing dt in dm.dialogue)
                 {
-                    Inst.Logger.LogWarning(dm.Key + "'s <dialogue> contains a line with an invalid character [" + dt.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                    if (dt.saySwitch is not null)
+                    {
+                        foreach (DialogueThing dtss in dt.saySwitch)
+                        {
+                            if (dtss.who is not null && !DialogueMachine.CharExists(dtss.who, Inst))
+                            {
+                                Inst.Logger.LogWarning(sn.Key + "'s <dialogue(sayswitch)> contains a line with an invalid character [" + dtss.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                            }
+                        }
+                    }
+                    else if (dt.who is not null && !DialogueMachine.CharExists(dt.who, Inst))
+                    {
+                        Inst.Logger.LogWarning(sn.Key + "'s <dialogue> contains a line with an invalid character [" + dt.who + "] that may not be recognized by the game! Did you spell the character correctly? (or if it's a modded character: the mod isn't loaded or is a modded enemy.)");
+                    }
                 }
+            }
+
+            // Checks if the edit dialogue thing's key is valid
+            if (dm.edit is not null && !DB.story.all.ContainsKey(sn.Key))
+            {
+                Inst.Logger.LogWarning(sn.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
             }
         }
 
-        // Checks if the edit dialogue thing's key is valid
-        if (dm.Value.edit is not null && !DB.story.all.ContainsKey(dm.Key))
-        {
-            Inst.Logger.LogWarning(dm.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
-        }
     }
 
     /// <summary>
@@ -659,6 +662,7 @@ public class LocalDB
             // Convert all custom DialogueThings from DialogueMachine to StoryNode lines
             if (sn.Value is DialogueMachine dm)
             {
+                ExistenceChecker(sn);
                 dm.Convert(Inst);
                 editMode = dm.edit is not null;
             }

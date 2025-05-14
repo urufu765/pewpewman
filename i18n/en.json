@@ -169,7 +169,7 @@
             },
             "PowerCrystals": {
                 "name": "POWER CRYSTALS",
-                "desc": "Whenever you gain <c=status>PULSEDRIVE</c>, gain <c=status>SHARD</c> instead. Increase attack damage by the amount of <c=status>SHARD</c> you have.\n<c=downside>Lose 1 <c=status>SHARD</c> at start of turn</c>"
+                "desc": "Whenever you gain <c=status>PULSEDRIVE</c>, gain <c=status>SHARD</c> instead. Increase attack damage by the amount of <c=status>SHARD</c> you have.\n<c=downside>Lose 1 <c=status>SHARD</c> at start of turn.</c>"
             },
             "PyroCannon": {
                 "name": "PYRO-CANNON",

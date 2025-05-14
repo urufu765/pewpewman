@@ -55,6 +55,11 @@ public class Feral : Card, IRegisterable, IHasCustomCardTraits
         {
             Upgrade.B => 
             [
+                // new AAttack
+                // {
+                //     damage = GetDmg(s, 1),
+                //     fast = true
+                // },
                 new AAttack
                 {
                     damage = GetDmg(s, 1),
@@ -62,39 +67,38 @@ public class Feral : Card, IRegisterable, IHasCustomCardTraits
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1),
-                    fast = true
-                },
-                new AAttack
-                {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 2),
                     stunEnemy = true,
                     fast = true
                 },
             ],
             Upgrade.A => 
             [
+                // new AAttack
+                // {
+                //     damage = GetDmg(s, 1),
+                //     piercing = true,
+                //     fast = true
+                // },
                 new AAttack
                 {
                     damage = GetDmg(s, 1),
-                    piercing = true,
                     fast = true
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1),
-                    piercing = true,
-                    fast = true
-                },
-                new AAttack
-                {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 2),
                     piercing = true,
                     fast = true
                 },            
             ],
             _ => 
             [
+                // new AAttack
+                // {
+                //     damage = GetDmg(s, 1),
+                //     fast = true
+                // },
                 new AAttack
                 {
                     damage = GetDmg(s, 1),
@@ -102,12 +106,7 @@ public class Feral : Card, IRegisterable, IHasCustomCardTraits
                 },
                 new AAttack
                 {
-                    damage = GetDmg(s, 1),
-                    fast = true
-                },
-                new AAttack
-                {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 2),
                     fast = true
                 },
             ],
