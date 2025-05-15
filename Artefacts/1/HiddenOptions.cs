@@ -45,4 +45,12 @@ public class HiddenOptions : Artifact
             artifactType = $"{ModEntry.Instance.UniqueName}::{GetType().Name}",
         });
     }
+
+    public override void OnCombatStart(State state, Combat combat)
+    {
+        combat.QueueImmediate(new ALoseArtifact
+        {
+            artifactType = $"{ModEntry.Instance.UniqueName}::{GetType().Name}",
+        });
+    }
 }

@@ -75,12 +75,12 @@ internal class MemoryDialogue : IRegisterable
                     new(AmVoid, "I don't expect you to be.", true),
                     new(AmWeth, "up", "I... I haven't done all the things I wanted to do..."),
                     new(AmVoid, "You did what you could.", true),
-                    new(AmWeth, "crystalized", "..."),
+                    new(AmWeth, "crystallized", "..."),
                     new(AmVoid, "...", true),
                     new(AmVoid, "Rest well, little one.", true)
                 ]
             }},
-            {"Weth_Memory_1", new(){
+            {$"{AmWeth}_Memory_1", new(){
                 type = NodeType.@event,
                 introDelay = false,
                 bg = "BGVault",
@@ -112,14 +112,14 @@ internal class MemoryDialogue : IRegisterable
                     new(AmWeth, "pastputoutfire", "Fire!"),
                 ]
             }},
-            {"Weth_Memory_2", new(){
+            {$"{AmWeth}_Memory_2", new(){
                 type = NodeType.@event,
                 introDelay = false,
                 bg = "BGVault",
                 lookup = [
                     "vault", $"vault_{AmWeth}"
                 ],
-                requiredScenes = ["Weth_Memory_1"],
+                requiredScenes = [$"{AmWeth}_Memory_1"],
                 dialogue = [
                     new(""),
                     new(new Wait{secs = 2}),
@@ -143,14 +143,14 @@ internal class MemoryDialogue : IRegisterable
                     new(AmWeth, "pastplead", "Yes ma'am.")
                 ]
             }},
-            {"Weth_Memory_3", new(){
+            {$"{AmWeth}_Memory_3", new(){
                 type = NodeType.@event,
                 introDelay = false,
                 bg = "BGVault",
                 lookup = [
                     "vault", $"vault_{AmWeth}"
                 ],
-                requiredScenes = ["Weth_Memory_2"],
+                requiredScenes = [$"{AmWeth}_Memory_2"],
                 dialogue = [
                     new(""),
                     new(new Wait{secs = 2}),

@@ -54,7 +54,7 @@ public class TerminusMilestone : TheTerminus
 
     public override void OnCombatEnd(State state)
     {
-        ModEntry.Instance.Logger.LogInformation("Money GET");
+        //ModEntry.Instance.Logger.LogInformation("Money GET");
         List<CardAction> rewards = [];
         DetermineRewards(ref rewards);
         foreach (CardAction ca in rewards)

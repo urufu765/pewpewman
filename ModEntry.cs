@@ -36,6 +36,10 @@ internal class ModEntry : SimpleMod
     // internal ICardTraitEntry AutoSU { get; private set; } = null!;
     // internal Spr AutoSUSpr { get; private set; }
     //internal ICardTraitEntry AutoE { get; private set; } = null!;
+
+    public Spr WethEnd {get; private set;}
+    public Spr WethEndrot {get; private set;}
+    public Spr WethEndrotend {get; private set;}
     public Spr WethCommon { get; private set; }
     public Spr WethUncommon { get; private set; }
     public Spr WethRare { get; private set; }
@@ -196,14 +200,15 @@ internal class ModEntry : SimpleMod
         typeof(EventDialogue),
         typeof(CombatDialogue),
         typeof(ArtifactDialogue),
-        typeof(CardDialogue)
+        typeof(CardDialogue),
+        typeof(MemoryDialogue)
     ];
     private static IEnumerable<Type> AllRegisterableTypes =
         WethCardTypes
             .Concat(WethDialogues);
 
     private static List<string> Weth1Anims = [
-        //"crystallized", MEMORY ONLY
+        "crystallized",
         "gameover",
         "mini",
         "placeholder",
@@ -215,29 +220,28 @@ internal class ModEntry : SimpleMod
         "sodashakedown",
         "sodashakeup",
         "traumatised",
-        //"pastwait",  (tom and jerry Tom looking up from newspaper kind of face)
+        "pastwait",
     ];
     private static List<string> Weth3Anims = [
         "cryingcat",
         "crystal",
         "crystallolipop",
-        //"down",  (mumbling, crystallization advances) MEMORY ONLY
+        "down",
         "facepalm",
         "lockedin",
         "mad",
         "touch",
         "yay",
-        //"pastscream",
-        //"pastfacepalm",
-        //"pastlockedin",
-        //"pastmad",
-        //"pasteyeroll",
-        //"pastdonewithit",
-        //"pastsilly",
+        "up",
+        "pastscream",
+        "pastfacepalm",
+        "pastlockedin",
+        "pastmad",
+        "pastsilly",
     ];
     private static List<string> Weth4Anims = [
-        "pain"
-        //"pastsurprise",
+        "pain",
+        "pastsurprise",
     ];
     private static List<string> Weth5Anims = [
         "apple",
@@ -249,17 +253,18 @@ internal class ModEntry : SimpleMod
         "sparkle",
         "squint",
         "tired",
-        //"up",  (Baby doll eyes, almost crystallized) MEMORY ONLY
-        //"pastneutral",
-        //"pastsquint",
-        //"pastplead",
-        //"pastexplain",
-        //"pastsparkle",
-        //"pasttired",
-        //"pasthappy",
+        "pastneutral",
+        "pastsquint",
+        "pastplead",
+        "pastexplain",
+        "pasteyeroll",
+        "pastsparkle",
+        "pasttired",
+        "pasthappy",
+        "pastdonewithit",
     ];
     private static List<string> Weth6Anims = [
-        //"pastputoutfire",  (every frame except the second is Weth lifting a fire extinghisher above her head. second frame is Weth slamming the fire extinguisher at the fire)
+        "pastputoutfire",
         //"maniac",  (ace attorney big evil dude from game 1, including the clapping)
     ];
     public readonly static IEnumerable<string> WethAnims =
@@ -354,7 +359,12 @@ internal class ModEntry : SimpleMod
         WethCommon = RegisterSprite(package, "assets/frame_wethcommon.png").Sprite;
         WethUncommon = RegisterSprite(package, "assets/frame_wethuncommon.png").Sprite;
         WethRare = RegisterSprite(package, "assets/frame_wethrare.png").Sprite;
-        
+        Vault.charsWithLore.Add(WethDeck.Deck);
+        WethEnd = RegisterSprite(package, "assets/Memry/weth_end.png").Sprite;
+        WethEndrot = RegisterSprite(package, "assets/Memry/weth1_end.png").Sprite;
+        WethEndrotend = RegisterSprite(package, "assets/Memry/weth2_end.png").Sprite;
+        BGRunWin.charFullBodySprites.Add(WethDeck.Deck, WethEnd);
+
         GoodieDeck = helper.Content.Decks.RegisterDeck("goodie", new DeckConfiguration
         {
             Definition = new DeckDef
@@ -586,6 +596,7 @@ internal class ModEntry : SimpleMod
         ChoiceRelicRewardOfYourRelicChoice.Apply(Harmony);
         ArtifactMadcapPartOperator.Apply(Harmony);
         ArtifactPowersprintEvadeOperator.Apply(Harmony);
+        WethEndingArtSwitcher.Apply(Harmony);
     }
 
     /*

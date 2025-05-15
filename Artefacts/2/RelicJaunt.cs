@@ -79,7 +79,7 @@ public class TerminusJaunt : TheTerminus
     {
         if (Mode == Terminus.Reward)
         {
-            ModEntry.Instance.Logger.LogInformation("Riches GET");
+            //ModEntry.Instance.Logger.LogInformation("Riches GET");
             state.rewardsQueue.Queue(new AArtifactOffering
             {
                 amount = 3,
@@ -89,7 +89,7 @@ public class TerminusJaunt : TheTerminus
         }
         if (Mode == Terminus.AltReward)
         {
-            ModEntry.Instance.Logger.LogInformation("Bonus Riches GET");
+            //ModEntry.Instance.Logger.LogInformation("Bonus Riches GET");
             state.rewardsQueue.Queue(new AArtifactOffering
             {
                 amount = 3,

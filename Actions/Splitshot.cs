@@ -389,7 +389,7 @@ public class ASplitshot : CardAction
             {
                 c.DestroyDroneAt(s, raycastResult.worldX, !targetPlayer);
             }
-            ModEntry.Instance.Logger.LogInformation("Split!");
+            //ModEntry.Instance.Logger.LogInformation("Split!");
             AAttack left = ConvertSplitToAttack(this);
             AAttack right = ConvertSplitToAttack(this);
             ModEntry.Instance.Helper.ModData.SetModData(left, "split", true);

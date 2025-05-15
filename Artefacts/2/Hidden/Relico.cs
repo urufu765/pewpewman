@@ -29,6 +29,14 @@ public class RelicShield : Artifact
         ArtifactRemoval(state);
     }
 
+    public override void OnCombatStart(State state, Combat combat)
+    {
+        combat.QueueImmediate(new ALoseArtifact
+        {
+            artifactType = $"{ModEntry.Instance.UniqueName}::{GetType().Name}",
+        });
+    }
+
     public override void OnRemoveArtifact(State state)
     {
         foreach (Artifact artifact in state.EnumerateAllArtifacts())

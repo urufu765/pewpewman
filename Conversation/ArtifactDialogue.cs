@@ -426,7 +426,7 @@ internal class ArtifactDialogue : IRegisterable
                     new(AmWeth, "There's always something new to discover from blowing up people you don't like.")
                 ]
             }},
-            { "ArtifactSpaceRelicsWeth_Multi_0", new(){
+            {"ArtifactSpaceRelicsWeth_Multi_0", new(){
                 type = NodeType.combat,
                 hasArtifactTypes = [typeof(SpaceRelics)],
                 turnStart = true,
@@ -437,7 +437,7 @@ internal class ArtifactDialogue : IRegisterable
                     new(AmWeth, "sparkle", "The shiny stuff is very shiny...")
                 ]
             }},
-            { "ArtifactSpaceRelicsWeth_Multi_1", new(){
+            {"ArtifactSpaceRelicsWeth_Multi_1", new(){
                 type = NodeType.combat,
                 hasArtifactTypes = [typeof(SpaceRelics)],
                 turnStart = true,
@@ -448,7 +448,7 @@ internal class ArtifactDialogue : IRegisterable
                     new(AmWeth, "The ship already feels like it's running better.")
                 ]
             }},
-            { "ArtifactSpaceRelicsWeth_Multi_2", new(){
+            {"ArtifactSpaceRelicsWeth_Multi_2", new(){
                 type = NodeType.combat,
                 hasArtifactTypes = [typeof(SpaceRelics)],
                 turnStart = true,
@@ -514,7 +514,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerCombatTags = ["rockPowerAdvice"],
                 allPresent = [AmWeth, AmIsaac],
                 dialogue = [
-                    new(AmWeth, "There might be something usable in even the least assuming lump of rock."),
+                    new(AmWeth, "There might be something usable in the rocks!"),
                     new(AmIsaac, "explains", "Took you long enough to figure that out.")
                 ]
             }},
