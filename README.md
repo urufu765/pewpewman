@@ -6,7 +6,8 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
-* *(0.3.29)*: Completed Memories & Extreme Violence B is all pierce and splitshots and reversed
+* *(0.3.30)*: Finish the other bg
+* **(0.3.29)**: Completed Memories & Extreme Violence B is all pierce and splitshots and reversed
 * **(0.3.28)**: Sprites?! + mini sprite fix (lacked earring) + CrisisCall sending cards in the wrong direction + silenced logs + Redundancy in artifact removal due to some events not letting artifact get removed
 * **(0.3.27)**: Oops! Memory! + polished SpaceRelic... oh god the sprites I have to make...
 * **(0.3.26)**: DM0.17: Uses preprocessor debug instaed && release version, Feral now does 2 damage.

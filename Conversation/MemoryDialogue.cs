@@ -83,62 +83,78 @@ internal class MemoryDialogue : IRegisterable
             {$"{AmWeth}_Memory_1", new(){
                 type = NodeType.@event,
                 introDelay = false,
-                bg = "BGVault",
+                bg = "BGWethCustomRings",
                 lookup = [
                     "vault", $"vault_{AmWeth}"
                 ],
                 dialogue = [
-                    new(""),
+                    new("T-100 days"),
                     new(new Wait{secs = 2}),
                     new(DMod.title),
                     new(new Wait{secs = 1}),
                     new(AmWeth, "pastneutral", "Here it is, the shipwreck yard."),
-                    new(AmWeth, "pastsquint", "And no signs of looting or anything. Imagine all the relics I can collect from these!"),
+                    new(new Wait{secs = 2}),
+                    new(AmWeth, "pastsquint", "And no signs of looting or anything."),
+                    new(AmWeth, "pasthappy", "Imagine all the relics I can collect from these!"),
                     new(AmWeth, "pastlockedin", "Hidden treasure, here I come!"),
-                    new(new Wait{secs = 1}),
+                    new(new Wait{secs = 2}),
+                    new(new BGAction{action = "rumble_on"}),
+                    new(new BGAction{action = "flash"}),
                     // Explosion
                     new(AmWeth, "pastsurprise", "..."),
                     new(AmWeth, "pastmad", "Dammit! Not again!"),
-                    new(AmWeth, "pastsquint", "Where's that fire extinguisher?"),
+                    new(AmWeth, "pastlookfor", "Where's that fire extinguisher?"),
                     new(new Wait{secs = 1}),
                     new(AmWeth, "pastfacepalm", "Man, what was I thinking."),
                     new(AmWeth, "pasteyeroll", "Oh, I'll just install these giant drills to make excavation easier!"),
                     new(AmWeth, "pastdonewithit", "That won't constantly set the engines on fire!"),
-                    new(new Wait{secs = 3}),
+                    new(new BGAction{action = "flash_weak"}),
+                    new(new Wait{secs = 1}),
                     new(AmWeth, "pastmad", "..."),
-                    new(AmWeth, "pastputoutfire", "Stop."),
-                    new(AmWeth, "pastputoutfire", "Being."),
-                    new(AmWeth, "pastputoutfire", "On."),
-                    new(AmWeth, "pastputoutfire", "Fire!"),
+                    new(new BGAction{action = "bonk"}),
+                    new(AmWeth, "pastputoutfire", "STOP."),
+                    new(new BGAction{action = "bonk"}),
+                    new(AmWeth, "pastputoutfire", "BEING."),
+                    new(new BGAction{action = "bonk"}),
+                    new(AmWeth, "pastputoutfire", "ON."),
+                    new(new BGAction{action = "bonk"}),
+                    new(AmWeth, "pastputoutfire", "FIRE!"),
                 ]
             }},
             {$"{AmWeth}_Memory_2", new(){
                 type = NodeType.@event,
                 introDelay = false,
-                bg = "BGVault",
+                bg = "BGShop",
                 lookup = [
                     "vault", $"vault_{AmWeth}"
                 ],
                 requiredScenes = [$"{AmWeth}_Memory_1"],
                 dialogue = [
-                    new(""),
+                    new("T-14 days"),
                     new(new Wait{secs = 2}),
                     new(DMod.title),
                     new(new Wait{secs = 1}),
                     new(AmWeth, "pastneutral", "So, can you fix it?"),
                     new(new Wait{secs = 1}),
-                    new(AmShopkeeper, "Nope!", true),
+                    new(AmShopkeeper, "explains", "Nope!", true),
                     new(AmWeth, "pastsurprise", "What?! Why not?"),
-                    new(AmWeth, "pastsquint", "This isn't my worst wreckage yet..."),
-                    new(AmWeth, "pastplead", "... I think..."),
+                    new(AmWeth, "pastneutral", "This isn't my worst wreckage yet..."),
+                    new(AmWeth, "pastsquint", "... I think..."),
                     new(AmShopkeeper, "I swear, you and your luck...", true),
                     new(AmShopkeeper , "You gotta stop doing this to your ship.", true),
                     new(AmWeth, "pastexplain", "Well the expeditions aren't gonna complete themselves."),
                     new(AmShopkeeper, "I don't think I've seen you complete an expedition without basically limping to the finish line.", true),
-                    new(AmShopkeeper, "This is the second time just this week too.", true),
+                    new([
+                        new(AmShopkeeper, "nervous", "This is the second time just this week too.", true),
+                        new(AmShopkeeper, "Your luck is gonna run out eventually.", true),
+                        new(AmShopkeeper, "explains", "You're also straining my inventory.", true)
+                    ]),
                     new(AmWeth, "pastsilly", "Aren't I your best customer?"),
                     new(AmShopkeeper, "...", true),
-                    new(AmWeth, "pastsilly", "..."),
+                    new([
+                        new(AmWeth, "pastcheese", "..."),
+                        new(AmWeth, "pastsilly", "..."),
+                    ]),
                     new(AmShopkeeper, "Find a better hobby.", true),
                     new(AmWeth, "pastplead", "Yes ma'am.")
                 ]
@@ -146,13 +162,14 @@ internal class MemoryDialogue : IRegisterable
             {$"{AmWeth}_Memory_3", new(){
                 type = NodeType.@event,
                 introDelay = false,
-                bg = "BGVault",
+                bg = "BGRunStart",
                 lookup = [
                     "vault", $"vault_{AmWeth}"
                 ],
                 requiredScenes = [$"{AmWeth}_Memory_2"],
                 dialogue = [
-                    new(""),
+                    new("T-10 minutes"),
+                    new(new SetBG{bg = "BGRunStart"}),
                     new(new Wait{secs = 2}),
                     new(DMod.title),
                     new(new Wait{secs = 3}),
@@ -169,19 +186,29 @@ internal class MemoryDialogue : IRegisterable
                     new(AmWeth, "pastsquint", "And it's a design I've never seen before..."),
                     new(AmWeth, "pasthappy", "Aw man, this brings me way back when I was a youngin!"),
                     new(AmWeth, "pasthappy", "..."),
-                    new(AmWeth, "pastlockedin", "They wouldn't mind if I get a closer look, right?"),
+                    new(AmWeth, "pasthappy", "They wouldn't mind if I get a closer look, right?"),
+                    new(new Wait{secs = 1}),  // scene transition
+                    new(new SetBG{bg = "BGVault"}),
                     new(new Wait{secs = 2}),  // scene transition
                     new(AmWeth, "pastsparkle", "WOAH! It's even cooler close up!"),
-                    new(AmWeth, "pastneutral", "I'm so glad I installed that stealth kit a while back..."),
+                    new(AmWeth, "pasthappy", "I'm so glad I installed that stealth kit a while back..."),
                     new(AmWeth, "pastwait", "..."),
-                    new(AmWeth, "pastsquint", "..."),
-                    new(AmWeth, "pastsquint", "..."),
+                    new(AmWeth, "pastglare", "..."),
+                    new(AmWeth, "pastglareoffscreen", "..."),
+                    new(AmWeth, "pastnotpresent", "..."),
+                    new(AmWeth, "pastglareoffscreenextinguisher", "..."),
+                    new(AmWeth, "pastglarewithextinguisher", "..."),
+                    new(AmWeth, "pastglarewithextinguisher", "..."),
                     new(AmWeth, "pastexplain", "Okay it didn't catch on fire."),
                     // Explosion
+                    new(new BGAction{action = "rumble_on"}),
                     new(AmWeth, "pastsurprise", "What was that?!"),
                     // crystal crash into Weth
+                    new(new BGAction{action = "kill_sound_on"}),
                     new(AmWeth, "pastscream", "AAAAAAAAAAAAAAAAAGH!"),  // Clutching her left eye
-                    new("")  // T-0s
+                    new(new BGAction{action = "title_card_on"}),
+                    new("<c=downside>T-0 seconds</c>"),  // T-0s
+                    new(new Wait{secs = 9})
                 ]
             }},
 

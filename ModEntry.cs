@@ -221,6 +221,13 @@ internal class ModEntry : SimpleMod
         "sodashakeup",
         "traumatised",
         "pastwait",
+        "pastcheese",
+        "pastglare",
+        "pastnotpresent",
+        "pastglareoffscreenextinguisher",
+        "pastglarewithextinguisher",
+        "pastglareoffscreen",
+        "outsidetest",
     ];
     private static List<string> Weth3Anims = [
         "cryingcat",
@@ -238,6 +245,7 @@ internal class ModEntry : SimpleMod
         "pastlockedin",
         "pastmad",
         "pastsilly",
+        "pastlookfor",
     ];
     private static List<string> Weth4Anims = [
         "pain",
@@ -364,6 +372,7 @@ internal class ModEntry : SimpleMod
         WethEndrot = RegisterSprite(package, "assets/Memry/weth1_end.png").Sprite;
         WethEndrotend = RegisterSprite(package, "assets/Memry/weth2_end.png").Sprite;
         BGRunWin.charFullBodySprites.Add(WethDeck.Deck, WethEnd);
+        DB.backgrounds.Add("BGWethCustomRings", typeof(BGWethRings));
 
         GoodieDeck = helper.Content.Decks.RegisterDeck("goodie", new DeckConfiguration
         {
