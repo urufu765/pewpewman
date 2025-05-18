@@ -89,7 +89,7 @@
         "Splitshot": {
             "name": "SPLITSHOT",
             "desc": "If attack hits a midrow object, the attack splits into two: one to the left and one to the right.",
-            "pierceDesc": "If attack hits a midrow object, the attack splits into three: one to the left, one center, one to the right."
+            "pierceDesc": "If attack hits a midrow object, the attack splits into three: one to the left, one center, one to the right. Ignores all shields and armor."
         },
         "Bayblast": {
             "name": "BAYBLAST",

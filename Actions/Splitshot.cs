@@ -377,7 +377,7 @@ public class ASplitshot : CardAction
                     artifact.Pulse();
                 }
             }
-            if (c.stuff[raycastResult.worldX].bubbleShield)
+            if (c.stuff[raycastResult.worldX].bubbleShield && !piercing)
             {
                 c.stuff[raycastResult.worldX].bubbleShield = false;
             }

@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.31)**: Splitshot aligns better with Attacks with pierce vs bubble behaviour
 * **(0.3.30)**: Memories completed yes & Extreme Violence B is all pierce and splitshots and reversed
 * **(0.3.29)**: Completed Memories and 1st bg
 * **(0.3.28)**: Sprites?! + mini sprite fix (lacked earring) + CrisisCall sending cards in the wrong direction + silenced logs + Redundancy in artifact removal due to some events not letting artifact get removed
