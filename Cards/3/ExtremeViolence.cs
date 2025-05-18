@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Nanoray.PluginManager;
 using Nickel;
+using Weth.Actions;
 
 namespace Weth.Cards;
 
@@ -66,31 +67,33 @@ public class ExtremeViolence : Card, IRegisterable
             // ],
             Upgrade.B => 
             [
-                new AAttack
+                new ASplitshot
                 {
-                    damage = GetDmg(s, 0),
+                    damage = GetDmg(s, 4),
                     piercing = true,
                     fast = true
                 },
-                new AAttack
+                new ASplitshot
                 {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 3),
+                    piercing = true,
                     fast = true
                 },
-                new AAttack
+                new ASplitshot
                 {
                     damage = GetDmg(s, 2),
                     piercing = true,
                     fast = true
                 },
-                new AAttack
+                new ASplitshot
                 {
-                    damage = GetDmg(s, 3),
+                    damage = GetDmg(s, 1),
+                    piercing = true,
                     fast = true
                 },
-                new AAttack
+                new ASplitshot
                 {
-                    damage = GetDmg(s, 4),
+                    damage = GetDmg(s, 0),
                     piercing = true,
                     fast = true
                 },

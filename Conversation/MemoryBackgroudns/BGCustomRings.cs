@@ -1,9 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using HarmonyLib;
-using Microsoft.Extensions.Logging;
-using static Weth.Dialogue.CommonDefinitions;
 
 namespace Weth.Dialogue;
 
@@ -33,15 +28,16 @@ public class BGWethRings : BGRings
                 PlayerScreenDamage.OneShot();
                 g.state.shake += 0.5;
             }
-            Draw.Fill(new Color(1, 0.6, 0.4, 1.0).gain(Math.Max(0, rumbleTimer - halfPoint) / 8.0), BlendMode.Screen);
+            Draw.Fill(new Color(1, 0.6, 0.4).gain(Math.Max(0, rumbleTimer - halfPoint) / 8.0), BlendMode.Screen);
         }
         if (flashTimer > 0.0)
         {
             //g.state.shake += flashTimer;
-            Draw.Fill(new Color(1, 0.6, 0.4, 1.0).gain(flashTimer / 3.0), BlendMode.Screen);
-            Draw.Fill(new Color(1, 0.6, 0.4, 1.0).fadeAlpha(flashTimer / 4.0));
+            Draw.Fill(new Color(1, 0.6, 0.4).gain(flashTimer / 3.0), BlendMode.Screen);
+            Draw.Fill(new Color(1, 0.6, 0.4).fadeAlpha(flashTimer / 4.0));
             flashTimer -= g.dt;
         }
+        BGComponents.Letterbox();
     }
 
     public override void OnAction(State s, string action)

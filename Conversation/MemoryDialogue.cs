@@ -124,7 +124,7 @@ internal class MemoryDialogue : IRegisterable
             {$"{AmWeth}_Memory_2", new(){
                 type = NodeType.@event,
                 introDelay = false,
-                bg = "BGShop",
+                bg = "BGWethShop",
                 lookup = [
                     "vault", $"vault_{AmWeth}"
                 ],
@@ -162,51 +162,54 @@ internal class MemoryDialogue : IRegisterable
             {$"{AmWeth}_Memory_3", new(){
                 type = NodeType.@event,
                 introDelay = false,
-                bg = "BGRunStart",
+                bg = "BGWethVault",
                 lookup = [
                     "vault", $"vault_{AmWeth}"
                 ],
                 requiredScenes = [$"{AmWeth}_Memory_2"],
                 dialogue = [
                     new("T-10 minutes"),
-                    new(new SetBG{bg = "BGRunStart"}),
                     new(new Wait{secs = 2}),
                     new(DMod.title),
                     new(new Wait{secs = 3}),
                     new(AmWeth, "pastsparkle", "Woah!"),
                     new(AmWeth, "pastsparkle", "Who knew the universe was this pretty?"),
-                    new(new Wait{secs = 2}),
-                    new(AmWeth, "pastneutral", "I was so focused on looking for treasure that I've missed the most important thing in a journey."),
-                    new(AmWeth, "pastexplain", "The journey."),
+                    new(new Wait{secs = 1}),
+                    new(AmWeth, "pastneutral", "I can't believe I've failed to realize that I have been missing out on the most important aspect of discovery until now."),
+                    new(AmWeth, "pastexplain", "The journey itself."),
                     new(AmWeth, "pasttired", "..."),
                     new(AmWeth, "pastsquint", "Is there a gasleak somewhere? Or was I always this delusional?"),
+                    new(new BGAction{action = "peek"}),
                     new(new Wait{secs = 2}),
                     new(AmWeth, "pastneutral", "Hey? What's that?"),
                     new(AmWeth, "pastsurprise", "Woah! That's a big ship!"),
                     new(AmWeth, "pastsquint", "And it's a design I've never seen before..."),
-                    new(AmWeth, "pasthappy", "Aw man, this brings me way back when I was a youngin!"),
+                    new(AmWeth, "pasthappy", "Aw man, this brings me way back when I was a youngin' venturing the docks to look at ships!"),
                     new(AmWeth, "pasthappy", "..."),
                     new(AmWeth, "pasthappy", "They wouldn't mind if I get a closer look, right?"),
-                    new(new Wait{secs = 1}),  // scene transition
-                    new(new SetBG{bg = "BGVault"}),
-                    new(new Wait{secs = 2}),  // scene transition
+                    new(new BGAction{action = "transition"}),
+                    new(new Wait{secs = 5}),  // scene transition
                     new(AmWeth, "pastsparkle", "WOAH! It's even cooler close up!"),
                     new(AmWeth, "pasthappy", "I'm so glad I installed that stealth kit a while back..."),
                     new(AmWeth, "pastwait", "..."),
-                    new(AmWeth, "pastglare", "..."),
-                    new(AmWeth, "pastglareoffscreen", "..."),
-                    new(AmWeth, "pastnotpresent", "..."),
-                    new(AmWeth, "pastglareoffscreenextinguisher", "..."),
+                    new(new BGAction{action = "auto_advance_on"}),
+                    new(AmWeth, "pastglare", "...", delay: 1),
+                    new(AmWeth, "pastglareoffscreen", "...", delay: 1),
+                    new(AmWeth, "pastnotpresent", "...", delay: 1),
+                    new(AmWeth, "pastglareoffscreenextinguisher", "...", delay: 1),
+                    new(new BGAction{action = "auto_advance_off"}),
                     new(AmWeth, "pastglarewithextinguisher", "..."),
-                    new(AmWeth, "pastglarewithextinguisher", "..."),
-                    new(AmWeth, "pastexplain", "Okay it didn't catch on fire."),
+                    new(AmWeth, "pastexhausted", "Okay good, it didn't catch on fire."),
                     // Explosion
                     new(new BGAction{action = "rumble_on"}),
-                    new(AmWeth, "pastsurprise", "What was that?!"),
+                    new(AmWeth, "pastneutral", "Huh? What's happening?"),
                     // crystal crash into Weth
-                    new(new BGAction{action = "kill_sound_on"}),
-                    new(AmWeth, "pastscream", "AAAAAAAAAAAAAAAAAGH!"),  // Clutching her left eye
-                    new(new BGAction{action = "title_card_on"}),
+                    new(new BGAction{action = "rumble_intensify"}),
+                    new(new Wait{secs = 0.7}),
+                    new(new BGAction{action = "shard"}),
+                    new(new Wait{secs = 0.3}),
+                    new(AmWeth, "pastscream", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!"),  // Clutching her left eye
+                    new(new BGAction{action = "stop"}),
                     new("<c=downside>T-0 seconds</c>"),  // T-0s
                     new(new Wait{secs = 9})
                 ]

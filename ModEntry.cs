@@ -246,6 +246,7 @@ internal class ModEntry : SimpleMod
         "pastmad",
         "pastsilly",
         "pastlookfor",
+        "pastexhausted",
     ];
     private static List<string> Weth4Anims = [
         "pain",
@@ -373,6 +374,8 @@ internal class ModEntry : SimpleMod
         WethEndrotend = RegisterSprite(package, "assets/Memry/weth2_end.png").Sprite;
         BGRunWin.charFullBodySprites.Add(WethDeck.Deck, WethEnd);
         DB.backgrounds.Add("BGWethCustomRings", typeof(BGWethRings));
+        DB.backgrounds.Add("BGWethShop", typeof(BGWethShop));
+        DB.backgrounds.Add("BGWethVault", typeof(BGWethVault));
 
         GoodieDeck = helper.Content.Decks.RegisterDeck("goodie", new DeckConfiguration
         {
@@ -398,7 +401,7 @@ internal class ModEntry : SimpleMod
         GoodieMech = RegisterSprite(package, "assets/frame_goodiesmech.png").Sprite;
         GoodieMechA = RegisterSprite(package, "assets/frame_goodiesmechA.png").Sprite;
 
-        
+
         /*
          * Characters have required animations, recommended animations, and you have the option to add more.
          * In addition, they must be registered before the character themselves is registered.
@@ -470,7 +473,7 @@ internal class ModEntry : SimpleMod
                 new PulsedriveCard(),
                 new Puckshot(),
             ],
-            artifacts = 
+            artifacts =
             [
                 new TreasureHunter()
             ]
@@ -606,6 +609,7 @@ internal class ModEntry : SimpleMod
         ArtifactMadcapPartOperator.Apply(Harmony);
         ArtifactPowersprintEvadeOperator.Apply(Harmony);
         WethEndingArtSwitcher.Apply(Harmony);
+        WethForceAdvanceDialogue.Apply(Harmony);
     }
 
     /*
