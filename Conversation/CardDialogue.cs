@@ -3,9 +3,9 @@ using Nanoray.PluginManager;
 using Nickel;
 using Weth.Artifacts;
 using Weth.External;
-using static Weth.Dialogue.CommonDefinitions;
+using static Weth.Conversation.CommonDefinitions;
 
-namespace Weth.Dialogue;
+namespace Weth.Conversation;
 
 internal class CardDialogue : IRegisterable
 {
@@ -15,12 +15,12 @@ internal class CardDialogue : IRegisterable
         {
             {"CATsummonedWethCard_Multi_0", new(){
                 type = NodeType.combat,
+                allPresent = [AmCat],
+                lookup = ["summonWeth"],
+                oncePerCombatTags = ["summonWethTag"],
                 oncePerRun = true,
-                allPresent = [ AmCat ],
-                lookup = [ "summonWeth" ],
-                oncePerCombatTags = [ "summonWethTag" ],
                 dialogue = [
-                    new(AmCat, "We need more pew pew bang bang right about now.")
+                    new(AmCat, "squint", "Why do I suddenly feel like hoarding junk?")
                 ]
             }},
             {"CATsummonedWethCard_Multi_1", new(){

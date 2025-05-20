@@ -3,9 +3,9 @@ using Nanoray.PluginManager;
 using Nickel;
 using Weth.Artifacts;
 using Weth.External;
-using static Weth.Dialogue.CommonDefinitions;
+using static Weth.Conversation.CommonDefinitions;
 
-namespace Weth.Dialogue;
+namespace Weth.Conversation;
 
 internal class MemoryDialogue : IRegisterable
 {
@@ -80,7 +80,7 @@ internal class MemoryDialogue : IRegisterable
                     new(AmVoid, "Rest well, little one.", true)
                 ]
             }},
-            {$"{AmWeth}_Memory_1", new(){
+            {$"Weth_Memory_1", new(){
                 type = NodeType.@event,
                 introDelay = false,
                 bg = "BGWethCustomRings",
@@ -121,7 +121,7 @@ internal class MemoryDialogue : IRegisterable
                     new(AmWeth, "pastputoutfire", "FIRE!"),
                 ]
             }},
-            {$"{AmWeth}_Memory_2", new(){
+            {$"Weth_Memory_2", new(){
                 type = NodeType.@event,
                 introDelay = false,
                 bg = "BGWethShop",
@@ -159,7 +159,7 @@ internal class MemoryDialogue : IRegisterable
                     new(AmWeth, "pastplead", "Yes ma'am.")
                 ]
             }},
-            {$"{AmWeth}_Memory_3", new(){
+            {$"Weth_Memory_3", new(){
                 type = NodeType.@event,
                 introDelay = false,
                 bg = "BGWethVault",

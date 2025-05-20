@@ -4,7 +4,7 @@ using FMOD.Studio;
 using FSPRO;
 using Nickel;
 
-namespace Weth.Dialogue;
+namespace Weth.Conversation;
 
 public class BGWethRings : BGRings
 {

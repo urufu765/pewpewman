@@ -1,0 +1,296 @@
+using HarmonyLib;
+using Nickel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Weth.Artifacts;
+using Weth.Cards;
+using Weth.External;
+using Weth.Conversation;
+
+namespace Weth;
+
+internal partial class ModEntry : SimpleMod
+{
+    internal static ModEntry Instance { get; private set; } = null!;
+    internal static IPlayableCharacterEntryV2 WethTheSnep { get; private set; } = null!;
+    internal string UniqueName { get; private set; }
+    internal Harmony Harmony;
+    internal IKokoroApi KokoroApi;
+    internal IDeckEntry WethDeck;
+    internal IDeckEntry GoodieDeck;
+    public bool modDialogueInited;
+    private int _loadFrameBuffer = 3;
+    public bool WethFrameLoadAllowed
+    {
+        get => _loadFrameBuffer-- > 0;
+    }
+    internal IStatusEntry PulseStatus { get; private set; } = null!;
+    internal IStatusEntry UnknownStatus { get; private set; } = null!;
+    internal ISoundEntry JauntSlapSound { get; private set; }
+    internal ISoundEntry SodaOpening { get; private set; }
+    internal ISoundEntry SodaOpened { get; private set; }
+    internal ISoundEntry HitHullHit { get; private set; }
+    public Spr PulseQuestionMark { get; private set; }
+    // internal ICardTraitEntry AutoSU { get; private set; } = null!;
+    // internal Spr AutoSUSpr { get; private set; }
+    //internal ICardTraitEntry AutoE { get; private set; } = null!;
+
+    public Spr WethEnd { get; private set; }
+    public Spr WethEndrot { get; private set; }
+    public Spr WethEndrotend { get; private set; }
+    public Spr WethFramePast { get; private set; }
+    public Spr WethFrameA { get; private set; }
+    public Spr WethFrameB { get; private set; }
+    public Spr WethFrameC { get; private set; }
+    public Spr WethFrameOverlayA { get; private set; }
+    public Spr WethFrameOverlayB { get; private set; }
+    public Spr WethFrameOverlayC { get; private set; }
+    public Spr WethFrameGlowA { get; private set; }
+    public Spr WethFrameGlowB { get; private set; }
+    public Spr WethFrameGlowC { get; private set; }
+    public Spr WethCommon { get; private set; }
+    public Spr WethUncommon { get; private set; }
+    public Spr WethRare { get; private set; }
+    public Spr GoodieCrystal { get; private set; }
+    public Spr GoodieCrystalA { get; private set; }
+    public Spr GoodieMech { get; private set; }
+    public Spr GoodieMechA { get; private set; }
+
+    public Spr SprArtTHDepleted { get; private set; }
+
+    public Spr SprArtTermMileCommon { get; private set; }
+    public Spr SprArtTermMileBoss { get; private set; }
+    public Spr SprArtTermMileRelic { get; private set; }
+
+    public Spr SprArtTermJActive { get; private set; }
+    public Spr SprArtTermJInactive { get; private set; }
+    public Spr SprArtTermJReward { get; private set; }
+    public Spr SprArtTermJAltReward { get; private set; }
+
+    public Spr SprArtMadcapDepleted { get; private set; }
+    public Spr SprArtPowerSprintDepleted { get; private set; }
+
+    public Spr SprSplitshot { get; private set; }
+    public Spr SprSplitshotFail { get; private set; }
+    public Spr SprSplitshotPiercing { get; private set; }
+    public Spr SprSplitshotPiercingFail { get; private set; }
+
+    public Spr SprBayBlast { get; private set; }
+    public Spr SprBayBlastFail { get; private set; }
+    public Spr SprBayBlastWide { get; private set; }
+    public Spr SprBayBlastWideFail { get; private set; }
+    public Spr SprBayBlastFlared { get; private set; }
+    public Spr SprBayBlastFlaredFail { get; private set; }
+    public Spr SprBayBlastGeneralFail { get; private set; }
+
+    public Spr SprGiantAsteroidIcon { get; private set; }
+    public Spr SprGiantAsteroid { get; private set; }
+    public Spr SprMegaAsteroidIcon { get; private set; }
+    public Spr SprMegaAsteroid { get; private set; }
+
+    internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
+    internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
+    internal IMoreDifficultiesApi? MoreDifficultiesApi { get; private set; } = null!;
+    internal IDuoArtifactsApi? DuoArtifactsApi { get; private set; } = null!;
+    public LocalDB localDB { get; set; } = null!;
+    
+    /*
+     * The following lists contain references to all types that will be registered to the game.
+     * All cards and artifacts must be registered before they may be used in the game.
+     * In theory only one collection could be used, containing all registerable types, but it is seperated this way for ease of organization.
+     */
+    private static List<Type> WethCommonCardTypes = [
+        typeof(WethExe),
+        typeof(TripleTap),
+        typeof(Puckshot),
+        typeof(SplitshotCard),
+        typeof(TrashDispenser),
+        typeof(CargoBlaster),
+        typeof(PulsedriveCard),
+        typeof(GiantTrash),
+        typeof(DoubleBlast),
+        typeof(Overcompensator),
+        typeof(MilkSoda),
+        typeof(Feral)
+    ];
+    private static List<Type> WethUncommonCardTypes = [
+        typeof(DoubleTap),
+        typeof(Disabler),
+        typeof(ScatterTrash),
+        typeof(Discovery),
+        typeof(Powershot),
+        typeof(Spreadshot),
+        typeof(Bloom),
+        typeof(FeralBlast),
+        typeof(MirageBlast)
+    ];
+    private static List<Type> WethRareCardTypes = [
+        typeof(UnstoppableForce),
+        typeof(PearlDispenser),
+        typeof(CrisisCall),
+        typeof(PowPow),
+        typeof(ExtremeViolence)
+    ];
+    private static List<Type> WethSpecialCardTypes = [
+        typeof(CryAhtack),
+        typeof(CryDuhfend),
+        typeof(CryCapacity),
+        typeof(CryEnergy),
+        typeof(CryEvade),
+        typeof(CryFlux),
+        typeof(CryShield),
+        typeof(CrySwap),
+        typeof(MechAhtack),
+        typeof(MechDuhfend),
+        typeof(MechEvade),
+        typeof(MechHull),
+        typeof(MechMine),
+        typeof(MechMissile),
+        typeof(MechDodge),
+        typeof(MechSwap),
+        typeof(CryPlaceholder),
+        typeof(MechPlaceholder)
+    ];
+    private static IEnumerable<Type> WethCardTypes =
+        WethCommonCardTypes
+            .Concat(WethUncommonCardTypes)
+            .Concat(WethRareCardTypes)
+            .Concat(WethSpecialCardTypes);
+
+    private static List<Type> WethCommonArtifacts = [
+        typeof(TreasureSeeker),
+        typeof(HiddenOptions),
+    ];
+    private static List<Type> WethBossArtifacts = [
+        typeof(HiddenOptions2),
+        typeof(TerminusMilestone),
+        typeof(TerminusJaunt)
+    ];
+    private static List<Type> WethEventArtifacts = [
+        typeof(TreasureHunter),
+        typeof(SpaceRelics)
+    ];
+    private static List<Type> WethSpecialArtifacts = [
+        typeof(RelicPulsedrive),
+        typeof(RelicAutododgeRight),
+        typeof(RelicBoost),
+        typeof(RelicDrawNextTurn),
+        typeof(RelicDroneShift),
+        typeof(RelicEnergyFragment),
+        typeof(RelicEvade),
+        typeof(RelicFlux),
+        typeof(RelicHermes),
+        typeof(RelicShard),
+        typeof(RelicShield),
+        typeof(RelicStunCharge),
+        typeof(RelicTempPayback),
+        typeof(RelicTempShield)
+    ];
+    private static List<Type> WethDuoArtifacts = [
+        typeof(CannonRecharge),  // CAT
+        typeof(ResidualShot),  // Peri
+        typeof(RockPower),  // Isaac
+        typeof(PowerCrystals),  // Books
+        typeof(PyroCannon),  // Drake
+        typeof(MadcapCharge),  // Dizzy
+        typeof(PowerSprint),  // Riggs
+        typeof(HiddenGem),  // Max
+    ];
+    private static IEnumerable<Type> WethArtifactTypes =
+        WethCommonArtifacts
+            .Concat(WethBossArtifacts)
+            .Concat(WethEventArtifacts)
+            .Concat(WethSpecialArtifacts)
+            .Concat(WethDuoArtifacts);
+
+    private static List<Type> WethDialogues = [
+        typeof(StoryDialogue),
+        typeof(EventDialogue),
+        typeof(CombatDialogue),
+        typeof(ArtifactDialogue),
+        typeof(CardDialogue),
+        typeof(MemoryDialogue)
+    ];
+    private static IEnumerable<Type> AllRegisterableTypes =
+        WethCardTypes
+            .Concat(WethDialogues);
+
+    private static List<string> Weth1Anims = [
+        "crystallized",
+        "gameover",
+        "mini",
+        "placeholder",
+        "sodadrink",
+        "sodagone",
+        "sodaexplode",
+        "sodaexplodeup",
+        "sodaexplodedown",
+        "sodashakedown",
+        "sodashakeup",
+        "traumatised",
+        "pastwait",
+        "pastcheese",
+        "pastglare",
+        "pastnotpresent",
+        "pastglareoffscreenextinguisher",
+        "pastglarewithextinguisher",
+        "pastglareoffscreen",
+        "outsidetest",
+    ];
+    private static List<string> Weth3Anims = [
+        "cryingcat",
+        "crystal",
+        "crystallolipop",
+        "down",
+        "facepalm",
+        "lockedin",
+        "mad",
+        "touch",
+        "yay",
+        "up",
+        "pastscream",
+        "pastfacepalm",
+        "pastlockedin",
+        "pastmad",
+        "pastsilly",
+        "pastlookfor",
+        "pastexhausted",
+    ];
+    private static List<string> Weth4Anims = [
+        "pain",
+        "pastsurprise",
+    ];
+    private static List<string> Weth5Anims = [
+        "apple",
+        "explain",
+        "neutral",
+        "panic",
+        "plead",
+        "sad",
+        "sparkle",
+        "squint",
+        "tired",
+        "pastneutral",
+        "pastsquint",
+        "pastplead",
+        "pastexplain",
+        "pasteyeroll",
+        "pastsparkle",
+        "pasttired",
+        "pasthappy",
+        "pastdonewithit",
+    ];
+    private static List<string> Weth6Anims = [
+        "pastputoutfire",
+        //"maniac",  (ace attorney big evil dude from game 1, including the clapping)
+    ];
+    public readonly static IEnumerable<string> WethAnims =
+        Weth1Anims
+            .Concat(Weth3Anims)
+            .Concat(Weth4Anims)
+            .Concat(Weth5Anims)
+            .Concat(Weth6Anims);
+
+    public static bool Patch_EnemyPack {get; private set;}
+}

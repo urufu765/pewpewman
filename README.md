@@ -10,12 +10,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
-* *(0.3.33)*: Changed all turquoise crystal sprites to time crystals to match themeing and changed Weth's frame such that each zone advances the crystal on the frame (and also has an overlay such that Weth's sprite doesn't go over it... maybe)
-  * No crystal: Memory only
-  * Triangle: Menus, zone 1, runwinwho1
-  * Infected Triangle: vault after runwinwho1, Zone 2, runwinwho2
-  * Out of control: vault after runwinwho2, Zone 3, runwinwho3
-  * Poke around where these changes happen, so you can update DB.charPanels
+* **(0.3.33)**: Changed all turquoise crystal sprites to time crystals to match themeing and changed Weth's frame such that each zone advances the crystal on the frame, and organised sprite folder and glowy crystal overlay
 * **(0.3.32)**: Added description for an upcoming duo and added a reply dialogue towards Illeana. Also added bang sfx to memory 1
 * **(0.3.31)**: Splitshot aligns better with Attacks with pierce vs bubble behaviour
 * **(0.3.30)**: Memories completed yes & Extreme Violence B is all pierce and splitshots and reversed

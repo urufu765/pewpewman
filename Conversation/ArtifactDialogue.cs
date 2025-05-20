@@ -3,9 +3,9 @@ using Nanoray.PluginManager;
 using Nickel;
 using Weth.Artifacts;
 using Weth.External;
-using static Weth.Dialogue.CommonDefinitions;
+using static Weth.Conversation.CommonDefinitions;
 
-namespace Weth.Dialogue;
+namespace Weth.Conversation;
 
 internal class ArtifactDialogue : IRegisterable
 {

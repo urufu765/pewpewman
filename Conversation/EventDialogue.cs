@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using Nanoray.PluginManager;
 using Nickel;
 using Weth.External;
-using static Weth.Dialogue.CommonDefinitions;
+using static Weth.Conversation.CommonDefinitions;
 
-namespace Weth.Dialogue;
+namespace Weth.Conversation;
 
 internal class EventDialogue : IRegisterable
 {

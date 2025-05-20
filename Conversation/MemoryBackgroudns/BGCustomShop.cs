@@ -1,4 +1,4 @@
-namespace Weth.Dialogue;
+namespace Weth.Conversation;
 
 public class BGWethShop : BGShop
 {

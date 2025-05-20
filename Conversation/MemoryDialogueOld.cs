@@ -1,6 +1,6 @@
-using static Weth.Dialogue.CommonDefinitions;
+using static Weth.Conversation.CommonDefinitions;
 
-namespace Weth.Dialogue;
+namespace Weth.Conversation;
 
 internal static class MemoryDialoguee
 {

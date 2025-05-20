@@ -52,6 +52,15 @@ public static class UhDuhHundo
     }
 }
 
+public static class Helpers
+{
+    public static double InverseLerp(double a, double b, double n)
+    {
+        if (a == b) return 0;
+        return Math.Clamp((n - a) / (b - a), 0, 1);
+    }
+}
+
 public class TTTTTTText : TTText
 {
     public TTTTTTText()

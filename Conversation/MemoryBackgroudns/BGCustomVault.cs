@@ -2,7 +2,7 @@ using System;
 using FMOD;
 using FSPRO;
 
-namespace Weth.Dialogue;
+namespace Weth.Conversation;
 
 public class BGWethVault : BG
 {
@@ -37,7 +37,7 @@ public class BGWethVault : BG
                 Mutil.Lerp(
                     G.screenSize.x,
                     400,
-                    InverseLerp(0, peekTransitionDuration, peekTransitionTimer)
+                    Helpers.InverseLerp(0, peekTransitionDuration, peekTransitionTimer)
                 ),
                 150,
                 ILerpEaseOut(0, transitionDuration, transitionTimer)
@@ -99,16 +99,10 @@ public class BGWethVault : BG
         }
     }
 
-    private static double InverseLerp(double a, double b, double n)
-    {
-        if (a == b) return 0;
-        return Math.Clamp((n - a) / (b - a), 0, 1);
-    }
-
     private static double ILerpEaseOut(double a, double b, double n)
     {
         if (a == b) return 0;
-        return Math.Sin(Mutil.Lerp(0, Math.PI/2, InverseLerp(a, b, n)));
+        return Math.Sin(Mutil.Lerp(0, Math.PI/2, Helpers.InverseLerp(a, b, n)));
     }
 
     public override void OnAction(State s, string action)
@@ -128,6 +122,7 @@ public class BGWethVault : BG
                 shardTimer = 1;
                 bangTimer = 1.5;
                 shardHit = true;
+                WethArtAndFrameSwitcher.SetWethCharFrame(1);
                 break;
             case "peek":
                 peekTransition = true;
