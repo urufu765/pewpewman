@@ -13,7 +13,27 @@ internal class CardDialogue : IRegisterable
     {
         LocalDB.DumpStoryToLocalLocale("en", new Dictionary<string, DialogueMachine>()
         {
-            {"MilkSodaBoom_0", new(){
+            {"CATsummonedWethCard_Multi_0", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                allPresent = [ AmCat ],
+                lookup = [ "summonWeth" ],
+                oncePerCombatTags = [ "summonWethTag" ],
+                dialogue = [
+                    new(AmCat, "We need more pew pew bang bang right about now.")
+                ]
+            }},
+            {"CATsummonedWethCard_Multi_1", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                allPresent = [ AmCat ],
+                lookup = [ "summonWeth" ],
+                oncePerCombatTags = [ "summonWethTag" ],
+                dialogue = [
+                    new(AmCat, "We need more pew pew bang bang right about now.")
+                ]
+            }},
+            { "MilkSodaBoom_0", new(){
                 type = NodeType.combat,
                 allPresent = [AmWeth],
                 lookup = ["shakeSodaBoom"],

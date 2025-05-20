@@ -1,7 +1,16 @@
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using Nickel;
 
 namespace Weth.Dialogue;
+
+/// <summary>
+/// For if a dialogue needs to be registered AFTER mods have been loaded
+/// </summary>
+internal interface IDialogueRegisterable
+{
+    static abstract void LateRegister();
+}
 
 static class CommonDefinitions
 {
@@ -23,6 +32,7 @@ static class CommonDefinitions
     internal const string AmStardog = "wolf";
     internal const string AmCrystalMiniboss = "crystal";
     internal const string AmWizbo = "wizard";
+    internal readonly static string AmIlleana = "urufudoggo.Illeana::illeana";
 
     internal static Status MissingWeth => ModEntry.WethTheSnep.MissingStatus.Status;
     internal static Status Pulsedrive => ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive;
@@ -40,6 +50,21 @@ static class CommonDefinitions
             return loopTag;
         }
         return "placeholder";
+    }
+
+    internal static Status TryGetMissing(this string who)
+    {
+        if (
+            who is not null &&
+            // ModEntry.Instance.Helper.Content.Decks.LookupByUniqueName(who) is IDeckEntry ide &&
+            // ModEntry.Instance.Helper.Content.Characters.V2.LookupByDeck(ide.Deck) is IPlayableCharacterEntryV2 ipce
+            ModEntry.Instance.Helper.Content.Characters.V2.LookupByUniqueName(who) is IPlayableCharacterEntryV2 ipce
+            )
+        {
+            return ipce.MissingStatus.Status;
+        }
+        ModEntry.Instance.Logger.LogWarning("Couldn't find a missing!");
+        return MissingWeth;
     }
 
 

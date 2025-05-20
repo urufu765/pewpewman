@@ -682,5 +682,16 @@ internal class ArtifactDialogue : IRegisterable
                 ]
             }},
         });
+
+        LocalDB.DumpStoryToLocalLocale("en", "urufudoggo.Illeana", new Dictionary<string, DialogueMachine>()
+        {
+            {"ArtifactForgedCertificate_Illeana_0", new(){
+                dialogue = [
+                    new(),
+                    new(AmWeth, "squint", "Hey, no?")
+                ]
+            }}
+        });
+
     }
 }

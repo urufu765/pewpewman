@@ -90,7 +90,7 @@ internal class MemoryDialogue : IRegisterable
                 dialogue = [
                     new("T-100 days"),
                     new(new Wait{secs = 2}),
-                    new(DMod.title),
+                    new(title: null),  // Clears title card
                     new(new Wait{secs = 1}),
                     new(AmWeth, "pastneutral", "Here it is, the shipwreck yard."),
                     new(new Wait{secs = 2}),
@@ -132,7 +132,7 @@ internal class MemoryDialogue : IRegisterable
                 dialogue = [
                     new("T-14 days"),
                     new(new Wait{secs = 2}),
-                    new(DMod.title),
+                    new(DMod.title),  // Also clears title card
                     new(new Wait{secs = 1}),
                     new(AmWeth, "pastneutral", "So, can you fix it?"),
                     new(new Wait{secs = 1}),
@@ -170,7 +170,7 @@ internal class MemoryDialogue : IRegisterable
                 dialogue = [
                     new("T-10 minutes"),
                     new(new Wait{secs = 2}),
-                    new(DMod.title),
+                    new(new TitleCard{empty = true}),  // Also ALSO clears title card
                     new(new Wait{secs = 3}),
                     new(AmWeth, "pastsparkle", "Woah!"),
                     new(AmWeth, "pastsparkle", "Who knew the universe was this pretty?"),

@@ -67,7 +67,7 @@ public class BGWethVault : BG
         if (bangTimer > 0)
         {
             g.state.shake += bangTimer;
-            Draw.Fill(new Color(1, 0.6, 0.4).fadeAlpha(bangTimer / 3));
+            Draw.Fill(new Color(1, 0.92, 0.85).fadeAlpha(bangTimer / 6));
             bangTimer = Math.Max(0, bangTimer - g.dt);
         }
 

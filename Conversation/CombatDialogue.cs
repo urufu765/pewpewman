@@ -8,7 +8,7 @@ using static Weth.Dialogue.CommonDefinitions;
 
 namespace Weth.Dialogue;
 
-internal class CombatDialogue : IRegisterable
+internal class CombatDialogue : IRegisterable, IDialogueRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -749,18 +749,33 @@ internal class CombatDialogue : IRegisterable
                     new(AmRiggs, "serious", "Umm?")
                 ]
             }},
+        });
+        LocalDB.DumpStoryToLocalLocale("en", "urufudoggo.Illeana", new Dictionary<string, DialogueMachine>()
+        {
+            {"IlleanaGotPerfect_Multi_0", new(){
+                dialogue = [
+                    new(),
+                    new(AmWeth, "explain", "I'd actually rather not.")
+                ]
+            }},
+        });
+    }
 
-
-            // {"ThatsALotOfDamageToThem_Weth_3", new(){
-            //     type = NodeType.combat,
-            //     playerShotJustHit = true,
-            //     minDamageDealtToEnemyThisTurn = 10,
-            //     allPresent = [AmWeth],
-            //     dialogue = [
-            //         new(AmWeth, "maniac", "AAAAAHAHAHAHAA!")
-            //     ]
-            // }},
-
+    public static void LateRegister()
+    {
+        LocalDB.DumpStoryToLocalLocale("en", "urufudoggo.Illeana", new Dictionary<string, DialogueMachine>()
+        {
+            {"IlleanaWentMissing_Weth_0", new(){
+                type = NodeType.combat,
+                allPresent = [AmWeth],
+                lastTurnPlayerStatuses = [AmIlleana.TryGetMissing()],
+                priority = true,
+                oncePerCombatTags = ["illeanaWentMissing"],
+                oncePerRun = true,
+                dialogue = [
+                    new(AmWeth, "panic", "Oh no! The snake, she's gone!")
+                ]
+            }},
         });
     }
 }

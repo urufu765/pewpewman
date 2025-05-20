@@ -190,6 +190,10 @@
             "HiddenGem": {
                 "name": "HIDDEN GEM",
                 "desc": "Choose 1 of 3 Uncommon <c=trait>non-temp</c> <c=card>Goodie</c>. Instead of <c=trait>Single Use</c>, it has <c=trait>Exhaust</c>.\nBypass any restrictions to gaining uncommon goodies."
+            },
+            "Refreshment": {
+                "name": "REFRESHMENT",
+                "desc": "Add a <c=card>Milk Soda</c> to your deck."
             }
         },
         "Boss": {

@@ -29,9 +29,10 @@ internal class ModEntry : SimpleMod
     public bool modDialogueInited;
     internal IStatusEntry PulseStatus { get; private set; } = null!;
     internal IStatusEntry UnknownStatus { get; private set; } = null!;
-    internal ISoundEntry JauntSlapSound { get; private set; } = null!;
-    internal ISoundEntry SodaOpening { get; private set; } = null!;
-    internal ISoundEntry SodaOpened { get; private set; } = null!;
+    internal ISoundEntry JauntSlapSound { get; private set; }
+    internal ISoundEntry SodaOpening { get; private set; }
+    internal ISoundEntry SodaOpened { get; private set; }
+    internal ISoundEntry HitHullHit { get; private set; }
     public Spr PulseQuestionMark { get; private set; }
     // internal ICardTraitEntry AutoSU { get; private set; } = null!;
     // internal Spr AutoSUSpr { get; private set; }
@@ -323,6 +324,8 @@ internal class ModEntry : SimpleMod
                     }
                 }
                 Patch_EnemyPack = helper.ModRegistry.LoadedMods.ContainsKey("TheJazMaster.EnemyPack");
+                foreach (Type type in WethDialogues)
+                    AccessTools.DeclaredMethod(type, nameof(IDialogueRegisterable.LateRegister))?.Invoke(null, null);
                 localDB = new(helper, package);
             }
         };
@@ -370,9 +373,9 @@ internal class ModEntry : SimpleMod
         WethRare = RegisterSprite(package, "assets/frame_wethrare.png").Sprite;
         Vault.charsWithLore.Add(WethDeck.Deck);
         WethEnd = RegisterSprite(package, "assets/Memry/weth_end.png").Sprite;
+        BGRunWin.charFullBodySprites.Add(WethDeck.Deck, WethEnd);
         WethEndrot = RegisterSprite(package, "assets/Memry/weth1_end.png").Sprite;
         WethEndrotend = RegisterSprite(package, "assets/Memry/weth2_end.png").Sprite;
-        BGRunWin.charFullBodySprites.Add(WethDeck.Deck, WethEnd);
         DB.backgrounds.Add("BGWethCustomRings", typeof(BGWethRings));
         DB.backgrounds.Add("BGWethShop", typeof(BGWethShop));
         DB.backgrounds.Add("BGWethVault", typeof(BGWethVault));
@@ -510,6 +513,7 @@ internal class ModEntry : SimpleMod
         JauntSlapSound = helper.Content.Audio.RegisterSound("spaceSlap", package.PackageRoot.GetRelativeFile("assets/SpaceSlap.wav"));
         SodaOpening = helper.Content.Audio.RegisterSound("sodaopening", package.PackageRoot.GetRelativeFile("assets/sodaopening.wav"));
         SodaOpened = helper.Content.Audio.RegisterSound("sodaopened", package.PackageRoot.GetRelativeFile("assets/sodaopen.wav"));
+        HitHullHit = helper.Content.Audio.RegisterSound("vanillahullhitbutvariablepitch", package.PackageRoot.GetRelativeFile("assets/HitsHurtSeparated.wav"));
         PulseQuestionMark = RegisterSprite(package, "assets/questionmark.png").Sprite;
 
         //JauntSlapSound = RegisterSound(package, "assets/SpaceSlap.wav");
