@@ -56,6 +56,7 @@ public class TerminusMilestone : TheTerminus
     {
         //ModEntry.Instance.Logger.LogInformation("Money GET");
         List<CardAction> rewards = [];
+        Counter += Points[EnemyType];
         DetermineRewards(ref rewards);
         foreach (CardAction ca in rewards)
         {
@@ -65,12 +66,11 @@ public class TerminusMilestone : TheTerminus
 
     private void DetermineRewards(ref List<CardAction> result, int stop = 0)
     {
-        if (stop > 1)
+        if (stop > 3)
         {
             ModEntry.Instance.Logger.LogInformation("Infinite Recursion Detected");
             return;
         }
-        Counter += Points[EnemyType];
         if (GiveCondition(true))
         {
             result.Add(Stage switch

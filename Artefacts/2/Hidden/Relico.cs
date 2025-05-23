@@ -19,12 +19,9 @@ public class RelicShield : Artifact
 
     public override void OnReceiveArtifact(State state)
     {
-        if (!state.EnumerateAllArtifacts().Any(x => x is SpaceRelics))
+        if (!state.EnumerateAllArtifacts().Any(x => x is SpaceRelics2))
         {
-            state.GetCurrentQueue().QueueImmediate(new AAddArtifact
-            {
-                artifact = new SpaceRelics()
-            });
+            state.GetCurrentQueue().QueueImmediate(new AWethSpaceRelicOffering());
         }
         ArtifactRemoval(state);
     }
@@ -41,7 +38,7 @@ public class RelicShield : Artifact
     {
         foreach (Artifact artifact in state.EnumerateAllArtifacts())
         {
-            if (artifact is SpaceRelics sr)
+            if (artifact is SpaceRelics2 sr)
             {
                 sr.ObtainRelic(GetThing());
                 //ModEntry.Instance.Logger.LogInformation("GotDaRelic!");

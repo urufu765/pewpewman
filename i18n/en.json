@@ -24,17 +24,37 @@
             "name": "Recoil",
             "desc": "The next {0} attacks will deal 1 less damage."
         },
+        "overdrive": {
+            "name": "OVERDRIVE",
+            "desc": "{0} <c=status>OVERDRIVE</c>"
+        },
+        "powerdrive": {
+            "name": "POWERDRIVE",
+            "desc": "{0} <c=status>POWERDRIVE</c>"
+        },
         "shield": {
             "name": "SHIELD",
             "desc": "{0} <c=status>SHIELD</c>"
+        },
+        "maxShield": {
+            "name": "MAX SHIELD",
+            "desc": "{0} <c=status>MAX SHIELD</c>"
         },
         "tempShield": {
             "name": "TEMP SHIELD",
             "desc": "{0} <c=status>TEMP SHIELD</c>"
         },
+        "perfectShield": {
+            "name": "PERFECT SHIELD",
+            "desc": "{0} <c=status>PERFECT SHIELD</c>"
+        },
         "hermes": {
             "name": "HERMES",
             "desc": "{0} <c=status>HERMES</c>"
+        },
+        "strafe": {
+            "name": "STRAFE",
+            "desc": "{0} <c=status>STRAFE</c>"
         },
         "evade": {
             "name": "EVADE",
@@ -44,6 +64,10 @@
             "name": "AUTODODGE R",
             "desc": "{0} <c=status>AUTODODGE R</c>"
         },
+        "ace": {
+            "name": "ACE",
+            "desc": "{0} <c=status>ACE</c>"
+        },
         "libra": {
             "name": "FLUX",
             "desc": "{0} <c=status>FLUX</c>"
@@ -52,9 +76,17 @@
             "name": "STUN CHARGE",
             "desc": "{0} <c=status>STUN CHARGE</c>"
         },
+        "stunSource": {
+            "name": "STUN SOURCE",
+            "desc": "{0} <c=status>STUN SOURCE</c>"
+        },
         "drawNextTurn": {
             "name": "DRAW NEXT TURN",
             "desc": "{0} <c=status>DRAW NEXT TURN</c>"
+        },
+        "energyNextTurn": {
+            "name": "ENERGY NEXT TURN",
+            "desc": "{0} <c=status>ENERGY NEXT TURN</c>"
         },
         "energyFragment": {
             "name": "ENERGY FRAGMENT",
@@ -64,6 +96,10 @@
             "name": "TEMPORARY PAYBACK",
             "desc": "{0} <c=status>TEMP PAYBACK</c>"
         },
+        "payback": {
+            "name": "PAYBACK",
+            "desc": "{0} <c=status>PAYBACK</c>"
+        },
         "droneShift": {
             "name": "DRONE SHIFT",
             "desc": "{0} <c=status>DRONE SHIFT</c>"
@@ -71,6 +107,14 @@
         "shard": {
             "name": "SHARD",
             "desc": "{0} <c=status>SHARD</c>"
+        },
+        "quarry": {
+            "name": "QUARRY",
+            "desc": "{0} <c=status>QUARRY</c>"
+        },
+        "maxShard": {
+            "name": "MAX SHARD",
+            "desc": "{0} <c=status>MAX SHARD</c>"
         },
         "boost": {
             "name": "BOOST",
@@ -276,6 +320,22 @@
             "RelicPulsedrive": {
                 "name": "RELIC: PULSEDIVE",
                 "desc": "Gain 1 <c=status>PULSEDIVE</c> at the start of combat."
+            },
+            "SpaceRelics2": {
+                "name": "COOL SPACE RELICS",
+                "desc": "<c=2a767d>Weth</c> found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nEach combat, gain:"
+            },
+            "SR2Crackling": {
+                "name": "CRACKLING SPACE RELICS",
+                "desc": "<c=2a767d>Weth</c> found unstable <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\n<c=keyword>Collect 3 of the same type of relic to upgrade the status!</c>\n<c=downside>Not eligible for: <c=status>EVADE</c>, <c=status>ENERGY FRAGMENT</c>, <c=status>DRONE SHIFT</c>, <c=status>BOOST</c>.</c>\nEach combat, gain:"
+            },
+            "SR2Subsuming": {
+                "name": "SUBSUMING SPACE RELICS",
+                "desc": "<c=2a767d>Weth</c> has collected some <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nEach turn (<c=keyword>until you run out</c>) gain 1 of:"
+            },
+            "SR2Focused": {
+                "name": "FOCUSED SPACE RELICS",
+                "desc": "<c=2a767d>Weth</c> is obsessed with <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\n<c=keyword>You will always be offered the type of relics you already have.</c>\n<c=downside>You can only have up to 3 different types.</c>\nEach combat, gain:"
             }
         },
         "Tooltips": {

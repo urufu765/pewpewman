@@ -98,15 +98,25 @@ public static class WethArtAndFrameSwitcher
     /// <param name="__instance"></param>
     private static void ReapplyFrameOnStartup(State __instance)
     {
-        if (ModEntry.Instance.WethFrameLoadAllowed)
+        try
         {
-            ModEntry.Instance.Logger.LogInformation("GITIT");
-            if (__instance.route is Dialogue d && AllMemories.Contains(d.ctx.script))
+            if (ModEntry.Instance is not null && ModEntry.Instance.WethFrameLoadAllowed)
             {
-                SetWethCharFrame();
-                return;
+                ModEntry.Instance.Logger.LogInformation("GITIT");
+                if (__instance.route is Dialogue d && AllMemories.Contains(d.ctx.script))
+                {
+                    SetWethCharFrame();
+                    return;
+                }
+                if (__instance.map is not null) SwitchTheFrame(__instance.map);
             }
-            if (__instance.map is not null) SwitchTheFrame(__instance.map);
+        }
+        catch (Exception err)
+        {
+            if (ModEntry.Instance?.Logger is not null)
+            {
+                ModEntry.Instance.Logger.LogError(err, "Huh?");
+            }
         }
     }
 

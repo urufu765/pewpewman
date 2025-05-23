@@ -169,7 +169,11 @@ internal partial class ModEntry : SimpleMod
     ];
     private static List<Type> WethEventArtifacts = [
         typeof(TreasureHunter),
-        typeof(SpaceRelics)
+        typeof(SpaceRelics),
+        typeof(SpaceRelics2),
+        typeof(SR2Crackling),
+        typeof(SR2Focused),
+        typeof(SR2Subsuming)
     ];
     private static List<Type> WethSpecialArtifacts = [
         typeof(RelicPulsedrive),

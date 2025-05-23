@@ -66,7 +66,7 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
 
         if (ignoreUncommonRestriction || overruleRestriction) restrictUncommon = false;
         List<Card> cardz = [];
-        bool uncommonOffered = HasUncommon(c);
+        bool uncommonOffered = HasUncommon(s, c);
         for (int x = 0; x < amount; x++)
         {
             bool rollUncommon = RolledUncommon(s.rngCardOfferingsMidcombat, betterOdds);
@@ -143,7 +143,7 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
         return Mutil.Roll(rng.Next(), (betterOdds? 0.67:0.75, false), (betterOdds?0.33:0.25, true));
     }
 
-    private static bool HasUncommon(Combat c)
+    private static bool HasUncommon(State s, Combat c)
     {
         foreach (Card card in c.discard)
         {
@@ -160,6 +160,13 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
             }
         }
         foreach (Card card in c.exhausted)
+        {
+            if (card.GetMeta().deck == ModEntry.Instance.GoodieDeck.Deck && (card.GetMeta().rarity == Rarity.uncommon))
+            {
+                return true;
+            }
+        }
+        foreach (Card card in s.deck)
         {
             if (card.GetMeta().deck == ModEntry.Instance.GoodieDeck.Deck && (card.GetMeta().rarity == Rarity.uncommon))
             {

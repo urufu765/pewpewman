@@ -10,6 +10,8 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* *(0.3.35)*: Remove Mine goodie, replace it with something else, glow borders
+* **(0.3.34)**: New SpaceRelic 2: Split it into four things! Also fixed Terminus: Milestones doing weird math (but arriving to the correct conclusion)
 * **(0.3.33)**: Changed all turquoise crystal sprites to time crystals to match themeing and changed Weth's frame such that each zone advances the crystal on the frame, and organised sprite folder and glowy crystal overlay
 * **(0.3.32)**: Added description for an upcoming duo and added a reply dialogue towards Illeana. Also added bang sfx to memory 1
 * **(0.3.31)**: Splitshot aligns better with Attacks with pierce vs bubble behaviour
