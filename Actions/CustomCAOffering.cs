@@ -5,7 +5,7 @@ namespace Weth.Actions;
 
 public class AWethCardOffering : CardAction
 {
-    public List<Card> cards = null!;
+    public List<Card> cards = [];
     public bool canSkip = false;
     public override Route? BeginWithRoute(G g, State s, Combat c)
     {

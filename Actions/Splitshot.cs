@@ -15,32 +15,7 @@ namespace Weth.Actions;
 
 public static class SplitshotTranspiler
 {
-    public static void Apply(Harmony harmony)
-    {
-        harmony.Patch(
-            original: typeof(AAttack).GetMethod("Begin", AccessTools.all),
-            transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(IgnoreMissingDroneCheck))
-        );
-        harmony.Patch(
-            original: typeof(AAttack).GetMethod("Begin", AccessTools.all),
-            transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(IgnoreDroneBloops))
-        );
-        harmony.Patch(
-            original: typeof(AAttack).GetMethod("Begin", AccessTools.all),
-            transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(DontDoDuplicateArtifactModifiers))
-        );
-        harmony.Patch(
-            original: typeof(Card).GetMethod("MakeAllActionIcons", AccessTools.all),
-            transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(RenderSplitshotAsAttack))
-        );
-        harmony.Patch(
-            original: typeof(Card).GetMethod("RenderAction", AccessTools.all),
-            prefix: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(IconRenderingStuff))
-        );
-            
-    }
-
-    private static IEnumerable<CodeInstruction> RenderSplitshotAsAttack(IEnumerable<CodeInstruction> instructions, ILGenerator il)
+    public static IEnumerable<CodeInstruction> RenderSplitshotAsAttack(IEnumerable<CodeInstruction> instructions, ILGenerator il)
     {
         try
         {
@@ -68,7 +43,7 @@ public static class SplitshotTranspiler
         }
     }
 
-    private static CardAction? FakeSplitshotAsAttack(CardAction? action)
+    public static CardAction? FakeSplitshotAsAttack(CardAction? action)
     {
         if (action is ASplitshot splitshot)
         {
@@ -77,7 +52,7 @@ public static class SplitshotTranspiler
         return action;
     }
 
-    private static IEnumerable<CodeInstruction> DontDoDuplicateArtifactModifiers(IEnumerable<CodeInstruction> instructions, ILGenerator il)
+    public static IEnumerable<CodeInstruction> DontDoDuplicateArtifactModifiers(IEnumerable<CodeInstruction> instructions, ILGenerator il)
     {
         try
         {
@@ -109,7 +84,7 @@ public static class SplitshotTranspiler
         }
     }
 
-    private static bool IconRenderingStuff(G g, State state, CardAction action, bool dontDraw, int shardAvailable, int stunChargeAvailable, int bubbleJuiceAvailable, ref int __result)
+    public static bool IconRenderingStuff(G g, State state, CardAction action, bool dontDraw, int shardAvailable, int stunChargeAvailable, int bubbleJuiceAvailable, ref int __result)
     {
         if (action is ASpawn spawn && spawn.thing is GiantAsteroid or MegaAsteroid)
         {
@@ -222,7 +197,7 @@ public static class SplitshotTranspiler
     /// <param name="instructions"></param>
     /// <param name="il"></param>
     /// <returns></returns>
-    private static IEnumerable<CodeInstruction> IgnoreMissingDroneCheck(IEnumerable<CodeInstruction> instructions, ILGenerator il)
+    public static IEnumerable<CodeInstruction> IgnoreMissingDroneCheck(IEnumerable<CodeInstruction> instructions, ILGenerator il)
     {
         try
         {
@@ -254,7 +229,7 @@ public static class SplitshotTranspiler
     /// <param name="instructions"></param>
     /// <param name="il"></param>
     /// <returns></returns>
-    private static IEnumerable<CodeInstruction> IgnoreDroneBloops(IEnumerable<CodeInstruction> instructions, ILGenerator il)
+    public static IEnumerable<CodeInstruction> IgnoreDroneBloops(IEnumerable<CodeInstruction> instructions, ILGenerator il)
     {
         try
         {

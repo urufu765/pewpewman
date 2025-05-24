@@ -348,14 +348,8 @@ internal partial class ModEntry : SimpleMod
         foreach (var type in AllRegisterableTypes)
             AccessTools.DeclaredMethod(type, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
 
-        Artifacthider.Apply(Harmony);
-        SplitshotTranspiler.Apply(Harmony);
+        Apply(Harmony);
         //BayBlastIconography.Apply(Harmony);
-        ChoiceRelicRewardOfYourRelicChoice.Apply(Harmony);
-        ArtifactMadcapPartOperator.Apply(Harmony);
-        ArtifactPowersprintEvadeOperator.Apply(Harmony);
-        WethArtAndFrameSwitcher.Apply(Harmony);
-        WethForceAdvanceDialogue.Apply(Harmony);
     }
 
     /*

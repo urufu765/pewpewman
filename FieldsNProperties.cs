@@ -145,7 +145,7 @@ internal partial class ModEntry : SimpleMod
         typeof(MechDuhfend),
         typeof(MechEvade),
         typeof(MechHull),
-        typeof(MechMine),
+        typeof(MechBubble),
         typeof(MechMissile),
         typeof(MechDodge),
         typeof(MechSwap),

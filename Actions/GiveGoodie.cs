@@ -39,7 +39,7 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
         typeof(MechSwap)
     ];
     public static readonly List<Type> MechUncommonOfferings = [
-        typeof(MechMine),
+        typeof(MechBubble),
         typeof(MechMissile),
         typeof(MechDodge),
     ];

@@ -13,35 +13,12 @@ public static class WethArtAndFrameSwitcher
     private static HashSet<string> Ending2Saw { get; } = ["RunWinWho_Weth_2"];
     private static HashSet<string> Ending3Saw { get; } = ["RunWinWho_Weth_3"];
     private static List<string> AllMemories { get; } = ["Weth_Memory_1", "Weth_Memory_2", "Weth_Memory_3"];
-    public static void Apply(Harmony harmony)
-    {
-        harmony.Patch(
-            original: typeof(Events).GetMethod(nameof(Events.RunWinWho), AccessTools.all),
-            postfix: new HarmonyMethod(typeof(WethArtAndFrameSwitcher), nameof(SwitchTheArt))
-        );
-        harmony.Patch(
-            original: typeof(State).GetMethod(nameof(State.GoToZone), AccessTools.all),
-            postfix: new HarmonyMethod(typeof(WethArtAndFrameSwitcher), nameof(SwitchTheFrame))
-        );
-        harmony.Patch(
-            original: typeof(Vault).GetMethod(nameof(Vault.GetVaultMemories), AccessTools.all),
-            postfix: new HarmonyMethod(typeof(WethArtAndFrameSwitcher), nameof(SwitchTheFrameInVault))
-        );
-        harmony.Patch(
-            original: typeof(State).GetMethod(nameof(State.Update), AccessTools.all),
-            postfix: new HarmonyMethod(typeof(WethArtAndFrameSwitcher), nameof(ReapplyFrameOnStartup))
-        );
-        harmony.Patch(
-            original: typeof(Vault).GetMethod(nameof(Vault.LoadFromVault), AccessTools.all),
-            postfix: new HarmonyMethod(typeof(WethArtAndFrameSwitcher), nameof(UseMemoryFrame))
-        );
-    }
 
     /// <summary>
     /// Switches the runWinWho full character sprite according to progression and also switches frame for that dialogue
     /// </summary>
     /// <param name="s"></param>
-    private static void SwitchTheArt(State s)
+    public static void SwitchTheArt(State s)
     {
         bool editFrame = true;
         if (!BGRunWin.charFullBodySprites.ContainsKey(AmWethDeck)) return;
@@ -68,7 +45,7 @@ public static class WethArtAndFrameSwitcher
     /// Switches the character frame according to the map's dialogue thing.
     /// </summary>
     /// <param name="nextMap"></param>
-    private static void SwitchTheFrame(MapBase nextMap)
+    public static void SwitchTheFrame(MapBase nextMap)
     {
         // if (!(ModEntry.Instance.Helper.Content.Characters.V2.LookupByCharacterType(ModEntry.WethTheSnep.CharacterType) is Character ch && __instance.characters.Contains(ch)))
         // {
@@ -96,7 +73,7 @@ public static class WethArtAndFrameSwitcher
     /// Reapplies correct character frame on load, with a few frames for redundancy
     /// </summary>
     /// <param name="__instance"></param>
-    private static void ReapplyFrameOnStartup(State __instance)
+    public static void ReapplyFrameOnStartup(State __instance)
     {
         try
         {
@@ -124,7 +101,7 @@ public static class WethArtAndFrameSwitcher
     /// Switches the frame according to the runwinwho visited
     /// </summary>
     /// <param name="s"></param>
-    private static void SwitchTheFrameInVault(State s)
+    public static void SwitchTheFrameInVault(State s)
     {
         if (!DB.charPanels.ContainsKey(ModEntry.WethTheSnep.CharacterType))
         {
@@ -137,7 +114,7 @@ public static class WethArtAndFrameSwitcher
         else SetWethCharFrame();
     }
 
-    private static void UseMemoryFrame(string memoryKey)
+    public static void UseMemoryFrame(string memoryKey)
     {
         if (AllMemories.Contains(memoryKey)) SetWethCharFrame();
     }

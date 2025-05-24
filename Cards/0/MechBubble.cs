@@ -8,7 +8,7 @@ namespace Weth.Cards;
 /// <summary>
 /// MECH: Defence
 /// </summary>
-public class MechMine : Card, IRegisterable
+public class MechBubble : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -22,8 +22,8 @@ public class MechMine : Card, IRegisterable
                 upgradesTo = [Upgrade.A],
                 dontOffer = true,
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Token", "Mime", "name"]).Localize,
-            Art = StableSpr.cards_GoatDrone
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Token", "Bauble", "name"]).Localize,
+            Art = StableSpr.cards_BubbleField
         });
     }
 
@@ -34,12 +34,11 @@ public class MechMine : Card, IRegisterable
         {
             _ => 
             [
-                new ASpawn
+                new AStatus
                 {
-                    thing = new SpaceMine
-                    {
-                        bigMine = true
-                    }
+                    status = Status.bubbleJuice,
+                    statusAmount = 1,
+                    targetPlayer = true
                 }
             ],
         };

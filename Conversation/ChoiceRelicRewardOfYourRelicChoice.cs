@@ -9,15 +9,7 @@ namespace Weth.Conversation;
 
 public static class ChoiceRelicRewardOfYourRelicChoice
 {
-    public static void Apply(Harmony harmony)
-    {
-        harmony.Patch(
-            original: typeof(Events).GetMethod("ChoiceCardRewardOfYourColorChoice", AccessTools.all),
-            postfix: new HarmonyMethod(typeof(ChoiceRelicRewardOfYourRelicChoice), nameof(ReplaceCardRewardWithRelic))
-        );
-    }
-
-    private static void ReplaceCardRewardWithRelic(State s, ref List<Choice> __result)
+    public static void ReplaceCardRewardWithRelic(State s, ref List<Choice> __result)
     {
         for (int x = 0; x < __result.Count; x++)
         {

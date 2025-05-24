@@ -50,16 +50,8 @@ public class MadcapCharge : Artifact
 public static class ArtifactMadcapPartOperator
 {
     private static bool? partHasIntent;
-    public static void Apply(Harmony harmony)
-    {
-        harmony.Patch(
-            original: typeof(AStunPart).GetMethod("Begin", AccessTools.all),
-            prefix: new HarmonyMethod(typeof(ArtifactMadcapPartOperator), nameof(DetectIntent)),
-            postfix: new HarmonyMethod(typeof(ArtifactMadcapPartOperator), nameof(DetectChange))
-        );
-    }
 
-    private static void DetectChange(AStunPart __instance, State s, Combat c)
+    public static void DetectChange(AStunPart __instance, State s, Combat c)
     {
         if (partHasIntent == true)
         {
@@ -75,7 +67,7 @@ public static class ArtifactMadcapPartOperator
         }
     }
 
-    private static void DetectIntent(AStunPart __instance, Combat c)
+    public static void DetectIntent(AStunPart __instance, Combat c)
     {
         partHasIntent = null;
         Part? partAtWorldX = c.otherShip?.GetPartAtWorldX(__instance.worldX);

@@ -63,15 +63,7 @@ public class PowerSprint : Artifact
 
 public static class ArtifactPowersprintEvadeOperator
 {
-    public static void Apply(Harmony harmony)
-    {
-        harmony.Patch(
-            original: typeof(AStatus).GetMethod("Begin", AccessTools.all),
-            prefix: new HarmonyMethod(typeof(ArtifactPowersprintEvadeOperator), nameof(FindEvade))
-        );
-    }
-
-    private static void FindEvade(State s)
+    public static void FindEvade(State s)
     {
         int? amount = s.ship?.Get(Status.evade);
         Artifact? artifact = s.EnumerateAllArtifacts().Find(a => a is PowerSprint);

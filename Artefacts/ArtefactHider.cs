@@ -32,24 +32,12 @@ public static class Artifacthider
     //     typeof(RelicTempShield)
     // ];
 
-    public static void Apply(Harmony harmony)
-    {
-        harmony.Patch(
-            original: typeof(ArtifactReward).GetMethod("GetBlockedArtifacts", AccessTools.all),
-            postfix: new HarmonyMethod(typeof(Artifacthider), nameof(ArtifactRewardPreventer))
-        );
-        harmony.Patch(
-            original: typeof(ArtifactReward).GetMethod(nameof(ArtifactReward.GetOffering), AccessTools.all),
-            postfix: new HarmonyMethod(typeof(Artifacthider), nameof(FocusedSpaceRelicsAlwaysRelicRelic))
-        );
-    }
-
     /// <summary>
     /// GetBlockedArtifacts postfix
     /// </summary>
     /// <param name="s"></param>
     /// <param name="__result"></param>
-    private static void ArtifactRewardPreventer(State s, ref HashSet<Type> __result)
+    public static void ArtifactRewardPreventer(State s, ref HashSet<Type> __result)
     {
         try
         {
@@ -82,7 +70,7 @@ public static class Artifacthider
         }
     }
 
-    private static void FocusedSpaceRelicsAlwaysRelicRelic(State s, int count, Deck? limitDeck, List<ArtifactPool>? limitPools, ref List<Artifact> __result)
+    public static void FocusedSpaceRelicsAlwaysRelicRelic(State s, int count, Deck? limitDeck, List<ArtifactPool>? limitPools, ref List<Artifact> __result)
     {
         if (!(limitDeck == ModEntry.Instance.WethDeck.Deck && limitPools is not null && limitPools.Contains(ArtifactPool.Unreleased))) return;
 

@@ -50,6 +50,60 @@ public static class UhDuhHundo
             }
         }
     }
+
+    public static void ApplySubtleCrystalOverlayGlow(Vec? anchorPoint, (Vec pos, Vec size)[] spots, Color color, double timer, double cycleTime = 4, double minGlow = 0, double maxGlow = 1, bool cascade = false, Vec? extraSize = null)
+    {
+        try
+        {
+            for (int i = 0; i < spots.Length; i++)
+            {
+                Glow.Draw(
+                    (anchorPoint ?? new()) + spots[i].pos,
+                    extraSize is Vec v? spots[i].size + v : spots[i].size,
+                    Color.Lerp(
+                        Colors.black,
+                        color,
+                        Mutil.Lerp(
+                            minGlow,
+                            maxGlow,
+                            (Math.Sin(timer / cycleTime * Math.PI - (cascade && spots.Length > 1? (i * Math.PI / spots.Length - 1) : 0)) + 1) / 2
+                        )
+                    )
+                );
+            }
+        }
+        catch (Exception err)
+        {
+            ModEntry.Instance.Logger.LogError(err, "Glow thing failed!");
+        }
+    }
+
+    // public static void ApplyWaveCrystalOverlayGlow(Vec? anchorPoint, (Vec pos, Vec size)[] spots, Color color, double timer, double cycleTime = 4, double minGlow = 0, double maxGlow = 1, double hangTime = 0)
+    // {
+    //     try
+    //     {
+    //         for (int i = 0; i < spots.Length; i++)
+    //         {
+    //             Glow.Draw(
+    //                 (anchorPoint ?? new Vec()) + spots[i].pos,
+    //                 spots[i].size,
+    //                 Color.Lerp(
+    //                     Colors.black,
+    //                     color,
+    //                     Mutil.Lerp(
+    //                         minGlow,
+    //                         maxGlow,
+    //                         (Math.Sin(((timer / cycleTime) + (i / spots.Length)) * Math.PI) + 1) / 4
+    //                     )
+    //                 )
+    //             );
+    //         }
+    //     }
+    //     catch (Exception err)
+    //     {
+    //         ModEntry.Instance.Logger.LogError(err, "Glow thing failed!");
+    //     }
+    // }
 }
 
 public static class Helpers
