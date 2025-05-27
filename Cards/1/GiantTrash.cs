@@ -9,7 +9,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Shoots a trash
 /// </summary>
-public class GiantTrash : Card, IRegisterable
+public class GiantTrash : WCCommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

@@ -8,7 +8,7 @@ namespace Weth.Cards;
 /// <summary>
 /// AAAAAA
 /// </summary>
-public class Overcompensator : Card, IRegisterable
+public class Overcompensator : WCCommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

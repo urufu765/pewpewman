@@ -10,7 +10,7 @@ namespace Weth.Cards;
 /// <summary>
 /// gives Pulsedrive
 /// </summary>
-public class SplitshotCard : Card, IRegisterable
+public class SplitshotCard : WCCommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

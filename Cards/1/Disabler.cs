@@ -9,7 +9,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Shoot a disabling round
 /// </summary>
-public class Disabler : Card, IRegisterable
+public class Disabler : WCCommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

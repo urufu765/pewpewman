@@ -12,7 +12,7 @@ namespace Weth.Cards;
 /// <summary>
 /// gives Pulsedrive
 /// </summary>
-public class Feral : Card, IRegisterable, IHasCustomCardTraits
+public class Feral : WCCommon, IRegisterable, IHasCustomCardTraits
 {
     private static Spr closedSprite;
     private static Spr openSprite;

@@ -8,7 +8,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Shoot three times
 /// </summary>
-public class TripleTap : Card, IRegisterable
+public class TripleTap : WCCommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

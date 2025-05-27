@@ -8,7 +8,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Can't stop!
 /// </summary>
-public class UnstoppableForce : Card, IRegisterable
+public class UnstoppableForce : WCRare, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

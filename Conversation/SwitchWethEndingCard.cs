@@ -79,7 +79,7 @@ public static class WethArtAndFrameSwitcher
         {
             if (ModEntry.Instance is not null && ModEntry.Instance.WethFrameLoadAllowed)
             {
-                ModEntry.Instance.Logger.LogInformation("GITIT");
+                //ModEntry.Instance.Logger.LogInformation("GITIT");
                 if (__instance.route is Dialogue d && AllMemories.Contains(d.ctx.script))
                 {
                     SetWethCharFrame();

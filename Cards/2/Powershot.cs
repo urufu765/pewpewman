@@ -8,7 +8,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Shoot powerfully
 /// </summary>
-public class Powershot : Card, IRegisterable
+public class Powershot : WCUncommon, IRegisterable
 {
     private static Spr altSprite {get; set;}
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)

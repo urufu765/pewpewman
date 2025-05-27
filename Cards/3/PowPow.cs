@@ -8,7 +8,7 @@ namespace Weth.Cards;
 /// <summary>
 /// WHAM WHAM!!!
 /// </summary>
-public class PowPow : Card, IRegisterable
+public class PowPow : WCRare, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

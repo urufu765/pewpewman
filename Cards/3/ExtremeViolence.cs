@@ -9,7 +9,7 @@ namespace Weth.Cards;
 /// <summary>
 /// WHAM WHAM!!!
 /// </summary>
-public class ExtremeViolence : Card, IRegisterable
+public class ExtremeViolence : WCRare, IRegisterable
 {
     private static Spr altSprite {get; set;}
     private static Spr altSpriteB {get; set;}

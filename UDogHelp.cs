@@ -59,14 +59,14 @@ public static class UhDuhHundo
             {
                 Glow.Draw(
                     (anchorPoint ?? new()) + spots[i].pos,
-                    extraSize is Vec v? spots[i].size + v : spots[i].size,
+                    extraSize is Vec v ? spots[i].size + v : spots[i].size,
                     Color.Lerp(
                         Colors.black,
                         color,
                         Mutil.Lerp(
                             minGlow,
                             maxGlow,
-                            (Math.Sin(timer / cycleTime * Math.PI - (cascade && spots.Length > 1? (i * Math.PI / spots.Length - 1) : 0)) + 1) / 2
+                            (Math.Sin(timer / cycleTime * Math.PI - ((cascade && spots.Length > 1) ? (i * Math.PI / spots.Length - 1) : 0)) + 1) / 2
                         )
                     )
                 );
@@ -78,6 +78,40 @@ public static class UhDuhHundo
         }
     }
 
+    public static void ApplySubtleCrystalOverlayGlow(Vec? anchorPoint, (Vec pos, Vec size)[] spots, Color color, double timer, (double min, double max)[] brightness, double cycleTime = 4, bool cascade = false, Vec? extraSize = null)
+    {
+        try
+        {
+            if (brightness.Length != spots.Length)
+            {
+                if (brightness.Length > 0)
+                {
+                    ApplySubtleCrystalOverlayGlow(anchorPoint, spots, color, timer, cycleTime, brightness[0].min, brightness[0].max, cascade, extraSize);
+                }
+                return;
+            }
+            for (int i = 0; i < spots.Length; i++)
+            {
+                Glow.Draw(
+                    (anchorPoint ?? new()) + spots[i].pos,
+                    extraSize is Vec v ? spots[i].size + v : spots[i].size,
+                    Color.Lerp(
+                        Colors.black,
+                        color,
+                        Mutil.Lerp(
+                            brightness[i].min,
+                            brightness[i].max,
+                            (Math.Sin(timer / cycleTime * Math.PI - ((cascade && spots.Length > 1) ? (i * Math.PI / spots.Length - 1) : 0)) + 1) / 2
+                        )
+                    )
+                );
+            }
+        }
+        catch (Exception err)
+        {
+            ModEntry.Instance.Logger.LogError(err, "Glow thing failed!");
+        }
+    }
     // public static void ApplyWaveCrystalOverlayGlow(Vec? anchorPoint, (Vec pos, Vec size)[] spots, Color color, double timer, double cycleTime = 4, double minGlow = 0, double maxGlow = 1, double hangTime = 0)
     // {
     //     try

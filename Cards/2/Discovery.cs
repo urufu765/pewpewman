@@ -9,7 +9,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Flashbang enemy
 /// </summary>
-public class Discovery : Card, IRegisterable
+public class Discovery : WCUncommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

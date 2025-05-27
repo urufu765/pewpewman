@@ -8,7 +8,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Flashbang enemy
 /// </summary>
-public class Bloom : Card, IRegisterable
+public class Bloom : WCUncommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

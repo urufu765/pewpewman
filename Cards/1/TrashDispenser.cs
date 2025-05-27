@@ -8,7 +8,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Shoots a trash
 /// </summary>
-public class TrashDispenser : Card, IRegisterable
+public class TrashDispenser : WCCommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

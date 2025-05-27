@@ -9,7 +9,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Shoot two times with MORE EXCITEMENT
 /// </summary>
-public class Spreadshot : Card, IRegisterable
+public class Spreadshot : WCUncommon, IRegisterable
 {
     private static Spr altSprite {get; set;}
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)

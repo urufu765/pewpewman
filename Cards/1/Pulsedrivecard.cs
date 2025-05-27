@@ -9,7 +9,7 @@ namespace Weth.Cards;
 /// <summary>
 /// gives Pulsedrive
 /// </summary>
-public class PulsedriveCard : Card, IRegisterable
+public class PulsedriveCard : WCCommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

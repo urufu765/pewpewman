@@ -9,7 +9,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Oh No!
 /// </summary>
-public class CrisisCall : Card, IRegisterable
+public class CrisisCall : WCRare, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

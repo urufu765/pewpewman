@@ -8,7 +8,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Heal?
 /// </summary>
-public class PearlDispenser : Card, IRegisterable
+public class PearlDispenser : WCRare, IRegisterable
 {
     // private static Spr altSprite {get; set;}
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)

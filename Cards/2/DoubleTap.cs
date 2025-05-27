@@ -8,7 +8,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Shoot two times
 /// </summary>
-public class DoubleTap : Card, IRegisterable
+public class DoubleTap : WCUncommon, IRegisterable
 {
     private static Spr altSprite {get; set;}
 

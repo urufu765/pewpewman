@@ -8,7 +8,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Shot for stun
 /// </summary>
-public class Puckshot : Card, IRegisterable
+public class Puckshot : WCCommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {

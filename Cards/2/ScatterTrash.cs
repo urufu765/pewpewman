@@ -10,7 +10,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Shoot two times with MORE EXCITEMENT
 /// </summary>
-public class ScatterTrash : Card, IRegisterable
+public class ScatterTrash : WCUncommon, IRegisterable
 {
     private static Spr altSprite {get; set;}
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)

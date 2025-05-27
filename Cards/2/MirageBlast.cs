@@ -10,7 +10,7 @@ namespace Weth.Cards;
 /// <summary>
 /// gives Pulsedrive
 /// </summary>
-public class MirageBlast : Card, IRegisterable
+public class MirageBlast : WCUncommon, IRegisterable
 {
     private static Spr normalSprite;
     private static Spr flippedSprite;
