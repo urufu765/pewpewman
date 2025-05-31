@@ -495,6 +495,14 @@
             },
             "Placeholder": {
                 "name": "___"
+            },
+            "JourneyV": {
+                "name": "Journey: Track V",
+                "play": "Flip to Play/Resume Song",
+                "pause": "Flip to Stop/Pause Song"
+            },
+            "IncompetentB": {
+                "name": "Incompetent Baffoon"
             }
         }
     }

@@ -78,7 +78,7 @@ public static class UhDuhHundo
         }
     }
 
-    public static void ApplySubtleCrystalOverlayGlow(Vec? anchorPoint, (Vec pos, Vec size)[] spots, Color color, double timer, (double min, double max)[] brightness, double cycleTime = 4, bool cascade = false, Vec? extraSize = null)
+    public static void ApplySubtleCrystalOverlayGlow(Vec? anchorPoint, (Vec pos, Vec size)[] spots, Color color, double timer, (double min, double max)[] brightness, double cycleTime = 4, bool cascade = false, Vec? extraSize = null, double dimmer = 1)
     {
         try
         {
@@ -86,7 +86,7 @@ public static class UhDuhHundo
             {
                 if (brightness.Length > 0)
                 {
-                    ApplySubtleCrystalOverlayGlow(anchorPoint, spots, color, timer, cycleTime, brightness[0].min, brightness[0].max, cascade, extraSize);
+                    ApplySubtleCrystalOverlayGlow(anchorPoint, spots, color, timer, cycleTime, brightness[0].min * dimmer, brightness[0].max * dimmer, cascade, extraSize);
                 }
                 return;
             }
@@ -99,8 +99,8 @@ public static class UhDuhHundo
                         Colors.black,
                         color,
                         Mutil.Lerp(
-                            brightness[i].min,
-                            brightness[i].max,
+                            brightness[i].min * dimmer,
+                            brightness[i].max * dimmer,
                             (Math.Sin(timer / cycleTime * Math.PI - ((cascade && spots.Length > 1) ? (i * Math.PI / spots.Length - 1) : 0)) + 1) / 2
                         )
                     )
@@ -138,14 +138,44 @@ public static class UhDuhHundo
     //         ModEntry.Instance.Logger.LogError(err, "Glow thing failed!");
     //     }
     // }
+
+
 }
 
 public static class Helpers
 {
+    /// <summary>
+    /// Inverse lerp. A and B cannot be equal.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <param name="n"></param>
+    /// <returns></returns>
     public static double InverseLerp(double a, double b, double n)
     {
         if (a == b) return 0;
         return Math.Clamp((n - a) / (b - a), 0, 1);
+    }
+
+    /// <summary>
+    /// Checks whether the channel the instance references is playing the instance's sound
+    /// </summary>
+    /// <param name="imsi">Instance</param>
+    /// <returns>Whether it's playing the wanted sound or not</returns>
+    public static bool CheckSoundValidity(IModSoundInstance imsi)
+    {
+        try
+        {
+            Audio.Catch(imsi.Channel.getCurrentSound(out FMOD.Sound soud));
+            Audio.Catch(soud.getName(out string nam, 5));
+            Audio.Catch(imsi.Entry.Sound.getName(out string nam2, 5));
+            if (nam == nam2) return true;
+        }
+        catch (Exception err)
+        {
+            ModEntry.Instance.Logger.LogError(err, "Something went wrong with checking sound validity!");
+        }
+        return false;
     }
 }
 

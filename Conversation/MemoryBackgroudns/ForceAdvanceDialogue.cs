@@ -36,17 +36,17 @@ public static class WethForceAdvanceDialogue
         {
             if (mini)
             {
-                UhDuhHundo.ApplySubtleCrystalOverlayGlow(new Vec(x, y), GetSpriteOverlayGlowSpots(animTag), glowColor, breatheTime, cycleTime: 5, maxGlow: 0.35);
+                UhDuhHundo.ApplySubtleCrystalOverlayGlow(new Vec(x, y), GetSpriteOverlayGlowSpots(animTag), glowColor, breatheTime, cycleTime: 5, maxGlow: 0.3);
                 return;
             }
             else if (RenderExtraGlow(animTag) is bool renderExtra)
             {
-                UhDuhHundo.ApplySubtleCrystalOverlayGlow(new Vec(x, y), GetSpriteOverlayGlowSpots(animTag), glowColor, breatheTime, cascade: true, cycleTime: 4.1, maxGlow: 0.4, extraSize: new(4, 2));
+                UhDuhHundo.ApplySubtleCrystalOverlayGlow(new Vec(x, y), GetSpriteOverlayGlowSpots(animTag), glowColor, breatheTime, cascade: true, cycleTime: 4.1, maxGlow: 0.35, extraSize: new(4, 2));
                 if (renderExtra)
                 {
                     if (animTag.StartsWith("crystal"))
                     {
-                        UhDuhHundo.ApplySubtleCrystalOverlayGlow(new Vec(x, y), GetExtraSpriteOverlayGlowSpots(animTag), glowColor, breatheTime, cascade: true, cycleTime: 3, maxGlow: 0.5, extraSize: new(5, 7));
+                        UhDuhHundo.ApplySubtleCrystalOverlayGlow(new Vec(x, y), GetExtraSpriteOverlayGlowSpots(animTag), glowColor, breatheTime, cascade: true, cycleTime: 3, maxGlow: 0.4, extraSize: new(5, 7));
                     }
                 }
             }

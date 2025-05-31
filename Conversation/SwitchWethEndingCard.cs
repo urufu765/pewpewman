@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
+using Nickel;
 using static Weth.Conversation.CommonDefinitions;
 
 namespace Weth.Conversation;

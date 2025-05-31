@@ -67,7 +67,7 @@ public abstract class WethCard : Card
         try
         {
             string? zoneTag = g.state?.map?.GetZoneDialogueTag();
-            UhDuhHundo.ApplySubtleCrystalOverlayGlow(v, GetGlowSpots(), new("00ffee"), LifeTime, GetGlowBrightness(zoneTag ?? ""), cascade: true, cycleTime: 3, extraSize: new(2, 2));
+            UhDuhHundo.ApplySubtleCrystalOverlayGlow(v, GetGlowSpots(), new("00ffee"), LifeTime, GetGlowBrightness(zoneTag ?? ""), cascade: true, cycleTime: 3, extraSize: new(2, 2), dimmer: 0.5);
 
             if (
                 GetExtraGlowSpots() is { } extraSpots &&

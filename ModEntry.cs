@@ -252,10 +252,12 @@ internal partial class ModEntry : SimpleMod
             Name = AnyLocalizations.Bind(["status", "Unknown", "name"]).Localize,
             Description = AnyLocalizations.Bind(["status", "Unknown", "desc"]).Localize
         });
-        JauntSlapSound = helper.Content.Audio.RegisterSound("spaceSlap", package.PackageRoot.GetRelativeFile("assets/SFX/SpaceSlap.wav"));
+        JauntSlapSound = helper.Content.Audio.RegisterSound("spaceSlap", package.PackageRoot.GetRelativeFile("assets/SFX/SpaceSlap.ogg"));
         SodaOpening = helper.Content.Audio.RegisterSound("sodaopening", package.PackageRoot.GetRelativeFile("assets/SFX/sodaopening.wav"));
         SodaOpened = helper.Content.Audio.RegisterSound("sodaopened", package.PackageRoot.GetRelativeFile("assets/SFX/sodaopen.wav"));
-        HitHullHit = helper.Content.Audio.RegisterSound("vanillahullhitbutvariablepitch", package.PackageRoot.GetRelativeFile("assets/SFX/HitsHurtSeparated.wav"));
+        HitHullHit = helper.Content.Audio.RegisterSound("vanillahullhitbutvariablepitch", package.PackageRoot.GetRelativeFile("assets/SFX/HitsHurtSeparated.ogg"));
+        MidiTestJourneyV = helper.Content.Audio.RegisterSound("MidiTestJourney", package.PackageRoot.GetRelativeFile("assets/SFX/Journey_Track_V.mid"));
+        MidiTestIncompetentB = helper.Content.Audio.RegisterSound("MidiTestIncompetent", package.PackageRoot.GetRelativeFile("assets/SFX/Incompetent_Baffoon.mid"));
         PulseQuestionMark = RegisterSprite(package, "assets/Icon/questionmark.png").Sprite;
 
         //JauntSlapSound = RegisterSound(package, "assets/SpaceSlap.wav");

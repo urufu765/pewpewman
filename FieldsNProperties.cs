@@ -27,10 +27,12 @@ internal partial class ModEntry : SimpleMod
     }
     internal IStatusEntry PulseStatus { get; private set; } = null!;
     internal IStatusEntry UnknownStatus { get; private set; } = null!;
-    internal ISoundEntry JauntSlapSound { get; private set; }
-    internal ISoundEntry SodaOpening { get; private set; }
-    internal ISoundEntry SodaOpened { get; private set; }
-    internal ISoundEntry HitHullHit { get; private set; }
+    internal IModSoundEntry JauntSlapSound { get; private set; }
+    internal IModSoundEntry SodaOpening { get; private set; }
+    internal IModSoundEntry SodaOpened { get; private set; }
+    internal IModSoundEntry HitHullHit { get; private set; }
+    internal IModSoundEntry MidiTestJourneyV { get; private set; }
+    internal IModSoundEntry MidiTestIncompetentB { get; private set; }
     public Spr PulseQuestionMark { get; private set; }
     // internal ICardTraitEntry AutoSU { get; private set; } = null!;
     // internal Spr AutoSUSpr { get; private set; }
@@ -150,7 +152,9 @@ internal partial class ModEntry : SimpleMod
         typeof(MechDodge),
         typeof(MechSwap),
         typeof(CryPlaceholder),
-        typeof(MechPlaceholder)
+        typeof(MechPlaceholder),
+        typeof(PlayJourneyV),
+        typeof(PlayIncompetentBaffoon)
     ];
     private static IEnumerable<Type> WethCardTypes =
         WethCommonCardTypes
