@@ -51,18 +51,29 @@ public static class Artifacthider
                 __result.Add(typeof(TerminusMilestone));
             }
             __result = [.. __result, .. hideByDefault];
-            // if (s.EnumerateAllArtifacts().Find(a => a is SR2Focused) is SR2Focused sr2)
-            // {
-            //     IEnumerable<Artifact> standbyRelics = s.EnumerateAllArtifacts().Where(a => a is RelicShield);
-            //     if (sr2.AtMax || sr2.ObtainedRelics.Count + standbyRelics.Count() >= SR2Focused.RELICLIMIT)
-            //     {
-            //         IEnumerable<Type> obtainedRelics = sr2.ObtainedRelics.Select(status => sr2.RelicDic[status]);
-            //         __result = [
-            //             .. __result,
-            //             .. allPossibleRelicTypes.Where(t => !obtainedRelics.Contains(t))
-            //         ];
-            //     }
-            // }
+
+            // Prevent owned relic from showing up twice
+            if (s.EnumerateAllArtifacts().Find(a => a is SR2Focused) is SR2Focused sr2)
+            {
+                foreach (Status status in sr2.ObtainedRelics)
+                {
+                    if (status == ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive)
+                    {
+                        __result.Add(typeof(RelicPulsedrive));
+                    }
+                    else
+                    {
+                        try
+                        {
+                            __result.Add(SR2Focused.RelicDic[status]);
+                        }
+                        catch (Exception err)
+                        {
+                            ModEntry.Instance.Logger.LogError(err, "Failed to list SR2Focused owned relic as an offering exception");
+                        }
+                    }
+                }
+            }
         }
         catch (Exception err)
         {
@@ -97,13 +108,28 @@ public static class Artifacthider
     private static List<Artifact> ConjureUpRelicsFromFocused(SR2Focused spaceRelic, params Artifact[] otherRelics)
     {
         List<Artifact> a = [];
-        HashSet<Type> illegals = [.. otherRelics.Select(a => a.GetType())];
-        foreach (Status status in spaceRelic.ObtainedRelics)
+        try
         {
-            if (!illegals.Contains(SR2Focused.RelicDic[status]) && Activator.CreateInstance(SR2Focused.RelicDic[status]) is Artifact artifact)
+            HashSet<Type> illegals = [.. otherRelics.Select(a => a.GetType())];
+            foreach (Status status in spaceRelic.ObtainedRelics)
             {
-                a.Add(artifact);
+                // Remember, always handle the Pulsedrive separately.
+                if (status == ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive)
+                {
+                    if (!illegals.Contains(typeof(RelicPulsedrive)))
+                    {
+                        a.Add(new RelicPulsedrive());
+                    }
+                }
+                else if (!illegals.Contains(SR2Focused.RelicDic[status]) && Activator.CreateInstance(SR2Focused.RelicDic[status]) is Artifact artifact)
+                {
+                    a.Add(artifact);
+                }
             }
+        }
+        catch (Exception err)
+        {
+            ModEntry.Instance.Logger.LogError(err, "Something went wrong with conjuring relics!");
         }
         return a;
     }
