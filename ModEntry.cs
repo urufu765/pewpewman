@@ -256,8 +256,8 @@ internal partial class ModEntry : SimpleMod
         SodaOpening = helper.Content.Audio.RegisterSound("sodaopening", package.PackageRoot.GetRelativeFile("assets/SFX/sodaopening.wav"));
         SodaOpened = helper.Content.Audio.RegisterSound("sodaopened", package.PackageRoot.GetRelativeFile("assets/SFX/sodaopen.wav"));
         HitHullHit = helper.Content.Audio.RegisterSound("vanillahullhitbutvariablepitch", package.PackageRoot.GetRelativeFile("assets/SFX/HitsHurtSeparated.ogg"));
-        MidiTestJourneyV = helper.Content.Audio.RegisterSound("MidiTestJourney", package.PackageRoot.GetRelativeFile("assets/SFX/Journey_Track_V.mid"));
-        MidiTestIncompetentB = helper.Content.Audio.RegisterSound("MidiTestIncompetent", package.PackageRoot.GetRelativeFile("assets/SFX/Incompetent_Baffoon.mid"));
+        // MidiTestJourneyV = helper.Content.Audio.RegisterSound("MidiTestJourney", package.PackageRoot.GetRelativeFile("assets/SFX/Journey_Track_V.mid"));
+        // MidiTestIncompetentB = helper.Content.Audio.RegisterSound("MidiTestIncompetent", package.PackageRoot.GetRelativeFile("assets/SFX/Incompetent_Baffoon.mid"));
         PulseQuestionMark = RegisterSprite(package, "assets/Icon/questionmark.png").Sprite;
 
         //JauntSlapSound = RegisterSound(package, "assets/SpaceSlap.wav");
@@ -326,7 +326,7 @@ internal partial class ModEntry : SimpleMod
         SprSplitshot = RegisterSprite(package, "assets/Icon/Splitshot.png").Sprite;
         SprSplitshotFail = RegisterSprite(package, "assets/Icon/SplitshotFail.png").Sprite;
         SprSplitshotPiercing = RegisterSprite(package, "assets/Icon/SplitshotPierce.png").Sprite;
-        SprSplitshotPiercingFail = RegisterSprite(package, "assets/SplitshotPierceFail.png").Sprite;
+        SprSplitshotPiercingFail = RegisterSprite(package, "assets/Icon/SplitshotPierceFail.png").Sprite;
 
         SprBayBlast = RegisterSprite(package, "assets/Icon/bayblast.png").Sprite;
         SprBayBlastFail = RegisterSprite(package, "assets/Icon/bayblastfail.png").Sprite;

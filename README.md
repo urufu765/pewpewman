@@ -10,6 +10,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.38)**: On second thought, having the midi cards isn't a great idea... also addressed one of the sprites not being registered properly
 * **(0.3.37)**: Glow adjustment (less showy more subtle) & reduced file bloat (by using ogg instead o wavs)
 * **(0.3.36)**: Glow cards! (and basically overhaul of the Weth rarity thing (three general rarity classes all the cards inherit from, with extra render taking care of rarity border and shine.))
 * **(0.3.35)**: Removed Mine goodie and replaced with Bubble goodie, Buffed HiddenGem, glow borders
