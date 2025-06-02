@@ -42,7 +42,6 @@ public class MirageBlast : WCUncommon, IRegisterable
                 {
                     targetPlayer = true,
                     dir = -1,
-                    isTeleport = true,
                 },
                 new ASplitshot
                 {
@@ -64,8 +63,7 @@ public class MirageBlast : WCUncommon, IRegisterable
                 new AMove
                 {
                     targetPlayer = true,
-                    dir = -1,
-                    isTeleport = true
+                    dir = -1
                 }
             ],
             Upgrade.A =>
@@ -74,7 +72,6 @@ public class MirageBlast : WCUncommon, IRegisterable
                 {
                     targetPlayer = true,
                     dir = -1,
-                    isTeleport = true,
                 },
                 new ASplitshot
                 {
@@ -97,8 +94,7 @@ public class MirageBlast : WCUncommon, IRegisterable
                 new AMove
                 {
                     targetPlayer = true,
-                    dir = -1,
-                    isTeleport = true
+                    dir = -1
                 }
             ],
             _ => 
@@ -107,7 +103,6 @@ public class MirageBlast : WCUncommon, IRegisterable
                 {
                     targetPlayer = true,
                     dir = -1,
-                    isTeleport = true,
                 },
                 new ASplitshot
                 {
@@ -128,8 +123,7 @@ public class MirageBlast : WCUncommon, IRegisterable
                 new AMove
                 {
                     targetPlayer = true,
-                    dir = -1,
-                    isTeleport = true
+                    dir = -1
                 }
             ],
         };

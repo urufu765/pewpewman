@@ -35,7 +35,12 @@ public class UnstoppableForce : WCRare, IRegisterable
             [
                 new AAttack
                 {
-                    damage = GetDmg(s, 1),
+                    damage = GetDmg(s, 0),
+                    piercing = true
+                },
+                new AAttack
+                {
+                    damage = GetDmg(s, 0),
                     piercing = true
                 },
                 new AStatus
@@ -66,6 +71,13 @@ public class UnstoppableForce : WCRare, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 1,
+                infinite = true,
+                artTint = "ea4a4a",
+                artOverlay = ModEntry.Instance.WethRare
+            },
             Upgrade.A => new CardData
             {
                 cost = 1,

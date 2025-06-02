@@ -37,13 +37,10 @@ public class Bloom : WCUncommon, IRegisterable
                 {
                     damage = GetDmg(s, 1),
                     stunEnemy = true
-                }
-            ],
-            Upgrade.A => 
-            [
+                },
                 new AStatus
                 {
-                    status = Status.stunCharge,
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Minidrive,
                     statusAmount = 1,
                     targetPlayer = true
                 }
@@ -53,6 +50,12 @@ public class Bloom : WCUncommon, IRegisterable
                 new AStatus
                 {
                     status = Status.stunCharge,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Minidrive,
                     statusAmount = 1,
                     targetPlayer = true
                 }

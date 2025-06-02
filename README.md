@@ -11,7 +11,16 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 ### BETA 3: Balancing and adjustments + Final changes
 
 * *(0.3.42)*: Dialogue polish
-* *(0.3.41)*: Bloom, Unstoppable Force, Puckshot, Disabler balance changes
+* *(0.3.42)*: Weth gets actual artifacts?! + SpaceRelic description clarification
+* **(0.3.41)**: Bloom, Unstoppable Force, Disabler balance changes, mirage blast animation slight change
+  * Bloom: Added minidrive across the board
+  * Unstoppable B: Now does two 0 damage pierce attacks instead of a single 1 damage pierce and is now coloured RED
+  * Disabler:
+    * Base: Cost lowered to 0, now exhausts
+    * A: original B
+    * B: Brittle instead of weaken, now also fleeting
+    * A & B: Sends new Disabler to Exhaust pile instead of Discard pile
+  * Mirage Blast: Teleports only on the second movement instead of all three
 * **(0.3.40)**: Relic code cleanup
 * **(0.3.39)**: Fixed issue with pulsedrive not being handled in Focus relic and fixed Focus offering the same relic twice if you own that relic
 * **(0.3.38)**: On second thought, having the midi cards isn't a great idea... also addressed one of the sprites not being registered properly
