@@ -10,14 +10,6 @@ public class RelicDroneShift : RelicShield
         return Status.droneShift;
     }
 
-    public override void ArtifactRemoval(State state)
-    {
-        state.GetCurrentQueue().Queue(new ALoseArtifact
-        {
-            artifactType = $"{ModEntry.Instance.UniqueName}::{GetType().Name}",
-        });
-    }
-
     public override List<Tooltip>? GetExtraTooltips()
     {
         return [
