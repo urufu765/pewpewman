@@ -72,6 +72,10 @@ internal partial class ModEntry : SimpleMod
 
     public Spr SprArtMadcapDepleted { get; private set; }
     public Spr SprArtPowerSprintDepleted { get; private set; }
+    public Spr SprArtBattleStimulationDepleted { get; private set; }
+    public Spr SprArtBattleStimulationStimulated { get; private set; }
+    public Spr SprArtCalculatedWhiffDepleted { get; private set; }
+    public Spr SprArtCannonPrimerDepleted { get; private set; }
 
     public Spr SprSplitshot { get; private set; }
     public Spr SprSplitshotFail { get; private set; }
@@ -102,7 +106,7 @@ internal partial class ModEntry : SimpleMod
      * All cards and artifacts must be registered before they may be used in the game.
      * In theory only one collection could be used, containing all registerable types, but it is seperated this way for ease of organization.
      */
-    private static List<Type> WethCommonCardTypes = [
+    private readonly static List<Type> WethCommonCardTypes = [
         typeof(WethExe),
         typeof(TripleTap),
         typeof(Puckshot),
@@ -116,7 +120,7 @@ internal partial class ModEntry : SimpleMod
         typeof(MilkSoda),
         typeof(Feral)
     ];
-    private static List<Type> WethUncommonCardTypes = [
+    private readonly static List<Type> WethUncommonCardTypes = [
         typeof(DoubleTap),
         typeof(Disabler),
         typeof(ScatterTrash),
@@ -127,14 +131,14 @@ internal partial class ModEntry : SimpleMod
         typeof(FeralBlast),
         typeof(MirageBlast)
     ];
-    private static List<Type> WethRareCardTypes = [
+    private readonly static List<Type> WethRareCardTypes = [
         typeof(UnstoppableForce),
         typeof(PearlDispenser),
         typeof(CrisisCall),
         typeof(PowPow),
         typeof(ExtremeViolence)
     ];
-    private static List<Type> WethSpecialCardTypes = [
+    private readonly static List<Type> WethSpecialCardTypes = [
         typeof(CryAhtack),
         typeof(CryDuhfend),
         typeof(CryCapacity),
@@ -153,25 +157,31 @@ internal partial class ModEntry : SimpleMod
         typeof(MechSwap),
         typeof(CryPlaceholder),
         typeof(MechPlaceholder),
+        typeof(FullCommitment)
         // typeof(PlayJourneyV),
         // typeof(PlayIncompetentBaffoon)
     ];
-    private static IEnumerable<Type> WethCardTypes =
+    private readonly static IEnumerable<Type> WethCardTypes =
         WethCommonCardTypes
             .Concat(WethUncommonCardTypes)
             .Concat(WethRareCardTypes)
             .Concat(WethSpecialCardTypes);
 
-    private static List<Type> WethCommonArtifacts = [
+    private readonly static List<Type> WethCommonArtifacts = [
         typeof(TreasureSeeker),
         typeof(HiddenOptions),
+        typeof(BattleStimulation),
+        typeof(CalculatedWhiff),
+        typeof(CannonPrimer)
     ];
-    private static List<Type> WethBossArtifacts = [
+    private readonly static List<Type> WethBossArtifacts = [
         typeof(HiddenOptions2),
         typeof(TerminusMilestone),
-        typeof(TerminusJaunt)
+        typeof(TerminusJaunt),
+        typeof(AlPoToCa),
+        typeof(SuperDriveCollector)
     ];
-    private static List<Type> WethEventArtifacts = [
+    private readonly static List<Type> WethEventArtifacts = [
         typeof(TreasureHunter),
         typeof(SpaceRelics),
         typeof(SpaceRelics2),
@@ -179,7 +189,7 @@ internal partial class ModEntry : SimpleMod
         typeof(SR2Focused),
         typeof(SR2Subsuming)
     ];
-    private static List<Type> WethSpecialArtifacts = [
+    private readonly static List<Type> WethSpecialArtifacts = [
         typeof(RelicPulsedrive),
         typeof(RelicAutododgeRight),
         typeof(RelicBoost),
@@ -195,7 +205,7 @@ internal partial class ModEntry : SimpleMod
         typeof(RelicTempPayback),
         typeof(RelicTempShield)
     ];
-    private static List<Type> WethDuoArtifacts = [
+    private readonly static List<Type> WethDuoArtifacts = [
         typeof(CannonRecharge),  // CAT
         typeof(ResidualShot),  // Peri
         typeof(RockPower),  // Isaac
@@ -205,14 +215,14 @@ internal partial class ModEntry : SimpleMod
         typeof(PowerSprint),  // Riggs
         typeof(HiddenGem),  // Max
     ];
-    private static IEnumerable<Type> WethArtifactTypes =
+    private readonly static IEnumerable<Type> WethArtifactTypes =
         WethCommonArtifacts
             .Concat(WethBossArtifacts)
             .Concat(WethEventArtifacts)
             .Concat(WethSpecialArtifacts)
             .Concat(WethDuoArtifacts);
 
-    private static List<Type> WethDialogues = [
+    private readonly static List<Type> WethDialogues = [
         typeof(StoryDialogue),
         typeof(EventDialogue),
         typeof(CombatDialogue),
@@ -220,7 +230,7 @@ internal partial class ModEntry : SimpleMod
         typeof(CardDialogue),
         typeof(MemoryDialogue)
     ];
-    private static IEnumerable<Type> AllRegisterableTypes =
+    private readonly static IEnumerable<Type> AllRegisterableTypes =
         WethCardTypes
             .Concat(WethDialogues);
 

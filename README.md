@@ -11,7 +11,11 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 ### BETA 3: Balancing and adjustments + Final changes
 
 * *(0.3.42)*: Dialogue polish
-* *(0.3.42)*: Weth gets actual artifacts?! + SpaceRelic description clarification
+* **(0.3.42)**: Weth gets actual artifacts?! + SpaceRelic description clarification, Temporary upgrades have been moved to Upgrade C!
+  * Disabler:
+    * Base: Cost back to 1
+    * A: Now copies Base but costs 0
+    * B: Now copies Base but retains
 * **(0.3.41)**: Bloom, Unstoppable Force, Disabler balance changes, mirage blast animation slight change
   * Bloom: Added minidrive across the board
   * Unstoppable B: Now does two 0 damage pierce attacks instead of a single 1 damage pierce and is now coloured RED

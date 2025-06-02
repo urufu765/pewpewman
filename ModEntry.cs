@@ -321,6 +321,10 @@ internal partial class ModEntry : SimpleMod
         SprArtTHDepleted = RegisterSprite(package, "assets/Artifact/TreasureHunterDepleted.png").Sprite;
         SprArtMadcapDepleted = RegisterSprite(package, "assets/Artifact/MadcapDepleted.png").Sprite;
         SprArtPowerSprintDepleted = RegisterSprite(package, "assets/Artifact/PowerSprintDepleted.png").Sprite;
+        SprArtBattleStimulationDepleted = RegisterSprite(package, "assets/Artifact/BattleStimulationDepleted.png").Sprite;
+        SprArtBattleStimulationStimulated = RegisterSprite(package, "assets/Artifact/BattleStimulationStimulated.png").Sprite;
+        SprArtCalculatedWhiffDepleted = RegisterSprite(package, "assets/Artifact/CalculatedWhiffDepleted.png").Sprite;
+        SprArtCannonPrimerDepleted = RegisterSprite(package, "assets/Artifact/CannonPrimerDepleted.png").Sprite;
 
 
         SprSplitshot = RegisterSprite(package, "assets/Icon/Splitshot.png").Sprite;

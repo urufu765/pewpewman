@@ -103,5 +103,11 @@ internal partial class ModEntry : SimpleMod
             original: typeof(Character).GetMethod(nameof(Character.DrawFace), AccessTools.all),
             postfix: new HarmonyMethod(typeof(WethForceAdvanceDialogue), nameof(WethForceAdvanceDialogue.DrawWethCharOverlay))
         );
+
+        // BattleStimulation helper
+        harmony.Patch(
+            original: typeof(Ship).GetMethod(nameof(Ship.DirectHullDamage), AccessTools.all),
+            postfix: new HarmonyMethod(typeof(BattleStimulationHelper), nameof(BattleStimulationHelper.DetectEnemyLoseHull))
+        );
     }
 }

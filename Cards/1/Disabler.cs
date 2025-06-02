@@ -9,7 +9,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Shoot a disabling round
 /// </summary>
-public class Disabler : WCCommon, IRegisterable, IHasCustomCardTraits
+public class Disabler : WCCommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -32,34 +32,6 @@ public class Disabler : WCCommon, IRegisterable, IHasCustomCardTraits
     {
         return upgrade switch
         {
-            Upgrade.B =>
-            [
-                new ASplitshot
-                {
-                    damage = GetDmg(s, 0),
-                    stunEnemy = true,
-                    brittle = true
-                },
-                new AAddCard
-                {
-                    card = new Disabler(),
-                    destination = CardDestination.Exhaust,
-                }
-            ],
-            Upgrade.A =>
-            [
-                new ASplitshot
-                {
-                    damage = GetDmg(s, 0),
-                    stunEnemy = true,
-                    weaken = true
-                },
-                new AAddCard
-                {
-                    card = new Disabler(),
-                    destination = CardDestination.Exhaust,
-                }
-            ],
             _ =>
             [
                 new ASplitshot
@@ -76,26 +48,28 @@ public class Disabler : WCCommon, IRegisterable, IHasCustomCardTraits
     {
         return upgrade switch
         {
-            Upgrade.B or Upgrade.A => new CardData
+            Upgrade.B => new CardData
             {
                 cost = 1,
-                singleUse = true,
+                exhaust = true,
+                retain = true,
                 artTint = "ffc47b",
                 artOverlay = ModEntry.Instance.WethCommon
             },
-            _ => new CardData
+            Upgrade.A => new CardData
             {
                 cost = 0,
                 exhaust = true,
                 artTint = "ffc47b",
                 artOverlay = ModEntry.Instance.WethCommon
+            },
+            _ => new CardData
+            {
+                cost = 1,
+                exhaust = true,
+                artTint = "ffc47b",
+                artOverlay = ModEntry.Instance.WethCommon
             }
         };
-    }
-    
-    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
-    {
-        if (upgrade == Upgrade.B) return new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.V2.Fleeting.Trait };
-        return new HashSet<ICardTraitEntry>();
     }
 }
