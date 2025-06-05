@@ -88,7 +88,87 @@ internal class CardDialogue : IRegisterable
                 dialogue = [
                     new(AmWeth, "sodaexplodedown", "...")
                 ]
-            }}
+            }},
+            {"FeralCardKill_0", new(){
+                type = NodeType.combat,
+                allPresent = [AmWeth],
+                lookup = ["feralCardUnflipped"],
+                dialogue = [
+                    new(AmWeth, "feralkill", "KILL!")
+                ]
+            }},
+            {"FeralCardDie_0", new(){
+                type = NodeType.combat,
+                allPresent = [AmWeth],
+                lookup = ["feralCardFlipped"],
+                dialogue = [
+                    new(AmWeth, "feraldie", "DIE!")
+                ]
+            }},
+            {"CrisisCallCardYeeted_0", new(){
+                type = NodeType.combat,
+                allPresent = [AmWeth],
+                lookup = ["crisisCallCulled"],
+                dialogue = [
+                    new([
+                        new(AmWeth, "dontcare", "Oh no. The receiver. It blew."),
+                        new(AmWeth, "dontcare", "We didn't need a receiver to call in extra firepower anyways."),
+                        new(AmWeth, "dontcare", "At least I salvaged the useful components.")
+                    ]),
+                ]
+            }},
+            {"PowPowCardYeeted_0", new(){
+                type = NodeType.combat,
+                allPresent = [AmWeth],
+                lookup = ["powPowPopped"],
+                dialogue = [
+                    new([
+                        new(AmWeth, "dontcare", "Whoops, I pushed it too far."),
+                        new(AmWeth, "dontcare", "We got something out of it at least."),
+                        new(AmWeth, "dontcare", "I'm sure we'll come across another one.")
+                    ])
+                ]
+            }},
+            {"AllPowerToCannonsCardPlayed_Weth_0", new(){
+                type = NodeType.combat,
+                allPresent = [AmWeth],
+                lookup = ["APTCcard"],
+                dialogue = [
+                    new(AmWeth, "lockedin", "Here we go!")
+                ]
+            }},
+            {"AllPowerToCannonsCardPlayed_Weth_1", new(){
+                type = NodeType.combat,
+                allPresent = [AmWeth],
+                lookup = ["APTCcard"],
+                dialogue = [
+                    new(AmWeth, "lockedin", "Time to rain death!")
+                ]
+            }},
+            {"AllPowerToCannonsCardPlayed_Weth_2", new(){
+                type = NodeType.combat,
+                allPresent = [AmWeth],
+                lookup = ["APTCcard"],
+                dialogue = [
+                    new(AmWeth, "lockedin", "Now or never!")
+                ]
+            }},
+            {"AllPowerToCannonsCardPlayed_Weth_3", new(){
+                type = NodeType.combat,
+                allPresent = [AmWeth],
+                lookup = ["APTCcard"],
+                dialogue = [
+                    new(AmWeth, "lockedin", "I'll make it quick.")
+                ]
+            }},
+            {"AllPowerToCannonsCardPlayed_Weth_4", new(){
+                type = NodeType.combat,
+                allPresent = [AmWeth],
+                lookup = ["APTCcard"],
+                dialogue = [
+                    new(AmWeth, "lockedin", "I won't let this go to waste.")
+                ]
+            }},
         });
     }
 }

@@ -43,13 +43,14 @@ public class PowPow : WCRare, IRegisterable
                 {
                     status = Status.powerdrive,
                     statusAmount = 1,
-                    targetPlayer = true
+                    targetPlayer = true,
+                    dialogueSelector = ".powPowPopped"
                 },
                 new AAddCard
                 {
                     card = new Powershot(),
                     amount = 2,
-                    destination = CardDestination.Discard
+                    destination = CardDestination.Discard,
                 }
             ],
             _ => 

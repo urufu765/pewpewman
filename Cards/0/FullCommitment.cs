@@ -54,7 +54,8 @@ public class FullCommitment : Card, IRegisterable
                     status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     statusAmount = x,
                     targetPlayer = true,
-                    xHint = 1
+                    xHint = 1,
+                    dialogueSelector = ".APTCcard"
                 },
                 new AStatus
                 {

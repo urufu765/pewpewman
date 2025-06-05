@@ -48,11 +48,11 @@ internal class StoryDialogue : IRegisterable
                     new(AmWeth, "squint", "..."),
                     new(AmPeri, "squint", "...", true),
                     new(AmWeth, "tired", "Okay my eyes are starting to hurt from all that squinting."),
-                    new(AmWeth, "Move over."),
-                    new(AmPeri, "What? Hey! What are you doing?!", true),
+                    new(AmWeth, "squintoffscreen", "Move over."),
+                    new(AmPeri, "mad", "What? Hey! What are you doing?!", true),
                     new(AmWeth, "Manning the guns? What are YOU doing?"),
-                    new(AmPeri, "You're in my seat.", true),
-                    new(AmWeth, "How about we discuss the seating problems... after we blow up that ship that's in front of us?"),
+                    new(AmPeri, "mad", "You're in my seat.", true),
+                    new(AmWeth, "explain", "How about we discuss the seating problems... after we blow up that ship that's in front of us?"),
                     new(AmPeri, "squint", "...", true),
                     new(AmPeri, "squint", "Fine.", true)
                 ]
@@ -133,7 +133,7 @@ internal class StoryDialogue : IRegisterable
                     new(AmDizzy, "crystal", "How so?", true),
                     new(AmWeth, "tired", "I have a massive headache, my ears are ringing, and the area around my left eye is aching like crazy."),
                     new(AmDizzy, "crystal", "Interesting...", true),
-                    new(AmWeth, "squint", "Please take that away from me, before I violently throw you across the room."),
+                    new(AmWeth, "pain", "Please take that away from me, before I violently throw you across the room."),
                     new(AmDizzy, "intense", "Okay.", true)
                 ]
             }},
@@ -180,7 +180,7 @@ internal class StoryDialogue : IRegisterable
                     new(AmWeth, "Before that, can I ask a favor?"),
                     new(AmBooks, "Sure!", true),
                     new(AmWeth, "..."),
-                    new(AmWeth, "sad", "..."),
+                    new(AmWeth, "pain", "..."),
                     new(AmWeth, "tired", "..."),
                     new(AmWeth, "Nevermind. Forget about it. Wanna hear about the time I encountered a giant space octopus?"),
                     new(AmBooks, "Yes ma'am!", true)

@@ -41,7 +41,8 @@ public class BattleStimulation : Artifact
                 status = Status.overdrive,
                 statusAmount = 1,
                 targetPlayer = true,
-                artifactPulse = Key()
+                artifactPulse = Key(),
+                dialogueSelector = ".wethStimuliActive"
             });
             Stimulated = StimuliDepleted = true;
         }

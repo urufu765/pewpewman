@@ -35,7 +35,8 @@ static class CommonDefinitions
     internal readonly static string AmIlleana = "urufudoggo.Illeana::illeana";
 
     internal static Status MissingWeth => ModEntry.WethTheSnep.MissingStatus.Status;
-    internal static Status Pulsedrive => ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive;
+    internal static Status IsPulsedrive => ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive;
+    internal static Status IsMinidrive => ModEntry.Instance.KokoroApi.V2.DriveStatus.Minidrive;
 
 
     /// <summary>

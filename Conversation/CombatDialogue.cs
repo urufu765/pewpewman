@@ -14,10 +14,10 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
     {
         LocalDB.DumpStoryToLocalLocale("en", new Dictionary<string, DialogueMachine>(){
             {"BanditThreats_Multi_0", new(){
-                edit = [new("1bcc0802", AmWeth, "plead", "Hey? No?")]
+                edit = [new("1bcc0802", AmWeth, "intense", "Hey? No?")]
             }},
             {"BatboyKeepsTalking_Multi_0", new(){
-                edit = [new("5b1666a6", AmWeth, "Will you stop trying to kill us if we say yes?")]
+                edit = [new("5b1666a6", AmWeth, "plead", "Will you stop trying to kill us if we say yes?")]
             }},
             {"BlockedALotOfAttacksWithArmor_Weth_0", new(){
                 type = NodeType.combat,
@@ -27,7 +27,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 oncePerRun = true,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "Okay, reminder to self, don't do what the enemy is doing...")
+                    new(AmWeth, "think", "Okay, reminder to self, don't do what the enemy is doing...")
                 ]
             }},
             {"BooksWentMissing_Weth_0", new(){
@@ -38,7 +38,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 oncePerCombatTags = ["booksWentMissing"],
                 oncePerRun = true,
                 dialogue = [
-                    new(AmWeth, "plead", "Where she go?!")
+                    new(AmWeth, "plead", "Where did she go?!")
                 ]
             }},
             {"CheapCardPlayed_Weth_0", new(){
@@ -67,7 +67,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 ]
             }},
             {"DillianShouts", new(){
-                edit = [new("b01729fe", AmWeth, "squint", "Who said you could be my sworn enemy?")]
+                edit = [new("b01729fe", AmWeth, "pointout", "Who said you could be my sworn enemy?")]
             }},
             {"DizzyWentMissing_Weth_0", new(){
                 type = NodeType.combat,
@@ -83,7 +83,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 edit = [new("650e6806", AmWeth, "I can take care of that for you!")]
             }},
             {"DualNotEnoughDronesShouts_Multi_2", new(){
-                edit = [new("9b0ce906", AmWeth, "You're doing a terrible job.")]
+                edit = [new("9b0ce906", AmWeth, "pointout", "You're doing a terrible job.")]
             }},
             {"Duo_AboutToDieAndLoop_Weth_0", new(){
                 type = NodeType.combat,
@@ -105,7 +105,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 oncePerRun = true,
                 allPresent = [AmWeth, AmIsaac],
                 dialogue = [
-                    new(AmWeth, "sad", "How cruel."),
+                    new(AmWeth, "verysad", "How cruel."),
                     new(AmIsaac, "Let's do better next time.")
                 ]
             }},
@@ -129,7 +129,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 oncePerRun = true,
                 allPresent = [AmWeth, AmMax],
                 dialogue = [
-                    new(AmWeth, "sad", "So many regrets..."),
+                    new(AmWeth, "sob", "So many regrets!"),
                     new(AmMax, "intense", "Oh no.")
                 ]
             }},
@@ -165,7 +165,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 oncePerCombat = true,
                 oncePerRun = true,
                 dialogue = [
-                    new(AmWeth, "squint", "I was kinda expecting to drill right through the armor...")
+                    new(AmWeth, "hmm", "I was kinda expecting to drill right through the armor...")
                 ]
             }},
             {"EnemyArmorPierced_Weth_0", new(){
@@ -176,7 +176,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 oncePerRun = true,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "If this could do that to armor, imagine what it could do to a stubborn rock!")
+                    new(AmWeth, "think", "If this could do that to armor, imagine what it could do to a stubborn rock!")
                 ]
             }},
             {"EnemyHasBrittle_Weth_0", new(){
@@ -194,7 +194,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 oncePerRunTags = ["yelledAboutWeakness"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "Oh this is gonna hurt... for them!")
+                    new(AmWeth, "lockedin", "Oh this is gonna hurt... for them!")
                 ]
             }},
             {"ExpensiveCardPlayed_Weth_0", new(){
@@ -257,7 +257,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 oncePerRun = true,
                 hasArtifactTypes = [typeof(RockPower)],
                 dialogue = [
-                    new(AmWeth, "This shouldn't be allowed."),
+                    new(AmWeth, "think", "This shouldn't be allowed."),
                     new(AmIsaac, "explains", "Oh but it is.")
                 ]
             }},
@@ -368,7 +368,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 oncePerRun = true,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "explain", "I have the countermeasure if anything goes awry.")
+                    new(AmWeth, "donewithit", "I have the countermeasure if anything goes awry.")
                 ]
             }},
             {"JustPlayedAToothCard_Weth_0", new(){
@@ -437,7 +437,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 maxHull = 1,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "panic", "This is WAY TOO CLOSE for comfort!")
+                    new(AmWeth, "surprise", "That was WAY TOO CLOSE for comfort!")
                 ]
             }},
             {"OverheatDrakeFix_Multi_6", new(){
@@ -465,26 +465,26 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 oncePerRun = true,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "panic", "Who's manning the flight controls now?!")
+                    new(AmWeth, "intense", "Who's manning the flight controls now?!")
                 ]
             }},
             {"SkunkFirstTurnShouts_Multi_0", new(){
-                edit = [new("f47e8bf8", AmWeth, "I'm actually here to harvest that drill from you.")]
+                edit = [new("f47e8bf8", AmWeth, "lockedin", "I'm actually here to harvest that drill from you.")]
             }},
             {"ShopKeepBattleInsult", new(){
                 edit = [new("66ea84d6", AmWeth, "cryingcat", "NOOOOOOOOOOOOoooooooooooooooo...")]
             }},
             {"SogginsEscapeIntent_1", new(){
-                edit = [new("cb0e74d6", AmWeth, "Mission... complete?")]
+                edit = [new("cb0e74d6", AmWeth, "shrug", "Mission... complete?")]
             }},
             {"SogginsEscapeIntent_3", new(){
-                edit = [new("d3fa946e", AmWeth, "Oh, right after I'm done living out my power fantasy.")]
+                edit = [new("d3fa946e", AmWeth, "sly", "Oh, right after I'm done living out my power fantasy.")]
             }},
             {"Soggins_Missile_Shout_1", new(){
-                edit = [new("786d2caf", AmWeth, "Turns out I'm good for destroying drones AND ships at the same time.")]
+                edit = [new("786d2caf", AmWeth, "dontcare", "Turns out I'm good for destroying drones AND ships at the same time.")]
             }},
             {"SpikeGetsChatty_Multi_0", new(){
-                edit = [new(EMod.countFromStart, 1, AmWeth, "lockedin", "Bring it on!")]
+                edit = [new(EMod.countFromStart, 1, AmWeth, "bringiton", "Bring it on!")]
             }},
             {"StardogGetsChatty_Weth_0", new(){
                 type = NodeType.combat,
@@ -534,7 +534,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 turnStart = true,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "squint", "Are you doing this on purpose?")
+                    new(AmWeth, "donewithit", "Are you doing this on purpose?")
                 ]
             }},
             {"VeryManyTurns_Weth_1", new(){
@@ -554,7 +554,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 lastTurnPlayerStatuses = [Status.corrode],
                 oncePerRun = true,
                 dialogue = [
-                    new(AmWeth, "panic", "Save the rocks! SAVE THE ROCKS!")
+                    new(AmWeth, "surprise", "Save the rocks! SAVE THE ROCKS!")
                 ]
             }},
             {"WeAreMovingAroundALot_Weth_0", new(){
@@ -563,7 +563,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 minMovesThisTurn = 3,
                 oncePerRun = true,
                 dialogue = [
-                    new(AmWeth, "I'm starting to see double...")
+                    new(AmWeth, "facepalm", "I'm starting to see double...")
                 ]
             }},
             {"WeDidOverFiveDamage_Weth_0", new(){
@@ -572,7 +572,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 playerShotJustHit = true,
                 minDamageDealtToEnemyThisAction = 6,
                 dialogue = [
-                    new(AmWeth, "lockedin", "Meet your maker!")
+                    new(AmWeth, "bringiton", "Meet your maker!")
                 ]
             }},
             {"WeDidOverThreeDamage_Weth_0", new(){
@@ -593,7 +593,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 anyDronesHostile = ["missile_seeker"],
                 nonePresent = ["crab"],
                 dialogue = [
-                    new(AmWeth, "mad", "See? This is why we should've taken care of the missiles BEFORE doing a tactical retreat!")
+                    new(AmWeth, "angrypointing", "See? This is why we should've taken care of the missiles BEFORE doing a tactical retreat!")
                 ]
             }},
             {"WeDontOverlapWithEnemyAtAll_Weth_0", new(){
@@ -605,7 +605,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 nonePresent = ["crab", "scrap"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "squint", "Now how are we supposed to hit them from here?")
+                    new(AmWeth, "angry", "Now how are we supposed to hit them from here?")
                 ]
             }},
             {"WeGotHurtButNotTooBad_Weth_0", new(){
@@ -619,7 +619,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 ]
             }},
             {"WeJustGainedHeatAndDrakeIsHere_Multi_0", new(){
-                edit = [new(EMod.countFromStart, 1, AmWeth, "pain", "Drake! Do something about this heat! I'm dying over here!")]
+                edit = [new(EMod.countFromStart, 1, AmWeth, "angrypointing", "Drake! Do something about this heat! I'm dying over here!")]
             }},
             {"WeMissedOopsie_Weth_0", new(){
                 type = NodeType.combat,
@@ -628,7 +628,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 doesNotHaveArtifactTypes = [typeof(Recalibrator), typeof(GrazerBeam)],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "explain", "Eh, not the end of the world.")
+                    new(AmWeth, "shrug", "Eh, not the end of the world.")
                 ]
             }},
             {"WeMissedOopsie_Weth_1", new(){
@@ -648,7 +648,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 doesNotHaveArtifactTypes = [typeof(Recalibrator), typeof(GrazerBeam)],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "That should scare them... maybe.")
+                    new(AmWeth, "hmm", "That should scare them... maybe.")
                 ]
             }},
             {"WizardGeneralShouts_Weth_0", new(){
@@ -664,13 +664,13 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
             }},
             {"WethWentMissing_Multi_0", new(){
                 type = NodeType.combat,
-                allPresent = [AmBooks],
+                allPresent = [AmMax],
                 lastTurnPlayerStatuses = [MissingWeth],
                 priority = true,
                 oncePerCombatTags = ["wethWentMissing"],
                 oncePerRun = true,
                 dialogue = [
-                    new(AmBooks, "intense", "Where did crystal lady go?")
+                    new(AmMax, "intense", "Hey? We need her!")
                 ]
             }},
             {"WethWentMissing_Multi_1", new(){

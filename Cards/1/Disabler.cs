@@ -58,8 +58,7 @@ public class Disabler : WCCommon, IRegisterable
             },
             Upgrade.A => new CardData
             {
-                cost = 0,
-                exhaust = true,
+                cost = 1,
                 artTint = "ffc47b",
                 artOverlay = ModEntry.Instance.WethCommon
             },

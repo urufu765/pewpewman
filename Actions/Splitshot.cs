@@ -15,6 +15,9 @@ namespace Weth.Actions;
 
 public static class SplitshotTranspiler
 {
+    /// <summary>
+    /// Hijacks the action icon renderer to use a fake version of AAttack that just changes the icon
+    /// </summary>
     public static IEnumerable<CodeInstruction> RenderSplitshotAsAttack(IEnumerable<CodeInstruction> instructions, ILGenerator il)
     {
         try
@@ -43,6 +46,9 @@ public static class SplitshotTranspiler
         }
     }
 
+    /// <summary>
+    /// Checks if the action is splitshot, then gives the fake AAttack version to render.
+    /// </summary>
     public static CardAction? FakeSplitshotAsAttack(CardAction? action)
     {
         if (action is ASplitshot splitshot)
@@ -52,6 +58,9 @@ public static class SplitshotTranspiler
         return action;
     }
 
+    /// <summary>
+    /// Ignores calls to pierce/stun modifying artifact method hooks if the aattack is part of Splitshot's split shot.
+    /// </summary>
     public static IEnumerable<CodeInstruction> DontDoDuplicateArtifactModifiers(IEnumerable<CodeInstruction> instructions, ILGenerator il)
     {
         try
@@ -84,6 +93,9 @@ public static class SplitshotTranspiler
         }
     }
 
+    /// <summary>
+    /// Renders the double width icons that belong to Giant and Mega asteroids. Also renders the Milk Soda question mark thing
+    /// </summary>
     public static bool IconRenderingStuff(G g, State state, CardAction action, bool dontDraw, int shardAvailable, int stunChargeAvailable, int bubbleJuiceAvailable, ref int __result)
     {
         if (action is ASpawn spawn && spawn.thing is GiantAsteroid or MegaAsteroid)
@@ -192,11 +204,8 @@ public static class SplitshotTranspiler
 
 
     /// <summary>
-    /// Allows splitshots to function similarily as an AAttack
+    /// Allows splitshots to function similarily as an AAttack by ignoring some drone null checks
     /// </summary>
-    /// <param name="instructions"></param>
-    /// <param name="il"></param>
-    /// <returns></returns>
     public static IEnumerable<CodeInstruction> IgnoreMissingDroneCheck(IEnumerable<CodeInstruction> instructions, ILGenerator il)
     {
         try
@@ -226,9 +235,6 @@ public static class SplitshotTranspiler
     /// <summary>
     /// Prevents splitshots from triggering drones VFX.
     /// </summary>
-    /// <param name="instructions"></param>
-    /// <param name="il"></param>
-    /// <returns></returns>
     public static IEnumerable<CodeInstruction> IgnoreDroneBloops(IEnumerable<CodeInstruction> instructions, ILGenerator il)
     {
         try
@@ -254,35 +260,42 @@ public static class SplitshotTranspiler
         }
     }
 
-
+    /// <summary>
+    /// Checks if the AAttack is a split shot from a ASplitshot
+    /// </summary>
+    /// <param name="attack">An AAttack with or without the moddata</param>
+    /// <returns>Is splitshot's split shot?</returns>
     private static bool IsSplit(AAttack attack)
     {
         return ModEntry.Instance.Helper.ModData.TryGetModData<bool>(attack, "split", out var b) && b;
     }
 }
 
+/// <summary>
+/// Splitshot class... why I didn't make this into a AAttack subclass? I forgot.
+/// </summary>
 public class ASplitshot : CardAction
 {
     public int damage;
-    public int? givesEnergy;
-    public Status? status;
-    public int statusAmount;
-    public Card? cardOnHit;
-    public CardDestination destination;
+    public int? givesEnergy;  // Currently unused
+    public Status? status;  // Currently unused
+    public int statusAmount;  // Currently unused
+    public Card? cardOnHit;  // Currently unused
+    public CardDestination destination;  // Currently unused
     public bool stunEnemy;
-    public int moveEnemy;
-    public bool weaken;
-    public bool brittle;
-    public bool armorise;
+    public int moveEnemy;  // Currently unused
+    public bool weaken;  // Currently unused
+    public bool brittle;  // Currently unused
+    public bool armorise;  // Currently unused
     public bool piercing;
     public bool targetPlayer;
     public bool fast;
-    public bool paybackAttack;
+    public bool paybackAttack;  // Currently unused
     public bool multiCannonVolley;
-    public int paybackCounter;
-    public bool storyFromStrafe;
-    public bool storyFromPayback;
-    public List<CardAction>? onKillActions;
+    public int paybackCounter;  // Currently unused
+    public bool storyFromStrafe;  // Currently unused
+    public bool storyFromPayback;  // Currently unused
+    public List<CardAction>? onKillActions;  // Currently unused
     public int? fromX;
 
 
@@ -333,37 +346,39 @@ public class ASplitshot : CardAction
                 }
             }
         }
-
+        // Handle stunCharge if not a stun shot
         if (!stunEnemy && s.ship.Get(Status.stunCharge) > 0 && !targetPlayer)
         {
             s.ship.Set(Status.stunCharge, s.ship.Get(Status.stunCharge) - 1);
             stunEnemy = true;
         }
 
+        // As of 0.3.43, Splitshot no longer handles the drone destruction. Instead it'll queue an AAttack to do it for it instead.
+        bool hitADrone = false;
         if (raycastResult is not null && raycastResult.hitDrone)
         {
-            bool invincible = c.stuff[raycastResult.worldX].Invincible();
-            foreach (Artifact artifact in s.EnumerateAllArtifacts())
-            {
-                bool? droneInvincibilityModified = artifact.ModifyDroneInvincibility(s, c, c.stuff[raycastResult.worldX]);
-                if (droneInvincibilityModified == true)
-                {
-                    invincible = true;
-                    artifact.Pulse();
-                }
-            }
-            if (c.stuff[raycastResult.worldX].bubbleShield && !piercing)
-            {
-                c.stuff[raycastResult.worldX].bubbleShield = false;
-            }
-            else if (invincible)
-            {
-                c.QueueImmediate(c.stuff[raycastResult.worldX].GetActionsOnShotWhileInvincible(s, c, !targetPlayer, damage));
-            }
-            else
-            {
-                c.DestroyDroneAt(s, raycastResult.worldX, !targetPlayer);
-            }
+            // bool invincible = c.stuff[raycastResult.worldX].Invincible();
+            // foreach (Artifact artifact in s.EnumerateAllArtifacts())
+            // {
+            //     bool? droneInvincibilityModified = artifact.ModifyDroneInvincibility(s, c, c.stuff[raycastResult.worldX]);
+            //     if (droneInvincibilityModified == true)
+            //     {
+            //         invincible = true;
+            //         artifact.Pulse();
+            //     }
+            // }
+            // if (c.stuff[raycastResult.worldX].bubbleShield && !piercing)
+            // {
+            //     c.stuff[raycastResult.worldX].bubbleShield = false;
+            // }
+            // else if (invincible)
+            // {
+            //     c.QueueImmediate(c.stuff[raycastResult.worldX].GetActionsOnShotWhileInvincible(s, c, !targetPlayer, damage));
+            // }
+            // else
+            // {
+            //     c.DestroyDroneAt(s, raycastResult.worldX, !targetPlayer);
+            // }
             //ModEntry.Instance.Logger.LogInformation("Split!");
             AAttack left = ConvertSplitToAttack(this);
             AAttack right = ConvertSplitToAttack(this);
@@ -398,16 +413,20 @@ public class ASplitshot : CardAction
                     c.QueueImmediate([left, right]);
                 }
             }
-            timer = 0.0;
-            return;
         }
-        c.QueueImmediate(ConvertSplitToAttack(this));
+        AAttack origin = ConvertSplitToAttack(this);
+        if (hitADrone)
+        {
+            ModEntry.Instance.Helper.ModData.SetModData(origin, "split", true);
+            origin.fast = true;
+        }
+        c.QueueImmediate(origin);
         timer = 0.0;
     }
 
 
 
-    public static AAttack ConvertSplitToAttack(ASplitshot splitshot, bool fake=false)
+    public static AAttack ConvertSplitToAttack(ASplitshot splitshot, bool fake = false)
     {
         if (fake)
         {
@@ -627,9 +646,9 @@ public class ASplitshot : CardAction
     {
         if (DoWeHaveCannonsThough(s))
         {
-            return new Icon(this.piercing? ModEntry.Instance.SprSplitshotPiercing : ModEntry.Instance.SprSplitshot, damage, Colors.redd, false);
+            return new Icon(this.piercing ? ModEntry.Instance.SprSplitshotPiercing : ModEntry.Instance.SprSplitshot, damage, Colors.redd, false);
         }
-        return new Icon(this.piercing? ModEntry.Instance.SprSplitshotPiercingFail : ModEntry.Instance.SprSplitshotFail, damage, Colors.attackFail, false);
+        return new Icon(this.piercing ? ModEntry.Instance.SprSplitshotPiercingFail : ModEntry.Instance.SprSplitshotFail, damage, Colors.attackFail, false);
     }
 
 

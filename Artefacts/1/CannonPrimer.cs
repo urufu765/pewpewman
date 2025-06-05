@@ -67,7 +67,8 @@ public class CannonPrimer : Artifact
                 status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Minidrive,
                 statusAmount = aAttack.damage * 2,
                 targetPlayer = true,
-                artifactPulse = Key()
+                artifactPulse = Key(),
+                dialogueSelector = ".cannonPrimedWeth"
             });
         }
     }

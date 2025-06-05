@@ -21,14 +21,14 @@ internal class EventDialogue : IRegisterable
                 oncePerRun = true,
                 bg = "BGBootSequence",
                 dialogue = [
-                    new(AmWeth, "panic", "ACK! Ow?!"),
+                    new(AmWeth, "surprise", "ACK! Ow?!"),
                     new(AmVoid, "You have been a good girl. Have a crystal."),
                     new(AmWeth, "crystallolipop", "Oh. Yay!"),
                     new(AmCat, "Energy readings are back to normal.")
                 ]
             }},
             {"CrystallizedFriendEvent", new(){
-                edit = [new("8383e940", AmWeth, "plead", "Please don't put me in the freezer again...")]
+                edit = [new("8383e940", AmWeth, "plead", "No...")]
             }},
             {$"CrystallizedFriendEvent_{AmWeth}", new(){
                 type = NodeType.@event,
@@ -79,7 +79,7 @@ internal class EventDialogue : IRegisterable
                 ]
             }},
             {"LoseCharacterCard", new(){
-                edit = [new("79d6356a", AmWeth, "panic", "Nonononononono... WAIWAIWAIWAIWAIT!")]
+                edit = [new("79d6356a", AmWeth, "terror", "Aah! It hurts! What hurt?! Make it stop!!!")]
             }},
             {"LoseCharacterCard_No", new(){
                 edit = [new("ea6cfd2f", AmWeth, "traumatised", "...")]
@@ -117,11 +117,28 @@ internal class EventDialogue : IRegisterable
                     new(new Jump{key = "NewShop"})
                 ]
             }},
+            {"ShopkeeperInfinite_Weth_Multi_2", new(){
+                type = NodeType.@event,
+                lookup = ["shopBefore"],
+                bg = "BGShop",
+                allPresent = [AmWeth],
+                requiredScenes = [ "Weth_Memory_2" ],
+                maxHullPercent = 0.25,
+                dialogue = [
+                    new(AmShopkeeper, "I thought I told you to stop bringing me wreckages.", true),
+                    new([
+                        new(AmWeth, "facepalm", "It won't happen again..."),
+                        new(AmWeth, "sob", "I'm so sorry!!!"),
+                        new(AmWeth, "panic", "I was careful this time! I swear!")
+                    ]),
+                    new(new Jump{key = "NewShop"})
+                ]
+            }},
             {"SogginsEscape_1", new(){
                 edit = [new("af37567d", AmWeth, "Are you wanna die?")]
             }},
             {"Soggins_1", new(){
-                edit = [new("28308960", AmWeth, "I suppose I have the tools necessary to help him.")]
+                edit = [new("28308960", AmWeth, "squint", "I suppose I have the tools necessary to help him.")]
             }},
             {"Soggins_Infinite", new(){
                 edit = [new("30e9da01", AmWeth, "We'll see about that.")]
@@ -139,11 +156,11 @@ internal class EventDialogue : IRegisterable
                     new(AmWeth, "explain", "It's as beautiful as the first time I laid my eyes on the beaut."),
                     new(AmWeth, "tired", "..."),
                     new(AmCat, "You're shaking."),
-                    new(AmWeth, "I've also developed a bit of a phobia from giant ships transporting giant crystals."),
+                    new(AmWeth, "pain", "I've also developed a bit of a phobia from giant ships transporting giant crystals."),
                     new(AmCat, "squint", "As one does."),
                     new(AmWeth, "squint", "..."),
                     new(AmCat, "..."),
-                    new(AmWeth, "So... are we just gonna stare at the ship or...?"),
+                    new(AmWeth, "hmm", "So... are we just gonna stare at the ship or...?"),
                     new(AmCat, "See ya soon!")
                 ]
             }},

@@ -66,6 +66,13 @@ public class SpaceRelics2 : Artifact
         { Status.boost, StableSpr.icons_boost }
     };
     public int ObtainPulsedrive { get; set; }
+    public bool DontDisplayDescription { get; set; }
+
+
+    public override void OnReceiveArtifact(State state)
+    {
+        DontDisplayDescription = true;
+    }
 
     public virtual void ObtainRelic(Status status)
     {
@@ -117,6 +124,13 @@ public class SpaceRelics2 : Artifact
     public override List<Tooltip>? GetExtraTooltips()
     {
         List<Tooltip> tt = [];
+        if (!DontDisplayDescription)
+        {
+            tt.Add(new GlossaryTooltip("relicDiscriptor")
+            {
+                Description = ModEntry.Instance.Localizations.Localize(["artifact", "Unreleased", GetType().Name, "clair"])
+            });
+        }
         if (ObtainPulsedrive > 0)
         {
             tt.Add(new TTTTTTGlossary($"showStatus.pulsedrive")

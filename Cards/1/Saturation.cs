@@ -16,7 +16,14 @@ public class Feral : WCCommon, IRegisterable, IHasCustomCardTraits
 {
     private static Spr closedSprite;
     private static Spr openSprite;
-    public bool FlagState {get; set;} = false;
+    /// <summary>
+    /// Determines if the open mouth art or the closed mouth art should be used
+    /// </summary>
+    public bool FlagState { get; set; } = false;
+    /// <summary>
+    /// I'll use this for something, I swear...
+    /// </summary>
+    public int PlayCount { get; set; }
 
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -35,12 +42,41 @@ public class Feral : WCCommon, IRegisterable, IHasCustomCardTraits
         closedSprite = ModEntry.RegisterSprite(package, "assets/Card/1/feral.png").Sprite;
     }
 
+    /// <summary>
+    /// On draw, reset counter
+    /// </summary>
+    public override void OnDraw(State s, Combat c)
+    {
+        PlayCount = 0;
+    }
 
-    // public override void AfterWasPlayed(State state, Combat c)
-    // {
-    //     FlagState = !FlagState;
-    //     // ModEntry.Instance.Logger.LogInformation("Play?" + FlagState);
-    // }
+    /// <summary>
+    /// Since this goes before the hook below, call the action OPPOSITE of the FlagState
+    /// </summary>
+    /// <param name="state"></param>
+    /// <param name="c"></param>
+    public override void AfterWasPlayed(State state, Combat c)
+    {
+        if (FlagState)
+        {
+            c.QueueImmediate(
+                new ADummyAction
+                {
+                    dialogueSelector = "feralCardUnflipped"
+                }
+            );
+        }
+        else
+        {
+            c.QueueImmediate(
+                new ADummyAction
+                {
+                    dialogueSelector = "feralCardFlipped"
+                }
+            );
+        }
+        PlayCount++;
+    }
 
     public override void OnOtherCardPlayedWhileThisWasInHand(State s, Combat c, int handPosition)
     {

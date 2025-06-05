@@ -43,7 +43,8 @@ public class CrisisCall : WCRare, IRegisterable
                 {
                     status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     statusAmount = 3,
-                    targetPlayer = true
+                    targetPlayer = true,
+                    dialogueSelector = ".crisisCallCulled"
                 },
                 new AAddCard
                 {

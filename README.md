@@ -10,8 +10,9 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
-* *(0.3.42)*: Dialogue polish
-* **(0.3.42)**: Weth gets actual artifacts?! + SpaceRelic description clarification, Temporary upgrades have been moved to Upgrade C!
+* *(0.3.44)*: Test of below patch
+* **(0.3.43)**: Dialogue polish (+ new dialogue), Space Relic description clarifications, Splitshot pierce icon updated, splitshot midrow mechanic patches (midrow hit animation + fixed issue where some artifacts that count shots fired didn't count splitshots that hit midrow), Disabler A costs 1 and doesn't exhaust
+* **(0.3.42)**: Weth gets actual artifacts?!
   * Disabler:
     * Base: Cost back to 1
     * A: Now copies Base but costs 0

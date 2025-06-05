@@ -128,7 +128,7 @@ internal class MemoryDialogue : IRegisterable
                 lookup = [
                     "vault", $"vault_{AmWeth}"
                 ],
-                requiredScenes = [$"{AmWeth}_Memory_1"],
+                requiredScenes = [$"Weth_Memory_1"],
                 dialogue = [
                     new("T-14 days"),
                     new(new Wait{secs = 2}),
@@ -166,7 +166,7 @@ internal class MemoryDialogue : IRegisterable
                 lookup = [
                     "vault", $"vault_{AmWeth}"
                 ],
-                requiredScenes = [$"{AmWeth}_Memory_2"],
+                requiredScenes = [$"Weth_Memory_2"],
                 dialogue = [
                     new("T-10 minutes"),
                     new(new Wait{secs = 2}),
