@@ -31,7 +31,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["AresCannon"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "think", "If only both of these cannons could be used at once... now wouldn't that be neat?")
+                    new(AmWeth, "think", "If only both of these cannons could be used at once...")
                 ]
             }},
             {"ArtifactArmoredBay_Weth_0", new(){
@@ -42,7 +42,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["ArmoredBae"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "explain", "It was about time the missile bay got reinforced, the amount of stray rocks that hit that part from me blowing asteroids up...")
+                    new(AmWeth, "happy", "Since the bay's armored and all, I can blow more stuff up right?")
                 ]
             }},
             {"ArtifactBerserkerDrive_Weth_0", new(){
@@ -98,7 +98,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["CrosslinkTriggering"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "We're so going to the end of the universe and back with this!")
+                    new(AmWeth, "happy", "We're so going to the end of the universe and back with this!")
                 ]
             }},
             {"ArtifactDirtyEngines_Weth_0", new(){
@@ -129,7 +129,7 @@ internal class ArtifactDialogue : IRegisterable
                 minCostOfCardJustPlayed = 3,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "Getting in a bonus shot after a big spend is a big plus!")
+                    new(AmWeth, "happy", "Getting in a bonus shot after a big spend is a big plus!")
                 ]
             }},
             {"ArtifactFractureDetection_Weth_0", new(){
@@ -141,7 +141,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRun = true,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "bringiton", "Just line me up with the fracture, and I'll make sure to hit the bullseye!")
+                    new(AmWeth, "lookatthat", "Just line me up with the fracture, and I'll make sure to hit the bullseye!")
                 ]
             }},
             {"ArtifactGeminiCore_Multi_4", new(){
@@ -155,7 +155,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["GeminiCoreBooster"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "explain", "This has solidified my belief in the red side.")
+                    new(AmWeth, "isthisa", "This has solidified my belief in the red side.")
                 ]
             }},
             {"ArtifactGeminiCoreBooster_Weth_1", new(){
@@ -164,7 +164,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["GeminiCoreBooster"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "Blue baaaaaaad, red gooooooood!")
+                    new(AmWeth, "happynothoughts", "Blue baaaaaaad, red gooooooood!")
                 ]
             }},
             {"ArtifactGravelRecycler_Weth_0", new(){
@@ -174,7 +174,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerCombatTags = ["GravelRecycler"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "So you're telling me, breaking these lumps of trash gives us protection? Sweet.")
+                    new(AmWeth, "think", "So you're telling me, breaking these lumps of trash gives us protection?")
                 ]
             }},
             {"ArtifactHardmode_Weth_0", new(){
@@ -207,7 +207,7 @@ internal class ArtifactDialogue : IRegisterable
                 lookup = ["OverclockedGeneratorTrigger"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "Reminds me of the time when I had to overclock my ship's generator to even get it to move."),
+                    new(AmWeth, "think", "Reminds me of the time when I had to overclock my ship's generator to even get it to move."),
                     new([
                         new(AmMax, "That's concerning?"),
                         new(AmBooks, "Is that how you got a crystal growing out of your face?"),
@@ -259,7 +259,7 @@ internal class ArtifactDialogue : IRegisterable
                 whoDidThat = AmWethDeck,
                 allPresent = [AmWeth, AmPeri],
                 dialogue = [
-                    new(AmWeth, "squint", "Can this power diversion thing be switched off?"),
+                    new(AmWeth, "complain", "Can this power diversion thing be switched off?"),
                     new(AmPeri, "No.")
                 ]
             }},
@@ -293,7 +293,7 @@ internal class ArtifactDialogue : IRegisterable
                 hasArtifacts = ["Recalibrator"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "think", "Usually when I miss, nothing happens!")
+                    new(AmWeth, "isthisa", "Usually when I miss, nothing happens!")
                 ]
             }},
             {"ArtifactRevengeDrive_Weth_0", new(){
@@ -316,7 +316,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRun = true,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "Personally, I don't like the wood finish. I like my ship parts all metal if possible.")
+                    new(AmWeth, "explain", "Personally, I don't like the wood finish. I like my ship parts all metal if possible.")
                 ]
             }},
             {"ArtifactTridimensionalCockpit_Weth_0", new(){
@@ -340,7 +340,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["TreasureHunterWeth"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "With enough bits and pieces floating around, I bet I could find something useful!")
+                    new(AmWeth, "isthisa", "With enough bits and pieces floating around, I bet I could find something useful!")
                 ]
             }},
             {"ArtifactTreasureHunterWeth_Multi_1", new(){
@@ -380,7 +380,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["TreasureSeekerWeth"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "explain", "The more bits that fly off the enemy, the more chances I get to grabbing something useful!")
+                    new(AmWeth, "lookatyou", "The more bits that fly off the enemy, the more chances I get to grabbing something useful.")
                 ]
             }},
             {"ArtifactTreasureSeekerWeth_Multi_2", new(){
@@ -401,7 +401,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["WethGoesOnAnExcursion"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "It's time to go on an excursion!")
+                    new(AmWeth, "happynothoughts", "It's time to go on an excursion!")
                 ]
             }},
             {"ArtifactExcursionWeth_Multi_1", new(){
@@ -445,7 +445,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["WethsSpaceRelic"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "think", "The ship already feels like it's running better.")
+                    new(AmWeth, "happy", "The ship already feels like it's running better.")
                 ]
             }},
             {"ArtifactSpaceRelicsWeth_Multi_2", new(){
@@ -495,7 +495,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["WethsSpaceRelic"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "think", "I sorta expected this to give off energy, but instead it feels like it's absorbing it?")
+                    new(AmWeth, "hmm", "This isn't a fake, is it?")
                 ]
             }},
             {"ArtifactSubsumingRelicsWeth_Multi_1", new(){
@@ -517,7 +517,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["WethsSpaceRelic"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "crystal", "...")
+                    new(AmWeth, "explain", "Perhaps not collecting every different type is the way to go.")
                 ]
             }},
             {"ArtifactFocusedRelicsWeth_Multi_1", new(){
@@ -539,7 +539,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["JauntAllTheWay"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "Let's go on an adventure!")
+                    new(AmWeth, "lookatthat", "Let's go on an adventure!")
                 ]
             }},
             {"ArtifactJauntWeth_Multi_1", new(){
@@ -550,7 +550,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["JauntAllTheWay"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "hmm", "I can smell the hidden treasure, just gotta light them up to find it!")
+                    new(AmWeth, "lockedin", "I can smell the hidden treasure, just gotta light them up to find it!")
                 ]
             }},
             {"ArtifactJauntWeth_Multi_2", new(){
@@ -561,7 +561,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["JauntAllTheWay"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "squint", "It's hidden somewhere. The thing. I can feel it.")
+                    new(AmWeth, "evil", "It's hidden somewhere. The thing. I can feel it.")
                 ]
             }},
         });
@@ -574,7 +574,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerCombatTags = ["rockPowerAdvice"],
                 allPresent = [AmWeth, AmIsaac],
                 dialogue = [
-                    new(AmWeth, "squint", "Hey, I think I see something in the lumps of rock."),
+                    new(AmWeth, "hmm", "Hey, I think I see something in the lumps of rock."),
                     new(AmIsaac, "Well, what are you waiting for?")
                 ]
             }},
@@ -597,7 +597,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["wethsResidualShotUseless"],
                 allPresent = [AmWeth, AmPeri],
                 dialogue = [
-                    new(AmWeth, "shrug", "It's the thought that counts."),
+                    new(AmWeth, "dontcare", "It's the thought that counts."),
                     new(AmPeri, "mad", "Try again.")
                 ]
             }},
@@ -609,7 +609,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerRunTags = ["wethsResidualShotUseless"],
                 allPresent = [AmWeth, AmPeri],
                 dialogue = [
-                    new(AmWeth, "dontcare", "Better than not having it."),
+                    new(AmWeth, "Better than not having it."),
                     new(AmPeri, "squint", "Not very helpful either.")
                 ]
             }},
@@ -622,7 +622,7 @@ internal class ArtifactDialogue : IRegisterable
                 allPresent = [AmWeth, AmPeri],
                 dialogue = [
                     new(AmPeri, "mad", "What was that?!"),
-                    new(AmWeth, "explain", "You missing.")
+                    new(AmWeth, "isthisa", "You missing.")
                 ]
             }},
             {"ArtifactResidualShotNoDamageWeth_Multi_3", new(){
@@ -658,7 +658,7 @@ internal class ArtifactDialogue : IRegisterable
                 oncePerCombatTags = ["CannonRechargeTag"],
                 allPresent = [AmWeth, AmCat],
                 dialogue = [
-                    new(AmWeth, "sly", "Next shot should be shocking!"),
+                    new(AmWeth, "sly", "Next shot should be... shocking!"),
                     new(AmCat, "squint", "Get out.")
                 ]
             }},
@@ -671,7 +671,7 @@ internal class ArtifactDialogue : IRegisterable
                 allPresent = [AmWeth, AmDizzy],
                 dialogue = [
                     new(AmDizzy, "Your turn."),
-                    new(AmWeth, "Tag team!")
+                    new(AmWeth, "happy", "Tag team!")
                 ]
             }},
             {"ArtifactMadcapChargeWeth_Multi_1", new(){
@@ -683,7 +683,7 @@ internal class ArtifactDialogue : IRegisterable
                 allPresent = [AmWeth, AmDizzy],
                 dialogue = [
                     new(AmDizzy, "Let 'er rip!"),
-                    new(AmWeth, "lockedin", "Yessir!")
+                    new(AmWeth, "evil", "Yessir!")
                 ]
             }},
             {"ArtifactSprintSprintBabyWeth_Multi_0", new(){
@@ -694,7 +694,7 @@ internal class ArtifactDialogue : IRegisterable
                 allPresent = [AmWeth, AmRiggs],
                 dialogue = [
                     new(AmRiggs, "squint", "Hey, where did the power go?"),
-                    new(AmWeth, "lockedin", "Guns ready!")
+                    new(AmWeth, "Guns ready!")
                 ]
             }},
             {"ArtifactSprintSprintBabyWeth_Multi_1", new(){
@@ -715,7 +715,7 @@ internal class ArtifactDialogue : IRegisterable
                 lastTurnPlayerStatuses = [Status.heat],
                 allPresent = [AmWeth, AmDrake],
                 dialogue = [
-                    new(AmWeth, "squint", "Did I connect this right?"),
+                    new(AmWeth, "hmm", "Did I connect this right?"),
                     new(AmDrake, "I dunno, but heat equals more power now!")
                 ]
             }},
@@ -727,7 +727,7 @@ internal class ArtifactDialogue : IRegisterable
                 allPresent = [AmWeth, AmDrake],
                 dialogue = [
                     new(AmDrake, "sly", "I just do what I usually do and you get more power, right?"),
-                    new(AmWeth, "hmm", "I fear I've made a critical mistake."),
+                    new(AmWeth, "contemplate", "I fear I've made a critical mistake."),
                 ]
             }},
             // {"ArtifactHiddenGamWeth_Multi_0", new(){
@@ -749,7 +749,7 @@ internal class ArtifactDialogue : IRegisterable
                 allPresent = [AmWeth, AmBooks],
                 dialogue = [
                     new(AmBooks, "Wow! These shards are vibrating!"),
-                    new(AmWeth, "Quick! Load them into the cannon!")
+                    new(AmWeth, "pointing", "Quick! Load them into the cannon!")
                 ]
             }},
             {"ArtifactBattleStimulationWeth_Multi_0", new(){
@@ -759,7 +759,7 @@ internal class ArtifactDialogue : IRegisterable
                 lookup = ["wethStimuliActive"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "I feel like I can take on the whole world.")
+                    new(AmWeth, "evil", "I feel like I can take on the whole world.")
                 ]
             }},
             {"ArtifactBattleStimulationWeth_Multi_1", new(){
@@ -769,7 +769,7 @@ internal class ArtifactDialogue : IRegisterable
                 lookup = ["wethStimuliActive"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "Woh wow, that's a feeling I haven't felt in a while!")
+                    new(AmWeth, "verysilly", "Woh wow, that's a feeling I haven't felt in a while!")
                 ]
             }},
             {"ArtifactBattleStimulationWeth_Multi_2", new(){
@@ -789,7 +789,7 @@ internal class ArtifactDialogue : IRegisterable
                 playerShotJustMissed = true,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "dontcare", "I'll make sure the next shots hurt a lot more.")
+                    new(AmWeth, "contemplate", "I'll make sure the next shots hurt a lot more.")
                 ]
             }},
             { "ArtifactCalculatedWhiffWeth_Multi_1", new(){
@@ -809,7 +809,7 @@ internal class ArtifactDialogue : IRegisterable
                 playerShotJustMissed = true,
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "I know what I'm doing.")
+                    new(AmWeth, "hmm", "I know what I'm doing.")
                 ]
             }},
             { "ArtifactCannonPrimerWeth_Multi_0", new(){
@@ -883,7 +883,10 @@ internal class ArtifactDialogue : IRegisterable
             {"ArtifactForgedCertificate_Illeana_0", new(){
                 dialogue = [
                     new(),
-                    new(AmWeth, "squint", "Hey, no?")
+                    new([
+                        new(AmWeth, "wtf", "Hey, no?"),
+                        new(AmWeth, "complain", "This has to be a violation.")
+                    ])
                 ]
             }}
         });

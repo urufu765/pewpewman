@@ -3,7 +3,7 @@
   "Version": "{{ModVersion}}",
   "Author": "urufudoggo",
   "DisplayName": "Weth",
-  "Description": "Description goes here you pineapple head. Don't you dare forget.",
+  "Description": "Urufu's most \"ambitious\" mod yet!",
   "RequiredApiVersion": "1.15.0",
   "EntryPointAssembly": "Weth.dll",
   "LoadPhase": "AfterDbInit",

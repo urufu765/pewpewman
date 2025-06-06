@@ -357,6 +357,7 @@ public class ASplitshot : CardAction
         bool hitADrone = false;
         if (raycastResult is not null && raycastResult.hitDrone)
         {
+            hitADrone = true;
             // bool invincible = c.stuff[raycastResult.worldX].Invincible();
             // foreach (Artifact artifact in s.EnumerateAllArtifacts())
             // {

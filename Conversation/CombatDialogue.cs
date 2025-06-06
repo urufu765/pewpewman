@@ -248,6 +248,16 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                     new(AmWeth, "squint", "How did this happen?")
                 ]
             }},
+            {"HandOnlyHasUnplayableCards_Weth_1", new(){
+                type = NodeType.combat,
+                handFullOfUnplayableCards = true,
+                oncePerCombatTags = ["handFullOfUnplayableCards"],
+                oncePerRun = true,
+                allPresent = [AmWeth],
+                dialogue = [
+                    new(AmWeth, "complain", "How did this even happen?")
+                ]
+            }},
             {"IssacHasTooMuchRockFactoryButYouHaveRockPower_Weth_0", new(){
                 type = NodeType.combat,
                 allPresent = [AmWeth, AmIsaac],
@@ -398,7 +408,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 minDamageDealtToEnemyThisAction = 5,
                 playerShotJustHit = true,
                 dialogue = [
-                    new(AmWeth, "explain", "And that is why we don't leave any stone unturned. Behold, a hidden gem.")
+                    new(AmWeth, "explain", "And that is why we don't leave any stone unturned.")
                 ]
             }},
             {"LookOutMissile_Weth_0", new(){
@@ -492,7 +502,7 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                 allPresent = [AmWeth, AmStardog],
                 oncePerCombatTags = ["StardogLeaveUsAlone"],
                 dialogue = [
-                    new(AmWeth, "lockedin", "Ah! My eternal rival! We meet once more!"),
+                    new(AmWeth, "bringiton", "Ah! My eternal rival! We meet once more!"),
                     new(AmStardog, "panic", "Who ARE you?!")
                 ]
             }},

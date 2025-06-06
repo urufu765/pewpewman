@@ -10,7 +10,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
-* *(0.3.44)*: Test of below patch
+* **(0.3.44)**: Splitshot not actually setting the correct values fixed, added a little bit of flavour to Weth Illeana duo interaction, fixed animations (intense, sly, angry eyes, some past stuff)
 * **(0.3.43)**: Dialogue polish (+ new dialogue), Space Relic description clarifications, Splitshot pierce icon updated, splitshot midrow mechanic patches (midrow hit animation + fixed issue where some artifacts that count shots fired didn't count splitshots that hit midrow), Disabler A costs 1 and doesn't exhaust
 * **(0.3.42)**: Weth gets actual artifacts?!
   * Disabler:
