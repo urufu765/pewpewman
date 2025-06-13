@@ -62,7 +62,7 @@ public class Feral : WCCommon, IRegisterable, IHasCustomCardTraits
             c.QueueImmediate(
                 new ADummyAction
                 {
-                    dialogueSelector = "feralCardUnflipped"
+                    dialogueSelector = ".feralCardUnflipped"
                 }
             );
         }
@@ -71,7 +71,7 @@ public class Feral : WCCommon, IRegisterable, IHasCustomCardTraits
             c.QueueImmediate(
                 new ADummyAction
                 {
-                    dialogueSelector = "feralCardFlipped"
+                    dialogueSelector = ".feralCardFlipped"
                 }
             );
         }
