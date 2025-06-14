@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using Weth.API;
 using Weth.Artifacts;
 using Weth.Cards;
@@ -24,12 +25,12 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
     public static readonly List<Type> CrystalOfferings = [
         typeof(CryAhtack),
         typeof(CryDuhfend),
-        typeof(CryCapacity),
+        typeof(CryEvade),
         typeof(CrySwap)
     ];
     public static readonly List<Type> CrystalUncommonOfferings = [
         typeof(CryEnergy),
-        typeof(CryEvade),
+        typeof(CryCapacity),
         typeof(CryFlux)
     ];
     public static readonly List<Type> MechOfferings = [
@@ -53,6 +54,8 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
         {
             name = c.otherShip.ai.character.type;
         }
+
+        // Check for Weth uncommon goodie restriction stuff
         bool restrictUncommon = false;
         bool overruleRestriction = false;
         foreach (Artifact artifact in s.EnumerateAllArtifacts())
@@ -63,66 +66,135 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
                 if (iwgur.DoIOverrideGoodieUncommonRestriction()) overruleRestriction = true;
             }
         }
-
         if (ignoreUncommonRestriction || overruleRestriction) restrictUncommon = false;
+
+
+        bool isCrystal = name.Contains("crystal", StringComparison.CurrentCultureIgnoreCase);
+
+        if (asAnOffering)
+        {
+            OfferCardsAsAnOffering(s, c, isCrystal, restrictUncommon);
+        }
+        else  // For just handing out cards into the hand or deck
+        {
+            SendCardsToDeck(s, c, isCrystal, restrictUncommon);
+        }
+    }
+
+    /// <summary>
+    /// Create a card offering with no duplicates.
+    /// </summary>
+    /// <param name="s">State</param>
+    /// <param name="c">Combat</param>
+    /// <param name="isCrystal">Whether player is fighting a crystal or not</param>
+    /// <param name="restrictUncommon">Whether to put a restriction on Uncommon draw</param>
+    private void OfferCardsAsAnOffering(State s, Combat c, bool isCrystal, bool restrictUncommon)
+    {
         List<Card> cardz = [];
-        bool uncommonOffered = HasUncommon(s, c);
+        bool disallowUncommonOffering = restrictUncommon && HasUncommon(s, c);
+
+        // Implementation #2: Just grabs the two lists for common and uncommon then shuffles them before picking one after another.
+        Queue<Type> commonOfferings = new(GetOfferings(isCrystal, false).Shuffle(s.rngCardOfferingsMidcombat));
+        Queue<Type> uncommonOfferings = new(GetOfferings(isCrystal, true).Shuffle(s.rngCardOfferingsMidcombat));
+
+
+        for (int rolls = 0; rolls < amount; rolls++)
+        {
+            Type? rolledCard;  // Just a container for the card type that will be rolled.
+
+
+            if (!disallowUncommonOffering && RolledUncommon(s.rngCardOfferingsMidcombat, betterOdds))
+            {
+                if (uncommonOfferings.TryDequeue(out Type? uncommonCard))
+                {
+                    rolledCard = uncommonCard;
+                }
+                // Backup if we run out of uncommon card offerings
+                else if (commonOfferings.TryDequeue(out Type? commonCard))
+                {
+                    rolledCard = commonCard;
+                }
+                else break;  // No more cards available to roll.
+            }
+            else
+            {
+                if (commonOfferings.TryDequeue(out Type? commonCard))
+                {
+                    rolledCard = commonCard;
+                }
+                // Backup if we run out of common card offerings
+                else if (!disallowUncommonOffering && uncommonOfferings.TryDequeue(out Type? uncommonCard))
+                {
+                    rolledCard = uncommonCard;
+                }
+                else break;  // No more cards available to roll.
+            }
+
+            if (rolledCard is null)  // error?
+            {
+                ModEntry.Instance.Logger.LogWarning("AGiveGoodieLikeAGoodBoy: No card rolled, this should not happen.");
+                break;
+            }
+
+            Card? cd = (Card?)Activator.CreateInstance(rolledCard);
+            cd ??= isCrystal ? new CrySwap() : new MechSwap();  // This should never happen, but just in case...
+            cd.upgrade = upgrade;
+            cardz.Add(cd);
+        }
+
+        c.QueueImmediate(new AWethCardOffering
+        {
+            cards = cardz,
+            artifactPulse = fromArtifact ? artifactKey : null,
+            canSkip = true,
+        });
+    }
+
+    /// <summary>
+    /// Send cards to the deck or hand, making sure to respect the uncommon restriction if applicable.
+    /// </summary>
+    /// <param name="s">State</param>
+    /// <param name="c">Combat</param>
+    /// <param name="isCrystal">Whether player is fighting a crystal or not</param>
+    /// <param name="restrictUncommon">Whether to put a restriction on Uncommon draw</param>
+    private void SendCardsToDeck(State s, Combat c, bool isCrystal, bool restrictUncommon)
+    {
+        bool uncommonAlreadyPresent = HasUncommon(s, c);
         for (int x = 0; x < amount; x++)
         {
             bool rollUncommon = RolledUncommon(s.rngCardOfferingsMidcombat, betterOdds);
             // Restrict uncommon only if there already is one, or if player is receiving multiple at a time.
             if (restrictUncommon && rollUncommon)
             {
-                if (uncommonOffered)
-                {
-                    rollUncommon = false;
-                }
-                if(!uncommonOffered && !asAnOffering)
-                {
-                    uncommonOffered = true;
-                }
+                if (uncommonAlreadyPresent) rollUncommon = false;  // Prevent current uncommon card draw
+                else uncommonAlreadyPresent = true;  // Prevent future uncommon cards
             }
-            List<Type> offerings = GetOfferings(name.ToLower().Contains("crystal"), rollUncommon);
-            Card cd = (Card)Activator.CreateInstance(offerings.Random(s.rngCardOfferingsMidcombat))!;
-            cd.upgrade = upgrade;
-            // shove card into deck
-            if (asAnOffering)
+            List<Type> offerings = GetOfferings(isCrystal, rollUncommon);
+            Card? cd = (Card?)Activator.CreateInstance(offerings.Random(s.rngCardOfferingsMidcombat));
+            cd ??= isCrystal ? new CrySwap() : new MechSwap();  // This should never happen, but just in case...
+
+            // shove card into deck/hand
+            if (fromArtifact)
             {
-                cardz.Add(cd);
+                c.Queue(
+                    new AAddCard
+                    {
+                        card = cd,
+                        destination = destination ?? CardDestination.Hand,
+                        artifactPulse = artifactKey
+                    }
+                );
             }
             else
             {
-                if (fromArtifact)
-                {
-                    c.Queue(
-                        new AAddCard
-                        {
-                            card = cd,
-                            destination = destination??CardDestination.Hand,
-                            artifactPulse = artifactKey
-                        }
-                    );
-                }
-                else
-                {
-                    c.Queue(
-                        new AAddCard
-                        {
-                            card = cd,
-                            destination = destination??CardDestination.Deck
-                        }
-                    );
-                }
+                c.Queue(
+                    new AAddCard
+                    {
+                        card = cd,
+                        destination = destination ?? CardDestination.Deck
+                    }
+                );
             }
-        }
-        if (asAnOffering)
-        {
-            c.Queue(new AWethCardOffering
-            {
-                cards = cardz,
-                artifactPulse = fromArtifact? artifactKey : null,
-                canSkip = true,
-            });
         }
     }
 

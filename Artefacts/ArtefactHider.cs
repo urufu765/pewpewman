@@ -13,7 +13,8 @@ public static class Artifacthider
         typeof(SpaceRelics2),
         typeof(SR2Crackling),
         typeof(SR2Focused),
-        typeof(SR2Subsuming)
+        typeof(SR2Subsuming),
+        typeof(SuperDriveCollector),
     ];
     // private static readonly List<Type> allPossibleRelicTypes = [
     //     typeof(RelicAutododgeRight),

@@ -265,10 +265,6 @@
                 "name": "TERMINUS: JAUNT",
                 "desc": "1 random enemy part offers 1 of 3 <c=2a767d>WETH</c> relics when shot at.\nFor every 5th relic uncovered, instead gain 1 of 3 common artifacts.\n<c=keyword>Receive these rewards at the end of combat.</c>\n<c=downside>You can only obtain one relic or artifact per battle.\nYou are limited to 1 <c=artifact>TERMINUS</c> artifact.</c>"
             },
-            "SuperDriveCollector": {
-                "name": "SUPER DRIVE COLLECTOR",
-                "desc": "Increase <c=keyword>all player base damage</c> by the number of turns where all four <c=status>DRIVE</c>s are or were present this combat."
-            },
             "AlPoToCa": {
                 "name": "ALL POWER TO CANNON(S)",
                 "desc": "At the start of each combat, add a <c=card>Full Commitment</c> to your hand."
@@ -360,6 +356,10 @@
                 "name": "FOCUSED SPACE RELICS",
                 "desc": "<c=2a767d>Weth</c> is obsessed with <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\n<c=keyword>You will always be offered the type of relics you already have.</c>\n<c=downside>You can only have up to 3 different types.</c>\nEach combat, gain:",
                 "clair": "<c=keyword>ALL</c> the relic bonuses on the start of first turn."
+            },
+            "SuperDriveCollector": {
+                "name": "SUPER DRIVE COLLECTOR",
+                "desc": "Increase <c=keyword>all player base damage</c> by the number of turns where all four <c=status>DRIVE</c>s are or were present this combat."
             }
         },
         "Tooltips": {

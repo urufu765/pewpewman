@@ -1,0 +1,297 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Extensions.Logging;
+using Weth.API;
+using Weth.Artifacts;
+using Weth.Cards;
+
+namespace Weth.Actions;
+
+/// <summary>
+/// An action that gives a random goodie card
+/// </summary>
+public class AGiveGoodieLikeAGoodBoy : CardAction
+{
+    public bool fromArtifact;
+    public string artifactKey = "";
+    public Upgrade upgrade;
+    public bool betterOdds;
+    public int amount = 1;
+    public bool ignoreUncommonRestriction;
+    public CardDestination? destination = null;
+    public bool asAnOffering = false;
+    private const int MAXROLLS = 30;
+
+    public static readonly List<Type> CrystalOfferings = [
+        typeof(CryAhtack),
+        typeof(CryDuhfend),
+        typeof(CryEvade),
+        typeof(CrySwap)
+    ];
+    public static readonly List<Type> CrystalUncommonOfferings = [
+        typeof(CryEnergy),
+        typeof(CryCapacity),
+        typeof(CryFlux)
+    ];
+    public static readonly List<Type> MechOfferings = [
+        typeof(MechAhtack),
+        typeof(MechDuhfend),
+        typeof(MechEvade),
+        typeof(MechSwap)
+    ];
+    public static readonly List<Type> MechUncommonOfferings = [
+        typeof(MechBubble),
+        typeof(MechMissile),
+        typeof(MechDodge),
+    ];
+
+
+    public override void Begin(G g, State s, Combat c)
+    {
+        timer = 0.0;
+        string name = "";
+        if (c.otherShip?.ai?.character?.type is not null)
+        {
+            name = c.otherShip.ai.character.type;
+        }
+        bool restrictUncommon = false;
+        bool overruleRestriction = false;
+        foreach (Artifact artifact in s.EnumerateAllArtifacts())
+        {
+            if (artifact is IArtifactWethGoodieUncommonRestrictor iwgur)
+            {
+                if (iwgur.DoIImposeGoodieUncommonRestriction()) restrictUncommon = true;
+                if (iwgur.DoIOverrideGoodieUncommonRestriction()) overruleRestriction = true;
+            }
+        }
+        bool isCrystal = name.ToLower().Contains("crystal");
+
+        if (ignoreUncommonRestriction || overruleRestriction) restrictUncommon = false;
+        List<Card> cardz = [];
+        bool uncommonOffered = HasUncommon(s, c);
+
+        if (asAnOffering)  
+        {
+            // Implementation #1: Randomly rolls for each card
+
+            // Keeps track of cards already rolled, so that we don't offer the same card multiple times.
+            HashSet<Type> alreadyRolled = [];
+            int rollsLeft = amount;
+            for (int totalRolls = 0; totalRolls < MAXROLLS && rollsLeft > 0; totalRolls++, rollsLeft--)
+            {
+                bool validCardRolled = false;
+                for (int rolls = 0; rolls < MAXROLLS; rolls++)
+                {
+                    // Roll a random card
+                    Type randomlyRolledCard = GetOfferings(
+                        isCrystal,
+                        RolledUncommon(
+                            s.rngCardOfferingsMidcombat,
+                            betterOdds
+                        )
+                    ).Random(s.rngCardOfferingsMidcombat);
+
+                    if (alreadyRolled.Add(randomlyRolledCard))
+                    {
+                        validCardRolled = true;
+                        break;
+                    }
+                }
+                if (!validCardRolled)
+                {
+                    rollsLeft++;
+                    continue; // No valid card rolled, try again.
+                }
+
+                // It's implied the last card that enters the hashset is the newest rolled card.
+                Card? cd = (Card?)Activator.CreateInstance(alreadyRolled.Last());
+                cd ??= isCrystal ? new CrySwap() : new MechSwap();  // This should never happen, but just in case...
+                cd.upgrade = upgrade;
+                cardz.Add(cd);
+            }
+
+
+            // Implementation #2: Just grabs the two lists for common and uncommon then shuffles them before picking one after another.
+            Queue<Type> commonOfferings = new(GetOfferings(isCrystal, false).Shuffle(s.rngCardOfferingsMidcombat));
+            Queue<Type> uncommonOfferings = new(GetOfferings(isCrystal, true).Shuffle(s.rngCardOfferingsMidcombat));
+            for (int rolls = 0; rolls < amount; rolls++)
+            {
+                Type? rolledCard;
+                if (!restrictUncommon && RolledUncommon(s.rngCardOfferingsMidcombat, betterOdds))
+                {
+                    if (uncommonOfferings.TryDequeue(out Type? uncommonCard))
+                    {
+                        rolledCard = uncommonCard;
+                    }
+                    // Backup if we run out of uncommon card offerings
+                    else if (commonOfferings.TryDequeue(out Type? commonCard))
+                    {
+                        rolledCard = commonCard;
+                    }
+                    else break;  // No more cards available to roll.
+                }
+                else
+                {
+                    if (commonOfferings.TryDequeue(out Type? commonCard))
+                    {
+                        rolledCard = commonCard;
+                    }
+                    // Backup if we run out of common card offerings
+                    else if (!restrictUncommon && uncommonOfferings.TryDequeue(out Type? uncommonCard))
+                    {
+                        rolledCard = uncommonCard;
+                    }
+                    else break;  // No more cards available to roll.
+                }
+                if (rolledCard is null)  // error?
+                {
+                    ModEntry.Instance.Logger.LogWarning("AGiveGoodieLikeAGoodBoy: No card rolled, this should not happen.");
+                    break;  
+                }
+
+                Card? cd = (Card?)Activator.CreateInstance(rolledCard);
+                cd ??= isCrystal ? new CrySwap() : new MechSwap();  // This should never happen, but just in case...
+                cd.upgrade = upgrade;
+                cardz.Add(cd);
+            }
+
+            c.QueueImmediate(new AWethCardOffering
+            {
+                cards = cardz,
+                artifactPulse = fromArtifact ? artifactKey : null,
+                canSkip = true,
+            });
+        }
+        else  // For just handing out cards into the hand or deck
+        {
+            for (int x = 0; x < amount; x++)
+            {
+                bool rollUncommon = RolledUncommon(s.rngCardOfferingsMidcombat, betterOdds);
+                // Restrict uncommon only if there already is one, or if player is receiving multiple at a time.
+                if (restrictUncommon && rollUncommon)
+                {
+                    if (uncommonOffered)
+                    {
+                        rollUncommon = false;
+                    }
+                    if (!uncommonOffered && !asAnOffering)
+                    {
+                        uncommonOffered = true;
+                    }
+                }
+                List<Type> offerings = GetOfferings(isCrystal, rollUncommon);
+                Card? cd = (Card?)Activator.CreateInstance(offerings.Random(s.rngCardOfferingsMidcombat));
+                cd ??= isCrystal ? new CrySwap() : new MechSwap();  // This should never happen, but just in case...
+                // shove card into deck
+                if (fromArtifact)
+                {
+                    c.Queue(
+                        new AAddCard
+                        {
+                            card = cd,
+                            destination = destination ?? CardDestination.Hand,
+                            artifactPulse = artifactKey
+                        }
+                    );
+                }
+                else
+                {
+                    c.Queue(
+                        new AAddCard
+                        {
+                            card = cd,
+                            destination = destination ?? CardDestination.Deck
+                        }
+                    );
+                }
+            }
+        }
+    }
+
+    private static List<Type> GetOfferings(bool isCrystal, bool giveUncommon)
+    {
+        if (giveUncommon)
+        {
+            return isCrystal ? CrystalUncommonOfferings : MechUncommonOfferings;
+        }
+        else
+        {
+            return isCrystal ? CrystalOfferings : MechOfferings;
+        }
+    }
+
+    private static bool RolledUncommon(Rand rng, bool betterOdds)
+    {
+        return Mutil.Roll(rng.Next(), (betterOdds? 0.67:0.75, false), (betterOdds?0.33:0.25, true));
+    }
+
+    private static bool HasUncommon(State s, Combat c)
+    {
+        foreach (Card card in c.discard)
+        {
+            if (card.GetMeta().deck == ModEntry.Instance.GoodieDeck.Deck && (card.GetMeta().rarity == Rarity.uncommon))
+            {
+                return true;
+            }
+        }
+        foreach (Card card in c.hand)
+        {
+            if (card.GetMeta().deck == ModEntry.Instance.GoodieDeck.Deck && (card.GetMeta().rarity == Rarity.uncommon))
+            {
+                return true;
+            }
+        }
+        foreach (Card card in c.exhausted)
+        {
+            if (card.GetMeta().deck == ModEntry.Instance.GoodieDeck.Deck && (card.GetMeta().rarity == Rarity.uncommon))
+            {
+                return true;
+            }
+        }
+        foreach (Card card in s.deck)
+        {
+            if (card.GetMeta().deck == ModEntry.Instance.GoodieDeck.Deck && (card.GetMeta().rarity == Rarity.uncommon))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static List<Type> GetPossibleOffering(Combat c, bool isCrystal, bool restrictUncommon)
+    {
+        List<Type> offerings = isCrystal ? CrystalOfferings : MechOfferings;
+        bool hasUncommon = false;
+
+        foreach (Card card in c.discard)
+        {
+            if (card.GetMeta().deck == ModEntry.Instance.GoodieDeck.Deck && (card.GetMeta().rarity == Rarity.uncommon))
+            {
+                hasUncommon = true;
+                goto skipCheck;
+            }
+        }
+        foreach (Card card in c.hand)
+        {
+            if (card.GetMeta().deck == ModEntry.Instance.GoodieDeck.Deck && (card.GetMeta().rarity == Rarity.uncommon))
+            {
+                hasUncommon = true;
+                goto skipCheck;
+            }
+        }
+        foreach (Card card in c.exhausted)
+        {
+            if (card.GetMeta().deck == ModEntry.Instance.GoodieDeck.Deck && (card.GetMeta().rarity == Rarity.uncommon))
+            {
+                hasUncommon = true;
+            }
+        }
+    skipCheck:
+        if (!hasUncommon || !restrictUncommon)
+        {
+            offerings = offerings.Concat(isCrystal ? CrystalUncommonOfferings : MechUncommonOfferings).ToList();
+        }
+        return offerings;
+    }
+}

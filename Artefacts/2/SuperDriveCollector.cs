@@ -8,7 +8,7 @@ using Weth.Cards;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ArtifactPool.Boss])]
+[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
 public class SuperDriveCollector : Artifact
 {
     public int TurnsShowedOff { get; set; }

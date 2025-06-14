@@ -10,6 +10,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### BETA 3: Balancing and adjustments + Final changes
 
+* **(0.3.46)**: Drive collector GONE! Goodies offering no longer duplicate options
 * **(0.3.45)**: Fixed Feral not doing the feral animation bit and adjusted feral animation
 * **(0.3.44)**: Splitshot not actually setting the correct values fixed, added a little bit of flavour to Weth Illeana duo interaction, fixed animations (intense, sly, angry eyes, some past stuff)
 * **(0.3.43)**: Dialogue polish (+ new dialogue), Space Relic description clarifications, Splitshot pierce icon updated, splitshot midrow mechanic patches (midrow hit animation + fixed issue where some artifacts that count shots fired didn't count splitshots that hit midrow), Disabler A costs 1 and doesn't exhaust
