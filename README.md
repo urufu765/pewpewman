@@ -6,11 +6,11 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### Release 1.0.0
 
-* **(1.0.0)**: Release! (Fuck it we ball)
+* **(1.0.0)**: Release! ID obtained
 
 ### BETA 3: Balancing and adjustments + Final changes
 
-* **(0.3.47)**: Scatter Trash redo, base shoots three asteroids (10101), A upgrades the sides to giants, B shoots four asteroids (11011), fixed small font leakage from unused library, and applied correct tints to pierce cards, and swapped A & B to better match A pierce B stun themeing
+* **(0.3.47)**: Scatter Trash redo, base shoots three asteroids (10101), A upgrades the sides to giants, B shoots four asteroids (11011), fixed small font leakage from unused library, and applied correct tints to pierce cards
 * **(0.3.46)**: Drive collector GONE! Goodies offering no longer duplicate options
 * **(0.3.45)**: Fixed Feral not doing the feral animation bit and adjusted feral animation
 * **(0.3.44)**: Splitshot not actually setting the correct values fixed, added a little bit of flavour to Weth Illeana duo interaction, fixed animations (intense, sly, angry eyes, some past stuff)
