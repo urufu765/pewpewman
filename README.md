@@ -6,6 +6,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### Release 1.0.0
 
+* **(1.0.1)**: DialogueMachine 0.18: Fixed cross-mod dialogue implementation
 * **(1.0.0)**: Release! ID obtained
 
 ### BETA 3: Balancing and adjustments + Final changes

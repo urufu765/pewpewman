@@ -884,8 +884,8 @@ internal class ArtifactDialogue : IRegisterable
                 dialogue = [
                     new(),
                     new([
-                        new(AmWeth, "wtf", "Hey, no?"),
-                        new(AmWeth, "complain", "This has to be a violation.")
+                        new(AmWeth, "wtf", "Hey, definitely not a certificate?"),
+                        new(AmWeth, "complain", "This has got to be a violation.")
                     ])
                 ]
             }}
