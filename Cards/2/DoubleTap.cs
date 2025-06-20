@@ -91,6 +91,13 @@ public class DoubleTap : WCUncommon, IRegisterable
                 art = altSprite,
                 artOverlay = ModEntry.Instance.WethUncommon
             },
+            Upgrade.A => new CardData
+            {
+                cost = 2,
+                artTint = "ea4a4a",
+                art = altSprite,
+                artOverlay = ModEntry.Instance.WethUncommon
+            },
             _ => new CardData
             {
                 cost = 2,

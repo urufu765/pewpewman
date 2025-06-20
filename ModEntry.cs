@@ -174,6 +174,18 @@ internal partial class ModEntry : SimpleMod
         {
             RegisterAnimation(package, s6, $"assets/Animation/weth_{s6}", 6);
         }
+        // Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
+        // {
+        //     CharacterType = GoodieDeck.Deck.Key(),
+        //     LoopTag = "neutral",
+        //     Frames = [RegisterSprite(package, "assets/Animation/weth1_neutral0.png").Sprite]
+        // });
+        // Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
+        // {
+        //     CharacterType = GoodieDeck.Deck.Key(),
+        //     LoopTag = "mini",
+        //     Frames = [RegisterSprite(package, "assets/Animation/weth1_mini0.png").Sprite]
+        // });
 
         WethTheSnep = helper.Content.Characters.V2.RegisterPlayableCharacter("weth", new PlayableCharacterConfigurationV2
         {
@@ -211,6 +223,15 @@ internal partial class ModEntry : SimpleMod
             },
             ExeCardType = typeof(WethExe)
         });
+        // helper.Content.Characters.V2.RegisterPlayableCharacter("weth1", new PlayableCharacterConfigurationV2
+        // {
+        //     Deck = GoodieDeck.Deck,
+        //     BorderSprite = WethFrameA,
+        //     Starters = new StarterDeck
+        //     {
+        //     },
+        //     Description = AnyLocalizations.Bind(["character", "Weth", "desc"]).Localize,
+        // });
 
         MoreDifficultiesApi?.RegisterAltStarters(WethDeck.Deck, new StarterDeck
         {

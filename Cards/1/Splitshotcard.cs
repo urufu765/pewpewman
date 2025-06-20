@@ -63,6 +63,12 @@ public class SplitshotCard : WCCommon, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 1,
+                artTint = "b34444",
+                artOverlay = ModEntry.Instance.WethCommon
+            },
             _ => new CardData
             {
                 cost = 1,

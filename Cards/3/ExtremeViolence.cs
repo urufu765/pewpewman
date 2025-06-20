@@ -138,8 +138,7 @@ public class ExtremeViolence : WCRare, IRegisterable
             {
                 cost = 4,
                 exhaust = true,
-                art = altSprite,
-                artTint = "689da2",
+                artTint = "ea4a4a",
                 artOverlay = ModEntry.Instance.WethRare
             },
             Upgrade.A => new CardData

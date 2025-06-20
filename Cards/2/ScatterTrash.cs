@@ -43,15 +43,31 @@ public class ScatterTrash : WCUncommon, IRegisterable
                     {
                         yAnimation = 0.0
                     },
+                    offset = -2
+                },
+                new ASpawn
+                {
+                    thing = new Asteroid
+                    {
+                        yAnimation = 0.0
+                    },
                     offset = -1
                 },
                 new ASpawn
                 {
-                    thing = new GiantAsteroid
+                    thing = new Asteroid
                     {
                         yAnimation = 0.0
                     },
                     offset = 1
+                },
+                new ASpawn
+                {
+                    thing = new Asteroid
+                    {
+                        yAnimation = 0.0
+                    },
+                    offset = 2
                 }
             ],
             Upgrade.A => 
@@ -62,7 +78,7 @@ public class ScatterTrash : WCUncommon, IRegisterable
                     {
                         yAnimation = 0.0
                     },
-                    offset = -1
+                    offset = -2
                 },
                 new ASpawn
                 {
@@ -70,7 +86,15 @@ public class ScatterTrash : WCUncommon, IRegisterable
                     {
                         yAnimation = 0.0
                     },
-                    offset = 1
+                    offset = 0
+                },
+                new ASpawn
+                {
+                    thing = new GiantAsteroid
+                    {
+                        yAnimation = 0.0
+                    },
+                    offset = 2
                 }
             ],
             _ => 
@@ -81,7 +105,7 @@ public class ScatterTrash : WCUncommon, IRegisterable
                     {
                         yAnimation = 0.0
                     },
-                    offset = -1
+                    offset = -2
                 },
                 new ASpawn
                 {
@@ -89,7 +113,15 @@ public class ScatterTrash : WCUncommon, IRegisterable
                     {
                         yAnimation = 0.0
                     },
-                    offset = 1
+                    offset = 0
+                },
+                new ASpawn
+                {
+                    thing = new Asteroid
+                    {
+                        yAnimation = 0.0
+                    },
+                    offset = 2
                 }
             ],
         };
@@ -100,7 +132,7 @@ public class ScatterTrash : WCUncommon, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.A or Upgrade.B => new CardData
+            Upgrade.A => new CardData
             {
                 cost = 2,
                 art = altSprite,
