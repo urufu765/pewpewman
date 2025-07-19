@@ -15,6 +15,7 @@ public static class Artifacthider
         typeof(SR2Focused),
         typeof(SR2Subsuming),
         typeof(SuperDriveCollector),
+        typeof(RelicCollection)
     ];
     // private static readonly List<Type> allPossibleRelicTypes = [
     //     typeof(RelicAutododgeRight),
@@ -53,7 +54,13 @@ public static class Artifacthider
             }
             __result = [.. __result, .. hideByDefault];
 
-            // Prevent owned relic from showing up twice
+            // Hide Space Relics version 2 relics if version 2 is not present. (basically has to be cheated in)
+            if (!s.EnumerateAllArtifacts().Any(a => a is SpaceRelics2))
+            {
+                __result = [.. __result, .. ModEntry.WethSpecialArtifacts];
+            }
+
+            // Prevent owned relic from showing up twice (only applies to version 2 Space Relics)
             if (s.EnumerateAllArtifacts().Find(a => a is SR2Focused) is SR2Focused sr2)
             {
                 foreach (Status status in sr2.ObtainedRelics)

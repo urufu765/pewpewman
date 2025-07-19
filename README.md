@@ -4,6 +4,15 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ## Changalog
 
+### Release 1.1.0
+
+* **(1.1.0)**: ASplitshot compatibility fix (Shouldn't be a gameplay difference.), Relic redo, artifact buffs, Goodies (starter) slight nerf (and correct call to artifact method)
+  * **dev.1**: New relic system!
+  * **dev.2*: Artifact buffs + New Artifact
+  * **dev.3*:  Goodies changes
+  * **dev.4*: Splitshot code stuff
+  * **dev.5*: Bonus hidden relics
+
 ### Release 1.0.0
 
 * **(1.0.1)**: DialogueMachine 0.18: Fixed cross-mod dialogue implementation

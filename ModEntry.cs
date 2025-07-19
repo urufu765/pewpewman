@@ -299,23 +299,21 @@ internal partial class ModEntry : SimpleMod
         //     },
         //     Icon = (state, card) => AutoSUSpr
         // });
-        /*
-         * Managers are typically made to register themselves when constructed.
-         * _ = makes the compiler not complain about the fact that you are constructing something for seemingly no reason.
-         */
+
+
+        // New relics version 3
+        foreach (KeyValuePair<WethRelics, Type> relic in NewRelicTypes)
+        {
+            helper.Content.Artifacts.RegisterArtifact(relic.Key.ToString(), UhDuhHundo.ArtifactRegistrationHelper(relic.Value, RegisterSprite(package, "assets/Artifact/relics/" + relic.Key.ToString() + ".png").Sprite, WethDeck.Deck));
+            NewRelicIcons[relic.Key] = RegisterSprite(package, "assets/Artifact/relics/minis/" + relic.Key.ToString() + ".png").Sprite;
+        }
+
+
         //_ = new KnowledgeManager();
         _ = new Pulsedriving();
         //_ = new Otherdriving();
 
-        /*
-         * Some classes require so little management that a manager may not be worth writing.
-         * In AGainPonder's case, it is simply a need for two sprites and evaluation of an artifact's effect.
-         */
-        //AGainPonder.DrawSpr = RegisterSprite(package, "assets/ponder_draw.png").Sprite;
-        //AGainPonder.DiscardSpr = RegisterSprite(package, "assets/ponder_discard.png").Sprite;
-        //AOverthink.Spr = RegisterSprite(package, "assets/overthink.png").Sprite;
-
-        // Artifact Section
+        // Artifact Section (except for version 3 space relics)
         foreach (Type ta in WethArtifactTypes)
         {
             Deck deck = WethDeck.Deck;

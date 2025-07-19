@@ -360,6 +360,77 @@
             "SuperDriveCollector": {
                 "name": "SUPER DRIVE COLLECTOR",
                 "desc": "Increase <c=keyword>all player base damage</c> by the number of turns where all four <c=status>DRIVE</c>s are or were present this combat."
+            },
+            "RelicCollection": {
+                "name": "RELIC COLLECTION",
+                "desc": "<c=2a767d>Weth</c> found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!"
+            },
+            "AntiqueCell": {
+                "name": "RELIC: ANTIQUE CELL",
+                "title": "ANTIQUE CELL",
+                "flavour": "<c=faint>Despite all odds, it still holds a charge.</c>",
+                "desc": "Gain <c=keyword>{0}</c> <c=status>ENERGY FRAGMENTS</c> every third turn"
+            },
+            "DogCharm": {
+                "name": "RELIC: DOG CHARM",
+                "title": "DOG CHARM",
+                "flavour": "<c=faint>Somehow increases attractiveness when worn.</c>",
+                "altFlavour": "<c=faint>It's like catnip, but infinitely more profitable and probably fake.</c>",
+                "desc": "At the start of combat, give enemy <c=keyword>{0}</c> <c=status>UNDERDRIVE</c>."
+            },
+            "PewPewGun": {
+                "name": "RELIC: PEW PEW GUN",
+                "title": "PEW PEW GUN",
+                "flavour": "<c=faint>Weth's trusty revolver.</c>",
+                "desc": "The next <c=keyword>{0}</c> <c=2a767d>Weth</c> cards will fire an additional <c=damage>0</c> damage attack."
+            },
+            "ShockStack": {
+                "name": "RELIC: SHOCK STACK",
+                "title": "SHOCK STACK",
+                "flavour": "<c=faint>You never know when they'll go off!</c>",
+                "desc": "At random intervals of enemy hull loss (up to <c=keyword>{0}</c> times per combat), gain 1 <c=status>STUN CHARGE</c>."
+            },
+            "UsefulScrap": {
+                "name": "RELIC: USED HULL PATCH",
+                "title": "USED HULL PATCH",
+                "flavour": "<c=faint>Works well enough, with the help of speed tape.</c>",
+                "desc": "Immediately on pickup, <c=hull>heal <c=keyword>{0}</c></c> hull."
+            },
+            "Omnimote": {
+                "name": "RELIC: OMNIMOTE",
+                "title": "OMNIMOTE",
+                "flavour": "<c=faint>A universal remote, but better cuz' space!</c>",
+                "desc": "For the next <c=keyword>{0}</c> turns every combat, gain 1 <c=status>DRONE SHIFT</c>."
+            },
+            "StubbornDrill": {
+                "name": "RELIC: STUBBORN DRILL",
+                "title": "STUBBORN DRILL",
+                "flavour": "<c=faint>It's what Weth always wanted... maybe not in a half broken state.</c>",
+                "desc": "Whenever you destroy a <c=midrow>midrow object</c>, add 1 <c=card>Safety Override</c> <c=downside>and 1 <c=card>Debris</c> to your hand</c>."
+            },
+            "DeadFish": {
+                "name": "RELIC: DEADFISH",
+                "title": "DEADFISH",
+                "flavour": "<c=faint>It's stinking up everything!</c>",
+                "desc": "At the start of combat, gain 1 <c=status>POWERDRIVE</c> <c=downside>and 5 <c=status>UNDERDRIVE</c></c>."
+            },
+            "PageantRibbon": {
+                "name": "RELIC: PAGEANT RIBBON",
+                "title": "PAGEANT RIBBON",
+                "flavour": "<c=faint>Given to those who at least showed up to the Pageant contest.</c>",
+                "desc": "At the start of combat, launch a <c=midrow>missile</c>.\n<c=downside>Every other combat, spawn the <c=midrow>missile</c> backwards.</c>"
+            },
+            "AstroGrass": {
+                "name": "RELIC: ASTRO-GRASS",
+                "title": "ASTRO-GRASS",
+                "flavour": "<c=faint>It can't get any greener than this.</c>",
+                "desc": "<c=action>Splitshots</c> do +1 damage if it hits <c=midrow>midrow objects</c>.\n<c=downside><c=action>Splitshots</c> that don't split deal -1 damage.</c>"
+            },
+            "StructuralStone": {
+                "name": "RELIC: STRUCTURAL TOE",
+                "title": "STRUCTURAL TOE",
+                "flavour": "<c=faint>Increases structural rigidity, at the cost of extra damage from stubbing your toe.</c>",
+                "desc": "<c=downside>Lose all but 1 hull</c> and permanently gain that amount as <c=hull>max hull</c>."
             }
         },
         "Tooltips": {

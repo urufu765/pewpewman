@@ -109,5 +109,11 @@ internal partial class ModEntry : SimpleMod
             original: typeof(Ship).GetMethod(nameof(Ship.DirectHullDamage), AccessTools.all),
             postfix: new HarmonyMethod(typeof(BattleStimulationHelper), nameof(BattleStimulationHelper.DetectEnemyLoseHull))
         );
+
+        // Relic Tooltip fixer (when being displayed in the relic offerings)
+        harmony.Patch(
+            original: typeof(Artifact).GetMethod(nameof(Artifact.GetTooltips), AccessTools.all),
+            postfix: new HarmonyMethod(typeof(FixTheRelicTooltips), nameof(FixTheRelicTooltips.FixIt))
+        );
     }
 }

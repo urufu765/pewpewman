@@ -95,6 +95,35 @@ internal partial class ModEntry : SimpleMod
     public Spr SprMegaAsteroidIcon { get; private set; }
     public Spr SprMegaAsteroid { get; private set; }
 
+    public Dictionary<WethRelics, Spr> NewRelicIcons { get; set; } = new Dictionary<WethRelics, Spr>
+    {
+        {WethRelics.AntiqueCell, 0},
+        {WethRelics.DogCharm, 0},
+        {WethRelics.PewPewGun, 0},
+        {WethRelics.ShockStack, 0},
+        {WethRelics.UsefulScrap, 0},
+        {WethRelics.Omnimote, 0},
+        {WethRelics.StubbornDrill, 0},
+        {WethRelics.DeadFish, 0},
+        {WethRelics.PageantRibbon, 0},
+        {WethRelics.AstroGrass, 0},
+        {WethRelics.StructuralStone, 0}
+    };
+    public static Dictionary<WethRelics, Type> NewRelicTypes { get; set; } = new Dictionary<WethRelics, Type>
+    {
+        {WethRelics.AntiqueCell, typeof(AntiqueCell)},
+        {WethRelics.DogCharm,typeof(DogCharm)},
+        {WethRelics.PewPewGun, typeof(PewPewGun)},
+        {WethRelics.ShockStack, typeof(ShockStack)},
+        {WethRelics.UsefulScrap, typeof(UsefulScrap)},
+        {WethRelics.Omnimote, typeof(Omnimote)},
+        // {WethRelics.StubbornDrill, typeof()},
+        // {WethRelics.DeadFish, typeof()},
+        // {WethRelics.PageantRibbon, typeof()},
+        // {WethRelics.AstroGrass, typeof()},
+        // {WethRelics.StructuralStone, typeof()}
+    };
+
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
     internal IMoreDifficultiesApi? MoreDifficultiesApi { get; private set; } = null!;
@@ -187,9 +216,10 @@ internal partial class ModEntry : SimpleMod
         typeof(SpaceRelics2),
         typeof(SR2Crackling),
         typeof(SR2Focused),
-        typeof(SR2Subsuming)
+        typeof(SR2Subsuming),
+        typeof(RelicCollection)
     ];
-    private readonly static List<Type> WethSpecialArtifacts = [
+    public readonly static List<Type> WethSpecialArtifacts = [
         typeof(RelicPulsedrive),
         typeof(RelicAutododgeRight),
         typeof(RelicBoost),
