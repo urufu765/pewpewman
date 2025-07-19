@@ -44,6 +44,18 @@ internal partial class ModEntry : SimpleMod
             original: typeof(AAttack).GetMethod("Begin", AccessTools.all),
             transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(SplitshotTranspiler.DontDoDuplicateArtifactModifiers))
         );
+        // harmony.Patch(
+        //     original: typeof(AAttack).GetMethod("Begin", AccessTools.all),
+        //     transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(SplitshotTranspiler.FuckYouIllDoWhatIWant))
+        // );
+        // harmony.Patch(
+        //     original: typeof(Combat).GetMethod("BeginCardAction", AccessTools.all),
+        //     prefix: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(SplitshotTranspiler.FuckYouIllDoWhatIWantAgain))
+        // );
+        harmony.Patch(
+            original: typeof(AJupiterShoot).GetMethod("Begin", AccessTools.all),
+            prefix: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(SplitshotTranspiler.FlipModDataFromJupiter))
+        );
         harmony.Patch(
             original: typeof(Card).GetMethod("MakeAllActionIcons", AccessTools.all),
             transpiler: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(SplitshotTranspiler.RenderSplitshotAsAttack))

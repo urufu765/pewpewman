@@ -8,6 +8,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 * **(1.1.0)**: ASplitshot compatibility fix (Shouldn't be a gameplay difference.), Relic redo, artifact buffs, Goodies (starter) slight nerf (and correct call to artifact method)
   * **dev.1**: New relic system!
+  * **dev.2**: Fixed occasional splitshot crash with reversed jupiter drones
   * **dev.2*: Artifact buffs + New Artifact
   * **dev.3*:  Goodies changes
   * **dev.4*: Splitshot code stuff

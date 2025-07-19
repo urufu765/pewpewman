@@ -67,17 +67,17 @@ public static class SplitshotTranspiler
         {
             return new SequenceBlockMatcher<CodeInstruction>(instructions)
                 .Find(SequenceBlockMatcherFindOccurence.First,
-                SequenceMatcherRelativeBounds.WholeSequence,
-                ILMatches.Ldarg(2),
-                ILMatches.AnyCall,
-                ILMatches.AnyCall,
-                ILMatches.AnyStloc)
+                SequenceMatcherRelativeBounds.WholeSequence,  // C_35
+                ILMatches.Ldarg(2),  // 262
+                ILMatches.AnyCall,  // 263
+                ILMatches.AnyCall,  // 264
+                ILMatches.AnyStloc)  // 265
                 .Find(SequenceBlockMatcherFindOccurence.Last,
                 SequenceMatcherRelativeBounds.BeforeOrEnclosed,
-                ILMatches.Ldarg(0),
-                ILMatches.Ldflda(AccessTools.DeclaredField(typeof(AAttack), "fromDroneX")),
-                ILMatches.AnyCall,
-                ILMatches.Brtrue.GetBranchTarget(out var target))
+                ILMatches.Ldarg(0),  // 253
+                ILMatches.Ldflda(AccessTools.DeclaredField(typeof(AAttack), "fromDroneX")),  // 254
+                ILMatches.AnyCall,  // 255
+                ILMatches.Brtrue.GetBranchTarget(out var target))  // 256
                 .Insert(SequenceMatcherPastBoundsDirection.After,
                 SequenceMatcherInsertionResultingBounds.JustInsertion,
                 [
@@ -213,9 +213,9 @@ public static class SplitshotTranspiler
             return new SequenceBlockMatcher<CodeInstruction>(instructions)
                 .Find(SequenceBlockMatcherFindOccurence.First,
                 SequenceMatcherRelativeBounds.Enclosed,
-                ILMatches.AnyCall,
-                ILMatches.AnyCall,
-                ILMatches.Brtrue.GetBranchTarget(out var target))
+                ILMatches.AnyCall,  // 110
+                ILMatches.AnyCall,  // 111
+                ILMatches.Brtrue.GetBranchTarget(out var target))  // 112
                 .Insert(SequenceMatcherPastBoundsDirection.After,
                 SequenceMatcherInsertionResultingBounds.JustInsertion,
                 [
@@ -231,6 +231,45 @@ public static class SplitshotTranspiler
         }
     }
 
+    public static IEnumerable<CodeInstruction> FuckYouIllDoWhatIWant(IEnumerable<CodeInstruction> instructions, ILGenerator il)
+    {
+        try
+        {
+            return new SequenceBlockMatcher<CodeInstruction>(instructions)
+                .Find(SequenceBlockMatcherFindOccurence.First,
+                SequenceMatcherRelativeBounds.Enclosed,
+                ILMatches.Ldarg(3),
+                ILMatches.Newobj(AccessTools.DeclaredConstructor(typeof(AJupiterShoot)))
+                ).Insert(SequenceMatcherPastBoundsDirection.Before,
+                SequenceMatcherInsertionResultingBounds.JustInsertion,
+                [
+                    new(OpCodes.Call, AccessTools.DeclaredMethod(typeof(SplitshotTranspiler), nameof(Report)))
+                ]).AllElements();
+        }
+        catch (Exception err)
+        {
+            ModEntry.Instance.Logger.LogError(err, "FUCK, IL shit went FUCKITY");
+            throw;
+        }
+    }
+
+    public static void FuckYouIllDoWhatIWantAgain(CardAction a)
+    {
+        ModEntry.Instance.Logger.LogInformation("Current Action: " + a.GetType().Name);
+    }
+
+    public static void FlipModDataFromJupiter(AJupiterShoot __instance)
+    {
+        if (ModEntry.Instance.Helper.ModData.TryGetModData(__instance.attackCopy, "split", out bool b) && b)
+        {
+            ModEntry.Instance.Helper.ModData.SetModData(__instance.attackCopy, "split", false);
+        }
+    }
+
+    private static void Report()
+    {
+        ModEntry.Instance.Logger.LogInformation("Working");
+    }
 
     /// <summary>
     /// Prevents splitshots from triggering drones VFX.
@@ -241,10 +280,10 @@ public static class SplitshotTranspiler
         {
             return new SequenceBlockMatcher<CodeInstruction>(instructions)
                 .Find(SequenceBlockMatcherFindOccurence.Last,
-                SequenceMatcherRelativeBounds.Enclosed,
-                ILMatches.Ldflda(AccessTools.DeclaredField(typeof(AAttack), "fromDroneX")),
-                ILMatches.AnyCall,
-                ILMatches.Brfalse.GetBranchTarget(out var target)
+                SequenceMatcherRelativeBounds.Enclosed,  // C_338
+                ILMatches.Ldflda(AccessTools.DeclaredField(typeof(AAttack), "fromDroneX")),  // 1948
+                ILMatches.AnyCall,  // 1949
+                ILMatches.Brfalse.GetBranchTarget(out var target)  // 1950
                 ).Insert(SequenceMatcherPastBoundsDirection.After,
                 SequenceMatcherInsertionResultingBounds.JustInsertion,
                 [

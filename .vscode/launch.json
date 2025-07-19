@@ -17,7 +17,7 @@
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}\\Weth.csproj",
-            "launchConfigurationId": "TargetFramework=;Weth"
+            "launchConfigurationId": "TargetFramework=;Weth",
         }
     ]
 }
