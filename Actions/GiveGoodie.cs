@@ -172,6 +172,7 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
             List<Type> offerings = GetOfferings(isCrystal, rollUncommon);
             Card? cd = (Card?)Activator.CreateInstance(offerings.Random(s.rngCardOfferingsMidcombat));
             cd ??= isCrystal ? new CrySwap() : new MechSwap();  // This should never happen, but just in case...
+            cd.upgrade = this.upgrade;
 
             // shove card into deck/hand
             if (fromArtifact)

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Weth</RootNamespace>
-		<Version>1.1.0-dev.2</Version>
+		<Version>1.1.0-dev.3</Version>
 		<!-- <IncludedModProjectPaths>i18n;assets</IncludedModProjectPaths> -->
 
 		<TargetFramework>net8.0</TargetFramework>
@@ -12,7 +12,7 @@
 		<ModLoaderPath>A:\SteamLibrary\steamapps\common\Cobalt Core\Nickel</ModLoaderPath>
 		<GameExePath>A:\SteamLibrary\steamapps\common\Cobalt Core\CobaltCore.exe</GameExePath>
 		<ModZipPath>$(MSBuildProjectDirectory)\.release\$(MSBuildProjectName)-$(Version).zip</ModZipPath>
-		<GameDllPath>A:\SteamLibrary\steamapps\common\Cobalt Core\Nickel\CobaltCore.dll</GameDllPath>
+		<GameDllPath>$(MSBuildProjectDirectory)\..\..\..\Decompiled\CobaltCore.dll</GameDllPath>
 	</PropertyGroup>
 	<ItemGroup>
 		<ModFiles Include="assets/**" />

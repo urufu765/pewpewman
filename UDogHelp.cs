@@ -49,6 +49,7 @@ public static class UhDuhHundo
                 character.artifacts.RemoveAll(a => a.Key() == artifactType);
             }
         }
+        state.UpdateArtifactCache();
     }
 
     public static void ApplySubtleCrystalOverlayGlow(Vec? anchorPoint, (Vec pos, Vec size)[] spots, Color color, double timer, double cycleTime = 4, double minGlow = 0, double maxGlow = 1, bool cascade = false, Vec? extraSize = null)

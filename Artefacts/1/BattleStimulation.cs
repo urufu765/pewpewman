@@ -39,7 +39,7 @@ public class BattleStimulation : Artifact
             combat.QueueImmediate(new AStatus
             {
                 status = Status.overdrive,
-                statusAmount = 1,
+                statusAmount = 2,
                 targetPlayer = true,
                 artifactPulse = Key(),
                 dialogueSelector = ".wethStimuliActive"
@@ -51,7 +51,7 @@ public class BattleStimulation : Artifact
     public override List<Tooltip>? GetExtraTooltips()
     {
         return [
-            new TTGlossary($"status.overdrive", ["1"])
+            new TTGlossary($"status.overdrive", ["2"])
         ];
     }
 }

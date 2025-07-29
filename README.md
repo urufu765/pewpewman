@@ -9,10 +9,18 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 * **(1.1.0)**: ASplitshot compatibility fix (Shouldn't be a gameplay difference.), Relic redo, artifact buffs, Goodies (starter) slight nerf (and correct call to artifact method)
   * **dev.1**: New relic system!
   * **dev.2**: Fixed occasional splitshot crash with reversed jupiter drones
-  * **dev.2*: Artifact buffs + New Artifact
-  * **dev.3*:  Goodies changes
-  * **dev.4*: Splitshot code stuff
-  * **dev.5*: Bonus hidden relics
+  * **dev.3**: Artifact buffs + New Artifact
+    * Treasure Hunter: No longer gives max health/shield after boss fights
+    * Treasure Seeker: Hit requirement halved from 10 -> 5. No longer gives max health after elite/boss fights. Instead offers max shield for any enemy with a name that contains "crystal"
+    * Calculated Whiff: Description updated to clarify
+    * NEW! Kinetic Cap
+    * Battle Stimulation: Increased Overdrive gain from 1 -> 2
+    * Now requires Nickel 1.18
+    * Fixed artifact removal bug introduced by new update
+    * Fixed Treasure Finder not giving the upgraded A version of the goodie
+  * **dev.4*: Relic art stuff (+dialogue)
+  * **ext.1*: Bonus hidden relics
+  * **ext.2*: Splitshot code stuff (Aattack subclass migration?)
 
 ### Release 1.0.0
 

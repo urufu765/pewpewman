@@ -208,7 +208,8 @@ internal partial class ModEntry : SimpleMod
         typeof(TerminusMilestone),
         typeof(TerminusJaunt),
         typeof(AlPoToCa),
-        typeof(SuperDriveCollector)
+        typeof(SuperDriveCollector),
+        typeof(KineticCap)
     ];
     private readonly static List<Type> WethEventArtifacts = [
         typeof(TreasureHunter),

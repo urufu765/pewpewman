@@ -23,7 +23,12 @@ public class TreasureSeeker : TreasureHunter
 
     public override bool CanBeDepleted()
     {
-        return false;
+        return true;
+    }
+
+    public override int GetHitsRequired()
+    {
+        return 5;
     }
 
     public override Upgrade GetUpgrade()
