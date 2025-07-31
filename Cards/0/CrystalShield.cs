@@ -59,7 +59,7 @@ public class CryShield : Card, IRegisterable
         {
             _ => new CardData
             {
-                cost = 0,
+                cost = 1,
                 artOverlay = ModEntry.Instance.GoodieCrystalA,
                 singleUse = true,
                 buoyant = true,

@@ -378,7 +378,8 @@
             "DogCharm": {
                 "name": "RELIC: DOG CHARM",
                 "title": "DOG CHARM",
-                "flavour": "<c=faint>Somehow increases attractiveness when worn.</c>",
+                "flavour": "<c=faint>Inexplicably invokes empathy when blown.</c>",
+                "altFlavour2": "<c=faint>Somehow increases attractiveness when worn.</c>",
                 "altFlavour": "<c=faint>It's like catnip, but infinitely more profitable and probably fake.</c>",
                 "desc": "At the start of combat, give enemy <c=keyword>{0}</c> <c=status>UNDERDRIVE</c>."
             },

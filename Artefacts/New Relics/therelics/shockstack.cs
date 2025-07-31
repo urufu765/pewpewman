@@ -24,12 +24,14 @@ public class ShockStack : NewWethSpaceRelics
                 .Select(_ => (int)Math.Floor(s.rngActions.Next() * (c.otherShip.hullMax - 2)) + 1)];
             ModEntry.Instance.Logger.LogInformation(string.Join(", ", values));
             randomStuff = values;
+            // TODO: Don't allow duplicates
         }
         else
         {
             randomStuff = [];
         }
         OverwriteRelicData(r, typeof(ShockStack), new ShockData { Increments = randomStuff });
+        // TODO: If enemy health = max health, and assigned stack is empty, reroll
     }
 
     public static void DoOnEnemyGetHit(RelicCollection r, State s, Combat c, Part? part, int n)
@@ -62,10 +64,12 @@ public class ShockStack : NewWethSpaceRelics
 
     public override List<Tooltip>? GetExtraTooltips()
     {
-        List<Tooltip> tips = [];
+        List<Tooltip> tips = base.GetExtraTooltips()?? [];
         tips.Add(new TTGlossary("status.stunCharge", ["1"]));
         return tips;
     }
+
+    // TODO: Display the ShockStack ability on top of enemy ship, as yellow health bits
 }
 
 public record ShockData : RelicData

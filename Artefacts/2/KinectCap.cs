@@ -40,9 +40,9 @@ public class KineticCap : Artifact
                 statusAmount = giveAmount,
                 targetPlayer = true,
                 artifactPulse = Key(),
-                dialogueSelector = ".WethPutsOnCap"
+                //dialogueSelector = ".WethPutsOnCap"
             });
-        }
+        }  // Can't be bothered with drawing even more sprites lol
 
         // Mid-combat flux giver
         if (TurnsPassed >= TURNS_REQUIRED)
@@ -54,7 +54,7 @@ public class KineticCap : Artifact
                 statusAmount = MORE_AMOUNT,
                 targetPlayer = true,
                 artifactPulse = Key(),
-                dialogueSelector = ".WethPutsOnAnotherCap"
+                //dialogueSelector = ".WethPutsOnAnotherCap"
             });
         }
     }

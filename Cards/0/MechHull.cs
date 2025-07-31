@@ -50,7 +50,7 @@ public class MechHull : Card, IRegisterable
         {
             _ => new CardData
             {
-                cost = 0,
+                cost = 1,
                 artOverlay = ModEntry.Instance.GoodieMechA,
                 singleUse = true,
                 buoyant = true,

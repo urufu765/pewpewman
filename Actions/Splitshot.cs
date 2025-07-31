@@ -338,6 +338,8 @@ public class ASplitshot : CardAction
     public int? fromX;
 
 
+    // TODO: Convert Splitshot to an AAttack subclass, calling the base Begin first then grabbing whatever relevant stuff is changed in AAttack like stun/pierce. May need to look into AAttack guards returning the stuff early for reasons
+
 
     public override void Begin(G g, State s, Combat c)
     {
