@@ -39,6 +39,7 @@ public class Discovery : WCUncommon, IRegisterable
                     asAnOffering = true,
                     amount = 2,
                     betterOdds = true,
+                    destination = CardDestination.Hand
                 }
             ],
             Upgrade.A => 
@@ -48,7 +49,8 @@ public class Discovery : WCUncommon, IRegisterable
                     asAnOffering = true,
                     betterOdds = true,
                     amount = 3,
-                    upgrade = Upgrade.A
+                    upgrade = Upgrade.A,
+                    destination = CardDestination.Hand
                 }
             ],
             _ => 
@@ -56,7 +58,8 @@ public class Discovery : WCUncommon, IRegisterable
                 new AGiveGoodieLikeAGoodBoy
                 {
                     asAnOffering = true,
-                    amount = 3
+                    amount = 3,
+                    destination = CardDestination.Hand
                 }
             ],
         };

@@ -209,7 +209,7 @@
         "Common": {
             "TreasureSeeker": {
                 "name": "TREASURE SEEKER",
-                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nOnce per combat, after <c=keyword>5 hits</c>, add a random <c=card>Goodie A</c> to your hand. <c=downside>Count resets at the end of combat.</c>\nDefeating crystal enemies grants +1 <c=keyword>permanent</c> max shield goodie!\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
+                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nOnce per combat, after <c=keyword>5 hits</c>, add a random <c=card>Goodie A</c> to your hand. <c=downside>Count resets at the end of combat.</c>\nDefeating crystal enemies grants a <c=keyword>cheap</c> +1 <c=keyword>permanent</c> max shield goodie!\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
             },
             "HiddenOptions": {
                 "name": "HIDDEN OPTIONS",
@@ -293,7 +293,7 @@
         "EventOnly": {
             "TreasureHunter": {
                 "name": "TREASURE HUNTER",
-                "desc": "Once per combat, after <c=keyword>10 hits</c>, add a random <c=card>Goodie</c> to your hand.\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
+                "desc": "Once per combat, after <c=keyword>10 hits</c>, add a random <c=card>Goodie</c> to your hand.\nDefeating crystal enemies grants +1 <c=keyword>permanent</c> max shield goodie!\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
             }
         },
         "Unreleased": {

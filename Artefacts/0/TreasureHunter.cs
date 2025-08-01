@@ -106,12 +106,12 @@ public class TreasureHunter : Artifact, IArtifactWethGoodieUncommonRestrictor
     {
         SuccessfulHits = 0;
         Depleted = false;
-        if (GetAdvanced() && isCrystal)
+        if (isCrystal)
         {
             state.rewardsQueue.QueueImmediate(
                 new AWethCardOffering
                 {
-                    cards = [new CryShield()]
+                    cards = [new CryShield{discount = GetAdvanced() ? -1 : 0}]
                 }
             );
         }

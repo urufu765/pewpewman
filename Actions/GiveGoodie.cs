@@ -213,7 +213,7 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
 
     private static bool RolledUncommon(Rand rng, bool betterOdds)
     {
-        return Mutil.Roll(rng.Next(), (betterOdds? 0.67:0.75, false), (betterOdds?0.33:0.25, true));
+        return Mutil.Roll(rng.Next(), (betterOdds ? 0.67 : 0.75, false), (betterOdds ? 0.33 : 0.25, true));
     }
 
     private static bool HasUncommon(State s, Combat c)
@@ -283,5 +283,32 @@ public class AGiveGoodieLikeAGoodBoy : CardAction
             offerings = offerings.Concat(isCrystal ? CrystalUncommonOfferings : MechUncommonOfferings).ToList();
         }
         return offerings;
+    }
+
+    public override List<Tooltip> GetTooltips(State s)
+    {
+        string name = "";
+        if (s.route is Combat c && c.otherShip?.ai?.character?.type is not null)
+        {
+            name = c.otherShip.ai.character.type;
+        }
+        bool isCrystal = name.Contains("crystal", StringComparison.CurrentCultureIgnoreCase);
+
+        string destinator = destination switch
+        {
+            CardDestination.Deck => "destination.drawPile.name",
+            CardDestination.Hand => "destination.hand.name",
+            CardDestination.Discard => "destination.discardPile.name",
+            CardDestination.Exhaust => "destination.exhaustPile.name",
+            _ => fromArtifact? "destination.hand.name" : "destination.drawPile.name"
+        };
+        return [
+            new TTGlossary("action.addCard", ["<c=deck>" + Loc.T(destinator) + "</c>"]),
+            new TTCard
+            {
+                card = isCrystal? new CryPlaceholder{upgrade = this.upgrade} : new MechPlaceholder{upgrade = this.upgrade},
+                showCardTraitTooltips = true
+            }
+        ];
     }
 }

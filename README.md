@@ -20,11 +20,13 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
     * Fixed Treasure Finder not giving the upgraded A version of the goodie
   * **dev.4**: Relic art stuff (+ artifact dialogue), adjusted Dog Charm flavour text to match visuals, fixed Shock Stack relic not having flavour text, max hull/shield goodies now cost 1 energy
   * **dev.5**: Relic status stuff (Seems like Shockstack borken)
-  * **dev.6*: Separated relics into individual stuff (+ relic dialogue)
-  * **dev.7*: Fix external namespace
+  * **dev.6**: Fixed Discovery tooltips, starter also gives max shield but expensive compared to the upgrade.
+  * **dev.7*: separated relics into individual stuff (+ relic dialogue)
+  * **dev.8*: Fix external namespace
   * **ext.1*: Bonus hidden relics
   * **ext.2*: Splitshot code stuff (Aattack subclass migration?)
   * **ext.3*: Terminus: Surge
+  * **ext.4*: Option to change regular asteroids to giant/mega asteroids using option
 
 ### Release 1.0.0
 
