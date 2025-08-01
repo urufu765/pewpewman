@@ -301,13 +301,74 @@ internal partial class ModEntry : SimpleMod
         // });
 
 
-        // New relics version 3
+        #region New Weth Relics v3
         foreach (KeyValuePair<WethRelics, Type> relic in NewRelicTypes)
         {
             helper.Content.Artifacts.RegisterArtifact(relic.Key.ToString(), UhDuhHundo.ArtifactRegistrationHelper(relic.Value, RegisterSprite(package, "assets/Artifact/relics/" + relic.Key.ToString() + ".png").Sprite, WethDeck.Deck));
             NewRelicIcons[relic.Key] = RegisterSprite(package, "assets/Artifact/relics/minis/" + relic.Key.ToString() + ".png").Sprite;
         }
+        
+        // Statuses for visual representation purposes.
+        Relic_AntiqueCell = helper.Content.Statuses.RegisterStatus("RelicAntiqueCellStatus", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = false,
+                color = new Color("036192"),
+                icon = NewRelicIcons[WethRelics.AntiqueCell]
+            },
+            Name = AnyLocalizations.Bind(["status", "RelicAntiqueCell", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "RelicAntiqueCell", "desc"]).Localize
+        });
+        NewRelicStatuses[WethRelics.AntiqueCell] = Relic_AntiqueCell.Status;
+        _ = new AntiqueCellStatus();
 
+        Relic_PewPewGun = helper.Content.Statuses.RegisterStatus("RelicPewPewGunStatus", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = false,
+                color = new Color("036192"),
+                icon = NewRelicIcons[WethRelics.PewPewGun]
+            },
+            Name = AnyLocalizations.Bind(["status", "RelicPewPewGun", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "RelicPewPewGun", "desc"]).Localize
+        });
+        NewRelicStatuses[WethRelics.PewPewGun] = Relic_PewPewGun.Status;
+        _ = new PewPewGunStatus();
+
+        Relic_ShockStack = helper.Content.Statuses.RegisterStatus("RelicShockStackStatus", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = false,
+                color = new Color("036192"),
+                icon = NewRelicIcons[WethRelics.ShockStack]
+            },
+            Name = AnyLocalizations.Bind(["status", "RelicShockStack", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "RelicShockStack", "desc"]).Localize
+        });
+        NewRelicStatuses[WethRelics.ShockStack] = Relic_ShockStack.Status;
+        _ = new ShockStackStatus();
+
+        Relic_Omnimote = helper.Content.Statuses.RegisterStatus("RelicOmnimoteStatus", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = false,
+                color = new Color("036192"),
+                icon = NewRelicIcons[WethRelics.Omnimote]
+            },
+            Name = AnyLocalizations.Bind(["status", "RelicOmnimote", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "RelicOmnimote", "desc"]).Localize
+        });
+        NewRelicStatuses[WethRelics.Omnimote] = Relic_Omnimote.Status;
+        _ = new OmnimoteStatus();
+        #endregion
 
         //_ = new KnowledgeManager();
         _ = new Pulsedriving();

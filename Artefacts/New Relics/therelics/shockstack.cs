@@ -7,6 +7,7 @@ using Nickel;
 using OneOf.Types;
 using Weth.Actions;
 using Weth.Cards;
+using Weth.External;
 
 
 namespace Weth.Artifacts;
@@ -30,7 +31,9 @@ public class ShockStack : NewWethSpaceRelics
         {
             randomStuff = [];
         }
-        OverwriteRelicData(r, typeof(ShockStack), new ShockData { Increments = randomStuff });
+        s.ship.Set(ModEntry.Instance.Relic_ShockStack.Status, randomStuff.Count);
+
+        OverwriteRelicData(r, typeof(ShockStack), new ShockData { Increments = randomStuff, MaxShocks = n});
         // TODO: If enemy health = max health, and assigned stack is empty, reroll
     }
 
@@ -47,6 +50,7 @@ public class ShockStack : NewWethSpaceRelics
                 i++;
             }
             sd.Increments = [.. stacker];
+            sd.MaxShocks = n;
 
             if (i > 0)
             {
@@ -56,6 +60,8 @@ public class ShockStack : NewWethSpaceRelics
                     statusAmount = i,
                     targetPlayer = true
                 });
+                ModEntry.Instance.Logger.LogInformation("WAH!");
+                // status blip
             }
 
             OverwriteRelicData(r, typeof(ShockStack), sd);
@@ -74,6 +80,64 @@ public class ShockStack : NewWethSpaceRelics
 
 public record ShockData : RelicData
 {
+    public int MaxShocks { get; set; } = 0;
     public List<int> Increments { get; set; } = new();  // TODO: maybe use ModData instead?
 
+}
+
+public class ShockStackStatus : IKokoroApi.IV2.IStatusLogicApi.IHook, IKokoroApi.IV2.IStatusRenderingApi.IHook
+{
+    public ShockStackStatus()
+    {
+        ModEntry.Instance.KokoroApi.V2.StatusLogic.RegisterHook(this);
+        ModEntry.Instance.KokoroApi.V2.StatusRendering.RegisterHook(this);
+    }
+
+    /// <summary>
+    /// No relic statuses should be affected by timestop nor boost
+    /// </summary>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    public bool? IsAffectedByBoost(IKokoroApi.IV2.IStatusLogicApi.IHook.IIsAffectedByBoostArgs args)
+    {
+        if (args.Status == ModEntry.Instance.Relic_ShockStack.Status) return false;
+        return null;
+    }
+
+    public IKokoroApi.IV2.IStatusRenderingApi.IStatusInfoRenderer? OverrideStatusInfoRenderer(IKokoroApi.IV2.IStatusRenderingApi.IHook.IOverrideStatusInfoRendererArgs args)
+    {
+        if (args.Status != ModEntry.Instance.Relic_ShockStack.Status) return null;
+        if
+        (
+            args.State.EnumerateAllArtifacts().Find(a => a is RelicCollection) is RelicCollection rc &&
+            NewWethSpaceRelics.GetRelicData(rc, typeof(ShockStack)) is ShockData sd
+        )
+        {
+            List<Color> SegmentColours = [];
+
+            for (int i = 0; i < sd.MaxShocks; i++)
+            {
+                if (i < sd.Increments.Count - 1 || i == sd.Increments.Count - 1 && false)  // or when setting is applied
+                {
+                    SegmentColours.Add(new Color("c69610"));
+                }
+                else if (i == sd.Increments.Count - 1)
+                {
+                    SegmentColours.Add(new Color("ffd723"));
+                }
+                else if (i < args.Amount)
+                {
+                    SegmentColours.Add(new Color("635326"));
+                }
+                else
+                {
+                    SegmentColours.Add(ModEntry.Instance.KokoroApi.V2.StatusRendering.DefaultInactiveStatusBarColor);
+                }
+            }
+
+            return ModEntry.Instance.KokoroApi.V2.StatusRendering.MakeBarStatusInfoRenderer().SetSegments(SegmentColours);
+        }
+
+        return null;
+    }
 }

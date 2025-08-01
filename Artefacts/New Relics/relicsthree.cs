@@ -45,25 +45,21 @@ public class RelicCollection : Artifact
 
     public Dictionary<WethRelics, RelicData> RelicSaveData { get; set; } = [];
 
-    [JsonIgnore]
     public static Dictionary<WethRelics, AliasRelicStateCombat> RelicOnTurnStart { get; set; } = new Dictionary<WethRelics, AliasRelicStateCombat>
     {
         {WethRelics.AntiqueCell, AntiqueCell.DoOnTurnStartThing},
         {WethRelics.DogCharm, DogCharm.DoOnTurnStartThing},
         {WethRelics.Omnimote, Omnimote.DoOnTurnStartThing}
     };
-    [JsonIgnore]
     public static Dictionary<WethRelics, AliasRelicStateCombat> RelicOnCombatStart { get; set; } = new Dictionary<WethRelics, AliasRelicStateCombat>
     {
         {WethRelics.PewPewGun, PewPewGun.DoOnCombatStartThing},
         {WethRelics.ShockStack, ShockStack.DoOnCombatStartThing}
     };
-    [JsonIgnore]
     public static Dictionary<WethRelics, AliasRelicCard> RelicOnPlayerPlayCard { get; set; } = new Dictionary<WethRelics, AliasRelicCard>
     {
         {WethRelics.PewPewGun, PewPewGun.DoOnPlayerPlayCardThing}
     };
-    [JsonIgnore]
     public static Dictionary<WethRelics, AliasRelicEnemyHit> RelicOnEnemyGetHit { get; set; } = new Dictionary<WethRelics, AliasRelicEnemyHit>
     {
         {WethRelics.ShockStack, ShockStack.DoOnEnemyGetHit}
@@ -88,7 +84,10 @@ public class RelicCollection : Artifact
         {
             // Skip if there's a relic that's yet to be added, so it doesn't do duplicate actions.
             if (state.EnumerateAllArtifacts().Any(a => a.GetType() == ModEntry.NewRelicTypes[relic])) continue;
-
+            if (ModEntry.NewRelicStatuses.TryGetValue(relic, out Status s))
+            {
+                state.ship.Set(s, GetRelicCount(relic));
+            }
             RelicOnCombatStart[relic](this, state, combat, GetRelicCount(relic));
         }
     }

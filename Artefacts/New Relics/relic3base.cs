@@ -71,6 +71,7 @@ public abstract class NewWethSpaceRelics : Artifact
         });
     }
 
+    // TODO: Make this less reliant on the Collection artifact.
     public static RelicData? GetRelicData(RelicCollection collection, Type relic)
     {
         WethRelics r = (Attribute.GetCustomAttribute(relic, typeof(RelicMeta))! as RelicMeta)!.theRelic;

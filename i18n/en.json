@@ -3,7 +3,7 @@
         "Weth":
         {
             "name": "Weth",
-            "desc": "<c=2a767d>WETH</c>\nA treasure hunter. her cards focus on <c=keyword>multi-attack</c> and <c=keyword>midrow elimination</c>. She also finds <c=heal>goodies</c> hidden in plain sight."
+            "desc": "<c=2a767d>WETH</c>\nA treasure hunter. Her cards focus on <c=keyword>multi-attack</c> and <c=keyword>midrow elimination</c>. She also finds <c=heal>goodies</c> hidden in plain sight."
         },
         "Goodie":
         {
@@ -127,6 +127,22 @@
         "energy": {
             "name": "ENERGY",
             "desc": "{0} <c=status>ENERGY</c>"
+        },
+        "RelicAntiqueCell": {
+            "name": "RELIC: ANTIQUE CELL",
+            "desc": "Gain {0} <c=status>ENERGY FRAGMENTS</c> every third turn."
+        },
+        "RelicPewPewGun": {
+            "name": "RELIC: PEW PEW GUN",
+            "desc": "The first {0} <c=2a767d>Weth</c> cards fire a <c=damage>0</c> damage attack this combat."
+        },
+        "RelicShockStack": {
+            "name": "RELIC: SHOCK STACK",
+            "desc": "At random intervals of enemy hull loss (up to {0} times this combat), gain 1 <c=status>STUN CHARGE</c>."
+        },
+        "RelicOmnimote": {
+            "name": "RELIC: OMNIMOTE",
+            "desc": "The first <c=keyword>{0}</c> turns grants 1 <c=status>DRONE SHIFT</c> this combat."
         }
     },
     "action": {
@@ -373,7 +389,7 @@
                 "name": "RELIC: ANTIQUE CELL",
                 "title": "ANTIQUE CELL",
                 "flavour": "<c=faint>Despite all odds, it still holds a charge.</c>",
-                "desc": "Gain <c=keyword>{0}</c> <c=status>ENERGY FRAGMENTS</c> every third turn"
+                "desc": "Gain <c=keyword>{0}</c> <c=status>ENERGY FRAGMENTS</c> every third turn."
             },
             "DogCharm": {
                 "name": "RELIC: DOG CHARM",

@@ -7,6 +7,7 @@ using Weth.Artifacts;
 using Weth.Cards;
 using Weth.External;
 using Weth.Conversation;
+using Weth.External;
 
 namespace Weth;
 
@@ -33,6 +34,20 @@ internal partial class ModEntry : SimpleMod
     internal IModSoundEntry HitHullHit { get; private set; }
     // internal IModSoundEntry MidiTestJourneyV { get; private set; }
     // internal IModSoundEntry MidiTestIncompetentB { get; private set; }
+
+    // Relic statuses
+    public IStatusEntry Relic_AntiqueCell { get; private set; } = null!;
+    // public IStatusEntry Relic_DogCharm { get; private set; } = null!; Not needed
+    public IStatusEntry Relic_PewPewGun { get; private set; } = null!;
+    public IStatusEntry Relic_ShockStack { get; private set; } = null!;
+    // public IStatusEntry Relic_UsefulScrap { get; private set; } = null!; Not needed (unless buff requested where I'd instead do "On next heal, heal additionally by this much")
+    public IStatusEntry Relic_Omnimote { get; private set; } = null!;
+    // public IStatusEntry Relic_StubbornDrill { get; private set; } = null!; May have it be present if people forget about it
+    // public IStatusEntry Relic_DeadFish { get; private set; } = null!; Not needed
+    // public IStatusEntry Relic_PageantRibbon { get; private set; } = null!; May have it be present to represent which way the missile will face next combat
+    // public IStatusEntry Relic_AstroGrass { get; private set; } = null!; May have it be present if people forget about it
+    // public IStatusEntry Relic_StructuralStone { get; private set; } = null!; Not needed
+
     public Spr PulseQuestionMark { get; private set; }
     // internal ICardTraitEntry AutoSU { get; private set; } = null!;
     // internal Spr AutoSUSpr { get; private set; }
@@ -122,6 +137,20 @@ internal partial class ModEntry : SimpleMod
         // {WethRelics.PageantRibbon, typeof()},
         // {WethRelics.AstroGrass, typeof()},
         // {WethRelics.StructuralStone, typeof()}
+    };
+    public static Dictionary<WethRelics, Status> NewRelicStatuses { get; set; } = new Dictionary<WethRelics, Status>
+    {
+        {WethRelics.AntiqueCell, 0},
+        // {WethRelics.DogCharm, 0},
+        {WethRelics.PewPewGun, 0},
+        {WethRelics.ShockStack, 0},
+        // {WethRelics.UsefulScrap, 0},
+        {WethRelics.Omnimote, 0},
+        // {WethRelics.StubbornDrill, 0},
+        // {WethRelics.DeadFish, 0},
+        // {WethRelics.PageantRibbon, 0},
+        // {WethRelics.AstroGrass, 0},
+        // {WethRelics.StructuralStone, 0}
     };
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }

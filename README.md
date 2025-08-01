@@ -19,7 +19,9 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
     * Fixed artifact removal bug introduced by new update
     * Fixed Treasure Finder not giving the upgraded A version of the goodie
   * **dev.4**: Relic art stuff (+ artifact dialogue), adjusted Dog Charm flavour text to match visuals, fixed Shock Stack relic not having flavour text, max hull/shield goodies now cost 1 energy
-  * **dev.5*: Relic status stuff (+ relic dialogue)
+  * **dev.5**: Relic status stuff (Seems like Shockstack borken)
+  * **dev.6*: Separated relics into individual stuff (+ relic dialogue)
+  * **dev.7*: Fix external namespace
   * **ext.1*: Bonus hidden relics
   * **ext.2*: Splitshot code stuff (Aattack subclass migration?)
   * **ext.3*: Terminus: Surge
