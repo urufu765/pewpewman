@@ -8,7 +8,7 @@ using OneOf.Types;
 using Weth.Actions;
 using Weth.Cards;
 
-
+#if false
 namespace Weth.Artifacts;
 
 [ArtifactMeta(pools = [ArtifactPool.Unreleased]), RelicMeta(theRelic = WethRelics.DogCharm)]
@@ -34,3 +34,4 @@ public class DogCharm : NewWethSpaceRelics
         return tips;
     }
 }
+#endif

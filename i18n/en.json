@@ -209,7 +209,7 @@
         "Common": {
             "TreasureSeeker": {
                 "name": "TREASURE SEEKER",
-                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nOnce per combat, after <c=keyword>5 hits</c>, add a random <c=card>Goodie A</c> to your hand. <c=downside>Count resets at the end of combat.</c>\nDefeating crystal enemies grants a <c=keyword>cheap</c> +1 <c=keyword>permanent</c> max shield goodie!\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
+                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nOnce per combat, after <c=keyword>5 hits</c>, add a random <c=card>Goodie A</c> to your hand.\n<c=mapinfo>You may find hidden treasure along the way!</c>\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
             },
             "HiddenOptions": {
                 "name": "HIDDEN OPTIONS",
@@ -293,7 +293,7 @@
         "EventOnly": {
             "TreasureHunter": {
                 "name": "TREASURE HUNTER",
-                "desc": "Once per combat, after <c=keyword>10 hits</c>, add a random <c=card>Goodie</c> to your hand.\nDefeating crystal enemies grants +1 <c=keyword>permanent</c> max shield goodie!\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
+                "desc": "Once per combat, after <c=keyword>10 hits</c>, add a random <c=card>Goodie</c> to your hand.\n<c=mapinfo>You might even find hidden treasure along the way!</c>\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
             }
         },
         "Unreleased": {
@@ -389,7 +389,8 @@
                 "name": "RELIC: ANTIQUE CELL",
                 "title": "ANTIQUE CELL",
                 "flavour": "<c=faint>Despite all odds, it still holds a charge.</c>",
-                "desc": "Gain <c=keyword>{0}</c> <c=status>ENERGY FRAGMENTS</c> every third turn."
+                "desc": "Gain <c=keyword>{0}</c> <c=status>ENERGY FRAGMENTS</c> every third turn.",
+                "extras": ""
             },
             "DogCharm": {
                 "name": "RELIC: DOG CHARM",
@@ -397,61 +398,71 @@
                 "flavour": "<c=faint>Inexplicably invokes empathy when blown.</c>",
                 "altFlavour2": "<c=faint>Somehow increases attractiveness when worn.</c>",
                 "altFlavour": "<c=faint>It's like catnip, but infinitely more profitable and probably fake.</c>",
-                "desc": "At the start of combat, give enemy <c=keyword>{0}</c> <c=status>UNDERDRIVE</c>."
+                "desc": "At the start of combat, give enemy <c=keyword>{0}</c> <c=status>UNDERDRIVE</c>.",
+                "extras": ""
             },
             "PewPewGun": {
                 "name": "RELIC: PEW PEW GUN",
                 "title": "PEW PEW GUN",
                 "flavour": "<c=faint>Weth's trusty revolver.</c>",
-                "desc": "The next <c=keyword>{0}</c> <c=2a767d>Weth</c> cards will fire an additional <c=damage>0</c> damage attack."
+                "desc": "The next <c=keyword>{0}</c> <c=2a767d>Weth</c> cards will fire an additional <c=damage>0</c> damage attack.",
+                "extras": ""
             },
             "ShockStack": {
                 "name": "RELIC: SHOCK STACK",
                 "title": "SHOCK STACK",
                 "flavour": "<c=faint>You never know when they'll go off!</c>",
-                "desc": "At random intervals of enemy hull loss (up to <c=keyword>{0}</c> times per combat), gain 1 <c=status>STUN CHARGE</c>."
+                "desc": "At random intervals of enemy hull loss (up to <c=keyword>{0}</c> times per combat), gain 1 <c=status>STUN CHARGE</c>.",
+                "extras": "At the start of every combat, assigns random numbers ranging from <c=keyword>1 to enemy max hull</c> where reducing the enemy hull below each number gives 1 <c=status>STUN CHARGE</c>. All assigned numbers are unique."
             },
             "UsefulScrap": {
                 "name": "RELIC: USED HULL PATCH",
                 "title": "USED HULL PATCH",
                 "flavour": "<c=faint>Works well enough, with the help of speed tape.</c>",
-                "desc": "Immediately on pickup, <c=hull>heal <c=keyword>{0}</c></c> hull."
+                "desc": "Immediately on pickup, <c=hull>heal <c=keyword>{0}</c></c> hull.",
+                "extras": "Increases the value of this healing amount <c=keyword>every time you pick up this relic</c>."
             },
             "Omnimote": {
                 "name": "RELIC: OMNIMOTE",
                 "title": "OMNIMOTE",
                 "flavour": "<c=faint>A universal remote, but better cuz' space!</c>",
-                "desc": "For the next <c=keyword>{0}</c> turns every combat, gain 1 <c=status>DRONE SHIFT</c>."
+                "desc": "For the next <c=keyword>{0}</c> turns every combat, gain 1 <c=status>DRONE SHIFT</c>.",
+                "extras": ""
             },
             "StubbornDrill": {
                 "name": "RELIC: STUBBORN DRILL",
                 "title": "STUBBORN DRILL",
                 "flavour": "<c=faint>It's what Weth always wanted... maybe not in a half broken state.</c>",
-                "desc": "Whenever you destroy a <c=midrow>midrow object</c>, add 1 <c=card>Safety Override</c> <c=downside>and 1 <c=card>Debris</c> to your hand</c>."
+                "desc": "Whenever you destroy a <c=midrow>midrow object</c>, add 1 <c=card>Safety Override</c> <c=downside>and 1 <c=card>Debris</c> to your hand</c>.",
+                "extras": ""
             },
             "DeadFish": {
                 "name": "RELIC: DEADFISH",
                 "title": "DEADFISH",
-                "flavour": "<c=faint>It's stinking up everything!</c>",
-                "desc": "At the start of combat, gain 1 <c=status>POWERDRIVE</c> <c=downside>and 5 <c=status>UNDERDRIVE</c></c>."
+                "flavour": "<c=faint>Hard to get used to the eternal smell...</c>",
+                "desc": "At the start of combat, gain 1 <c=status>POWERDRIVE</c> <c=downside>and 5 <c=status>UNDERDRIVE</c></c>.",
+                "extras": ""
             },
             "PageantRibbon": {
                 "name": "RELIC: PAGEANT RIBBON",
                 "title": "PAGEANT RIBBON",
                 "flavour": "<c=faint>Given to those who at least showed up to the Pageant contest.</c>",
-                "desc": "At the start of combat, launch a <c=midrow>missile</c>.\n<c=downside>Every other combat, spawn the <c=midrow>missile</c> backwards.</c>"
+                "desc": "At the start of combat, launch a <c=midrow>missile</c>.\n<c=downside>Every other combat, spawn the <c=midrow>missile</c> backwards.</c>",
+                "extras": "Switches between the two every combat."
             },
             "AstroGrass": {
                 "name": "RELIC: ASTRO-GRASS",
                 "title": "ASTRO-GRASS",
                 "flavour": "<c=faint>It can't get any greener than this.</c>",
-                "desc": "<c=action>Splitshots</c> do +1 damage if it hits <c=midrow>midrow objects</c>.\n<c=downside><c=action>Splitshots</c> that don't split deal -1 damage.</c>"
+                "desc": "<c=action>Splitshots</c> do +1 damage if it hits <c=midrow>midrow objects</c>.\n<c=downside><c=action>Splitshots</c> that don't split deal -1 damage.</c>",
+                "extras": ""
             },
             "StructuralStone": {
                 "name": "RELIC: STRUCTURAL TOE",
                 "title": "STRUCTURAL TOE",
                 "flavour": "<c=faint>Increases structural rigidity, at the cost of extra damage from stubbing your toe.</c>",
-                "desc": "<c=downside>Lose all but 1 hull</c> and permanently gain that amount as <c=hull>max hull</c>."
+                "desc": "<c=downside>Lose all but 1 hull</c> and permanently gain that amount as <c=hull>max hull</c>.",
+                "extras": "Only counts hull you currently have, and <c=keyword>NOT</c> the hull you've already lost."
             }
         },
         "Tooltips": {

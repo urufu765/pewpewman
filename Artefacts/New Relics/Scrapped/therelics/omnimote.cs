@@ -9,7 +9,7 @@ using Weth.Actions;
 using Weth.Cards;
 using Weth.External;
 
-
+#if false
 namespace Weth.Artifacts;
 
 [ArtifactMeta(pools = [ArtifactPool.Unreleased]), RelicMeta(theRelic = WethRelics.Omnimote)]
@@ -74,3 +74,4 @@ public class OmnimoteStatus : IKokoroApi.IV2.IStatusLogicApi.IHook, IKokoroApi.I
         return ModEntry.Instance.KokoroApi.V2.StatusRendering.MakeBarStatusInfoRenderer().SetSegments(SegmentColours);
     }
 }
+#endif

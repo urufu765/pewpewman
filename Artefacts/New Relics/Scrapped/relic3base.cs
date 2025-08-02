@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Nickel;
-
+#if false
 namespace Weth.Artifacts;
 
+[Obsolete("Container won't be used")]
 [ArtifactMeta(pools = [ArtifactPool.Unreleased])]
 public abstract class NewWethSpaceRelics : Artifact
 {
@@ -115,3 +116,4 @@ public abstract class NewWethSpaceRelics : Artifact
         };
     }
 }
+#endif

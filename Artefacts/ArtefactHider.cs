@@ -15,7 +15,7 @@ public static class Artifacthider
         typeof(SR2Focused),
         typeof(SR2Subsuming),
         typeof(SuperDriveCollector),
-        typeof(RelicCollection)
+        //typeof(RelicCollection)
     ];
     // private static readonly List<Type> allPossibleRelicTypes = [
     //     typeof(RelicAutododgeRight),
@@ -52,7 +52,7 @@ public static class Artifacthider
                 __result.Add(typeof(TerminusJaunt));
                 __result.Add(typeof(TerminusMilestone));
             }
-            __result = [.. __result, .. hideByDefault];
+            __result = [.. __result, .. hideByDefault, .. ModEntry.NewRelicCounterparts.Keys];
 
             // Hide Space Relics version 2 relics if version 2 is not present. (basically has to be cheated in)
             if (!s.EnumerateAllArtifacts().Any(a => a is SpaceRelics2))

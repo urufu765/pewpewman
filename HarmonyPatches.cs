@@ -125,7 +125,13 @@ internal partial class ModEntry : SimpleMod
         // Relic Tooltip fixer (when being displayed in the relic offerings)
         harmony.Patch(
             original: typeof(Artifact).GetMethod(nameof(Artifact.GetTooltips), AccessTools.all),
-            postfix: new HarmonyMethod(typeof(FixTheRelicTooltips), nameof(FixTheRelicTooltips.FixIt))
+            postfix: new HarmonyMethod(typeof(WethRelicFourHelpers), nameof(WethRelicFourHelpers.FixTheTooltips))
+        );
+
+        // Fake relic remover
+        harmony.Patch(
+            original: typeof(State).GetMethod(nameof(State.SendArtifactToChar), AccessTools.all),
+            postfix: new HarmonyMethod(typeof(WethRelicFourHelpers), nameof(WethRelicFourHelpers.DontAddFakeRelic))
         );
     }
 }

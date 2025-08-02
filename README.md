@@ -21,12 +21,16 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
   * **dev.4**: Relic art stuff (+ artifact dialogue), adjusted Dog Charm flavour text to match visuals, fixed Shock Stack relic not having flavour text, max hull/shield goodies now cost 1 energy
   * **dev.5**: Relic status stuff (Seems like Shockstack borken)
   * **dev.6**: Fixed Discovery tooltips, starter also gives max shield but expensive compared to the upgrade.
-  * **dev.7*: separated relics into individual stuff (+ relic dialogue)
-  * **dev.8*: Fix external namespace
+  * **dev.7**: separated relics into individual stuff, mystified starter artifacts
+  * **dev.8*: Shockstack now indicates if you're one away from gaining one, Code cleanup, more personalized events, relic dialogue, artifact glow + sprite change
+  * **dev.9*: Fix external namespace, show Shockstack stuff on health bar
   * **ext.1*: Bonus hidden relics
   * **ext.2*: Splitshot code stuff (Aattack subclass migration?)
   * **ext.3*: Terminus: Surge
   * **ext.4*: Option to change regular asteroids to giant/mega asteroids using option
+  * **ext.5*: Allow the Terminus Jaunt to affect Combat QoL
+  * **ext.6*: Difficulty based relic power adjustment
+  * **ext.7*: Option to use older V2 relics
 
 ### Release 1.0.0
 

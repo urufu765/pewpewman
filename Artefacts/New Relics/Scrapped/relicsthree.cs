@@ -1,3 +1,4 @@
+#if false
 using System;
 using System.Collections.Generic;
 using AliasRelicStateCombat = System.Action<Weth.Artifacts.RelicCollection, State, Combat, int>;
@@ -25,6 +26,7 @@ public enum WethRelics
     StructuralStone
 }
 
+[Obsolete("Container won't be used")]
 [ArtifactMeta(pools = [ArtifactPool.Unreleased])]
 public class RelicCollection : Artifact
 {
@@ -162,3 +164,4 @@ public class RelicCollection : Artifact
         return tt;
     }
 }
+#endif

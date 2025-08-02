@@ -9,7 +9,7 @@ using Weth.Actions;
 using Weth.Cards;
 using Weth.External;
 
-
+#if false
 namespace Weth.Artifacts;
 
 [ArtifactMeta(pools = [ArtifactPool.Unreleased]), RelicMeta(theRelic = WethRelics.ShockStack)]
@@ -141,3 +141,4 @@ public class ShockStackStatus : IKokoroApi.IV2.IStatusLogicApi.IHook, IKokoroApi
         return null;
     }
 }
+#endif

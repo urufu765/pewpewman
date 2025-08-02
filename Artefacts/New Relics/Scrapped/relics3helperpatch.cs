@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
-
+#if false
 namespace Weth.Artifacts;
 
+[Obsolete("Container won't be used")]
 public static class FixTheRelicTooltips
 {
     public static void FixIt(ref List<Tooltip> __result, Artifact __instance)
@@ -19,3 +21,4 @@ public static class FixTheRelicTooltips
         }
     }
 }
+#endif

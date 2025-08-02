@@ -11,7 +11,7 @@ namespace Weth;
 /// </summary>
 public static class UhDuhHundo
 {
-    public static ArtifactConfiguration ArtifactRegistrationHelper(Type a, Spr sprite, Deck deck)
+    public static ArtifactConfiguration ArtifactRegistrationHelper(Type a, Spr sprite, Deck deck, string? altName = null)
     {
         ArtifactMeta? attrs = a.GetCustomAttribute<ArtifactMeta>();
         ArtifactPool[] artpl = attrs?.pools ?? new ArtifactPool[1];
@@ -25,8 +25,8 @@ public static class UhDuhHundo
                 unremovable = attrs is not null && attrs.unremovable,
                 extraGlossary = attrs?.extraGlossary ?? []
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["artifact", artpl[0].ToString(), a.Name, "name"]).Localize,
-            Description = ModEntry.Instance.AnyLocalizations.Bind(["artifact", artpl[0].ToString(), a.Name, "desc"]).Localize,
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["artifact", artpl[0].ToString(), altName??a.Name, "name"]).Localize,
+            Description = ModEntry.Instance.AnyLocalizations.Bind(["artifact", artpl[0].ToString(), altName??a.Name, "desc"]).Localize,
             Sprite = sprite
         };
         return ac;
@@ -50,6 +50,26 @@ public static class UhDuhHundo
             }
         }
         state.UpdateArtifactCache();
+    }
+
+    public static void ArtifactRemover(State state, Artifact ar)
+    {
+        foreach (Character character in state.characters)
+        {
+            if (character.deckType == ModEntry.Instance.WethDeck.Deck)
+            {
+                foreach (Artifact artifact in character.artifacts)
+                {
+                    if (artifact.GetType() == ar.GetType())
+                    {
+                        artifact.OnRemoveArtifact(state);
+                    }
+                }
+                character.artifacts.RemoveAll(a => a.GetType() == ar.GetType());
+            }
+        }
+        state.UpdateArtifactCache();
+        // ModEntry.Instance.Logger.LogInformation("Grah");
     }
 
     public static void ApplySubtleCrystalOverlayGlow(Vec? anchorPoint, (Vec pos, Vec size)[] spots, Color color, double timer, double cycleTime = 4, double minGlow = 0, double maxGlow = 1, bool cascade = false, Vec? extraSize = null)

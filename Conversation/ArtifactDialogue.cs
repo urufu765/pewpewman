@@ -596,40 +596,40 @@ internal class ArtifactDialogue : IRegisterable
                     new(AmDizzy, "squint", "Debatable.")
                 ]
             }},
-            {"ArtifactSpaceRelicsThreeWeth_Multi_0", new(){
-                type = NodeType.combat,
-                hasArtifactTypes = [typeof(RelicCollection)],
-                turnStart = true,
-                maxTurnsThisCombat = 1,
-                oncePerRunTags = ["WethsSpaceRelic"],
-                allPresent = [AmWeth],
-                dialogue = [
-                    new(AmWeth, "crystal", "It's not hoarding if it does stuff.")
-                ]
-            }},
-            {"ArtifactSpaceRelicsThreeWeth_Multi_1", new(){
-                type = NodeType.combat,
-                hasArtifactTypes = [typeof(RelicCollection)],
-                turnStart = true,
-                maxTurnsThisCombat = 1,
-                oncePerRunTags = ["WethsSpaceRelic"],
-                allPresent = [AmWeth],
-                dialogue = [
-                    new(AmWeth, "crystallolipop", "Look what I got!")
-                ]
-            }},
-            {"ArtifactSpaceRelicsThreeWeth_Multi_2", new(){
-                type = NodeType.combat,
-                hasArtifactTypes = [typeof(RelicCollection)],
-                turnStart = true,
-                maxTurnsThisCombat = 1,
-                oncePerRunTags = ["WethsSpaceRelic"],
-                allPresent = [AmBooks, AmWeth],
-                dialogue = [
-                    new(AmBooks, "That's a shiny rock!"),
-                    new(AmWeth, "sparkle", "Very.")
-                ]
-            }},
+            // {"ArtifactSpaceRelicsThreeWeth_Multi_0", new(){
+            //     type = NodeType.combat,
+            //     hasArtifactTypes = [typeof(RelicCollection)],
+            //     turnStart = true,
+            //     maxTurnsThisCombat = 1,
+            //     oncePerRunTags = ["WethsSpaceRelic"],
+            //     allPresent = [AmWeth],
+            //     dialogue = [
+            //         new(AmWeth, "crystal", "It's not hoarding if it does stuff.")
+            //     ]
+            // }},
+            // {"ArtifactSpaceRelicsThreeWeth_Multi_1", new(){
+            //     type = NodeType.combat,
+            //     hasArtifactTypes = [typeof(RelicCollection)],
+            //     turnStart = true,
+            //     maxTurnsThisCombat = 1,
+            //     oncePerRunTags = ["WethsSpaceRelic"],
+            //     allPresent = [AmWeth],
+            //     dialogue = [
+            //         new(AmWeth, "crystallolipop", "Look what I got!")
+            //     ]
+            // }},
+            // {"ArtifactSpaceRelicsThreeWeth_Multi_2", new(){
+            //     type = NodeType.combat,
+            //     hasArtifactTypes = [typeof(RelicCollection)],
+            //     turnStart = true,
+            //     maxTurnsThisCombat = 1,
+            //     oncePerRunTags = ["WethsSpaceRelic"],
+            //     allPresent = [AmBooks, AmWeth],
+            //     dialogue = [
+            //         new(AmBooks, "That's a shiny rock!"),
+            //         new(AmWeth, "sparkle", "Very.")
+            //     ]
+            // }},
         });
 
         LocalDB.DumpStoryToLocalLocale("en", "Shockah.DuoArtifacts", new Dictionary<string, DialogueMachine>(){

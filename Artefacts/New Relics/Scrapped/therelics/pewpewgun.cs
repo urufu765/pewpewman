@@ -9,7 +9,7 @@ using Weth.Actions;
 using Weth.Cards;
 using Weth.External;
 
-
+#if false
 namespace Weth.Artifacts;
 
 [ArtifactMeta(pools = [ArtifactPool.Unreleased]), RelicMeta(theRelic = WethRelics.PewPewGun)]
@@ -85,3 +85,4 @@ public class PewPewGunStatus : IKokoroApi.IV2.IStatusLogicApi.IHook, IKokoroApi.
         return null;
     }
 }
+#endif

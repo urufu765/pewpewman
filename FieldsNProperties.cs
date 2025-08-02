@@ -110,48 +110,109 @@ internal partial class ModEntry : SimpleMod
     public Spr SprMegaAsteroidIcon { get; private set; }
     public Spr SprMegaAsteroid { get; private set; }
 
-    public Dictionary<WethRelics, Spr> NewRelicIcons { get; set; } = new Dictionary<WethRelics, Spr>
+    public static Dictionary<Type, Type> NewRelicCounterparts { get; set; } = new Dictionary<Type, Type>
     {
-        {WethRelics.AntiqueCell, 0},
-        {WethRelics.DogCharm, 0},
-        {WethRelics.PewPewGun, 0},
-        {WethRelics.ShockStack, 0},
-        {WethRelics.UsefulScrap, 0},
-        {WethRelics.Omnimote, 0},
-        {WethRelics.StubbornDrill, 0},
-        {WethRelics.DeadFish, 0},
-        {WethRelics.PageantRibbon, 0},
-        {WethRelics.AstroGrass, 0},
-        {WethRelics.StructuralStone, 0}
+        {typeof(AntiqueCell), typeof(AntiqueCellFake)},
+        {typeof(DogCharm), typeof(DogCharmFake)},
+        {typeof(PewPewGun), typeof(PewPewGunFake)},
+        {typeof(ShockStack), typeof(ShockStackFake)},
+        {typeof(UsefulScrap), typeof(UsefulScrapFake)},
+        {typeof(Omnimote), typeof(OmnimoteFake)},
+        // {typeof(StubbornDrill), typeof(StubbornDrillFake)},
+        // {typeof(DeadFish), typeof(DeadFishFake)},
+        // {typeof(PageantRibbon), typeof(PageantRibbonFake)},
+        // {typeof(AstroGrass), typeof(AstroGrassFake)},
+        // {typeof(StructuralStone), typeof(StructuralStoneFake)}
     };
-    public static Dictionary<WethRelics, Type> NewRelicTypes { get; set; } = new Dictionary<WethRelics, Type>
+
+    public Dictionary<Type, Spr> NewRelicSprites { get; set; } = new Dictionary<Type, Spr>
     {
-        {WethRelics.AntiqueCell, typeof(AntiqueCell)},
-        {WethRelics.DogCharm,typeof(DogCharm)},
-        {WethRelics.PewPewGun, typeof(PewPewGun)},
-        {WethRelics.ShockStack, typeof(ShockStack)},
-        {WethRelics.UsefulScrap, typeof(UsefulScrap)},
-        {WethRelics.Omnimote, typeof(Omnimote)},
-        // {WethRelics.StubbornDrill, typeof()},
-        // {WethRelics.DeadFish, typeof()},
-        // {WethRelics.PageantRibbon, typeof()},
-        // {WethRelics.AstroGrass, typeof()},
-        // {WethRelics.StructuralStone, typeof()}
+        {typeof(AntiqueCell), 0},
+        {typeof(DogCharm), 0},
+        {typeof(PewPewGun), 0},
+        {typeof(ShockStack), 0},
+        {typeof(UsefulScrap), 0},
+        {typeof(Omnimote), 0},
+        // {typeof(StubbornDrill), 0},
+        // {typeof(DeadFish), 0},
+        // {typeof(PageantRibbon), 0},
+        // {typeof(AstroGrass), 0},
+        // {typeof(StructuralStone), 0}
     };
-    public static Dictionary<WethRelics, Status> NewRelicStatuses { get; set; } = new Dictionary<WethRelics, Status>
+
+    public Dictionary<Type, Spr> NewRelicIcons { get; set; } = new Dictionary<Type, Spr>
     {
-        {WethRelics.AntiqueCell, 0},
-        // {WethRelics.DogCharm, 0},
-        {WethRelics.PewPewGun, 0},
-        {WethRelics.ShockStack, 0},
-        // {WethRelics.UsefulScrap, 0},
-        {WethRelics.Omnimote, 0},
-        // {WethRelics.StubbornDrill, 0},
-        // {WethRelics.DeadFish, 0},
-        // {WethRelics.PageantRibbon, 0},
-        // {WethRelics.AstroGrass, 0},
-        // {WethRelics.StructuralStone, 0}
+        {typeof(AntiqueCell), 0},
+        {typeof(DogCharm), 0},
+        {typeof(PewPewGun), 0},
+        {typeof(ShockStack), 0},
+        {typeof(UsefulScrap), 0},
+        {typeof(Omnimote), 0},
+        // {typeof(StubbornDrill), 0},
+        // {typeof(DeadFish), 0},
+        // {typeof(PageantRibbon), 0},
+        // {typeof(AstroGrass), 0},
+        // {typeof(StructuralStone), 0}
     };
+
+    public Dictionary<Type, Status> NewRelicStatuses { get; set; } = new Dictionary<Type, Status>
+    {
+        {typeof(AntiqueCell), 0},
+        // {typeof(DogCharm), 0},
+        {typeof(PewPewGun), 0},
+        {typeof(ShockStack), 0},
+        // {typeof(UsefulScrap), 0},
+        {typeof(Omnimote), 0},
+        // {typeof(StubbornDrill), 0},
+        // {typeof(DeadFish), 0},
+        // {typeof(PageantRibbon), 0},
+        // {typeof(AstroGrass), 0},
+        // {typeof(StructuralStone), 0}
+    };
+
+    // public Dictionary<WethRelics, Spr> NewRelicIcons { get; set; } = new Dictionary<WethRelics, Spr>
+    // {
+    //     {WethRelics.AntiqueCell, 0},
+    //     {WethRelics.DogCharm, 0},
+    //     {WethRelics.PewPewGun, 0},
+    //     {WethRelics.ShockStack, 0},
+    //     {WethRelics.UsefulScrap, 0},
+    //     {WethRelics.Omnimote, 0},
+    //     {WethRelics.StubbornDrill, 0},
+    //     {WethRelics.DeadFish, 0},
+    //     {WethRelics.PageantRibbon, 0},
+    //     {WethRelics.AstroGrass, 0},
+    //     {WethRelics.StructuralStone, 0}
+    // };
+
+    // public static Dictionary<WethRelics, Type> NewRelicTypes { get; set; } = new Dictionary<WethRelics, Type>
+    // {
+    //     {WethRelics.AntiqueCell, typeof(AntiqueCell)},
+    //     {WethRelics.DogCharm,typeof(DogCharm)},
+    //     {WethRelics.PewPewGun, typeof(PewPewGun)},
+    //     {WethRelics.ShockStack, typeof(ShockStack)},
+    //     {WethRelics.UsefulScrap, typeof(UsefulScrap)},
+    //     {WethRelics.Omnimote, typeof(Omnimote)},
+    //     // {WethRelics.StubbornDrill, typeof()},
+    //     // {WethRelics.DeadFish, typeof()},
+    //     // {WethRelics.PageantRibbon, typeof()},
+    //     // {WethRelics.AstroGrass, typeof()},
+    //     // {WethRelics.StructuralStone, typeof()}
+    // };
+    // public static Dictionary<WethRelics, Status> NewRelicStatuses { get; set; } = new Dictionary<WethRelics, Status>
+    // {
+    //     {WethRelics.AntiqueCell, 0},
+    //     // {WethRelics.DogCharm, 0},
+    //     {WethRelics.PewPewGun, 0},
+    //     {WethRelics.ShockStack, 0},
+    //     // {WethRelics.UsefulScrap, 0},
+    //     {WethRelics.Omnimote, 0},
+    //     // {WethRelics.StubbornDrill, 0},
+    //     // {WethRelics.DeadFish, 0},
+    //     // {WethRelics.PageantRibbon, 0},
+    //     // {WethRelics.AstroGrass, 0},
+    //     // {WethRelics.StructuralStone, 0}
+    // };
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
@@ -247,7 +308,6 @@ internal partial class ModEntry : SimpleMod
         typeof(SR2Crackling),
         typeof(SR2Focused),
         typeof(SR2Subsuming),
-        typeof(RelicCollection)
     ];
     public readonly static List<Type> WethSpecialArtifacts = [
         typeof(RelicPulsedrive),

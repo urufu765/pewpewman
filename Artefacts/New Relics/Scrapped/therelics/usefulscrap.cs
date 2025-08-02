@@ -8,7 +8,7 @@ using OneOf.Types;
 using Weth.Actions;
 using Weth.Cards;
 
-
+#if false
 namespace Weth.Artifacts;
 
 [ArtifactMeta(pools = [ArtifactPool.Unreleased]), RelicMeta(theRelic = WethRelics.UsefulScrap)]
@@ -36,3 +36,4 @@ public class UsefulScrap : NewWethSpaceRelics
     }
     // Make sure to prefix GetTooltips to apply the stupid quantity vals thing
 }
+#endif
