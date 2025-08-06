@@ -126,6 +126,33 @@ public static class SplitshotTranspiler
 
         if (action is APseudoPulsedriveGiver)
         {
+            if (ModEntry.Instance.Helper.ModData.TryGetModData<bool>(action, "ispulsedrive", out bool b) && b)  // Takes advantage of Pulsedrive's icon rendering hook
+            {
+                return true;
+            }
+            var copy = Mutil.DeepCopy(action);
+            ModEntry.Instance.Helper.ModData.SetModData(copy, "ispulsedrive", true);
+            var position = g.Push(rect: new()).rect.xy;
+            int initialX = (int)position.x;
+
+            position.x += Card.RenderAction(g, state, copy, dontDraw, shardAvailable, stunChargeAvailable, bubbleJuiceAvailable);
+            g.Pop();
+
+
+            __result = (int)position.x - initialX;
+            __result += 1;
+            if (!dontDraw)
+            {
+                //Draw.Sprite(StableSpr.icons_questionMark, initialX + __result, position.y, color: Colors.textMain);
+                Draw.Sprite(ModEntry.Instance.PulseQuestionMark, initialX + __result, position.y-1, color: Colors.textMain);
+                //Draw.Text("?", initialX + __result, position.y, dontSubstituteLocFont: true, color: Colors.textMain);
+            }
+            __result += 9;
+            return false;
+        }
+
+        if (action is AWethPercentageRenderer)
+        {
             if (ModEntry.Instance.Helper.ModData.TryGetModData<bool>(action, "ispulsedrive", out bool b) && b)
             {
                 return true;
@@ -144,7 +171,7 @@ public static class SplitshotTranspiler
             if (!dontDraw)
             {
                 //Draw.Sprite(StableSpr.icons_questionMark, initialX + __result, position.y, color: Colors.textMain);
-                Draw.Sprite(ModEntry.Instance.PulseQuestionMark, initialX + __result, position.y, color: Colors.textMain);
+                Draw.Sprite(ModEntry.Instance.PercentageIcon, initialX + __result, position.y - 1, color: Colors.redd);
                 //Draw.Text("?", initialX + __result, position.y, dontSubstituteLocFont: true, color: Colors.textMain);
             }
             __result += 9;

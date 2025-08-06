@@ -65,10 +65,18 @@ internal partial class ModEntry : SimpleMod
             prefix: new HarmonyMethod(typeof(SplitshotTranspiler), nameof(SplitshotTranspiler.IconRenderingStuff))
         );
 
-        // ChoiceRelicRewardOfYourRelicChoice
+        // Event Modifiers
         harmony.Patch(
-            original: typeof(Events).GetMethod("ChoiceCardRewardOfYourColorChoice", AccessTools.all),
+            original: typeof(Events).GetMethod(nameof(Events.ChoiceCardRewardOfYourColorChoice), AccessTools.all),
             postfix: new HarmonyMethod(typeof(ChoiceRelicRewardOfYourRelicChoice), nameof(ChoiceRelicRewardOfYourRelicChoice.ReplaceCardRewardWithRelic))
+        );
+        // harmony.Patch(
+        //     original: typeof(Events).GetMethod(nameof(Events.ForeignCardOffering), AccessTools.all),
+        //     postfix: new HarmonyMethod(typeof(ForeignRelicOffering), nameof(ForeignRelicOffering.ReplaceCardRewardWithRelic))
+        // );
+        harmony.Patch(
+            original: typeof(Events).GetMethod(nameof(Events.GrandmaShop), AccessTools.all),
+            postfix: new HarmonyMethod(typeof(WethGrandmaShop), nameof(WethGrandmaShop.GrandmaGivesWethAMilkSoda))
         );
 
         // ArtifactMadcapPartOperator

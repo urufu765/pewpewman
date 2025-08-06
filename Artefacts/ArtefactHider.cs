@@ -15,7 +15,6 @@ public static class Artifacthider
         typeof(SR2Focused),
         typeof(SR2Subsuming),
         typeof(SuperDriveCollector),
-        //typeof(RelicCollection)
     ];
     // private static readonly List<Type> allPossibleRelicTypes = [
     //     typeof(RelicAutododgeRight),

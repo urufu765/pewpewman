@@ -49,6 +49,7 @@ internal partial class ModEntry : SimpleMod
     // public IStatusEntry Relic_StructuralStone { get; private set; } = null!; Not needed
 
     public Spr PulseQuestionMark { get; private set; }
+    public Spr PercentageIcon { get; private set; }
     // internal ICardTraitEntry AutoSU { get; private set; } = null!;
     // internal Spr AutoSUSpr { get; private set; }
     //internal ICardTraitEntry AutoE { get; private set; } = null!;
@@ -69,6 +70,7 @@ internal partial class ModEntry : SimpleMod
     public Spr WethCommon { get; private set; }
     public Spr WethUncommon { get; private set; }
     public Spr WethRare { get; private set; }
+    public Spr WethMilkSoda { get; private set; }
     public Spr GoodieCrystal { get; private set; }
     public Spr GoodieCrystalA { get; private set; }
     public Spr GoodieMech { get; private set; }
@@ -156,7 +158,7 @@ internal partial class ModEntry : SimpleMod
     };
 
     public Dictionary<Type, Status> NewRelicStatuses { get; set; } = new Dictionary<Type, Status>
-    {
+    {  // Any commented out either does not require a status or is not implemented
         {typeof(AntiqueCell), 0},
         // {typeof(DogCharm), 0},
         {typeof(PewPewGun), 0},
@@ -169,50 +171,6 @@ internal partial class ModEntry : SimpleMod
         // {typeof(AstroGrass), 0},
         // {typeof(StructuralStone), 0}
     };
-
-    // public Dictionary<WethRelics, Spr> NewRelicIcons { get; set; } = new Dictionary<WethRelics, Spr>
-    // {
-    //     {WethRelics.AntiqueCell, 0},
-    //     {WethRelics.DogCharm, 0},
-    //     {WethRelics.PewPewGun, 0},
-    //     {WethRelics.ShockStack, 0},
-    //     {WethRelics.UsefulScrap, 0},
-    //     {WethRelics.Omnimote, 0},
-    //     {WethRelics.StubbornDrill, 0},
-    //     {WethRelics.DeadFish, 0},
-    //     {WethRelics.PageantRibbon, 0},
-    //     {WethRelics.AstroGrass, 0},
-    //     {WethRelics.StructuralStone, 0}
-    // };
-
-    // public static Dictionary<WethRelics, Type> NewRelicTypes { get; set; } = new Dictionary<WethRelics, Type>
-    // {
-    //     {WethRelics.AntiqueCell, typeof(AntiqueCell)},
-    //     {WethRelics.DogCharm,typeof(DogCharm)},
-    //     {WethRelics.PewPewGun, typeof(PewPewGun)},
-    //     {WethRelics.ShockStack, typeof(ShockStack)},
-    //     {WethRelics.UsefulScrap, typeof(UsefulScrap)},
-    //     {WethRelics.Omnimote, typeof(Omnimote)},
-    //     // {WethRelics.StubbornDrill, typeof()},
-    //     // {WethRelics.DeadFish, typeof()},
-    //     // {WethRelics.PageantRibbon, typeof()},
-    //     // {WethRelics.AstroGrass, typeof()},
-    //     // {WethRelics.StructuralStone, typeof()}
-    // };
-    // public static Dictionary<WethRelics, Status> NewRelicStatuses { get; set; } = new Dictionary<WethRelics, Status>
-    // {
-    //     {WethRelics.AntiqueCell, 0},
-    //     // {WethRelics.DogCharm, 0},
-    //     {WethRelics.PewPewGun, 0},
-    //     {WethRelics.ShockStack, 0},
-    //     // {WethRelics.UsefulScrap, 0},
-    //     {WethRelics.Omnimote, 0},
-    //     // {WethRelics.StubbornDrill, 0},
-    //     // {WethRelics.DeadFish, 0},
-    //     // {WethRelics.PageantRibbon, 0},
-    //     // {WethRelics.AstroGrass, 0},
-    //     // {WethRelics.StructuralStone, 0}
-    // };
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
@@ -276,7 +234,8 @@ internal partial class ModEntry : SimpleMod
         typeof(MechSwap),
         typeof(CryPlaceholder),
         typeof(MechPlaceholder),
-        typeof(FullCommitment)
+        typeof(FullCommitment),
+        typeof(NewMilkSoda)
         // typeof(PlayJourneyV),
         // typeof(PlayIncompetentBaffoon)
     ];

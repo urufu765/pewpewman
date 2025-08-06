@@ -16,6 +16,29 @@ public class AWethCardOffering : CardAction
             canSkip = canSkip
         };
     }
+
+    public override List<Tooltip> GetTooltips(State s)
+    {
+        List<Tooltip> tooltips = [];
+        if (cards.Count == 1)
+        {
+            tooltips.AddRange(
+            [
+                new TTGlossary("action.addCard", [$"<c=deck>{Loc.T("destination.deck.name")}</c>"]),
+                new TTCard
+                {
+                    card = cards[0],
+                }
+            ]);
+        }
+        else if (cards.Count > 1)
+        {
+            tooltips.Add(
+                new TTGlossary("action.cardOfferingForWho", [$"<c=2a767d>{Character.GetDisplayName(ModEntry.Instance.WethDeck.Deck, s)}</c>"])
+            );
+        }
+        return tooltips;
+    }
 }
 
 public class AWethSpaceRelicOffering : CardAction

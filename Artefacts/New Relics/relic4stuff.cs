@@ -57,7 +57,6 @@ public abstract class WethRelicFourFake : Artifact
 {
     public abstract Type RealRelicType { get; }
 
-    #region unrestricted picks on consecutive
     public override void OnReceiveArtifact(State state)
     {
         if (!state.EnumerateAllArtifacts().Any(a => a.GetType() == RealRelicType) && Activator.CreateInstance(RealRelicType) is WethRelicFour wrf)
@@ -72,38 +71,8 @@ public abstract class WethRelicFourFake : Artifact
         {
             wrf2.GainStack(state);
         }
-        // ModEntry.Instance.Logger.LogInformation("Rah");
     }
 
-    public override void OnRemoveArtifact(State state)
-    {
-        // ModEntry.Instance.Logger.LogInformation("Bwah");
-    }
-
-    #endregion
-
-    // public override void OnReceiveArtifact(State state)
-    // {
-    //     state.GetCurrentQueue().QueueImmediate(new ALoseArtifact
-    //     {
-    //         artifactType = $"{ModEntry.Instance.UniqueName}::{GetType().Name}"
-    //     });
-    //     if (!state.EnumerateAllArtifacts().Any(a => a.GetType() == RealRelicType) && Activator.CreateInstance(RealRelicType) is WethRelicFour wrf)
-    //     {
-    //         state.GetCurrentQueue().QueueImmediate(new AAddArtifact
-    //         {
-    //             artifact = wrf
-    //         });
-    //     }
-    // }
-
-    // public override void OnRemoveArtifact(State state)
-    // {
-    //     if (state.EnumerateAllArtifacts().Find(a => a.GetType() == RealRelicType) is WethRelicFour wrf)
-    //     {
-    //         wrf.GainStack();
-    //     }
-    // }
 
     public override List<Tooltip>? GetExtraTooltips()
     {

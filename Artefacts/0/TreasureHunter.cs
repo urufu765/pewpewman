@@ -8,10 +8,10 @@ using Weth.Cards;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ ArtifactPool.EventOnly ])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly])]
 public class TreasureHunter : Artifact, IArtifactWethGoodieUncommonRestrictor
 {
-    public int SuccessfulHits {get; set;}
+    public int SuccessfulHits { get; set; }
     public bool Depleted { get; set; }
     public bool isCrystal;
     /// <summary>
@@ -106,20 +106,12 @@ public class TreasureHunter : Artifact, IArtifactWethGoodieUncommonRestrictor
     {
         SuccessfulHits = 0;
         Depleted = false;
-        if (isCrystal)
-        {
-            state.rewardsQueue.QueueImmediate(
-                new AWethCardOffering
-                {
-                    cards = [new CryShield{discount = GetAdvanced() ? -1 : 0}]
-                }
-            );
-        }
+        DoHiddenEvent(state);
     }
 
     public override List<Tooltip>? GetExtraTooltips()
     {
-        return isCrystal? 
+        return isCrystal ?
             [
                 new TTCard
                 {
@@ -128,7 +120,7 @@ public class TreasureHunter : Artifact, IArtifactWethGoodieUncommonRestrictor
                         upgrade = GetUpgrade()
                     },
                     showCardTraitTooltips = true
-                }] : 
+                }] :
             [
                 new TTCard
                 {
@@ -149,5 +141,18 @@ public class TreasureHunter : Artifact, IArtifactWethGoodieUncommonRestrictor
     public bool DoIOverrideGoodieUncommonRestriction()
     {
         return false;
+    }
+
+    public virtual void DoHiddenEvent(State state)
+    {
+        if (isCrystal)  // Crystal event
+        {
+            state.rewardsQueue.QueueImmediate(
+                new AWethCardOffering
+                {
+                    cards = [new CryShield()]
+                }
+            );
+        }
     }
 }

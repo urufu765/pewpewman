@@ -54,6 +54,15 @@ public static class UhDuhHundo
 
     public static void ArtifactRemover(State state, Artifact ar)
     {
+        foreach (Artifact art in state.artifacts)  // If relic has been gotten by other timeline event
+        {
+            if (art.GetType() == ar.GetType())
+            {
+                art.OnRemoveArtifact(state);
+            }
+            state.artifacts.RemoveAll(a => a.GetType() == ar.GetType());
+        }
+        
         foreach (Character character in state.characters)
         {
             if (character.deckType == ModEntry.Instance.WethDeck.Deck)

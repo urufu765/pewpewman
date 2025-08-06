@@ -22,8 +22,17 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
   * **dev.5**: Relic status stuff (Seems like Shockstack borken)
   * **dev.6**: Fixed Discovery tooltips, starter also gives max shield but expensive compared to the upgrade.
   * **dev.7**: separated relics into individual stuff, mystified starter artifacts
-  * **dev.8*: Shockstack now indicates if you're one away from gaining one, Code cleanup, more personalized events, relic dialogue, artifact glow + sprite change
-  * **dev.9*: Fix external namespace, show Shockstack stuff on health bar
+  * **dev.8**:
+    * Shockstack now indicates if you're one away from gaining one
+    * Code cleanup
+    * more personalized events
+      * Milk soda 2 (gotten from granny event)
+      * Choice card event now requires a treasure hunter/seeker
+    * sprite change
+  * **dev.9*:
+    * relic dialogue (TODO)
+    * Even more personalized events
+  * **dev.9*: Fix external namespace, show Shockstack stuff on health bar, rebalance milk soda
   * **ext.1*: Bonus hidden relics
   * **ext.2*: Splitshot code stuff (Aattack subclass migration?)
   * **ext.3*: Terminus: Surge

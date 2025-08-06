@@ -110,13 +110,13 @@ public class ShockStackStatus : IKokoroApi.IV2.IStatusLogicApi.IHook, IKokoroApi
 
             for (int i = 0; i < ss.Amount; i++)
             {
-                if (i < ss.ShockPoints.Count - 1 || i == ss.ShockPoints.Count - 1 && true)  // or when setting is applied
-                {
-                    SegmentColours.Add(new Color("c69610"));
-                }
-                else if (i == ss.ShockPoints.Count - 1)
+                if (i == ss.ShockPoints.Count - 1 && args.State.route is Combat combat && combat.otherShip.hull - 1 == ss.ShockPoints.Max())
                 {
                     SegmentColours.Add(new Color("ffd723"));
+                }
+                else if (i <= ss.ShockPoints.Count - 1)
+                {
+                    SegmentColours.Add(new Color("c69610"));
                 }
                 else if (i < args.Amount)
                 {

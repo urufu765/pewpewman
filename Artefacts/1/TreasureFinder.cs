@@ -8,7 +8,7 @@ using Weth.Cards;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ ArtifactPool.Common ])]
+[ArtifactMeta(pools = [ArtifactPool.Common])]
 public class TreasureSeeker : TreasureHunter
 {
     public override bool GetAdvanced()
@@ -39,5 +39,19 @@ public class TreasureSeeker : TreasureHunter
     public override void OnReceiveArtifact(State state)
     {
         UhDuhHundo.ArtifactRemover(ref state, typeof(TreasureHunter).Name);
+    }
+
+    public override void DoHiddenEvent(State state)
+    { 
+        if (isCrystal)
+        {
+            state.rewardsQueue.QueueImmediate(
+                new AWethCardOffering
+                {
+                    cards = [new CryShield{ discount = GetAdvanced() ? -1 : 0 }]
+                }
+            );
+        }
+
     }
 }

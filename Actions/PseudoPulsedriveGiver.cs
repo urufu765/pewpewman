@@ -10,12 +10,13 @@ public class APseudoPulsedriveGiver : AStatus
     public override List<Tooltip> GetTooltips(State s)
     {
         List<Tooltip> tooltips = [];
-        foreach ((string key, string stuff) description in descriptions??[])
+        foreach ((string key, string stuff) description in descriptions ?? [])
         {
             tooltips.Add(new GlossaryTooltip($"statustooltip.{description.key}")
             {
                 Description = description.stuff,
             });
+            tooltips.Add(new TTDivider());
         }
         tooltips.AddRange(base.GetTooltips(s));
         return tooltips;

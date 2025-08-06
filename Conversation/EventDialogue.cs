@@ -55,7 +55,15 @@ internal class EventDialogue : IRegisterable
             {"GrandmaShop", new(){
                 edit = [new(EMod.countFromStart, 1, AmWeth, "plead", "To say sowwy...")]
             }},
-            {"Knight_1", new(){
+            {"GrandmaShop_Weth", new(){
+                type = NodeType.@event,
+                oncePerRun = true,
+                dialogue = [
+                    new("grandma", "What should you say?", flipped: true),
+                    new(AmWeth, "sparkle", "Thank yuw!")
+                ]
+            }},
+            { "Knight_1", new(){
                 edit = [new(EMod.countFromEnd, 1, AmWeth, "lockedin", "Cometh at me, I doth not feareth thee!")]
             }},
             {"Knight_Midcombat_Greeting_Weth_Multi_0", new(){

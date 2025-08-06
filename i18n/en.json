@@ -182,7 +182,13 @@
     },
     "event": {
         "ChoiceRelicRewardOfYourRelicChoice_Yes": {
-            "desc": "Obtain one of {2} hidden <c={0}>{1}</c> relics."
+            "desc": "Obtain one of {2} <c={0}>{1}</c> relics."
+        },
+        "ForeignRelicOffering_Yes": {
+            "desc": "Take one of {2} <c={0}>{1}</c> relics."
+        },
+        "GrandmaShop_Weth": {
+            "desc": "Can we u- is that a Milk Soda Zero?!\n<c=heal>-Gain one volatile <c=card>Milk Soda</c></c>"
         }
     },
     "trait": {
@@ -213,7 +219,7 @@
             },
             "HiddenOptions": {
                 "name": "HIDDEN OPTIONS",
-                "desc": "Immediately choose 1 of 3 common artifacts.\nThen choose 1 of 3 hidden <c=2a767d>WETH</c> relics."
+                "desc": "Immediately choose 1 of 3 common artifacts.\nThen choose 1 of 3 <c=2a767d>WETH</c> relics."
             },
             "RockPower": {
                 "name": "ROCK POWER",
@@ -271,11 +277,11 @@
         "Boss": {
             "HiddenOptions2": {
                 "name": "HIDDEN OPTIONS II",
-                "desc": "Immediately choose 1 of 4 boss artifacts.\nThen choose 1 of 4 hidden <c=2a767d>WETH</c> relics."
+                "desc": "Immediately choose 1 of 4 boss artifacts.\nThen choose 1 of 4 <c=2a767d>WETH</c> relics."
             },
             "TerminusMilestone": {
                 "name": "TERMINUS: MILESTONE",
-                "desc": "Get rewards for reaching milestones from defeating enemies!\nEarn <c=keyword>4 points</c> for boss, <c=keyword>2 points</c> for elites, <c=keyword>1 point</c> for the rest.\nFor every 2 points past the last milestone, gain 1 of 3 hidden <c=2a767d>WETH</c> relics.\n<c=downside>You are limited to 1 <c=artifact>TERMINUS</c> artifact.</c>"
+                "desc": "Get rewards for reaching milestones from defeating enemies!\nEarn <c=keyword>4 points</c> for boss, <c=keyword>2 points</c> for elites, <c=keyword>1 point</c> for the rest.\nFor every 2 points past the last milestone, gain 1 of 3 <c=2a767d>WETH</c> relics.\n<c=downside>You are limited to 1 <c=artifact>TERMINUS</c> artifact.</c>"
             },
             "TerminusJaunt": {
                 "name": "TERMINUS: JAUNT",
@@ -413,7 +419,7 @@
                 "title": "SHOCK STACK",
                 "flavour": "<c=faint>You never know when they'll go off!</c>",
                 "desc": "At random intervals of enemy hull loss (up to <c=keyword>{0}</c> times per combat), gain 1 <c=status>STUN CHARGE</c>.",
-                "extras": "At the start of every combat, assigns random numbers ranging from <c=keyword>1 to enemy max hull</c> where reducing the enemy hull below each number gives 1 <c=status>STUN CHARGE</c>. All assigned numbers are unique."
+                "extras": "At the start of every combat, assigns random numbers ranging from <c=keyword>1 to enemy max hull</c> where reducing the enemy hull below each number gives 1 <c=status>STUN CHARGE</c>. All assigned numbers are unique.\n<c=keyword>Status indicator becomes brighter if enemy hull is one away from next shock stack.</c>"
             },
             "UsefulScrap": {
                 "name": "RELIC: USED HULL PATCH",
@@ -633,7 +639,20 @@
             },
             "FullCommit": {
                 "name": "Full Commitment"
+            },
+            "MilkSoda": {
+                "name": "Milk Soda",
+                "desc": "Gives <c=boldPink>{{amount}}</c> <c=status>Pulsedrive</c>.\n<c=downside>Has a <c=keyword>{{explode}}%</c> chance to explode.</c>",
+                "tooltip": "Shake to gain more <c=status>PULSEDRIVE</c>!\n\nYou've shaken the soda <c=boldPink>{{amount}}</c> times.\n<c=downside>Caution:</c> each shake increases the explosion chance by <c=keyword>{{rate}}</c>%",
+                "tooltipC": "Shake to gain more <c=status>PULSEDRIVE</c>!\n\nYou've shaken the soda <c=boldPink>{{amount}}</c> times.\n<c=downside>Caution:</c> each shake increases the explosion chance logarithmically by <c=keyword>50</c>%, never reaching 100%",
+                "flip": "Has a chance to explode, or will if it reaches 100%. Gives you <c=keyword>{{shaker}}</c> <c=status>SHAKEN</c> and refunds energy if it does.",
+                "exploded": "Oh no! It exploded!\n\n<c=downside>Gain <c=keyword>{{shaker}}</c> <c=status>SHAKEN</c>.</c>",
+                "spent": "\n\n\nIt's empty...",
+                "demo": "Shake to increase <c=status>Pulsedrive</c>, <c=downside>but also raise explosion chance by <c=keyword>{{rate}}%</c></c>",
+                "demoC": "Shake to add <c=status>Pulsedrive</c>, <c=downside>but also add explosion chance by <c=keyword>{{rate}}% logarithmically</c>.</c>",
+                "empty": "There's nothing left...\n\nNo longer does anything until next combat."
             }
+
         }
     }
 }
