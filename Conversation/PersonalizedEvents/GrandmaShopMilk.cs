@@ -26,7 +26,7 @@ public static class WethGrandmaShop
                 actions = [
                     new AWethCardOffering
                     {
-                        cards = [new NewMilkSoda()]
+                        cards = [new NewMilkSoda{Special = s.EnumerateAllArtifacts().Any(c => c is TreasureSeeker)}]
                     }
                 ]
             };

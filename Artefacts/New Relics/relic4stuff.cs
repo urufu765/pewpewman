@@ -11,11 +11,16 @@ namespace Weth.Artifacts;
 public abstract class WethRelicFour : Artifact
 {
     public int Amount { get; set; }
+    public bool Special { get; set; }
     public string? firstStack;
 
-    public virtual void GainStack(State state)
+    public virtual void GainStack(State state, bool? special = null)
     {
         Amount++;
+        if (special is not null)
+        {
+            Special = special.Value;
+        }
     }
 
     public override int? GetDisplayNumber(State s)
@@ -56,12 +61,14 @@ public abstract class WethRelicFour : Artifact
 public abstract class WethRelicFourFake : Artifact
 {
     public abstract Type RealRelicType { get; }
+    public virtual bool Special { get; set; }
 
     public override void OnReceiveArtifact(State state)
     {
         if (!state.EnumerateAllArtifacts().Any(a => a.GetType() == RealRelicType) && Activator.CreateInstance(RealRelicType) is WethRelicFour wrf)
         {
             wrf.firstStack = GetType().Name;
+            wrf.Special = Special;
             state.GetCurrentQueue().QueueImmediate(new AAddArtifact
             {
                 artifact = wrf
@@ -76,7 +83,7 @@ public abstract class WethRelicFourFake : Artifact
 
     public override List<Tooltip>? GetExtraTooltips()
     {
-        string extra = ModEntry.Instance.Localizations.Localize(["artifact", "Unreleased", RealRelicType.Name, "extras"]);
+        string extra = ModEntry.Instance.Localizations.Localize(["artifact", "Unreleased", RealRelicType.Name, Special? "extras_special":"extras"]);
 
         if (extra.Length == 0) return null;
 
@@ -103,21 +110,21 @@ public static class WethRelicFourHelpers
         {
             if (MG.inst?.g?.state?.EnumerateAllArtifacts().Find(a => a.GetType() == wrff.RealRelicType) is WethRelicFour wrf)
             {
-                __result[0] = RelicTooltip(wrff.RealRelicType, wrf.Amount + 1, false);
+                __result[0] = RelicTooltip(wrff.RealRelicType, wrf.Amount + 1, false, special:wrff.Special);
             }
             else
             {
-                __result[0] = RelicTooltip(wrff.RealRelicType, icon: false);
+                __result[0] = RelicTooltip(wrff.RealRelicType, icon: false, special: wrff.Special);
             }
         }
         else if (__instance is WethRelicFour wrfx)
         {
-            __result[0] = RelicTooltip(wrfx.GetType(), wrfx.Amount, false);
+            __result[0] = RelicTooltip(wrfx.GetType(), wrfx.Amount, false, special:wrfx.Special);
         }
     }
 
 
-    public static Tooltip RelicTooltip(Type relic, int n = 1, bool icon = true, bool micro = false)
+    public static Tooltip RelicTooltip(Type relic, int n = 1, bool icon = true, bool micro = false, bool special = false)
     {
         if (micro) // Make it so that event relics ignore the numbering maybe
         {
@@ -132,7 +139,7 @@ public static class WethRelicFourHelpers
             Icon = icon ? ModEntry.Instance.NewRelicIcons[relic] : null,
             Title = ModEntry.Instance.Localizations.Localize(["artifact", "Unreleased", relic.Name, "name"]),
             TitleColor = Colors.artifact,
-            Description = ModEntry.Instance.Localizations.Localize(["artifact", "Unreleased", relic.Name, "desc"]),
+            Description = ModEntry.Instance.Localizations.Localize(["artifact", "Unreleased", relic.Name, special? "desc_special":"desc"]),
             vals = [n]
         };
     }

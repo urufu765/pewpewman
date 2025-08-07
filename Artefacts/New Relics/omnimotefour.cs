@@ -4,7 +4,7 @@ using Weth.External;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased, ArtifactPool.Common])]
+[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
 public class Omnimote : WethRelicFour
 {
     public override void OnTurnStart(State state, Combat combat)

@@ -22,6 +22,7 @@ public class NewMilkSoda : Card, IRegisterable
     public bool Demo { get; set; } = true;
     public bool Unavailable => Exploded || Used;
     public int Shakes { get; set; } = 0;
+    public bool Special { get; set; } = false;
     public static Spr MilkSoda_BG { get; set; }  // BackGround
     public static Spr MilkSoda_BE { get; set; }  // BackGround (exploded)
     public static Spr MilkSoda_OL { get; set; }  // OverLay
@@ -65,6 +66,11 @@ public class NewMilkSoda : Card, IRegisterable
         };
     }
 
+    public static int GetShakenAmount(bool special)
+    {
+        return special ? 1 : 2;
+    }
+
     public double GetMultiplier()
     {
         if (upgrade == Upgrade.A)
@@ -98,7 +104,7 @@ public class NewMilkSoda : Card, IRegisterable
                     descriptions = [
                         ("milksodaMain", GetTooltip()),
                         ("milksodaWarning", ModEntry.Instance.Localizations.Localize(["card", "Token", "MilkSoda", "flip"], new {
-                            shaker = GetShakenAmount(upgrade)
+                            shaker = GetShakenAmount(Special)
                         })),
                         //("milksodaShakes", string.Format(ModEntry.Instance.Localizations.Localize(["card", "Common", "MilkSoda", "descc"]), Shakes)),
                         //("milksodaprobabilities", GetEvenMoreTooltips()),
@@ -141,7 +147,7 @@ public class NewMilkSoda : Card, IRegisterable
                     new ASodaBoom
                     {
                         dialogueSelector = flipped? ".shakeSodaBoomUp" : ".shakeSodaBoomDown",
-                        shakenAmount = GetShakenAmount(upgrade)
+                        shakenAmount = GetShakenAmount(Special)
                     }
                 ]);
             }
@@ -228,7 +234,7 @@ public class NewMilkSoda : Card, IRegisterable
             combat.QueueImmediate(new ASodaBoom
             {
                 dialogueSelector = ".shakeSodaGone",
-                shakenAmount = GetShakenAmount(upgrade)
+                shakenAmount = GetShakenAmount(Special)
             });
         }
         Exploded = true;
@@ -279,7 +285,7 @@ public class NewMilkSoda : Card, IRegisterable
         {
             return ModEntry.Instance.Localizations.Localize(["card", "Token", "MilkSoda", "exploded"], new
             {
-                shaker = GetShakenAmount(upgrade)
+                shaker = GetShakenAmount(Special)
             });  // Exploded description
         }
         if (Demo)
@@ -287,7 +293,7 @@ public class NewMilkSoda : Card, IRegisterable
             return ModEntry.Instance.Localizations.Localize(["card", "Token", "MilkSoda", ((int)upgrade == 3 ? "demoC" : "demo")], new
             {
                 rate = (int)(GetMultiplier() * 100),
-                shaker = GetShakenAmount(upgrade)
+                shaker = GetShakenAmount(Special)
             });  // Exploded description
         }
         // if (flipped)

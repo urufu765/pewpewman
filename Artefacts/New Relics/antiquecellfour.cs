@@ -4,7 +4,7 @@ using Weth.External;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased, ArtifactPool.Common])]
+[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
 public class AntiqueCell : WethRelicFour
 {
     public const int TURNS = 3;

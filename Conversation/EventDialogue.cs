@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Nanoray.PluginManager;
 using Nickel;
+using Weth.Artifacts;
 using Weth.External;
 using static Weth.Conversation.CommonDefinitions;
 
@@ -100,6 +101,14 @@ internal class EventDialogue : IRegisterable
                     new(AmWeth, "traumatised", "...")
                 ]
             }},
+            {$"LoseCharacterRelic_{AmWeth}", new(){
+                type = NodeType.@event,
+                oncePerRun = true,
+                bg = "BGSupernova",
+                dialogue = [
+                    new(AmWeth, "cryingcat", "Noooooooooooooooooooooooo!!")
+                ]
+            }},
             {"Sasha_2_Multi_2", new(){
                 edit = [new("89fa9389", AmWeth, "yay", "Ball!")]
             }},
@@ -131,14 +140,36 @@ internal class EventDialogue : IRegisterable
                 bg = "BGShop",
                 allPresent = [AmWeth],
                 requiredScenes = [ "Weth_Memory_2" ],
-                maxHullPercent = 0.25,
+                maxHullPercent = 0.3,
+                dialogue = [
+                    new(AmShopkeeper, "Habits die hard, huh?", true),
+                    new(AmWeth, "facepalm", "It won't happen again..."),
+                    new(new Jump{key = "NewShop"})
+                ]
+            }},
+            {"ShopkeeperInfinite_Weth_Multi_3", new(){
+                type = NodeType.@event,
+                lookup = ["shopBefore"],
+                bg = "BGShop",
+                allPresent = [AmWeth],
+                requiredScenes = [ "Weth_Memory_2" ],
+                maxHullPercent = 0.3,
+                dialogue = [
+                    new(AmShopkeeper, "...", true),
+                    new(AmWeth, "sob", "I'm so sorry!!!"),
+                    new(new Jump{key = "NewShop"})
+                ]
+            }},
+            {"ShopkeeperInfinite_Weth_Multi_4", new(){
+                type = NodeType.@event,
+                lookup = ["shopBefore"],
+                bg = "BGShop",
+                allPresent = [AmWeth],
+                requiredScenes = [ "Weth_Memory_2" ],
+                maxHullPercent = 0.3,
                 dialogue = [
                     new(AmShopkeeper, "I thought I told you to stop bringing me wreckages.", true),
-                    new([
-                        new(AmWeth, "facepalm", "It won't happen again..."),
-                        new(AmWeth, "sob", "I'm so sorry!!!"),
-                        new(AmWeth, "panic", "I was careful this time! I swear!")
-                    ]),
+                    new(AmWeth, "panic", "I was careful this time! I swear!"),
                     new(new Jump{key = "NewShop"})
                 ]
             }},
@@ -221,6 +252,41 @@ internal class EventDialogue : IRegisterable
                     new(AmWeth, "sparkle", "Thank you."),
                     new(AmWizbo, "But unfortunately I still have to kill you.", true),
                     new(AmWeth, "sad", "Damn.")
+                ]
+            }},
+            {"ChoiceHPForRelic_Yes", new(){
+                type = NodeType.@event,
+                oncePerRun = true,
+                bg = "BGMines",
+                dialogue = [
+                    new(AmCat, "WOWIE! What is it?"),
+                    new(AmWeth, "shrug", "I have no idea!")
+                ]
+            }},
+            {"UpgradeRandomAOrBUnique_After", new(){
+                type = NodeType.@event,
+                oncePerRun = true,
+                dialogue = [
+                    new(AmFriendlyDrone, "a message addressed to Weth, the dir<c=downside>BZZT</c>cker", flipped: true),
+                    new(AmWeth, "To me?"),
+                    new(AmFriendlyDrone, "message begin\n<c=79709a>Dear f<c=downside>BZZT</c>, still hav<c=downside>BZZT</c>orgotten the <c=downside>BZZT</c>se. I'm coming f<c=downside>BZZT</c> you!\nSincerely, T<c=downside>BZZT</c>c</c>\nmessage end", flipped: true),
+                    new(AmWeth, "intense", "That's... ominous..."),
+                    new(AmCat, "grumpy", "Do you know what this is?"),
+                    new(AmWeth, "plead", "No? Maybe a threat from one of my enemies?"),
+                    new(AmFriendlyDrone, "this mes<c=downside>BZZT</c>ge will self destruct in <c=downside>BZZT</c> 9... 8...", flipped: true),
+                    new(AmWeth, "surprise", "Eek! Let's get outta here!")
+                ]
+            }},
+            {"UpgradeRandomAOrBSpecial_After", new(){
+                type = NodeType.@event,
+                oncePerRun = true,
+                dialogue = [
+                    new(AmFriendlyDrone, "a message addressed to Weth, the dir<c=downside>BZZT</c>cker", flipped: true),
+                    new(AmWeth, "Oh?"),
+                    new(AmFriendlyDrone, "message begin\n<c=79709a>Dear idi<c=downside>BZZT</c>, if you're lis<c=downside>BZZT</c>ing to this mess<c=downside>BZZT</c> that means I have pro<c=downside>BZZT</c> found a w<c=downside>BZZT</c>. I'm definitely coming for y<c=downside>BZZT</c>.\nAll the best, <c=downside>BZZT</c>auc</c>\nmessage end", flipped: true),
+                    new(AmWeth, "contemplate", "Should I be worried?"),
+                    new(AmFriendlyDrone, "this message will s<c=downside>BZZT</c> destruct in 10... 9... <c=downside>BZZT</c>", flipped: true),
+                    new(AmCat, "grumpy", "Worry about it later, we're getting out of here!")
                 ]
             }}
         });

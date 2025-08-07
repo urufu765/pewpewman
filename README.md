@@ -29,17 +29,22 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
       * Milk soda 2 (gotten from granny event)
       * Choice card event now requires a treasure hunter/seeker
     * sprite change
-  * **dev.9*:
-    * relic dialogue (TODO)
+  * **dev.9**:
+    * relic dialogue
     * Even more personalized events
-  * **dev.9*: Fix external namespace, show Shockstack stuff on health bar, rebalance milk soda
-  * **ext.1*: Bonus hidden relics
+      * UpgradeRandomAorB
+      * LoseCharacterCard now offers weth relic first
+      * ChoiceHPForRelic
+    * Bonus hidden relics
+    * Sprites less transparent
+  * **ext.1*: Fix external namespace, show Shockstack stuff on health bar
   * **ext.2*: Splitshot code stuff (Aattack subclass migration?)
   * **ext.3*: Terminus: Surge
   * **ext.4*: Option to change regular asteroids to giant/mega asteroids using option
   * **ext.5*: Allow the Terminus Jaunt to affect Combat QoL
   * **ext.6*: Difficulty based relic power adjustment
   * **ext.7*: Option to use older V2 relics
+  * **ext.8*: Tarmauc: Unlockable using crystallized friend event or custom event
 
 ### Release 1.0.0
 

@@ -567,7 +567,7 @@ internal class ArtifactDialogue : IRegisterable
             {"ArtifactKineticCapWeth_Multi_0", new(){
                 type = NodeType.combat,
                 hasArtifactTypes = [typeof(KineticCap)],
-                lastTurnPlayerStatuses = [Status.tempShield],
+                lastTurnPlayerStatuses = [Status.tempShield, Status.libra],
                 oncePerRunTags = ["PewPewEqualsShieldWow"],
                 allPresent = [AmWeth],
                 dialogue = [
@@ -577,7 +577,7 @@ internal class ArtifactDialogue : IRegisterable
             {"ArtifactKineticCapWeth_Multi_1", new(){
                 type = NodeType.combat,
                 hasArtifactTypes = [typeof(KineticCap)],
-                lastTurnPlayerStatuses = [Status.tempShield],
+                lastTurnPlayerStatuses = [Status.tempShield, Status.libra],
                 oncePerRunTags = ["PewPewEqualsShieldWow"],
                 allPresent = [AmWeth],
                 dialogue = [
@@ -587,13 +587,246 @@ internal class ArtifactDialogue : IRegisterable
             {"ArtifactKineticCapWeth_Multi_2", new(){
                 type = NodeType.combat,
                 hasArtifactTypes = [typeof(KineticCap)],
-                lastTurnPlayerStatuses = [Status.tempShield],
+                lastTurnPlayerStatuses = [Status.tempShield, Status.libra],
                 oncePerRunTags = ["PewPewEqualsShieldWow"],
                 priority = true,
                 allPresent = [AmWeth, AmDizzy],
                 dialogue = [
                     new(AmWeth, "isthisa", "Hey, I'm doing your job for you!"),
                     new(AmDizzy, "squint", "Debatable.")
+                ]
+            }},
+            {"RelicAntiqueCellWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(AntiqueCell)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "donewithit", "I can't even use this in a light stand.")
+                ]
+            }},
+            {"RelicAntiqueCellWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(AntiqueCell)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "shrug", "It works?")
+                ]
+            }},
+            {"RelicDogCharmWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(DogCharm)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "sly", "They can't resist me now.")
+                ]
+            }},
+            {"RelicDogCharmWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(DogCharm)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "sly", "Well? How's my charisma now?"),
+                    new([
+                        new(AmDizzy, "Negligible."),
+                        new(AmCat, "Worse."),
+                        new(AmDrake, "squint", "Did you change your earring?"),
+                        new(AmBooks, "Outstanding!"),
+                        new(AmPeri, "mad", "Get back to work."),
+                        new(AmIsaac, "squint", "I'm so sorry, I can't tell...")
+                    ])
+                ]
+            }},
+            {"RelicPewPewGunWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(PewPewGun)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "sly", "Well well well, if it isn't my old friend pew pew gun.")
+                ]
+            }},
+            {"RelicPewPewGunWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(PewPewGun)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "whatsthis", "I may or may not have forgotten how to use a gun.")
+                ]
+            }},
+            {"RelicShockStackWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(ShockStack)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "isthisa", "Hit hull, shock kaboom, profit.")
+                ]
+            }},
+            {"RelicShockStackWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(ShockStack)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "intense", "This is a concerning amount of stored shock.")
+                ]
+            }},
+            {"RelicUsefulScrapWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(UsefulScrap)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "dontcare", "Even scraps will work for repairs.")
+                ]
+            }},
+            {"RelicUsefulScrapWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(UsefulScrap)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "Hey, would you look at that. It's fixed.")
+                ]
+            }},
+            {"RelicOmnimoteWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(Omnimote)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "happy", "I found the TV remote!")
+                ]
+            }},
+            {"RelicOmnimoteWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(Omnimote)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethGenericRelicShout"],
+                dialogue = [
+                    new(AmWeth, "evil", "The things I could control with this universal remote.")
+                ]
+            }},
+            {"RelicStubbornDrillWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(StubbornDrill)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "whatsthis", "This isn't the giant drill I was shooting at.")
+                ]
+            }},
+            {"RelicStubbornDrillWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(StubbornDrill)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "hmm", "It's a bit more broken than I thought...")
+                ]
+            }},
+            {"RelicDeadFishWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(DeadFish)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "angry", "Eugh. It stinks!")
+                ]
+            }},
+            {"RelicDeadFishWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(DeadFish)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "contemplate", "I think I'm gonna urp-")
+                ]
+            }},
+            {"RelicPageantRibbonWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(PageantRibbon)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "lookatyou", "The rivalry was totally not because of the ribbon.")
+                ]
+            }},
+            {"RelicPageantRibbonWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(PageantRibbon)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "sly", "Who's got the ribbon now?")
+                ]
+            }},
+            {"RelicStructuralStoneWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(StructuralStone)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "pain", "I hope this wasn't a mistake.")
+                ]
+            }},
+            {"RelicStructuralStoneWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(StructuralStone)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "pain", "I can already feel my foot aching.")
+                ]
+            }},
+            {"RelicAstroGrassWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(AstroGrass)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "whatisthis", "Does this count as touching grass?")
+                ]
+            }},
+            {"RelicAstroGrassWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(AstroGrass)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "happynothoughts", "It tastes funny too!")
+                ]
+            }},
+            {"RelicSpaceUrchinWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(SpaceUrchin)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "complain", "I hate holding this.")
+                ]
+            }},
+            {"RelicSpaceUrchinWeth_Multi_1", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(SpaceUrchin)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethSpecialRelicShout"],
+                dialogue = [
+                    new(AmWeth, "intense", "I feel like I'm about to turn to dust...")
+                ]
+            }},
+            {"RelicHeraldNihilityWeth_Multi_0", new(){
+                type = NodeType.combat,
+                hasArtifactTypes = [typeof(HeraldNihility)],
+                allPresent = [AmWeth],
+                oncePerRunTags = ["wethHeraldNihilityRelic"],
+                dialogue = [
+                    new(AmWeth, "contemplate", "Now where have I seen this relic before...")
                 ]
             }},
             // {"ArtifactSpaceRelicsThreeWeth_Multi_0", new(){

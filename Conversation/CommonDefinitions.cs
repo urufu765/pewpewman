@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Nickel;
+using Weth.External;
 
 namespace Weth.Conversation;
 
@@ -32,6 +33,7 @@ static class CommonDefinitions
     internal const string AmStardog = "wolf";
     internal const string AmCrystalMiniboss = "crystal";
     internal const string AmWizbo = "wizard";
+    internal const string AmFriendlyDrone = "chunkFriendly";
     internal readonly static string AmIlleana = "urufudoggo.Illeana::illeana";
 
     internal static Status MissingWeth => ModEntry.WethTheSnep.MissingStatus.Status;
@@ -66,6 +68,12 @@ static class CommonDefinitions
         }
         ModEntry.Instance.Logger.LogWarning("Couldn't find a missing!");
         return MissingWeth;
+    }
+
+
+    internal static DialogueMachine DoThing(this DialogueMachine dm, bool thing)
+    {
+        return dm;
     }
 
 

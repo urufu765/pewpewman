@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Nanoray.Shrike;
 using Nanoray.Shrike.Harmony;
 using Nickel;
+using Weth.Artifacts;
 using Weth.Cards;
 using Weth.Objects;
 
@@ -425,30 +426,11 @@ public class ASplitshot : CardAction
         bool hitADrone = false;
         if (raycastResult is not null && raycastResult.hitDrone)
         {
+            if (s.EnumerateAllArtifacts().Any(a => a is AstroGrass))
+            {
+                damage++;
+            }
             hitADrone = true;
-            // bool invincible = c.stuff[raycastResult.worldX].Invincible();
-            // foreach (Artifact artifact in s.EnumerateAllArtifacts())
-            // {
-            //     bool? droneInvincibilityModified = artifact.ModifyDroneInvincibility(s, c, c.stuff[raycastResult.worldX]);
-            //     if (droneInvincibilityModified == true)
-            //     {
-            //         invincible = true;
-            //         artifact.Pulse();
-            //     }
-            // }
-            // if (c.stuff[raycastResult.worldX].bubbleShield && !piercing)
-            // {
-            //     c.stuff[raycastResult.worldX].bubbleShield = false;
-            // }
-            // else if (invincible)
-            // {
-            //     c.QueueImmediate(c.stuff[raycastResult.worldX].GetActionsOnShotWhileInvincible(s, c, !targetPlayer, damage));
-            // }
-            // else
-            // {
-            //     c.DestroyDroneAt(s, raycastResult.worldX, !targetPlayer);
-            // }
-            //ModEntry.Instance.Logger.LogInformation("Split!");
             AAttack left = ConvertSplitToAttack(this);
             AAttack right = ConvertSplitToAttack(this);
             ModEntry.Instance.Helper.ModData.SetModData(left, "split", true);
@@ -488,6 +470,11 @@ public class ASplitshot : CardAction
         {
             ModEntry.Instance.Helper.ModData.SetModData(origin, "split", true);
             origin.fast = true;
+        }
+        else if (s.EnumerateAllArtifacts().Find(a => a is AstroGrass) is AstroGrass ag && !ag.Special)
+        {
+            origin.damage = Math.Max(0, origin.damage - 1);
+            ag.Pulse();
         }
         c.QueueImmediate(origin);
         timer = 0.0;

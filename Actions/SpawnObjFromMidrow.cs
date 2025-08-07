@@ -22,9 +22,16 @@ public class ASpawnFromMidrow : CardAction
 
     public override void Begin(G g, State s, Combat c)
     {
-        // foreach (Artifact artifact in s.EnumerateAllArtifacts())
-        // {
-        //     thing = artifact.ReplaceSpawnedThing(s, c, thing, )
+        if (byPlayer)
+        {
+            foreach (Artifact a in s.EnumerateAllArtifacts())
+            {
+                a.OnPlayerSpawnSomething(s, c, thing);
+            }
+        }
+        // foreach (Artifact a2 in s.EnumerateAllArtifacts())
+        // {  Decided against allowing player to replace the thing, cuz it isn't logical
+        //     thing = a2.ReplaceSpawnedThing(s, c, thing, byPlayer);
         // }
         int spawnX = worldX + offset;
         StuffBase? existingThing;

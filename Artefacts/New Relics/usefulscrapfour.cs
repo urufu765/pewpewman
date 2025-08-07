@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased, ArtifactPool.Common])]
+[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
 public class UsefulScrap : WethRelicFour
 {
-    public override void GainStack(State state)
+    public override void GainStack(State state, bool? special = null)
     {
-        base.GainStack(state);
+        base.GainStack(state, special);
         state.GetCurrentQueue().QueueImmediate(new AHeal
         {
             healAmount = Amount,

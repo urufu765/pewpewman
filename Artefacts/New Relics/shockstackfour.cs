@@ -5,7 +5,7 @@ using Weth.External;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased, ArtifactPool.Common])]
+[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
 public class ShockStack : WethRelicFour
 {
     public List<int> ShockPoints { get; set; } = [];

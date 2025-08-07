@@ -7,7 +7,6 @@ using Weth.Artifacts;
 using Weth.Cards;
 using Weth.External;
 using Weth.Conversation;
-using Weth.External;
 
 namespace Weth;
 
@@ -112,20 +111,32 @@ internal partial class ModEntry : SimpleMod
     public Spr SprMegaAsteroidIcon { get; private set; }
     public Spr SprMegaAsteroid { get; private set; }
 
-    public static Dictionary<Type, Type> NewRelicCounterparts { get; set; } = new Dictionary<Type, Type>
+    public static Dictionary<Type, Type> NewRegularRelicCounterparts { get; private set; } = new Dictionary<Type, Type>
     {
         {typeof(AntiqueCell), typeof(AntiqueCellFake)},
         {typeof(DogCharm), typeof(DogCharmFake)},
         {typeof(PewPewGun), typeof(PewPewGunFake)},
         {typeof(ShockStack), typeof(ShockStackFake)},
         {typeof(UsefulScrap), typeof(UsefulScrapFake)},
-        {typeof(Omnimote), typeof(OmnimoteFake)},
-        // {typeof(StubbornDrill), typeof(StubbornDrillFake)},
-        // {typeof(DeadFish), typeof(DeadFishFake)},
-        // {typeof(PageantRibbon), typeof(PageantRibbonFake)},
-        // {typeof(AstroGrass), typeof(AstroGrassFake)},
-        // {typeof(StructuralStone), typeof(StructuralStoneFake)}
+        {typeof(Omnimote), typeof(OmnimoteFake)}
     };
+
+    public static Dictionary<Type, Type> NewSpecialRelicCounterparts { get; private set; } = new Dictionary<Type, Type>
+    {
+        {typeof(StubbornDrill), typeof(StubbornDrillFake)},
+        {typeof(DeadFish), typeof(DeadFishFake)},
+        {typeof(PageantRibbon), typeof(PageantRibbonFake)},
+        {typeof(AstroGrass), typeof(AstroGrassFake)},
+        {typeof(StructuralStone), typeof(StructuralStoneFake)},
+        {typeof(SpaceUrchin), typeof(SpaceUrchinFake)},
+        {typeof(HeraldNihility), typeof(HeraldNihilityFake)},
+        // {typeof(), typeof(Fake)},
+    };
+
+    public static Dictionary<Type, Type> NewRelicCounterparts { get; private set; } = NewRegularRelicCounterparts
+        .Concat(NewSpecialRelicCounterparts)
+        .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
 
     public Dictionary<Type, Spr> NewRelicSprites { get; set; } = new Dictionary<Type, Spr>
     {
@@ -135,11 +146,11 @@ internal partial class ModEntry : SimpleMod
         {typeof(ShockStack), 0},
         {typeof(UsefulScrap), 0},
         {typeof(Omnimote), 0},
-        // {typeof(StubbornDrill), 0},
-        // {typeof(DeadFish), 0},
-        // {typeof(PageantRibbon), 0},
-        // {typeof(AstroGrass), 0},
-        // {typeof(StructuralStone), 0}
+        {typeof(StubbornDrill), 0},
+        {typeof(DeadFish), 0},
+        {typeof(PageantRibbon), 0},
+        {typeof(AstroGrass), 0},
+        {typeof(StructuralStone), 0}
     };
 
     public Dictionary<Type, Spr> NewRelicIcons { get; set; } = new Dictionary<Type, Spr>
@@ -150,11 +161,11 @@ internal partial class ModEntry : SimpleMod
         {typeof(ShockStack), 0},
         {typeof(UsefulScrap), 0},
         {typeof(Omnimote), 0},
-        // {typeof(StubbornDrill), 0},
-        // {typeof(DeadFish), 0},
-        // {typeof(PageantRibbon), 0},
-        // {typeof(AstroGrass), 0},
-        // {typeof(StructuralStone), 0}
+        {typeof(StubbornDrill), 0},
+        {typeof(DeadFish), 0},
+        {typeof(PageantRibbon), 0},
+        {typeof(AstroGrass), 0},
+        {typeof(StructuralStone), 0}
     };
 
     public Dictionary<Type, Status> NewRelicStatuses { get; set; } = new Dictionary<Type, Status>

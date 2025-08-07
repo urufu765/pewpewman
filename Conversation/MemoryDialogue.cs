@@ -80,7 +80,7 @@ internal class MemoryDialogue : IRegisterable
                     new(AmVoid, "Rest well, little one.", true)
                 ]
             }},
-            {$"Weth_Memory_1", new(){
+            {"Weth_Memory_1", new(){
                 type = NodeType.@event,
                 introDelay = false,
                 bg = "BGWethCustomRings",
@@ -121,14 +121,14 @@ internal class MemoryDialogue : IRegisterable
                     new(AmWeth, "pastputoutfire", "FIRE!"),
                 ]
             }},
-            {$"Weth_Memory_2", new(){
+            {"Weth_Memory_2", new(){
                 type = NodeType.@event,
                 introDelay = false,
                 bg = "BGWethShop",
                 lookup = [
                     "vault", $"vault_{AmWeth}"
                 ],
-                requiredScenes = [$"Weth_Memory_1"],
+                requiredScenes = ["Weth_Memory_1"],
                 dialogue = [
                     new("T-14 days"),
                     new(new Wait{secs = 2}),
@@ -159,7 +159,7 @@ internal class MemoryDialogue : IRegisterable
                     new(AmWeth, "pastplead", "Yes ma'am.")
                 ]
             }},
-            {$"Weth_Memory_3", new(){
+            {"Weth_Memory_3", new(){
                 type = NodeType.@event,
                 introDelay = false,
                 bg = "BGWethVault",

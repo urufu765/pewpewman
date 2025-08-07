@@ -40,18 +40,4 @@ public class TreasureSeeker : TreasureHunter
     {
         UhDuhHundo.ArtifactRemover(ref state, typeof(TreasureHunter).Name);
     }
-
-    public override void DoHiddenEvent(State state)
-    { 
-        if (isCrystal)
-        {
-            state.rewardsQueue.QueueImmediate(
-                new AWethCardOffering
-                {
-                    cards = [new CryShield{ discount = GetAdvanced() ? -1 : 0 }]
-                }
-            );
-        }
-
-    }
 }

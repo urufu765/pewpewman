@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased, ArtifactPool.Common])]
+[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
 public class DogCharm : WethRelicFour
 {
     public override void OnTurnStart(State state, Combat combat)

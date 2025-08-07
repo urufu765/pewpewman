@@ -189,6 +189,18 @@
         },
         "GrandmaShop_Weth": {
             "desc": "Can we u- is that a Milk Soda Zero?!\n<c=heal>-Gain one volatile <c=card>Milk Soda</c></c>"
+        },
+        "UpgradeRandomAOrB_WethRelics": {
+            "desc": "Increase 2 random relics' stack"
+        },
+        "UpgradeRandomAOrB_WethSpecial": {
+            "desc": "Gain a special relic from the unknown"
+        },
+        "LoseCharacterRelic_Yes": {
+            "desc": "Lose <c={0}>{1}</c>."
+        },
+        "ChoiceHPForRelic_Yes": {
+            "desc": "Risk it all for that weird spiky thing!\n<c=hurt> - Lose {0} HP,</c> <c=heal>Gain 1 special relic</c>"
         }
     },
     "trait": {
@@ -215,7 +227,7 @@
         "Common": {
             "TreasureSeeker": {
                 "name": "TREASURE SEEKER",
-                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nOnce per combat, after <c=keyword>5 hits</c>, add a random <c=card>Goodie A</c> to your hand.\n<c=mapinfo>You may find hidden treasure along the way!</c>\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
+                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nOnce per combat, after <c=keyword>5 hits</c>, add a random <c=card>Goodie A</c> to your hand.\n<c=mapinfo>You may find hidden fortune along the way!</c>\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
             },
             "HiddenOptions": {
                 "name": "HIDDEN OPTIONS",
@@ -394,81 +406,145 @@
             "AntiqueCell": {
                 "name": "RELIC: ANTIQUE CELL",
                 "title": "ANTIQUE CELL",
+                "label": "Antique Cell",
                 "flavour": "<c=faint>Despite all odds, it still holds a charge.</c>",
                 "desc": "Gain <c=keyword>{0}</c> <c=status>ENERGY FRAGMENTS</c> every third turn.",
-                "extras": ""
+                "extras": "",
+                "desc_special": "",
+                "extras_special": ""
             },
             "DogCharm": {
                 "name": "RELIC: DOG CHARM",
                 "title": "DOG CHARM",
+                "label": "Dog Charm",
                 "flavour": "<c=faint>Inexplicably invokes empathy when blown.</c>",
                 "altFlavour2": "<c=faint>Somehow increases attractiveness when worn.</c>",
                 "altFlavour": "<c=faint>It's like catnip, but infinitely more profitable and probably fake.</c>",
                 "desc": "At the start of combat, give enemy <c=keyword>{0}</c> <c=status>UNDERDRIVE</c>.",
-                "extras": ""
+                "extras": "",
+                "desc_special": "",
+                "extras_special": ""
             },
             "PewPewGun": {
                 "name": "RELIC: PEW PEW GUN",
                 "title": "PEW PEW GUN",
+                "label": "Pew Pew Gun",
                 "flavour": "<c=faint>Weth's trusty revolver.</c>",
                 "desc": "The next <c=keyword>{0}</c> <c=2a767d>Weth</c> cards will fire an additional <c=damage>0</c> damage attack.",
-                "extras": ""
+                "extras": "",
+                "desc_special": "",
+                "extras_special": ""
             },
             "ShockStack": {
                 "name": "RELIC: SHOCK STACK",
                 "title": "SHOCK STACK",
+                "label": "Shock Stack",
                 "flavour": "<c=faint>You never know when they'll go off!</c>",
                 "desc": "At random intervals of enemy hull loss (up to <c=keyword>{0}</c> times per combat), gain 1 <c=status>STUN CHARGE</c>.",
-                "extras": "At the start of every combat, assigns random numbers ranging from <c=keyword>1 to enemy max hull</c> where reducing the enemy hull below each number gives 1 <c=status>STUN CHARGE</c>. All assigned numbers are unique.\n<c=keyword>Status indicator becomes brighter if enemy hull is one away from next shock stack.</c>"
+                "extras": "At the start of every combat, assigns random numbers ranging from <c=keyword>1 to enemy max hull</c> where reducing the enemy hull below each number gives 1 <c=status>STUN CHARGE</c>. All assigned numbers are unique.\n<c=keyword>Status indicator becomes brighter if enemy hull is one away from next shock stack.</c>",
+                "desc_special": "",
+                "extras_special": ""
             },
             "UsefulScrap": {
                 "name": "RELIC: USED HULL PATCH",
                 "title": "USED HULL PATCH",
+                "label": "Used Hull Patch",
                 "flavour": "<c=faint>Works well enough, with the help of speed tape.</c>",
                 "desc": "Immediately on pickup, <c=hull>heal <c=keyword>{0}</c></c> hull.",
-                "extras": "Increases the value of this healing amount <c=keyword>every time you pick up this relic</c>."
+                "extras": "Increases the value of this healing amount <c=keyword>every time you pick up this relic</c>.",
+                "desc_special": "",
+                "extras_special": ""
             },
             "Omnimote": {
                 "name": "RELIC: OMNIMOTE",
                 "title": "OMNIMOTE",
+                "label": "Omnimote",
                 "flavour": "<c=faint>A universal remote, but better cuz' space!</c>",
                 "desc": "For the next <c=keyword>{0}</c> turns every combat, gain 1 <c=status>DRONE SHIFT</c>.",
-                "extras": ""
+                "extras": "",
+                "desc_special": "",
+                "extras_special": ""
             },
             "StubbornDrill": {
                 "name": "RELIC: STUBBORN DRILL",
                 "title": "STUBBORN DRILL",
+                "label": "Stubborn Drill",
                 "flavour": "<c=faint>It's what Weth always wanted... maybe not in a half broken state.</c>",
-                "desc": "Whenever you destroy a <c=midrow>midrow object</c>, add 1 <c=card>Safety Override</c> <c=downside>and 1 <c=card>Debris</c> to your hand</c>.",
-                "extras": ""
+                "desc": "Whenever you destroy a <c=midrow>midrow object</c>, add 1 <c=card>Safety Override</c> to your hand.",
+                "extras": "",
+                "desc_special": "Whenever you destroy a <c=midrow>midrow object</c>, add 1 <c=keyword>playable</c> <c=card>Safety Override</c> to your hand.",
+                "extras_special": ""
             },
             "DeadFish": {
                 "name": "RELIC: DEADFISH",
                 "title": "DEADFISH",
+                "label": "Deadfish",
                 "flavour": "<c=faint>Hard to get used to the eternal smell...</c>",
                 "desc": "At the start of combat, gain 1 <c=status>POWERDRIVE</c> <c=downside>and 5 <c=status>UNDERDRIVE</c></c>.",
-                "extras": ""
+                "extras": "",
+                "desc_special": "At the start of combat, gain 1 <c=status>POWERDRIVE</c> <c=downside>and 2 <c=status>UNDERDRIVE</c></c>.",
+                "extras_special": ""
             },
             "PageantRibbon": {
                 "name": "RELIC: PAGEANT RIBBON",
                 "title": "PAGEANT RIBBON",
+                "label": "Pageant Ribbon",
                 "flavour": "<c=faint>Given to those who at least showed up to the Pageant contest.</c>",
-                "desc": "At the start of combat, launch a <c=midrow>missile</c>.\n<c=downside>Every other combat, spawn the <c=midrow>missile</c> backwards.</c>",
-                "extras": "Switches between the two every combat."
+                "desc": "At the start of combat, launch a random <c=midrow>missile</c>.\n<c=downside>Every other combat, spawn the <c=midrow>missile</c> backwards.</c>",
+                "extras": "Switches between the two every combat.",
+                "desc_special": "At the start of combat, launch a random <c=midrow>missile</c>.",
+                "extras_special": ""
             },
             "AstroGrass": {
                 "name": "RELIC: ASTRO-GRASS",
                 "title": "ASTRO-GRASS",
+                "label": "Astro-GrassTM",
                 "flavour": "<c=faint>It can't get any greener than this.</c>",
                 "desc": "<c=action>Splitshots</c> do +1 damage if it hits <c=midrow>midrow objects</c>.\n<c=downside><c=action>Splitshots</c> that don't split deal -1 damage.</c>",
-                "extras": ""
+                "extras": "",
+                "desc_special": "<c=action>Splitshots</c> do +1 damage if it hits <c=midrow>midrow objects</c>.",
+                "extras_special": ""
             },
             "StructuralStone": {
-                "name": "RELIC: STRUCTURAL TOE",
-                "title": "STRUCTURAL TOE",
+                "name": "RELIC: STRUCTURAL FOOT",
+                "title": "STRUCTURAL FOOT",
+                "label": "Structural Foot",
                 "flavour": "<c=faint>Increases structural rigidity, at the cost of extra damage from stubbing your toe.</c>",
                 "desc": "<c=downside>Lose all but 1 hull</c> and permanently gain that amount as <c=hull>max hull</c>.",
-                "extras": "Only counts hull you currently have, and <c=keyword>NOT</c> the hull you've already lost."
+                "extras": "Only counts hull you currently have, and <c=keyword>NOT</c> the hull you've already lost.",
+                "desc_special": "Permanently double max hull, <c=downside>lose all but 1 hull</c>.",
+                "extras_special": ""
+            },
+            "SpaceUrchin": {
+                "name": "RELIC: SPACE URCHIN",
+                "title": "SPACE URCHIN",
+                "label": "Space Urchin",
+                "flavour": "<c=faint>It will hurt you in the most physical way possible.</c>",
+                "desc": "Your spawned <c=midrow>asteroids</c> are now <c=midrow>mines</c>.",
+                "extras": "",
+                "desc_special": "Your spawned <c=midrow>asteroids</c> are now <c=midrow>big mines</c>.\nYou take 1 less damage from mines.",
+                "extras_special": ""
+            },
+            "HeraldNihility": {
+                "name": "RELIC: HERALD OF NIHILITY",
+                "title": "HERALD OF NIHILITY",
+                "label": "Herald of Nihility",
+                "flavour": "<c=faint>There's something so familiar about it to the space dog... but she can't figure out why.</c>",
+                "desc": "After every combat, select a card to upgrade from <c=keyword>base to A</c>, swap <c=keyword>A to B</c>, or downgrade from <c=keyword>B to base</c>.\n<c=downside>The type of operation will be chosen randomly.</c>",
+                "extras": "If card has upgrade A but has only one upgrade path, it will downgrade from <c=keyword>A to base</c>.",
+                "desc_special": "After every combat, select a card to upgrade from <c=keyword>base to A</c>, swap <c=keyword>A to B</c>, or downgrade from <c=keyword>B to base</c>.\n<c=downside>The type of operation will be chosen randomly.</c>\n<c=keyword>Skippable if dissatisfied.</c>",
+                "extras_special": "If card has upgrade A but has only one upgrade path, it will downgrade from <c=keyword>A to base</c>.",
+                "desc_old": "After every combat, randomly picks a card to upgrade from <c=keyword>base to A</c>, swap <c=keyword>A to B</c>, or downgrade from <c=keyword>B to base</c>."
+            },
+            "RelicTemplate": {
+                "name": "RELIC:",
+                "title": "",
+                "label": "",
+                "flavour": "<c=faint></c>",
+                "desc": "",
+                "extras": "",
+                "desc_special": "",
+                "extras_special": ""
             }
         },
         "Tooltips": {

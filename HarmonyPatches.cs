@@ -78,6 +78,18 @@ internal partial class ModEntry : SimpleMod
             original: typeof(Events).GetMethod(nameof(Events.GrandmaShop), AccessTools.all),
             postfix: new HarmonyMethod(typeof(WethGrandmaShop), nameof(WethGrandmaShop.GrandmaGivesWethAMilkSoda))
         );
+        harmony.Patch(
+            original: typeof(Events).GetMethod(nameof(Events.UpgradeRandomAOrB), AccessTools.all),
+            postfix: new HarmonyMethod(typeof(RandomWethRandomUpgradeAOrB), nameof(RandomWethRandomUpgradeAOrB.AddAnotherOption))
+        );
+        harmony.Patch(
+            original: typeof(Events).GetMethod(nameof(Events.LoseCharacterCard), AccessTools.all),
+            postfix: new HarmonyMethod(typeof(LoseWethArtifact), nameof(LoseWethArtifact.OhShitOhFuck))
+        );
+        harmony.Patch(
+            original: typeof(Events).GetMethod(nameof(Events.ChoiceHPForArtifact), AccessTools.all),
+            postfix: new HarmonyMethod(typeof(ChoiceHPForRelic), nameof(ChoiceHPForRelic.WoahWhatsThat))
+        );
 
         // ArtifactMadcapPartOperator
         harmony.Patch(
