@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Weth.Objects;
 
 namespace Weth.Artifacts;
 
@@ -14,7 +15,7 @@ public class SpaceUrchin : WethRelicFour
 
     public override int ModifySpaceMineDamage(State state, Combat? combat, bool targetPlayer)
     {
-        if (targetPlayer && Special) return -1;
+        if (targetPlayer) return -1;
         return 0;
     }
 
@@ -24,7 +25,7 @@ public class SpaceUrchin : WethRelicFour
         if (spawnedByPlayer && thing is Asteroid)
         {
             Pulse();
-            return new SpaceMine
+            return new NinjaAsteroid
             {
                 yAnimation = thing.yAnimation,
                 bubbleShield = thing.bubbleShield,
@@ -47,14 +48,14 @@ public class SpaceUrchin : WethRelicFour
     {
         List<Tooltip> tips = base.GetExtraTooltips() ?? [];
         tips.Add(new TTGlossary("midrow.asteroid", []));
-        if (Special)
-        {
-            tips.Add(new TTGlossary("midrow.spaceMineBig", [3]));
-        }
-        else
-        {
-            tips.Add(new TTGlossary("midrow.spaceMine", [2]));
-        }
+        // if (Special)
+        // {
+        //     tips.Add(new TTGlossary("midrow.spaceMineBig", [3]));
+        // }
+        // else
+        // {
+        //     tips.Add(new TTGlossary("midrow.spaceMine", [2]));
+        // }
         return tips;
     }
 }
@@ -68,14 +69,14 @@ public class SpaceUrchinFake : WethRelicFourFake
     {
         List<Tooltip> tips = base.GetExtraTooltips() ?? [];
         tips.Add(new TTGlossary("midrow.asteroid", []));
-        if (Special)
-        {
-            tips.Add(new TTGlossary("midrow.spaceMineBig", [3]));
-        }
-        else
-        {
-            tips.Add(new TTGlossary("midrow.spaceMine", [2]));
-        }
+        // if (Special)
+        // {
+        //     tips.Add(new TTGlossary("midrow.spaceMineBig", [3]));
+        // }
+        // else
+        // {
+        //     tips.Add(new TTGlossary("midrow.spaceMine", [2]));
+        // }
         return tips;
     }
 }

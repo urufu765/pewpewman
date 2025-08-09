@@ -19,28 +19,25 @@ public static class ChoiceHPForRelic
     {
         if (s.characters.Any(a => a.type == ModEntry.WethTheSnep.CharacterType) && s.EnumerateAllArtifacts().Any(b => b is TreasureHunter) && __result.Count > 1)
         {
-            int hurting = s.GetHardEvents() ? 3 : 4;
-            if (s.EnumerateAllArtifacts().Any(b => b is TreasureSeeker))
+            for (int i = 0; i < __result.Count; i++)
             {
-                hurting--;
+                if (__result[i] is Choice c && c.key is not null && c.key == "ChoiceHPForArtifact_No")
+                {
+                    __result[i] = new Choice
+                    {
+                        label = string.Format(ModEntry.Instance.Localizations.Localize(["event", "ChoiceHPForRelic_Yes", "desc"])),
+                        key = "ChoiceHPForRelic_Yes",
+                        actions = [
+                            new AWethSingleArtifactOffering
+                            {
+                                artifact = new SpaceUrchinFake{ Special = s.EnumerateAllArtifacts().Any(a => a is TreasureSeeker) },
+                                canSkip = true,
+                                showTooltips = false
+                            }
+                        ]
+                    };
+                }
             }
-            __result[1] = new Choice
-            {
-                label = string.Format(ModEntry.Instance.Localizations.Localize(["event", "ChoiceHPForRelic_Yes", "desc"]), hurting),
-                key = "ChoiceHPForRelic_Yes",
-                actions = [
-                    new AHurt
-                    {
-                        hurtAmount = hurting,
-                        targetPlayer = true
-                    },
-                    new AWethSingleArtifactOffering
-                    {
-                        artifact = new SpaceUrchinFake{ Special = s.EnumerateAllArtifacts().Any(a => a is TreasureSeeker) },
-                        canSkip = false
-                    }
-                ]
-            };
         }
     }
 }

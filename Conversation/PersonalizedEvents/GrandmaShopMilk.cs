@@ -19,17 +19,23 @@ public static class WethGrandmaShop
     {
         if (s.characters.Any(a => a.type == ModEntry.WethTheSnep.CharacterType) && s.EnumerateAllArtifacts().Any(b => b is TreasureHunter) && __result.Count > 1)
         {
-            __result[1] = new Choice
+            for (int i = 0; i < __result.Count; i++)
             {
-                label = ModEntry.Instance.Localizations.Localize(["event", "GrandmaShop_Weth", "desc"]),
-                key = "GrandmaShop_Weth",
-                actions = [
-                    new AWethCardOffering
+                if (__result[i] is Choice c && c.key is not null && c.key == "GrandmaShop_Trash")
+                {
+                    __result[i] = new Choice
                     {
-                        cards = [new NewMilkSoda{Special = s.EnumerateAllArtifacts().Any(c => c is TreasureSeeker)}]
-                    }
-                ]
-            };
+                        label = ModEntry.Instance.Localizations.Localize(["event", "GrandmaShop_Weth", "desc"]),
+                        key = "GrandmaShop_Weth",
+                        actions = [
+                            new AWethCardOffering
+                            {
+                                cards = [new NewMilkSoda{Special = s.EnumerateAllArtifacts().Any(c => c is TreasureSeeker)}]
+                            }
+                        ]
+                    };
+                }
+            }
         }
     }
 }

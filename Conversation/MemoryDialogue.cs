@@ -214,7 +214,199 @@ internal class MemoryDialogue : IRegisterable
                     new(new Wait{secs = 9})
                 ]
             }},
+            {"Tarmauc_Memory_1", new(){
+                type = NodeType.@event,
+                introDelay = false,
+                bg = "",
+                lookup = [
+                    "vault", $"vault_{AmTarmauc}"
+                ],
+                dialogue = [
+                    new("T-??? days"),
+                    new(new Wait{secs = 2}),
+                ]
+            }},
+            {"Tarmauc_Memory_2", new(){
+                type = NodeType.@event,
+                introDelay = false,
+                bg = "",
+                lookup = [
+                    "vault", $"vault_{AmTarmauc}"
+                ],
+                requiredScenes = [
+                    "Tarmauc_Memory_1"
+                ],
+                dialogue = [
+                    new("T-??? days"),
+                    new(new Wait{secs = 2}),
+                ]
+            }},
+            {"Tarmauc_Memory_2_End_01", new(){
+                type = NodeType.@event,
+                bg = "BGPastTarmaucMemoryLovers",
+                dialogue = [
+                    new(new SetBG{bg = "BGTarmaucShipAfter"}),
+                    new(new BGAction{action = "VisorSuddenTakeOff"}),
+                    new(new Wait{secs = 3}),
+                    new(AmTarmauc, "blushshocked", "..."),
+                    new(AmTarmauc, "blusheyesclosed", "..."),
+                    new(new Wait{secs = 2}),
+                    new(AmTarmauc, "blushlookup", "Agh! Stop THINKING about it!")
+                ]
+            }},
+            {"Tarmauc_Memory_2_End_02", new(){
+                type = NodeType.@event,
+                bg = "BGPastTarmaucMemoryStrength",
+                dialogue = [
+                    new(AmTarmauc, "teenneutral", "Actually, before we say our goodbyes..."),
+                    new(AmTarmauc, "teensmirk", "Why don't we have one last bout, to see who's the strongest?"),
+                    new(AmWeth, "teensmug", "I like the sound of that.", flipped:true),
+                    new(new BGAction{action = "LeapAwayFromEachOther"}),
+                    new(new Wait{secs = 2}),
+                    new(new BGAction{action = "SlideInTornyFighterUI"}),
+                    new(new BGAction{action = "TextGetReadyTVIn"}),
+                    new(new Wait{secs = 3}),
+                    new(new BGAction{action = "TextGetReadyGone"}),
+                    new(new Wait{secs = 1}),
+                    new(new BGAction{action = "TextFightTVIn"}),
+                    new(new Wait{secs = 1}),
+                    new(new BGAction{action = "TextFightFadeOut"}),
+                    new(new BGAction{action = "ChargeFist"}),
+                    new(new Wait{secs = 2}),
+                    new(new BGAction{action = "FistsFlying"}),
+                    new(new Wait{secs = 3}),
 
+                    new(new SetBG{bg = "BGTarmaucShipAfterStrength"}),
+                    new(new BGAction{action = "PunchedAPole"}),  // Funny sfx?
+                    new(new Wait{secs = 3}),
+                    new(new BGAction{action = "CrouchHoldingHandInPain"}),
+                    new(new Wait{secs = 4}),
+                    new(new BGAction{action = "RaiseHeadAndStartScreaming"}),  // Autoadvance dialogue
+                    new(AmTarmauc, "holdfistinagony", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                ]
+            }},
+            {"Tarmauc_Memory_2_End_03", new(){
+                type = NodeType.@event,
+                bg = "BGPastTarmaucMemory",
+                dialogue = [
+                    new(new SetBG{bg = "BGTarmaucShipAfter"}),
+                ]
+            }},
+            {"Tarmauc_Memory_2_End_04", new(){
+                type = NodeType.@event,
+                bg = "BGPastTarmaucMemory",
+                dialogue = [
+                    new(new SetBG{bg = "BGTarmaucShipAfter"}),
+                ]
+            }},
+            {"Tarmauc_Memory_2_End_05", new(){
+                type = NodeType.@event,
+                bg = "BGPastTarmaucMemory",
+                dialogue = [
+                    new(new SetBG{bg = "BGTarmaucShipAfter"}),
+                ]
+            }},
+            {"Tarmauc_Memory_2_End_06", new(){
+                type = NodeType.@event,
+                bg = "BGPastTarmaucMemory",
+                dialogue = [
+                    new(new SetBG{bg = "BGTarmaucShipAfter"}),
+                ]
+            }},
+            {"Tarmauc_Memory_2_End_07", new(){
+                type = NodeType.@event,
+                bg = "BGPastTarmaucMemory",
+                dialogue = [
+                    new(new SetBG{bg = "BGTarmaucShipAfter"}),
+                ]
+            }},
+            {"Tarmauc_Memory_2_End_08", new(){
+                type = NodeType.@event,
+                bg = "BGPastTarmaucMemory",
+                dialogue = [
+                    new(new SetBG{bg = "BGTarmaucShipAfter"}),
+                ]
+            }},
+            {"Tarmauc_Memory_2_End_09", new(){
+                type = NodeType.@event,
+                bg = "BGPastTarmaucMemory",
+                dialogue = [
+                    new(new SetBG{bg = "BGTarmaucShipAfter"}),
+                ]
+            }},
+            {"Tarmauc_Memory_2_End_10", new(){
+                type = NodeType.@event,
+                bg = "BGPastTarmaucMemoryDeath",
+                dialogue = [
+                    new(AmTarmauc, "teenneutral", "See you on the other side."),
+                    new(AmWeth, "teentongueout", "Blegh, what a cliche line.", flipped:true),
+                    new(AmTarmauc, "teengrumpy", "As if you have something better."),
+                    new(AmWeth, "teensmug", "Actually I do.", flipped:true),
+                    new(new BGAction{action = "WethPunchesTarmaucInTheShoulder"}),
+                    new(new Wait{secs = 3}),
+                    new(AmWeth, "teensmileeyesclosed", "See you soon, Road Kill.", flipped: true),
+                    new(AmTarmauc, "teensmirk", "That was equally terrible."),
+                    new(AmWeth, "teensmug", "It's the thought that counts.", flipped:true),
+                    new(new Wait{secs = 3}),
+                    new(AmWeth, "teenlookdown", "Promise me you'll be back soon.", flipped:true),
+                    new(AmTarmauc, "teenshrug", "That's not for me to decide you know."),
+                    new(AmWeth, "teentears", "Just promise me.", flipped:true),
+                    new(AmTarmauc, "teenwait", "Okay okay! Fine!"),
+                    new(AmTarmauc, "teensmirk", "See you later, doggy."),
+                    new(new Wait{secs = 1}),
+                    new(AmWeth, "teenpout", "You're terrible at nicknames.", flipped:true),
+                    new(AmTarmauc, "teenshrug", "I'll try to think of something better by the time I'm back."),
+                    new(AmWeth, "teentongueout", "You better!", flipped:true),
+                    new(new Wait{secs = 2}),
+
+                    new(new SetBG{bg = "BGTarmaucShipAfter"}),
+                    new(new BGAction{action = "VisorSlowlyTakeOff"}),
+                    new(AmTarmauc, "This is it."),
+                    new(AmTarmauc, "excited", "I found it!"),
+                    new(AmTarmauc, "outofbounds", "Companion bot! Save positional energy data!"),
+                    new(AmCompanionChunk, "positional data saved. i will notify you once the ship is aligned", flipped: true),
+                    new(AmTarmauc, "suddenenlightenment", "Ah!"),
+                    new(AmTarmauc, "Companion bot, is it possible to broadcast a message, except this time to that universe's you only?"),
+                    new(AmCompanionChunk, "yes commander. please speak your message now", flipped: true),
+                    new(new BGAction{action = "ClearThroat"}),
+                    new(AmTarmauc, "Ahem."),
+                    new(new BGAction{action = "RecordingPose"}),
+                    new(AmTarmauc, "confidenteyesclosed", "Dear idiot,"),
+                    new(AmTarmauc, "confidentlookatdistant", "If you're listening to this message, then that means I have probably found a way back."),
+                    new(AmTarmauc, "confidentdevious", "I'm definitely coming for you this time."),
+                    new(AmTarmauc, "smile", "All the best, Tarmauc."),
+                    new(new Wait{secs = 1}),
+                    new(new BGAction{action = "Standing"}),
+                    new(new Wait{secs = 1}),
+                    new(AmCompanionChunk, "message saved. i will broadcast the message as soon as alignment completes", flipped: true),
+                    new(AmCompanionChunk, "would you like to attach \"prank-self-destruct-sequence\" like last time?", flipped: true),
+                    new(AmTarmauc, "evil", "Yes."),
+                    new(AmCompanionChunk, "added", flipped: true),
+                    new(new Wait{secs = 2}),
+                    new(new BGAction{action = "Sit"}),
+                    new([
+                        new(AmTarmauc, "mumble", "Just you wait, Weth. I'll be keeping that promise."),
+                        new(AmTarmauc, "mumble", "I hope you haven't forgotten our promise, Weth."),
+                        new(AmTarmauc, "mumble", "You better be alive still, I can't wait to see you again.")
+                    ])
+
+                ]
+            }},
+            {"Tarmauc_Memory_3", new(){
+                type = NodeType.@event,
+                introDelay = false,
+                bg = "",
+                lookup = [
+                    "vault", $"vault_{AmTarmauc}"
+                ],
+                requiredScenes = [
+                    "Tarmauc_Memory_2", "Tarmauc_Memory_2_End_10"
+                ],
+                dialogue = [
+                    new("T+??? days"),
+                    new(new Wait{secs = 2}),
+                ]
+            }},
         });
     }
 }

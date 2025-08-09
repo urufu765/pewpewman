@@ -130,7 +130,7 @@ internal class EventDialogue : IRegisterable
                 allPresent = [AmWeth],
                 dialogue = [
                     new(AmShopkeeper, "Hello there.", true),
-                    new(AmWeth, "Hello ma'am"),
+                    new(AmWeth, "Hello ma'am."),
                     new(new Jump{key = "NewShop"})
                 ]
             }},

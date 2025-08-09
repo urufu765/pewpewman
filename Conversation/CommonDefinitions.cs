@@ -19,6 +19,8 @@ static class CommonDefinitions
 
     internal static string AmWeth => Instance.WethDeck.UniqueName;
     internal static Deck AmWethDeck => Instance.WethDeck.Deck;
+    internal const string AmTarmauc = "tarmaucPlaceholder";
+    internal const string AmCompanionChunk = "tarmaucCompanionBotPlaceholder";
     internal const string AmUnknown = "johndoe";
     internal const string AmCat = "comp";
     internal static string AmDizzy => Deck.dizzy.Key();

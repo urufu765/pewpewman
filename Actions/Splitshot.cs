@@ -430,6 +430,10 @@ public class ASplitshot : CardAction
             {
                 damage++;
             }
+            if (c.stuff.TryGetValue(raycastResult.worldX, out StuffBase? aDrone) && aDrone is NinjaAsteroid)
+            {
+
+            }
             hitADrone = true;
             AAttack left = ConvertSplitToAttack(this);
             AAttack right = ConvertSplitToAttack(this);

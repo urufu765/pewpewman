@@ -4,9 +4,11 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ## Changalog
 
-### Release 1.1.0
+### Release 1.1.0: Relic overhaul
 
-* **(1.1.0)**: ASplitshot compatibility fix (Shouldn't be a gameplay difference.), Relic redo, artifact buffs, Goodies (starter) slight nerf (and correct call to artifact method)
+* **(1.1.1)**: Space Urchin balance + hidden event adjustments + typo fixes
+
+* **(1.1.0)**: Relic redo, artifact buffs, Goodies (starter) slight nerf (and correct call to artifact method)
   * **dev.1**: New relic system!
   * **dev.2**: Fixed occasional splitshot crash with reversed jupiter drones
   * **dev.3**: Artifact buffs + New Artifact
@@ -37,14 +39,15 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
       * ChoiceHPForRelic
     * Bonus hidden relics
     * Sprites less transparent
-  * **ext.1*: Fix external namespace, show Shockstack stuff on health bar
-  * **ext.2*: Splitshot code stuff (Aattack subclass migration?)
-  * **ext.3*: Terminus: Surge
-  * **ext.4*: Option to change regular asteroids to giant/mega asteroids using option
-  * **ext.5*: Allow the Terminus Jaunt to affect Combat QoL
-  * **ext.6*: Difficulty based relic power adjustment
-  * **ext.7*: Option to use older V2 relics
-  * **ext.8*: Tarmauc: Unlockable using crystallized friend event or custom event
+  * *TODO 1*: Fix external namespace
+  * *TODO 2*: Splitshot code stuff (Aattack subclass migration?)
+  * *TODO 3*: Terminus: Surge
+  * *TODO 4*: Option to change some regular asteroids in asteroid belts to giant/mega asteroids using option
+  * *TODO 5*: Allow the Terminus Jaunt to affect Combat QoL
+  * *TODO 6*: Difficulty based relic power adjustment
+  * *TODO 7*: Option to use older V2 relics
+  * *TODO 8*: Fix piercing splitshot tooltip for clarification
+  * *TODO 9*: Show Shockstack stuff on health bar
 
 ### Release 1.0.0
 
