@@ -104,7 +104,7 @@ internal class MemoryDialogue : IRegisterable
                     new(AmWeth, "pastsurprise", "..."),
                     new(AmWeth, "pastmad", "Dammit! Not again!"),
                     new(AmWeth, "pastlookfor", "Where's that fire extinguisher?"),
-                    new(new Wait{secs = 1}),
+                    new(new Wait{secs = 3}),
                     new(AmWeth, "pastfacepalm", "Man, what was I thinking."),
                     new(AmWeth, "pasteyeroll", "Oh, I'll just install these giant drills to make excavation easier!"),
                     new(AmWeth, "pastdonewithit", "That won't constantly set the engines on fire!"),
@@ -214,7 +214,9 @@ internal class MemoryDialogue : IRegisterable
                     new(new Wait{secs = 9})
                 ]
             }},
-            {"Tarmauc_Memory_1", new(){
+            #if false
+            // Tarmauc Memories
+            { "Tarmauc_Memory_1", new(){
                 type = NodeType.@event,
                 introDelay = false,
                 bg = "",
@@ -224,6 +226,8 @@ internal class MemoryDialogue : IRegisterable
                 dialogue = [
                     new("T-??? days"),
                     new(new Wait{secs = 2}),
+                    new(title: null),
+                    new(new Wait{secs = 1}),
                 ]
             }},
             {"Tarmauc_Memory_2", new(){
@@ -239,11 +243,13 @@ internal class MemoryDialogue : IRegisterable
                 dialogue = [
                     new("T-??? days"),
                     new(new Wait{secs = 2}),
+                    new(title: null),
+                    new(new Wait{secs = 1}),
                 ]
             }},
             {"Tarmauc_Memory_2_End_01", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemoryLovers",
+                bg = "BGPastTarmaucMemoryLovers",  // Date
                 dialogue = [
                     new(new SetBG{bg = "BGTarmaucShipAfter"}),
                     new(new BGAction{action = "VisorSuddenTakeOff"}),
@@ -256,7 +262,7 @@ internal class MemoryDialogue : IRegisterable
             }},
             {"Tarmauc_Memory_2_End_02", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemoryStrength",
+                bg = "BGPastTarmaucMemoryStrength",  // Fight
                 dialogue = [
                     new(AmTarmauc, "teenneutral", "Actually, before we say our goodbyes..."),
                     new(AmTarmauc, "teensmirk", "Why don't we have one last bout, to see who's the strongest?"),
@@ -273,7 +279,7 @@ internal class MemoryDialogue : IRegisterable
                     new(new BGAction{action = "TextFightFadeOut"}),
                     new(new BGAction{action = "ChargeFist"}),
                     new(new Wait{secs = 2}),
-                    new(new BGAction{action = "FistsFlying"}),
+                    new(new BGAction{action = "FistsFlying"}),  // Weth dashes forward with fist, Tarmauc charges fist
                     new(new Wait{secs = 3}),
 
                     new(new SetBG{bg = "BGTarmaucShipAfterStrength"}),
@@ -287,56 +293,105 @@ internal class MemoryDialogue : IRegisterable
             }},
             {"Tarmauc_Memory_2_End_03", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemory",
+                bg = "BGPastTarmaucMemoryFlex",  // Taunt all the way
                 dialogue = [
+                    new(AmTarmauc, "teenneutral", "..."),
+                    new(new BGAction{action = "LetPlayerTauntNow"}),  // Have some leeway with player skipping text by accident, by detecting how much of the text the player is skipping maybe?
+                    // and here is the part where Weth begins to just fill the dialogue boxes with weird story
+                    new(new BGAction{action = "NoMoreTauntingNow"}),
+                    new(new BGAction{action = "BranchingPathPlayerPatient"}),  // Quickly skip through this section using a custom Autoadvance if player skipped dialogue
+                    new(AmWeth, "teeneyescosed", "...", flipped: true),
+                    new(AmWeth, "teenglanceatdistant", "You know, I'm impressed that you listened to me the whole way", flipped: true),
+                    new(AmWeth, "teensolemn", "Not many of you did that.", flipped:true),
+                    new(AmTarmauc, "teensurprised", "Wait what? You're supposed to be this reality's past memory?"),
+                    new(AmWeth, "teentiredchuckle", "The same can be said about you.", flipped:true),
+                    new(AmWeth, "teenserious", "We both do not belong here.", flipped:true),
+                    new(AmTarmauc, "teensquint", "Wait, why can I interact with you?"),
+                    new(AmWeth, "teenshrug", "Maybe because you weren't supposed to listen to my whole monologue?", flipped:true),
+                    new(AmTarmauc, "teenlookathands", "I have so many questions."),
+                    new(AmWeth, "teensquint", "I bet I'll also be wondering the majority of those.", flipped:true),
+                    new(AmTarmauc, "teenthink", "I'd ask them all, but I have the feeling we don't have much time left with this memory."),
+                    new(AmWeth, "teensquintpoint", "Essential questions. Go, quick.", flipped:true),
+                    new(AmTarmauc, "teenpointout", "Are you also trying to find your way home?"),
+                    new(AmWeth, "teeneyesclosed", "Mmhm. Back to that lovable idiot...", flipped:true),
+                    new(AmWeth, "teensquint", "It's you, but a lot more... emotional?", flipped:true),
+                    new(AmTarmauc, "teenthink", "Kinda the opposite on my end. Though I call my universe you just an idiot."),
+                    new(AmWeth, "teentiredchuckle", "Not good with nicknames either, huh?", flipped:true),
+                    new(AmTarmauc, "teensmirk", "Nope."),
+                    new(AmWeth, "teensmile", "Say, what did your universe's me call you?", flipped:true),
+                    new(AmTarmauc, "teenshrug", "Road kill."),
+                    new(AmWeth, "teengiggle", "Clever!", flipped:true),
+                    new(AmTarmauc, "teenthink", "How about yours?"),
+                    new(AmWeth, "teensquint", "Sorry, I think the memory's almost over.", flipped:true),
+                    new(AmTarmauc, "teenpanic", "Wait, but the question!"),
+                    new(AmWeth, "teenwideeyes", "Brace yourself! I'm about to slap you. I'm sorry in advanced!", flipped:true),
+                    new(new BGAction{action = "BranchingPathPlayerSkipped"}),  // Quickly skip through this section using a custom Autoadvance if player didn't skip dialogue, otherwise prevent player from advancing dialogue on their own
+                    new(new BGAction{action = "AndStop"}),
+                    new(new BGAction{action = "ReverbedSlapSFX"}),
+                    new(new BGAction{action = "FadeToBlack"}),  // Skips dialogue after 3 seconds, prevents input
+                    new(AmTarmauc, "teengotslapped", "!!!"),
+
                     new(new SetBG{bg = "BGTarmaucShipAfter"}),
+                    new(new BGAction{action = "VisorSlowlyTakeOff"}),
+                    new(new Wait{secs = 3}),
+                    new(new BGAction{action = "HoldVisorInOneHandAndHoldCheekInOther"}),
+                    new(new Wait{secs = 2}),
+                    new(AmTarmauc, "holdcheek", "..."),
+                    new(new Wait{secs = 4}),
+                    new(AmTarmauc, "holdcheekeyesclosed", "...")
                 ]
             }},
             {"Tarmauc_Memory_2_End_04", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemory",
+                bg = "BGPastTarmaucMemoryHermit",  // ???
                 dialogue = [
                     new(new SetBG{bg = "BGTarmaucShipAfter"}),
                 ]
             }},
             {"Tarmauc_Memory_2_End_05", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemory",
+                bg = "BGPastTarmaucMemoryMagician",  // ???
                 dialogue = [
                     new(new SetBG{bg = "BGTarmaucShipAfter"}),
                 ]
             }},
             {"Tarmauc_Memory_2_End_06", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemory",
+                bg = "BGPastTarmaucMemoryWraith",  // Monster
                 dialogue = [
                     new(new SetBG{bg = "BGTarmaucShipAfter"}),
                 ]
             }},
             {"Tarmauc_Memory_2_End_07", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemory",
+                bg = "BGPastTarmaucMemoryInfinity",  // ???
                 dialogue = [
                     new(new SetBG{bg = "BGTarmaucShipAfter"}),
                 ]
             }},
             {"Tarmauc_Memory_2_End_08", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemory",
+                bg = "BGPastTarmaucMemorySitcom",  // Sitcom
                 dialogue = [
                     new(new SetBG{bg = "BGTarmaucShipAfter"}),
                 ]
             }},
             {"Tarmauc_Memory_2_End_09", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemory",
+                bg = "BGPastTarmaucMemoryTrance",  // Just weird hallucination
                 dialogue = [
                     new(new SetBG{bg = "BGTarmaucShipAfter"}),
+                    new(AmTarmauc, "squint", "..."),
+                    new(AmTarmauc, "squint", "That was really weird."),
+                    new(AmTarmauc, "lookathands", "But on the plus side I feel like running laps around the ship."),
+                    new(AmTarmauc, "lookathands", "..."),
+                    new(AmTarmauc, "You know what? Let's do that.")
+
                 ]
             }},
             {"Tarmauc_Memory_2_End_10", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemoryDeath",
+                bg = "BGPastTarmaucMemoryJumper",  // True
                 dialogue = [
                     new(AmTarmauc, "teenneutral", "See you on the other side."),
                     new(AmWeth, "teentongueout", "Blegh, what a cliche line.", flipped:true),
@@ -361,6 +416,7 @@ internal class MemoryDialogue : IRegisterable
 
                     new(new SetBG{bg = "BGTarmaucShipAfter"}),
                     new(new BGAction{action = "VisorSlowlyTakeOff"}),
+                    new(new Wait{secs = 3}),
                     new(AmTarmauc, "This is it."),
                     new(AmTarmauc, "excited", "I found it!"),
                     new(AmTarmauc, "outofbounds", "Companion bot! Save positional energy data!"),
@@ -389,13 +445,12 @@ internal class MemoryDialogue : IRegisterable
                         new(AmTarmauc, "mumble", "I hope you haven't forgotten our promise, Weth."),
                         new(AmTarmauc, "mumble", "You better be alive still, I can't wait to see you again.")
                     ])
-
                 ]
             }},
             {"Tarmauc_Memory_3", new(){
                 type = NodeType.@event,
                 introDelay = false,
-                bg = "",
+                bg = "BGTarmaucShip",
                 lookup = [
                     "vault", $"vault_{AmTarmauc}"
                 ],
@@ -405,8 +460,21 @@ internal class MemoryDialogue : IRegisterable
                 dialogue = [
                     new("T+??? days"),
                     new(new Wait{secs = 2}),
+                    new(title: null),
+                    new(new Wait{secs = 3}),
+                    // start scene with Tarmauc on the ground
+                    new(new BGAction{action = "TarmaucGetsUp"}),
+                    new(new Wait{secs = 4}),
+                    new(AmTarmauc, "gotupfromground", "Companion bot. Status report."),
+                    new(AmCompanionChunk, "commander, we have successfully leapt to approximate destination of the energy signature"),
+                    new(new BGAction{action = "TarmaucLeansAgainstRailing"}),
+                    new(new Wait{secs = 3}),
+                    new(AmTarmauc, "How close are we to the signature?"),
+                    new(AmCompanionChunk, "we are approximately 13 millimeters away"),
+                    new(AmTarmauc, "squint", "But there's nothing here.")
                 ]
             }},
+            #endif
         });
     }
 }

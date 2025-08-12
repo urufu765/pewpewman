@@ -25,7 +25,7 @@ public static class ChoiceHPForRelic
                 {
                     __result[i] = new Choice
                     {
-                        label = string.Format(ModEntry.Instance.Localizations.Localize(["event", "ChoiceHPForRelic_Yes", "desc"])),
+                        label = ModEntry.Instance.Localizations.Localize(["event", "ChoiceHPForRelic_Yes", "desc"]),
                         key = "ChoiceHPForRelic_Yes",
                         actions = [
                             new AWethSingleArtifactOffering

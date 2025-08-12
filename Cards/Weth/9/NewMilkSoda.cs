@@ -6,6 +6,7 @@ using FMOD;
 using FSPRO;
 using Nanoray.PluginManager;
 using Nickel;
+using Shockah.Kokoro;
 using Weth.Actions;
 using Weth.External;
 
@@ -259,7 +260,6 @@ public class NewMilkSoda : Card, IRegisterable
                 artOverlay = MilkSoda_OL,
                 description = GetDescription(),
                 art = GetSprite(),
-                // description = string.Format(ModEntry.Instance.Localizations.Localize(["card", "Common", "MilkSoda", GetDescription()]), PulsedrivesAcquired)
             }
         };
     }

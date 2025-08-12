@@ -1,6 +1,6 @@
 ﻿using daisyowl.text;
 
-namespace Weth.External;
+namespace Shockah.Kokoro;
 
 public partial interface IKokoroApi
 {

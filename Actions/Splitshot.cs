@@ -42,7 +42,7 @@ public static class SplitshotTranspiler
         }
         catch (Exception err)
         {
-            ModEntry.Instance.Logger.LogError(err, "damn.");
+            ModEntry.Instance.Logger.LogError(err, "Exception in RenderSplitshotAsAttack transpiler.");
             throw;
         }
     }
@@ -644,7 +644,7 @@ public class ASplitshot : CardAction
             tooltips.Add(new GlossaryTooltip("actiontooltip.piercingsplitshot")
             {
                 Icon = ModEntry.Instance.SprSplitshotPiercing,
-                Title = ModEntry.Instance.Localizations.Localize(["action", "Splitshot", "name"]),
+                Title = ModEntry.Instance.Localizations.Localize(["action", "Splitshot", "pierceName"]),
                 TitleColor = Colors.action,
                 Description = ModEntry.Instance.Localizations.Localize(["action", "Splitshot", "pierceDesc"])
 

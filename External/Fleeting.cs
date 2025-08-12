@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Nickel;
 
-namespace Weth.External;
+namespace Shockah.Kokoro;
 
 public partial interface IKokoroApi
 {

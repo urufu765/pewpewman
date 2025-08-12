@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Shockah.Kokoro;
 using Weth.External;
 
 namespace Weth.Artifacts;
@@ -59,6 +60,6 @@ public class OmnimoteStatus : IKokoroApi.IV2.IStatusLogicApi.IHook, IKokoroApi.I
     {
         if (args.Status != ModEntry.Instance.NewRelicStatuses[typeof(Omnimote)]) return null;
 
-        return ModEntry.Instance.KokoroApi.V2.StatusRendering.MakeTextStatusInfoRenderer($"{args.Amount - args.Combat.turn}").SetColor((args.Amount - args.Combat.turn > 0) ? new Color("00a94e") : ModEntry.Instance.KokoroApi.V2.StatusRendering.DefaultInactiveStatusBarColor);
+        return ModEntry.Instance.KokoroApi.V2.StatusRendering.MakeTextStatusInfoRenderer($"{Math.Max(0, args.Amount - args.Combat.turn)}").SetColor((args.Amount - args.Combat.turn > 0) ? new Color("00a94e") : ModEntry.Instance.KokoroApi.V2.StatusRendering.DefaultInactiveStatusBarColor);
     }
 }

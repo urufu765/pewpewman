@@ -6,6 +6,8 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### Release 1.1.0: Relic overhaul
 
+* **(1.1.2)**: Code Cleanup + relic background transparent again + Piercing splitshot now has a "different" name + namespace fixes + fixed a crash in minefield event and the description + fixed Omnimote status going to the negatives
+
 * **(1.1.1)**: Space Urchin balance + hidden event adjustments + typo fixes
 
 * **(1.1.0)**: Relic redo, artifact buffs, Goodies (starter) slight nerf (and correct call to artifact method)
@@ -39,7 +41,6 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
       * ChoiceHPForRelic
     * Bonus hidden relics
     * Sprites less transparent
-  * *TODO 1*: Fix external namespace
   * *TODO 2*: Splitshot code stuff (Aattack subclass migration?)
   * *TODO 3*: Terminus: Surge
   * *TODO 4*: Option to change some regular asteroids in asteroid belts to giant/mega asteroids using option

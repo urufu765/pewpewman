@@ -13,6 +13,9 @@ using Weth.Features;
 using System.Reflection;
 using Weth.Actions;
 using Weth.Conversation;
+using TheJazMaster.MoreDifficulties;
+using Shockah.DuoArtifacts;
+using Shockah.Kokoro;
 //using System.Reflection;
 
 namespace Weth;

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Weth.External;
+namespace Shockah.Kokoro;
 
 public partial interface IKokoroApi
 {

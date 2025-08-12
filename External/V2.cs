@@ -1,4 +1,4 @@
-﻿namespace Weth.External;
+﻿namespace Shockah.Kokoro;
 
 /// <summary>
 /// Allows accessing all of Kokoro library APIs.

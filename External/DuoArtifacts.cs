@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Weth.External;
+namespace Shockah.DuoArtifacts;
 
 public interface IDuoArtifactsApi
 {

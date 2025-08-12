@@ -7,6 +7,9 @@ using Weth.Artifacts;
 using Weth.Cards;
 using Weth.External;
 using Weth.Conversation;
+using TheJazMaster.MoreDifficulties;
+using Shockah.DuoArtifacts;
+using Shockah.Kokoro;
 
 namespace Weth;
 

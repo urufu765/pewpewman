@@ -1,5 +1,4 @@
-namespace Weth;
-
+namespace Shockah;
 internal sealed class CustomSay : Say
 {
     private static int NextId = 1;
