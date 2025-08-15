@@ -25,7 +25,7 @@ public static class ChoiceRelicRewardOfYourRelicChoice
                     int offeringAmount = s.GetHardEvents() ? 2 : 3;
                     __result[x] = new Choice
                     {
-                        label = string.Format(ModEntry.Instance.Localizations.Localize(["event", "ChoiceRelicRewardOfYourRelicChoice_Yes", "desc"]), ModEntry.Instance.WethDeck.Configuration.Definition.color, Character.GetDisplayName(AmWethDeck, s).ToUpperInvariant(), offeringAmount),
+                        label = string.Format(ModEntry.Instance.Localizations.Localize(["Weth", "event", "ChoiceRelicRewardOfYourRelicChoice_Yes", "desc"]), ModEntry.Instance.WethDeck.Configuration.Definition.color, Character.GetDisplayName(AmWethDeck, s).ToUpperInvariant(), offeringAmount),
                         key = $"ChoiceCardRewardOfYourColorChoice_{AmWeth}",
                         actions =
                         {

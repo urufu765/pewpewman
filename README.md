@@ -4,6 +4,19 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ## Changalog
 
+### Expansion 2.0.0: Miss Road Kill
+
+* **(2.0.0)**: Introduces a new unlockable character: Tarmauc
+  * **dev.1**: en.json regrouping, file restructuring
+  * *TODO 2*: Splitshot code stuff (Aattack subclass migration?)
+  * *TODO 3*: Terminus: Surge
+  * *TODO 4*: Option to change some regular asteroids in asteroid belts to giant/mega asteroids using option
+  * *TODO 5*: Allow the Terminus Jaunt to affect Combat QoL
+  * *TODO 6*: Difficulty based relic power adjustment
+  * *TODO 7*: Option to use older V2 relics
+  * *TODO 8*: Fix piercing splitshot tooltip for clarification
+  * *TODO 9*: Show Shockstack stuff on health bar
+
 ### Release 1.1.0: Relic overhaul
 
 * **(1.1.2)**: Code Cleanup + relic background transparent again + Piercing splitshot now has a "different" name + namespace fixes + fixed a crash in minefield event and the description + fixed Omnimote status going to the negatives
@@ -41,14 +54,6 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
       * ChoiceHPForRelic
     * Bonus hidden relics
     * Sprites less transparent
-  * *TODO 2*: Splitshot code stuff (Aattack subclass migration?)
-  * *TODO 3*: Terminus: Surge
-  * *TODO 4*: Option to change some regular asteroids in asteroid belts to giant/mega asteroids using option
-  * *TODO 5*: Allow the Terminus Jaunt to affect Combat QoL
-  * *TODO 6*: Difficulty based relic power adjustment
-  * *TODO 7*: Option to use older V2 relics
-  * *TODO 8*: Fix piercing splitshot tooltip for clarification
-  * *TODO 9*: Show Shockstack stuff on health bar
 
 ### Release 1.0.0
 

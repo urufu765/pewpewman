@@ -24,7 +24,7 @@ public static class RandomWethRandomUpgradeAOrB
                 // Offer to increase two random relic stacks
                 __result.Add(new Choice
                 {
-                    label = ModEntry.Instance.Localizations.Localize(["event", "UpgradeRandomAOrB_WethRelics", "desc"]),
+                    label = ModEntry.Instance.Localizations.Localize(["Weth", "event", "UpgradeRandomAOrB_WethRelics", "desc"]),
                     key = "UpgradeRandomAOrB_After",
                     actions = {
                         new AGainRelicsRandom
@@ -39,7 +39,7 @@ public static class RandomWethRandomUpgradeAOrB
                 // Offer a special relic
                 __result.Add(new Choice
                 {
-                    label = ModEntry.Instance.Localizations.Localize(["event", "UpgradeRandomAOrB_WethSpecial", "desc"]),
+                    label = ModEntry.Instance.Localizations.Localize(["Weth", "event", "UpgradeRandomAOrB_WethSpecial", "desc"]),
                     key = s.EnumerateAllArtifacts().Any(a => a is TreasureSeeker)? "UpgradeRandomAOrBSpecial_After" : "UpgradeRandomAOrBUnique_After",
                     actions = {
                         new AWethSingleArtifactOffering

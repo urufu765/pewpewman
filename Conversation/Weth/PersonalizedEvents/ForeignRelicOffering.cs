@@ -22,7 +22,7 @@ public static class ForeignRelicOffering
                 int offeringAmount = s.GetHardEvents() ? 2 : 3;
                 __result[x] = new Choice
                 {
-                    label = string.Format(ModEntry.Instance.Localizations.Localize(["event", "ForeignRelicOffering_Yes", "desc"]), ModEntry.Instance.WethDeck.Configuration.Definition.color, Character.GetDisplayName(AmWethDeck, s).ToUpperInvariant(), offeringAmount),
+                    label = string.Format(ModEntry.Instance.Localizations.Localize(["Weth", "event", "ForeignRelicOffering_Yes", "desc"]), ModEntry.Instance.WethDeck.Configuration.Definition.color, Character.GetDisplayName(AmWethDeck, s).ToUpperInvariant(), offeringAmount),
                     key = "ForeignCardOffering_After",
                     actions =
                     {

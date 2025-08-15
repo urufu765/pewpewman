@@ -25,7 +25,7 @@ public static class WethGrandmaShop
                 {
                     __result[i] = new Choice
                     {
-                        label = ModEntry.Instance.Localizations.Localize(["event", "GrandmaShop_Weth", "desc"]),
+                        label = ModEntry.Instance.Localizations.Localize(["Weth", "event", "GrandmaShop_Weth", "desc"]),
                         key = "GrandmaShop_Weth",
                         actions = [
                             new AWethCardOffering

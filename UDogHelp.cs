@@ -25,8 +25,8 @@ public static class UhDuhHundo
                 unremovable = attrs is not null && attrs.unremovable,
                 extraGlossary = attrs?.extraGlossary ?? []
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["artifact", artpl[0].ToString(), altName??a.Name, "name"]).Localize,
-            Description = ModEntry.Instance.AnyLocalizations.Bind(["artifact", artpl[0].ToString(), altName??a.Name, "desc"]).Localize,
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["Weth", "artifact", artpl[0].ToString(), altName??a.Name, "name"]).Localize,
+            Description = ModEntry.Instance.AnyLocalizations.Bind(["Weth", "artifact", artpl[0].ToString(), altName??a.Name, "desc"]).Localize,
             Sprite = sprite
         };
         return ac;

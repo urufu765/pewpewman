@@ -1,735 +1,731 @@
 ﻿{
-    "character": {
-        "Weth":
-        {
-            "name": "Weth",
-            "desc": "<c=2a767d>WETH</c>\nA treasure hunter. Her cards focus on <c=keyword>multi-attack</c> and <c=keyword>midrow elimination</c>. She also finds <c=heal>goodies</c> hidden in plain sight."
-        },
-        "Goodie":
-        {
-            "name": "Goodies",
-            "desc": "Goodies discovered from breaking apart structures."
-        }
-    },
-    "status": {
-        "Pulsedrive": {
-            "name": "Pulsedrive",
-            "desc": "Add {0} damage to all attacks. <c=downside>Goes away at the start of next turn.</c>"
-        },
-        "Unknown": {
-            "name": "___",
-            "desc": "Does {0} of something."
-        },
-        "Recoil": {
-            "name": "Recoil",
-            "desc": "The next {0} attacks will deal 1 less damage."
-        },
-        "overdrive": {
-            "name": "OVERDRIVE",
-            "desc": "{0} <c=status>OVERDRIVE</c>"
-        },
-        "powerdrive": {
-            "name": "POWERDRIVE",
-            "desc": "{0} <c=status>POWERDRIVE</c>"
-        },
-        "shield": {
-            "name": "SHIELD",
-            "desc": "{0} <c=status>SHIELD</c>"
-        },
-        "maxShield": {
-            "name": "MAX SHIELD",
-            "desc": "{0} <c=status>MAX SHIELD</c>"
-        },
-        "tempShield": {
-            "name": "TEMP SHIELD",
-            "desc": "{0} <c=status>TEMP SHIELD</c>"
-        },
-        "perfectShield": {
-            "name": "PERFECT SHIELD",
-            "desc": "{0} <c=status>PERFECT SHIELD</c>"
-        },
-        "hermes": {
-            "name": "HERMES",
-            "desc": "{0} <c=status>HERMES</c>"
-        },
-        "strafe": {
-            "name": "STRAFE",
-            "desc": "{0} <c=status>STRAFE</c>"
-        },
-        "evade": {
-            "name": "EVADE",
-            "desc": "{0} <c=status>EVADE</c>"
-        },
-        "autododgeRight": {
-            "name": "AUTODODGE R",
-            "desc": "{0} <c=status>AUTODODGE R</c>"
-        },
-        "ace": {
-            "name": "ACE",
-            "desc": "{0} <c=status>ACE</c>"
-        },
-        "libra": {
-            "name": "FLUX",
-            "desc": "{0} <c=status>FLUX</c>"
-        },
-        "stunCharge": {
-            "name": "STUN CHARGE",
-            "desc": "{0} <c=status>STUN CHARGE</c>"
-        },
-        "stunSource": {
-            "name": "STUN SOURCE",
-            "desc": "{0} <c=status>STUN SOURCE</c>"
-        },
-        "drawNextTurn": {
-            "name": "DRAW NEXT TURN",
-            "desc": "{0} <c=status>DRAW NEXT TURN</c>"
-        },
-        "energyNextTurn": {
-            "name": "ENERGY NEXT TURN",
-            "desc": "{0} <c=status>ENERGY NEXT TURN</c>"
-        },
-        "energyFragment": {
-            "name": "ENERGY FRAGMENT",
-            "desc": "{0} <c=status>ENERGY FRAGMENT</c>"
-        },
-        "tempPayback": {
-            "name": "TEMPORARY PAYBACK",
-            "desc": "{0} <c=status>TEMP PAYBACK</c>"
-        },
-        "payback": {
-            "name": "PAYBACK",
-            "desc": "{0} <c=status>PAYBACK</c>"
-        },
-        "droneShift": {
-            "name": "DRONE SHIFT",
-            "desc": "{0} <c=status>DRONE SHIFT</c>"
-        },
-        "shard": {
-            "name": "SHARD",
-            "desc": "{0} <c=status>SHARD</c>"
-        },
-        "quarry": {
-            "name": "QUARRY",
-            "desc": "{0} <c=status>QUARRY</c>"
-        },
-        "maxShard": {
-            "name": "MAX SHARD",
-            "desc": "{0} <c=status>MAX SHARD</c>"
-        },
-        "boost": {
-            "name": "BOOST",
-            "desc": "{0} <c=status>BOOST</c>"
-        },
-        "pulsedrive": {
-            "name": "PULSEDRIVE",
-            "desc": "{0} <c=status>PULSEDRIVE</c>"
-        },
-        "energy": {
-            "name": "ENERGY",
-            "desc": "{0} <c=status>ENERGY</c>"
-        },
-        "RelicAntiqueCell": {
-            "name": "RELIC: ANTIQUE CELL",
-            "desc": "Gain {0} <c=status>ENERGY FRAGMENTS</c> every third turn."
-        },
-        "RelicPewPewGun": {
-            "name": "RELIC: PEW PEW GUN",
-            "desc": "The first {0} <c=2a767d>Weth</c> cards fire a <c=damage>0</c> damage attack this combat."
-        },
-        "RelicShockStack": {
-            "name": "RELIC: SHOCK STACK",
-            "desc": "At random intervals of enemy hull loss (up to {0} times this combat), gain 1 <c=status>STUN CHARGE</c>."
-        },
-        "RelicOmnimote": {
-            "name": "RELIC: OMNIMOTE",
-            "desc": "The first <c=keyword>{0}</c> turns grants 1 <c=status>DRONE SHIFT</c> this combat."
-        }
-    },
-    "action": {
-        "Splitshot": {
-            "name": "SPLITSHOT",
-            "desc": "If attack hits a midrow object, the attack splits into two: one to the left and one to the right.",
-            "pierceName": "TRI-PIERCE SPLITSHOT",
-            "pierceDesc": "If attack hits a midrow object, the attack splits into three: one to the left, one center, one to the right. Ignores all shields and armor."
-        },
-        "Bayblast": {
-            "name": "BAYBLAST",
-            "desc": "Shoots a blast from the missile bay, destroying whatever midrow object is in front <c=keyword>as if the foe destroyed them.</c>\nDeals {0} damage to invincible objects."
-        },
-        "WideBayblast": {
-            "name": "WIDE BAYBLAST",
-            "desc": "Shoots a blast from the missile bay, destroying whatever midrow objects are in the adjacent and front <c=keyword>as if the foe destroyed them.</c>\nDeals {0} damage to invincible objects."
-        },
-        "BubbleLeech": {
-            "name": "BUBBLE LEECH",
-            "desc": "Steals the midrow object's bubble, giving 1 <c=status>BUBBLE</c> to whoever shot the Bayblast."
-        },
-        "Harmless": {
-            "name": "HARMLESS",
-            "desc": "This Bayblast will deal no damage. <c=keyword>Instead, this will activate the drone this blast hits.</c>"
-        },
-        "BayBlastFail": {
-            "desc": "<c=downside>Warning:</c> no missile bays to channel this attack!"
-        },
-        "BayblastV2": {
-            "name": "BAYBLAST",
-            "desc": "Shoots a blast from the missile bay, dealing 1 piercing damage to midrow object is in a {1} unit radius of the bay."
-        },
-        "FlaredBayblast": {
-            "name": "FLARED BAYBLAST",
-            "desc": "Shoots a blast from the missile bay, dealing 1 piercing damage to whatever midrow object is in a {1} unit radius of the bay <c=keyword>as if the foe destroyed them."
-        }
-
-    },
-    "event": {
-        "ChoiceRelicRewardOfYourRelicChoice_Yes": {
-            "desc": "Obtain one of {2} <c={0}>{1}</c> relics."
-        },
-        "ForeignRelicOffering_Yes": {
-            "desc": "Take one of {2} <c={0}>{1}</c> relics."
-        },
-        "GrandmaShop_Weth": {
-            "desc": "Can we u- is that a Milk Soda Zero?!\n<c=heal>-Gain one volatile <c=card>Milk Soda</c></c>"
-        },
-        "UpgradeRandomAOrB_WethRelics": {
-            "desc": "Increase 2 random relics' stack"
-        },
-        "UpgradeRandomAOrB_WethSpecial": {
-            "desc": "Gain a special relic from the unknown"
-        },
-        "LoseCharacterRelic_Yes": {
-            "desc": "Lose <c={0}>{1}</c>."
-        },
-        "ChoiceHPForRelic_Yes": {
-            "desc": "Risk it all for that weird spiky thing!\n<c=heal>- Gain 1 special relic</c> or skip event"
-        }
-    },
-    "trait": {
-        "Autouseexhaust": {
-            "name": "Auto Exhaust",
-            "desc": "Automatically plays upon discard if energy is sufficient.\n<c=downside>Exhausted after use.</c>"
-        },
-        "Autousedestroy": {
-            "name": "Auto Single-use",
-            "desc": "Automatically plays upon discard if energy is sufficient.\n<c=downside>Destroyed after use.</c>"
-        }
-    },
-    "object": {
-        "GiantAsteroid": {
-            "name": "Giant Asteroid",
-            "desc": "When destroyed, splits into two <c=drone>asteroids</c> in adjacent spots."
-        },
-        "MegaAsteroid": {
-            "name": "Mega Asteroid",
-            "desc": "When destroyed, splits into two <c=drone>giant asteroids</c> in adjacent spots."
-        }
-    },
-    "artifact": {
-        "Common": {
-            "TreasureSeeker": {
-                "name": "TREASURE SEEKER",
-                "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nOnce per combat, after <c=keyword>5 hits</c>, add a random <c=card>Goodie A</c> to your hand.\n<c=mapinfo>You may find hidden fortune along the way!</c>\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
-            },
-            "HiddenOptions": {
-                "name": "HIDDEN OPTIONS",
-                "desc": "Immediately choose 1 of 3 common artifacts.\nThen choose 1 of 3 <c=2a767d>WETH</c> relics."
-            },
-            "RockPower": {
-                "name": "ROCK POWER",
-                "desc": "Gain 1 <c=status>PULSEDRIVE</c> when you destroy an <c=midrow>asteroid</c>."
-            },
-            "ResidualShot": {
-                "name": "RESIDUAL SHOT",
-                "desc": "Shoot for 0 damage when you play a <c=2a767d>Weth</c> or <c=peri>Peri</c> card."
-            },
-            "CannonRecharge": {
-                "name": "CANNON RECHARGE",
-                "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c>, gain 1 <c=status>STUN CHARGE</c> next turn."
-            },
-            "PowerCrystals": {
-                "name": "POWER CRYSTALS",
-                "desc": "Whenever you gain <c=status>PULSEDRIVE</c>, gain <c=status>SHARD</c> instead. Increase attack damage by the amount of <c=status>SHARD</c> you have.\n<c=downside>Lose 1 <c=status>SHARD</c> at start of turn.</c>"
-            },
-            "PyroCannon": {
-                "name": "PYRO-CANNON",
-                "desc": "Heat affects damage done.\n<c=downside>Overheat limit is reduced by 1.</c>"
-            },
-            "MadcapTarge": {
-                "name": "MADCAP TARGE",
-                "desc": "The first time you gain <c=status>SHIELD</c>, increase all damage by shield gained.\n<c=downside>The first time you gain <c=status>TEMP SHIELD</c>, decrease all <c=keyword>base</c> damage by 1.\nResets on turn end.</c>"
-            },
-            "MadcapCharge": {
-                "name": "MADCAP CHARGE",
-                "desc": "Once per turn, stunning an enemy intent gives 1 <c=status>PULSEDRIVE</c>."
-            },
-            "PowerSprint": {
-                "name": "POWERSPRINT",
-                "desc": "<c=downside>Your <c=status>EVADE</c> is capped at 5.</c> Once per turn, convert excess <c=status>EVADE</c> into <c=status>PULSEDRIVE</c>."
-            },
-            "HiddenGem": {
-                "name": "HIDDEN GEM",
-                "desc": "Choose 2 of 6 Uncommon <c=trait>non-temp</c> <c=card>Goodie</c>. Instead of <c=trait>Single Use</c>, it has <c=trait>Exhaust</c>.\nBypass any restrictions to gaining uncommon goodies."
-            },
-            "Refreshment": {
-                "name": "REFRESHMENT",
-                "desc": "Add a <c=card>Milk Soda</c> to your deck."
-            },
-            "CalculatedWhiff": {
-                "name": "CALCULATED WHIFF",
-                "desc": "Whenever your attack misses by 1 space, gain 1 <c=status>PULSEDRIVE</c>. <c=keyword>Split shots from splitshots count.</c>"
-            },
-            "CannonPrimer": {
-                "name": "CANNON PRIMER",
-                "desc": "If you miss your first shot of the fight, convert double the attack damage to <c=status>MINIDRIVE</c>."
-            },
-            "BattleStimulation": {
-                "name": "BATTLE STIMULATION",
-                "desc": "The first time you deal hull damage each combat, gain 2 <c=status>OVERDRIVE</c>."
-            }
-        },
-        "Boss": {
-            "HiddenOptions2": {
-                "name": "HIDDEN OPTIONS II",
-                "desc": "Immediately choose 1 of 4 boss artifacts.\nThen choose 1 of 4 <c=2a767d>WETH</c> relics."
-            },
-            "TerminusMilestone": {
-                "name": "TERMINUS: MILESTONE",
-                "desc": "Get rewards for reaching milestones from defeating enemies!\nEarn <c=keyword>4 points</c> for boss, <c=keyword>2 points</c> for elites, <c=keyword>1 point</c> for the rest.\nFor every 2 points past the last milestone, gain 1 of 3 <c=2a767d>WETH</c> relics.\n<c=downside>You are limited to 1 <c=artifact>TERMINUS</c> artifact.</c>"
-            },
-            "TerminusJaunt": {
-                "name": "TERMINUS: JAUNT",
-                "desc": "1 random enemy part offers 1 of 3 <c=2a767d>WETH</c> relics when shot at.\nFor every 5th relic uncovered, instead gain 1 of 3 common artifacts.\n<c=keyword>Receive these rewards at the end of combat.</c>\n<c=downside>You can only obtain one relic or artifact per battle.\nYou are limited to 1 <c=artifact>TERMINUS</c> artifact.</c>"
-            },
-            "AlPoToCa": {
-                "name": "ALL POWER TO CANNON(S)",
-                "desc": "At the start of each combat, add a <c=card>Full Commitment</c> to your hand."
-            },
-            "KineticCap": {
-                "name": "KINETIC CAP",
-                "desc": "At the start of combat, gain 1 <c=status>FLUX</c>. Additionally, gain 1 <c=status>FLUX</c> every 5th turn."
-            }
-        },
-        "EventOnly": {
-            "TreasureHunter": {
-                "name": "TREASURE HUNTER",
-                "desc": "Once per combat, after <c=keyword>10 hits</c>, add a random <c=card>Goodie</c> to your hand.\n<c=mapinfo>You might even find hidden treasure along the way!</c>\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
-            }
-        },
-        "Unreleased": {
-            "SpaceRelics": {
-                "name": "SPACE RELICS",
-                "desc": "<c=2a767d>Weth</c> found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nEach combat, gain:"
-            },
-            "RelicShield": {
-                "name": "RELIC: SHIELD",
-                "desc": "Gain 1 <c=status>SHIELD</c> at the start of combat."
-            },
-            "RelicTempShield": {
-                "name": "RELIC: TEMP SHIELD",
-                "desc": "Gain 1 <c=status>TEMPORARY SHIELD</c> at the start of combat."
-            },
-            "RelicHermes": {
-                "name": "RELIC: HERMES",
-                "desc": "Gain 1 <c=status>HERMES</c> at the start of combat."
-            },
-            "RelicEvade": {
-                "name": "RELIC: EVADE",
-                "desc": "Gain 1 <c=status>EVADE</c> at the start of combat."
-            },
-            "RelicAutododgeRight": {
-                "name": "RELIC: AUTODODGE RIGHT",
-                "desc": "Gain 1 <c=status>AUTODODGE RIGHT</c> at the start of combat."
-            },
-            "RelicFlux": {
-                "name": "RELIC: FLUX",
-                "desc": "Gain 1 <c=status>FLUX</c> at the start of combat."
-            },
-            "RelicStunCharge": {
-                "name": "RELIC: STUN CHARGE",
-                "desc": "Gain 1 <c=status>STUN CHARGE</c> at the start of combat."
-            },
-            "RelicDrawNextTurn": {
-                "name": "RELIC: DRAW NEXT TURN",
-                "desc": "Gain 1 <c=status>DRAW NEXT TURN</c> at the start of combat."
-            },
-            "RelicEnergyFragment": {
-                "name": "RELIC: ENERGY FRAGMENT",
-                "desc": "Gain 1 <c=status>ENERGY FRAGMENT</c> at the start of combat."
-            },
-            "RelicTempPayback": {
-                "name": "RELIC: TEMP PAYBACK",
-                "desc": "Gain 1 <c=status>TEMPORARY PAYBACK</c> at the start of combat."
-            },
-            "RelicDroneShift": {
-                "name": "RELIC: DRONE SHIFT",
-                "desc": "Gain 1 <c=status>DRONE SHIFT</c> at the start of combat."
-            },
-            "RelicShard": {
-                "name": "RELIC: SHARD",
-                "desc": "Gain 1 <c=status>SHARD</c> at the start of combat."
-            },
-            "RelicBoost": {
-                "name": "RELIC: BOOST",
-                "desc": "Gain 1 <c=status>BOOST</c> at the start of combat."
-            },
-            "RelicPulsedrive": {
-                "name": "RELIC: PULSEDIVE",
-                "desc": "Gain 1 <c=status>PULSEDIVE</c> at the start of combat."
-            },
-            "SpaceRelics2": {
-                "name": "COOL SPACE RELICS",
-                "desc": "<c=2a767d>Weth</c> found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nEach combat, gain:",
-                "clair": "<c=keyword>ALL</c> the relic bonuses on the start of first turn."
-            },
-            "SR2Crackling": {
-                "name": "CRACKLING SPACE RELICS",
-                "desc": "<c=2a767d>Weth</c> found unstable <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\n<c=keyword>Collect 3 of the same type of relic to upgrade the status!</c>\n<c=downside>Not eligible for: <c=status>EVADE</c>, <c=status>ENERGY FRAGMENT</c>, <c=status>DRONE SHIFT</c>, <c=status>BOOST</c>.</c>\nEach combat, gain:",
-                "clair": "<c=keyword>ALL</c> the relic bonuses on the start of first turn."
-            },
-            "SR2Subsuming": {
-                "name": "SUBSUMING SPACE RELICS",
-                "desc": "<c=2a767d>Weth</c> has collected some <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nEach turn (<c=keyword>until you run out</c>) gain 1 of:",
-                "clair": "Each available relic bonus. The amount of relics per status determines the <c=keyword>number of turns</c> the bonus will be given."
-            },
-            "SR2Focused": {
-                "name": "FOCUSED SPACE RELICS",
-                "desc": "<c=2a767d>Weth</c> is obsessed with <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\n<c=keyword>You will always be offered the type of relics you already have.</c>\n<c=downside>You can only have up to 3 different types.</c>\nEach combat, gain:",
-                "clair": "<c=keyword>ALL</c> the relic bonuses on the start of first turn."
-            },
-            "SuperDriveCollector": {
-                "name": "SUPER DRIVE COLLECTOR",
-                "desc": "Increase <c=keyword>all player base damage</c> by the number of turns where all four <c=status>DRIVE</c>s are or were present this combat."
-            },
-            "RelicCollection": {
-                "name": "RELIC COLLECTION",
-                "desc": "<c=2a767d>Weth</c> found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!"
-            },
-            "AntiqueCell": {
-                "name": "RELIC: ANTIQUE CELL",
-                "title": "ANTIQUE CELL",
-                "label": "Antique Cell",
-                "flavour": "<c=faint>Despite all odds, it still holds a charge.</c>",
-                "desc": "Gain <c=keyword>{0}</c> <c=status>ENERGY FRAGMENTS</c> every third turn.",
-                "extras": "",
-                "desc_special": "",
-                "extras_special": ""
-            },
-            "DogCharm": {
-                "name": "RELIC: DOG CHARM",
-                "title": "DOG CHARM",
-                "label": "Dog Charm",
-                "flavour": "<c=faint>Inexplicably invokes empathy when blown.</c>",
-                "altFlavour2": "<c=faint>Somehow increases attractiveness when worn.</c>",
-                "altFlavour": "<c=faint>It's like catnip, but infinitely more profitable and probably fake.</c>",
-                "desc": "At the start of combat, give enemy <c=keyword>{0}</c> <c=status>UNDERDRIVE</c>.",
-                "extras": "",
-                "desc_special": "",
-                "extras_special": ""
-            },
-            "PewPewGun": {
-                "name": "RELIC: PEW PEW GUN",
-                "title": "PEW PEW GUN",
-                "label": "Pew Pew Gun",
-                "flavour": "<c=faint>Weth's trusty revolver.</c>",
-                "desc": "At the start of every combat, the next <c=keyword>{0}</c> <c=2a767d>Weth</c> cards will fire an additional <c=damage>0</c> damage attack.",
-                "extras": "",
-                "desc_special": "",
-                "extras_special": ""
-            },
-            "ShockStack": {
-                "name": "RELIC: SHOCK STACK",
-                "title": "SHOCK STACK",
-                "label": "Shock Stack",
-                "flavour": "<c=faint>You never know when they'll go off!</c>",
-                "desc": "At random intervals of enemy hull loss (up to <c=keyword>{0}</c> times per combat), gain 1 <c=status>STUN CHARGE</c>.",
-                "extras": "At the start of every combat, assigns random numbers ranging from <c=keyword>1 to enemy max hull</c> where reducing the enemy hull below each number gives 1 <c=status>STUN CHARGE</c>. All assigned numbers are unique.\n<c=keyword>Status indicator becomes brighter if enemy hull is one away from next shock stack.</c>",
-                "desc_special": "",
-                "extras_special": ""
-            },
-            "UsefulScrap": {
-                "name": "RELIC: USED HULL PATCH",
-                "title": "USED HULL PATCH",
-                "label": "Used Hull Patch",
-                "flavour": "<c=faint>Works well enough, with the help of speed tape.</c>",
-                "desc": "Immediately on pickup, <c=hull>heal <c=keyword>{0}</c></c> hull.",
-                "extras": "Increases the value of this healing amount <c=keyword>every time you pick up this relic</c>.",
-                "desc_special": "",
-                "extras_special": ""
-            },
-            "Omnimote": {
-                "name": "RELIC: OMNIMOTE",
-                "title": "OMNIMOTE",
-                "label": "Omnimote",
-                "flavour": "<c=faint>A universal remote, but better cuz' space!</c>",
-                "desc": "For the next <c=keyword>{0}</c> turns every combat, gain 1 <c=status>DRONE SHIFT</c>.",
-                "extras": "",
-                "desc_special": "",
-                "extras_special": ""
-            },
-            "StubbornDrill": {
-                "name": "RELIC: STUBBORN DRILL",
-                "title": "STUBBORN DRILL",
-                "label": "Stubborn Drill",
-                "flavour": "<c=faint>It's what Weth always wanted... maybe not in a half broken state.</c>",
-                "desc": "Whenever you destroy a <c=midrow>midrow object</c>, add 1 <c=card>Safety Override</c> to your draw pile.",
-                "extras": "",
-                "desc_special": "Whenever you destroy a <c=midrow>midrow object</c>, add 1 <c=keyword>playable</c> <c=card>Safety Override</c> to your draw pile.",
-                "extras_special": ""
-            },
-            "DeadFish": {
-                "name": "RELIC: DEADFISH",
-                "title": "DEADFISH",
-                "label": "Deadfish",
-                "flavour": "<c=faint>Hard to get used to the eternal smell...</c>",
-                "desc": "At the start of combat, gain 1 <c=status>POWERDRIVE</c> <c=downside>and 5 <c=status>UNDERDRIVE</c></c>.",
-                "extras": "",
-                "desc_special": "At the start of combat, gain 1 <c=status>POWERDRIVE</c> <c=downside>and 2 <c=status>UNDERDRIVE</c></c>.",
-                "extras_special": ""
-            },
-            "PageantRibbon": {
-                "name": "RELIC: PAGEANT RIBBON",
-                "title": "PAGEANT RIBBON",
-                "label": "Pageant Ribbon",
-                "flavour": "<c=faint>Given to those who at least showed up to the Pageant contest.</c>",
-                "desc": "At the start of combat, launch a random <c=midrow>missile</c>.\n<c=downside>Every other combat, spawn the <c=midrow>missile</c> backwards.</c>",
-                "extras": "Switches between the two every combat.",
-                "desc_special": "At the start of combat, launch a random <c=midrow>missile</c>.",
-                "extras_special": ""
-            },
-            "AstroGrass": {
-                "name": "RELIC: ASTRO-GRASS",
-                "title": "ASTRO-GRASS",
-                "label": "Astro-GrassTM",
-                "flavour": "<c=faint>It can't get any GreenerTM than this.</c>",
-                "desc": "<c=action>Splitshots</c> do +1 damage if it hits <c=midrow>midrow objects</c>.\n<c=downside><c=action>Splitshots</c> that don't split deal -1 damage.</c>",
-                "extras": "",
-                "desc_special": "<c=action>Splitshots</c> do +1 damage if it hits <c=midrow>midrow objects</c>.",
-                "extras_special": ""
-            },
-            "StructuralStone": {
-                "name": "RELIC: STRUCTURAL FOOT",
-                "title": "STRUCTURAL FOOT",
-                "label": "Structural Foot",
-                "flavour": "<c=faint>Increases structural rigidity, at the cost of extra damage from stubbing your toe.</c>",
-                "desc": "<c=downside>Lose all but 1 hull</c> and permanently gain that amount as <c=hull>max hull</c>.",
-                "extras": "Only counts hull you currently have, and <c=keyword>NOT</c> the hull you've already lost.",
-                "desc_special": "Permanently double max hull, <c=downside>lose all but 1 hull</c>.",
-                "extras_special": ""
-            },
-            "SpaceUrchin": {
-                "name": "RELIC: SPACE URCHIN",
-                "title": "SPACE URCHIN",
-                "label": "Space Urchin",
-                "flavour": "<c=faint>It will hurt you in the most physical way possible.</c>",
-                "desc": "Your spawned <c=midrow>asteroids</c> are now <c=midrow>mines</c> disguised as asteroids.\n<c=heal>You take 1 less damage from mines.</c>",
-                "extras": "It looks, feels, and acts like an asteroid... with a spicy twist.",
-                "desc_special": "Your spawned <c=midrow>asteroids</c> are now <c=midrow>big mines</c> disguised as asteroids.\n<c=heal>You take 1 less damage from mines.</c>\n<c=keyword>Splitshots will ignore self-damage from these hidden mines.</c>",
-                "extras_special": "It looks, feels, and acts like an asteroid... with a spicy twist.\nRemember to defuse it with a Splitshot."
-            },
-            "HeraldNihility": {
-                "name": "RELIC: HERALD OF NIHILITY",
-                "title": "HERALD OF NIHILITY",
-                "label": "Herald of Nihility",
-                "flavour": "<c=faint>There's something so familiar about it to the space dog... but she can't figure out why.</c>",
-                "desc": "After every combat, select a card to upgrade from <c=keyword>base to A</c>, swap <c=keyword>A to B</c>, or downgrade from <c=keyword>B to base</c>.\n<c=downside>The type of operation will be chosen randomly.</c>",
-                "extras": "If card has upgrade A but has only one upgrade path, it will downgrade from <c=keyword>A to base</c>.",
-                "desc_special": "After every combat, select a card to upgrade from <c=keyword>base to A</c>, swap <c=keyword>A to B</c>, or downgrade from <c=keyword>B to base</c>.\n<c=downside>The type of operation will be chosen randomly.</c>\n<c=keyword>Skippable if dissatisfied.</c>",
-                "extras_special": "If card has upgrade A but has only one upgrade path, it will downgrade from <c=keyword>A to base</c>.",
-                "desc_old": "After every combat, randomly picks a card to upgrade from <c=keyword>base to A</c>, swap <c=keyword>A to B</c>, or downgrade from <c=keyword>B to base</c>."
-            },
-            "RelicTemplate": {
-                "name": "RELIC:",
-                "title": "",
-                "label": "",
-                "flavour": "<c=faint></c>",
-                "desc": "",
-                "extras": "",
-                "desc_special": "",
-                "extras_special": ""
-            }
-        },
-        "Tooltips": {
-            "TerminusReward": "Your reward is available!",
-            "TerminusAltReward": "Your alternative reward is available!",
-            "JauntActive" : "One of the enemy's parts will grant you a reward if struck!",
-            "JauntInactive" : "None of the enemy's parts will grant you a reward.",
-            "JauntReward" : "You hit the jackpot! Finish the battle to collect your relic!",
-            "JauntAltReward" : "You hit the jackpot! Finish the battle to collect your artifact!",
-            "MilestoneStart" : "You have yet to receive:",
-            "Milestone" : 
+    "Weth": {
+        "deck": {
+            "Weth":
             {
-                "0" : "<c=keyword>3</c>:  1 of 2 Common Artifacts",
-                "1" : "<c=keyword>6</c>:  1 of 3 Common Artifacts",
-                "2" : "<c=keyword>10</c>: 1 of 2 Boss Artifacts",
-                "3" : "<c=keyword>14</c>: 1 of 3 Boss Artifacts"
+                "name": "Weth",
+                "desc": "<c=2a767d>WETH</c>\nA treasure hunter. Her cards focus on <c=keyword>multi-attack</c> and <c=keyword>midrow elimination</c>. She also finds <c=heal>goodies</c> hidden in plain sight."
             },
-            "MilestoneEnd" : "You've got them all! Any additional advancements will give you <c=2a767d>WETH</c> relics."
-        }
-    },
-    "card": {
-        "Common": {
-            "TripleTap": {
-                "name": "Triple Tap"
-            },
-            "Puckshot": {
-                "name": "Puckshot"
-            },
-            "TrashDispenser": {
-                "name": "Trash Dispenser"
-            },
-            "Splitshot": {
-                "name": "Splitshot"
-            },
-            "CargoBlaster": {
-                "name": "Cargo Blaster"
-            },
+            "Goodie":
+            {
+                "name": "Goodies",
+                "desc": "Goodies discovered from breaking apart structures."
+            }
+        },
+        "status": {
             "Pulsedrive": {
-                "name": "Pulsedrive"
+                "name": "Pulsedrive",
+                "desc": "Add {0} damage to all attacks. <c=downside>Goes away at the start of next turn.</c>"
             },
-            "GiantTrash": {
-                "name": "Giant Trash"
+            "Unknown": {
+                "name": "___",
+                "desc": "Does {0} of something."
             },
-            "DoubleBlast": {
-                "name": "Double Blast"
-            },
-            "Overcompensator": {
-                "name": "Compensate"
-            },
-            "WethEXE": {
-                "name": "Weth.EXE"
-            },
-            "MilkSoda": {
-                "name": "Milk Soda",
-                "desc": "Shake to <c=keyword>potentially</c> gain more <c=status>Pulsedrive</c>! <c=status>(<c=boldPink>{0}</c>)</c>\n<c=downside>Caution:</c> May have a chance to explode! <c=downside>(<c=boldPink>{1:p}</c>)</c>",
-                "desca": "Shake to <c=keyword>potentially</c> gain more <c=status>Pulsedrive</c>! <c=status>(<c=boldPink>{0}</c>)</c>\n<c=downside>Caution:</c> May have a <c=keyword>low</c> chance to explode! <c=downside>(<c=boldPink>{1:p}</c>)</c>",
-                "descb": "Shake to gain more <c=status>Pulsedrive</c>! <c=status>(<c=boldPink>{0}</c>)</c>\n<c=downside>Caution:</c> May have a <c=keyword>very high</c> chance to explode! <c=downside>(<c=boldPink>{1:p}</c>)</c>",
-                "descc": "You've shaken the soda <c=boldPink>{0}</c> times.",
-                "desce": "Oh no! It exploded!\n\n<c=downside>Take 2 hull damage.</c>",
-                "descf": "<c=downside>Take 2 hull damage if it explodes.</c> Also refund energy spent.",
-                "descp": "Every shake increases chance of explosion by {0}%.",
-                "descu": "It's empty..."
-            },
-            "Feral": {
-                "name": "Feral"
+            "Recoil": {
+                "name": "Recoil",
+                "desc": "The next {0} attacks will deal 1 less damage."
             }
         },
-        "Uncommon": {
-            "DoubleTap": {
-                "name": "Double Tap"
+        "fake_status": {
+            "overdrive": {
+                "name": "OVERDRIVE",
+                "desc": "{0} <c=status>OVERDRIVE</c>"
             },
-            "Disabler": {
-                "name": "Disabler"
+            "powerdrive": {
+                "name": "POWERDRIVE",
+                "desc": "{0} <c=status>POWERDRIVE</c>"
             },
-            "ScatterTrash": {
-                "name": "Scatter Trash"
+            "shield": {
+                "name": "SHIELD",
+                "desc": "{0} <c=status>SHIELD</c>"
             },
-            "Discovery": {
-                "name": "Discovery",
-                "desc": "Add 1 of {0} <c=card>Goodie</c> to your hand.",
-                "descA": "Add 1 of {0} <c=card>Goodie A</c> to your hand."
+            "maxShield": {
+                "name": "MAX SHIELD",
+                "desc": "{0} <c=status>MAX SHIELD</c>"
             },
-            "Powershot": {
-                "name": "Powershot"
+            "tempShield": {
+                "name": "TEMP SHIELD",
+                "desc": "{0} <c=status>TEMP SHIELD</c>"
             },
-            "Spreadshot": {
-                "name": "Strewshot"
+            "perfectShield": {
+                "name": "PERFECT SHIELD",
+                "desc": "{0} <c=status>PERFECT SHIELD</c>"
             },
-            "Bloom": {
-                "name": "Bloom"
+            "hermes": {
+                "name": "HERMES",
+                "desc": "{0} <c=status>HERMES</c>"
             },
-            "FeralBlast": {
-                "name": "Feral Blast"
+            "strafe": {
+                "name": "STRAFE",
+                "desc": "{0} <c=status>STRAFE</c>"
             },
-            "MirageBlast": {
-                "name": "Mirage Blast"
+            "evade": {
+                "name": "EVADE",
+                "desc": "{0} <c=status>EVADE</c>"
+            },
+            "autododgeRight": {
+                "name": "AUTODODGE R",
+                "desc": "{0} <c=status>AUTODODGE R</c>"
+            },
+            "ace": {
+                "name": "ACE",
+                "desc": "{0} <c=status>ACE</c>"
+            },
+            "libra": {
+                "name": "FLUX",
+                "desc": "{0} <c=status>FLUX</c>"
+            },
+            "stunCharge": {
+                "name": "STUN CHARGE",
+                "desc": "{0} <c=status>STUN CHARGE</c>"
+            },
+            "stunSource": {
+                "name": "STUN SOURCE",
+                "desc": "{0} <c=status>STUN SOURCE</c>"
+            },
+            "drawNextTurn": {
+                "name": "DRAW NEXT TURN",
+                "desc": "{0} <c=status>DRAW NEXT TURN</c>"
+            },
+            "energyNextTurn": {
+                "name": "ENERGY NEXT TURN",
+                "desc": "{0} <c=status>ENERGY NEXT TURN</c>"
+            },
+            "energyFragment": {
+                "name": "ENERGY FRAGMENT",
+                "desc": "{0} <c=status>ENERGY FRAGMENT</c>"
+            },
+            "tempPayback": {
+                "name": "TEMPORARY PAYBACK",
+                "desc": "{0} <c=status>TEMP PAYBACK</c>"
+            },
+            "payback": {
+                "name": "PAYBACK",
+                "desc": "{0} <c=status>PAYBACK</c>"
+            },
+            "droneShift": {
+                "name": "DRONE SHIFT",
+                "desc": "{0} <c=status>DRONE SHIFT</c>"
+            },
+            "shard": {
+                "name": "SHARD",
+                "desc": "{0} <c=status>SHARD</c>"
+            },
+            "quarry": {
+                "name": "QUARRY",
+                "desc": "{0} <c=status>QUARRY</c>"
+            },
+            "maxShard": {
+                "name": "MAX SHARD",
+                "desc": "{0} <c=status>MAX SHARD</c>"
+            },
+            "boost": {
+                "name": "BOOST",
+                "desc": "{0} <c=status>BOOST</c>"
+            },
+            "pulsedrive": {
+                "name": "PULSEDRIVE",
+                "desc": "{0} <c=status>PULSEDRIVE</c>"
+            },
+            "energy": {
+                "name": "ENERGY",
+                "desc": "{0} <c=status>ENERGY</c>"
+            },
+            "RelicAntiqueCell": {
+                "name": "RELIC: ANTIQUE CELL",
+                "desc": "Gain {0} <c=status>ENERGY FRAGMENTS</c> every third turn."
+            },
+            "RelicPewPewGun": {
+                "name": "RELIC: PEW PEW GUN",
+                "desc": "The first {0} <c=2a767d>Weth</c> cards fire a <c=damage>0</c> damage attack this combat."
+            },
+            "RelicShockStack": {
+                "name": "RELIC: SHOCK STACK",
+                "desc": "At random intervals of enemy hull loss (up to {0} times this combat), gain 1 <c=status>STUN CHARGE</c>."
+            },
+            "RelicOmnimote": {
+                "name": "RELIC: OMNIMOTE",
+                "desc": "The first <c=keyword>{0}</c> turns grants 1 <c=status>DRONE SHIFT</c> this combat."
             }
         },
-        "Rare": {
-            "UnstoppableForce": {
-                "name": "Unstoppable Force"
+        "action": {
+            "Splitshot": {
+                "name": "SPLITSHOT",
+                "desc": "If attack hits a midrow object, the attack splits into two: one to the left and one to the right.",
+                "pierceName": "TRI-PIERCE SPLITSHOT",
+                "pierceDesc": "If attack hits a midrow object, the attack splits into three: one to the left, one center, one to the right. Ignores all shields and armor."
             },
-            "PearlDispenser": {
-                "name": "Pearl Dispenser"
+            "Bayblast": {
+                "name": "BAYBLAST",
+                "desc": "Shoots a blast from the missile bay, destroying whatever midrow object is in front <c=keyword>as if the foe destroyed them.</c>\nDeals {0} damage to invincible objects."
             },
-            "CrisisCall": {
-                "name": "Crisis Call",
-                "desc": "Give 3 <c=status>PULSEDRIVE</c> on play,\n<c=downside>forcibly  exhausted on discard.</c>",
-                "descB": "Give 7 <c=status>PULSEDRIVE</c> on play,\n<c=downside>forcibly  exhausted on discard.</c>"
+            "WideBayblast": {
+                "name": "WIDE BAYBLAST",
+                "desc": "Shoots a blast from the missile bay, destroying whatever midrow objects are in the adjacent and front <c=keyword>as if the foe destroyed them.</c>\nDeals {0} damage to invincible objects."
             },
-            "PowPow": {
-                "name": "Pow Pow"
+            "BubbleLeech": {
+                "name": "BUBBLE LEECH",
+                "desc": "Steals the midrow object's bubble, giving 1 <c=status>BUBBLE</c> to whoever shot the Bayblast."
             },
-            "ExtremeViolence": {
-                "name": "Extreme Violence"
+            "Harmless": {
+                "name": "HARMLESS",
+                "desc": "This Bayblast will deal no damage. <c=keyword>Instead, this will activate the drone this blast hits.</c>"
+            },
+            "BayBlastFail": {
+                "desc": "<c=downside>Warning:</c> no missile bays to channel this attack!"
+            },
+            "BayblastV2": {
+                "name": "BAYBLAST",
+                "desc": "Shoots a blast from the missile bay, dealing 1 piercing damage to midrow object is in a {1} unit radius of the bay."
+            },
+            "FlaredBayblast": {
+                "name": "FLARED BAYBLAST",
+                "desc": "Shoots a blast from the missile bay, dealing 1 piercing damage to whatever midrow object is in a {1} unit radius of the bay <c=keyword>as if the foe destroyed them."
             }
         },
-        "Token": {
-            "Ahtack": {
-                "name": "_tt_ck"
+        "event": {
+            "ChoiceRelicRewardOfYourRelicChoice_Yes": {
+                "desc": "Obtain one of {2} <c={0}>{1}</c> relics."
             },
-            "Duhfend": {
-                "name": "Bl_ck"
+            "ForeignRelicOffering_Yes": {
+                "desc": "Take one of {2} <c={0}>{1}</c> relics."
             },
-            "Evado": {
-                "name": "_v_d_"
+            "GrandmaShop_Weth": {
+                "desc": "Can we u- is that a Milk Soda Zero?!\n<c=heal>-Gain one volatile <c=card>Milk Soda</c></c>"
             },
-            "Swaparoo": {
-                "name": "Sw_p"
+            "UpgradeRandomAOrB_WethRelics": {
+                "desc": "Increase 2 random relics' stack"
             },
-            "Mime": {
-                "name": "M_n_"
+            "UpgradeRandomAOrB_WethSpecial": {
+                "desc": "Gain a special relic from the unknown"
             },
-            "Mizzile": {
-                "name": "M_ss_l_"
+            "LoseCharacterRelic_Yes": {
+                "desc": "Lose <c={0}>{1}</c>."
             },
-            "Captain": {
-                "name": "C_p_c_ty"
-            },
-            "Hell": {
-                "name": "H_ll"
-            },
-            "Flox": {
-                "name": "Fl_x"
-            },
-            "Dodger": {
-                "name": "D_dg_"
-            },
-            "NRG": {
-                "name": "_n_rg_"
-            },
-            "Shoulder": {
-                "name": "Sh__ld"
-            },
-            "Bauble": {
-                "name": "B_bbl_"
-            },
-            "Placeholder": {
-                "name": "___"
-            },
-            "JourneyV": {
-                "name": "Journey: Track V",
-                "play": "Flip to Play/Resume Song",
-                "pause": "Flip to Stop/Pause Song"
-            },
-            "IncompetentB": {
-                "name": "Incompetent Baffoon"
-            },
-            "FullCommit": {
-                "name": "Full Commitment"
-            },
-            "MilkSoda": {
-                "name": "Milk Soda",
-                "desc": "Gives <c=boldPink>{{amount}}</c> <c=status>Pulsedrive</c>.\n<c=downside>Has a <c=keyword>{{explode}}%</c> chance to explode.</c>",
-                "tooltip": "Shake to gain more <c=status>PULSEDRIVE</c>!\n\nYou've shaken the soda <c=boldPink>{{amount}}</c> times.\n<c=downside>Caution:</c> each shake increases the explosion chance by <c=keyword>{{rate}}</c>%",
-                "tooltipC": "Shake to gain more <c=status>PULSEDRIVE</c>!\n\nYou've shaken the soda <c=boldPink>{{amount}}</c> times.\n<c=downside>Caution:</c> each shake increases the explosion chance logarithmically by <c=keyword>50</c>%, never reaching 100%",
-                "flip": "Has a chance to explode, or will if it reaches 100%. Gives you <c=keyword>{{shaker}}</c> <c=status>SHAKEN</c> and refunds energy if it does.",
-                "exploded": "Oh no! It exploded!\n\n<c=downside>Gain <c=keyword>{{shaker}}</c> <c=status>SHAKEN</c>.</c>",
-                "spent": "\n\n\nIt's empty...",
-                "demo": "Shake to increase <c=status>Pulsedrive</c>, <c=downside>but also raise explosion chance by <c=keyword>{{rate}}%</c></c>",
-                "demoC": "Shake to add <c=status>Pulsedrive</c>, <c=downside>but also add explosion chance by <c=keyword>{{rate}}% logarithmically</c>.</c>",
-                "empty": "There's nothing left...\n\nNo longer does anything until next combat."
+            "ChoiceHPForRelic_Yes": {
+                "desc": "Risk it all for that weird spiky thing!\n<c=heal>- Gain 1 special relic</c> or skip event"
             }
+        },
+        "trait": {
 
+        },
+        "object": {
+            "GiantAsteroid": {
+                "name": "Giant Asteroid",
+                "desc": "When destroyed, splits into two <c=drone>asteroids</c> in adjacent spots."
+            },
+            "MegaAsteroid": {
+                "name": "Mega Asteroid",
+                "desc": "When destroyed, splits into two <c=drone>giant asteroids</c> in adjacent spots."
+            }
+        },
+        "artifact": {
+            "Common": {
+                "TreasureSeeker": {
+                    "name": "TREASURE SEEKER",
+                    "desc": "Replaces <c=artifact>TREASURE HUNTER</c>.\nOnce per combat, after <c=keyword>5 hits</c>, add a random <c=card>Goodie A</c> to your hand.\n<c=mapinfo>You may find hidden fortune along the way!</c>\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
+                },
+                "HiddenOptions": {
+                    "name": "HIDDEN OPTIONS",
+                    "desc": "Immediately choose 1 of 3 common artifacts.\nThen choose 1 of 3 <c=2a767d>WETH</c> relics."
+                },
+                "RockPower": {
+                    "name": "ROCK POWER",
+                    "desc": "Gain 1 <c=status>PULSEDRIVE</c> when you destroy an <c=midrow>asteroid</c>."
+                },
+                "ResidualShot": {
+                    "name": "RESIDUAL SHOT",
+                    "desc": "Shoot for 0 damage when you play a <c=2a767d>Weth</c> or <c=peri>Peri</c> card."
+                },
+                "CannonRecharge": {
+                    "name": "CANNON RECHARGE",
+                    "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c>, gain 1 <c=status>STUN CHARGE</c> next turn."
+                },
+                "PowerCrystals": {
+                    "name": "POWER CRYSTALS",
+                    "desc": "Whenever you gain <c=status>PULSEDRIVE</c>, gain <c=status>SHARD</c> instead. Increase attack damage by the amount of <c=status>SHARD</c> you have.\n<c=downside>Lose 1 <c=status>SHARD</c> at start of turn.</c>"
+                },
+                "PyroCannon": {
+                    "name": "PYRO-CANNON",
+                    "desc": "Heat affects damage done.\n<c=downside>Overheat limit is reduced by 1.</c>"
+                },
+                "MadcapTarge": {
+                    "name": "MADCAP TARGE",
+                    "desc": "The first time you gain <c=status>SHIELD</c>, increase all damage by shield gained.\n<c=downside>The first time you gain <c=status>TEMP SHIELD</c>, decrease all <c=keyword>base</c> damage by 1.\nResets on turn end.</c>"
+                },
+                "MadcapCharge": {
+                    "name": "MADCAP CHARGE",
+                    "desc": "Once per turn, stunning an enemy intent gives 1 <c=status>PULSEDRIVE</c>."
+                },
+                "PowerSprint": {
+                    "name": "POWERSPRINT",
+                    "desc": "<c=downside>Your <c=status>EVADE</c> is capped at 5.</c> Once per turn, convert excess <c=status>EVADE</c> into <c=status>PULSEDRIVE</c>."
+                },
+                "HiddenGem": {
+                    "name": "HIDDEN GEM",
+                    "desc": "Choose 2 of 6 Uncommon <c=trait>non-temp</c> <c=card>Goodie</c>. Instead of <c=trait>Single Use</c>, it has <c=trait>Exhaust</c>.\nBypass any restrictions to gaining uncommon goodies."
+                },
+                "Refreshment": {
+                    "name": "REFRESHMENT",
+                    "desc": "Add a <c=card>Milk Soda</c> to your deck."
+                },
+                "CalculatedWhiff": {
+                    "name": "CALCULATED WHIFF",
+                    "desc": "Whenever your attack misses by 1 space, gain 1 <c=status>PULSEDRIVE</c>. <c=keyword>Split shots from splitshots count.</c>"
+                },
+                "CannonPrimer": {
+                    "name": "CANNON PRIMER",
+                    "desc": "If you miss your first shot of the fight, convert double the attack damage to <c=status>MINIDRIVE</c>."
+                },
+                "BattleStimulation": {
+                    "name": "BATTLE STIMULATION",
+                    "desc": "The first time you deal hull damage each combat, gain 2 <c=status>OVERDRIVE</c>."
+                }
+            },
+            "Boss": {
+                "HiddenOptions2": {
+                    "name": "HIDDEN OPTIONS II",
+                    "desc": "Immediately choose 1 of 4 boss artifacts.\nThen choose 1 of 4 <c=2a767d>WETH</c> relics."
+                },
+                "TerminusMilestone": {
+                    "name": "TERMINUS: MILESTONE",
+                    "desc": "Get rewards for reaching milestones from defeating enemies!\nEarn <c=keyword>4 points</c> for boss, <c=keyword>2 points</c> for elites, <c=keyword>1 point</c> for the rest.\nFor every 2 points past the last milestone, gain 1 of 3 <c=2a767d>WETH</c> relics.\n<c=downside>You are limited to 1 <c=artifact>TERMINUS</c> artifact.</c>"
+                },
+                "TerminusJaunt": {
+                    "name": "TERMINUS: JAUNT",
+                    "desc": "1 random enemy part offers 1 of 3 <c=2a767d>WETH</c> relics when shot at.\nFor every 5th relic uncovered, instead gain 1 of 3 common artifacts.\n<c=keyword>Receive these rewards at the end of combat.</c>\n<c=downside>You can only obtain one relic or artifact per battle.\nYou are limited to 1 <c=artifact>TERMINUS</c> artifact.</c>"
+                },
+                "AlPoToCa": {
+                    "name": "ALL POWER TO CANNON(S)",
+                    "desc": "At the start of each combat, add a <c=card>Full Commitment</c> to your hand."
+                },
+                "KineticCap": {
+                    "name": "KINETIC CAP",
+                    "desc": "At the start of combat, gain 1 <c=status>FLUX</c>. Additionally, gain 1 <c=status>FLUX</c> every 5th turn."
+                }
+            },
+            "EventOnly": {
+                "TreasureHunter": {
+                    "name": "TREASURE HUNTER",
+                    "desc": "Once per combat, after <c=keyword>10 hits</c>, add a random <c=card>Goodie</c> to your hand.\n<c=mapinfo>You might even find hidden treasure along the way!</c>\n<c=downside>Limited to <c=keyword>1</c> uncommon goodie in your deck.</c>"
+                }
+            },
+            "Unreleased": {
+                "SpaceRelics": {
+                    "name": "SPACE RELICS",
+                    "desc": "<c=2a767d>Weth</c> found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nEach combat, gain:"
+                },
+                "RelicShield": {
+                    "name": "RELIC: SHIELD",
+                    "desc": "Gain 1 <c=status>SHIELD</c> at the start of combat."
+                },
+                "RelicTempShield": {
+                    "name": "RELIC: TEMP SHIELD",
+                    "desc": "Gain 1 <c=status>TEMPORARY SHIELD</c> at the start of combat."
+                },
+                "RelicHermes": {
+                    "name": "RELIC: HERMES",
+                    "desc": "Gain 1 <c=status>HERMES</c> at the start of combat."
+                },
+                "RelicEvade": {
+                    "name": "RELIC: EVADE",
+                    "desc": "Gain 1 <c=status>EVADE</c> at the start of combat."
+                },
+                "RelicAutododgeRight": {
+                    "name": "RELIC: AUTODODGE RIGHT",
+                    "desc": "Gain 1 <c=status>AUTODODGE RIGHT</c> at the start of combat."
+                },
+                "RelicFlux": {
+                    "name": "RELIC: FLUX",
+                    "desc": "Gain 1 <c=status>FLUX</c> at the start of combat."
+                },
+                "RelicStunCharge": {
+                    "name": "RELIC: STUN CHARGE",
+                    "desc": "Gain 1 <c=status>STUN CHARGE</c> at the start of combat."
+                },
+                "RelicDrawNextTurn": {
+                    "name": "RELIC: DRAW NEXT TURN",
+                    "desc": "Gain 1 <c=status>DRAW NEXT TURN</c> at the start of combat."
+                },
+                "RelicEnergyFragment": {
+                    "name": "RELIC: ENERGY FRAGMENT",
+                    "desc": "Gain 1 <c=status>ENERGY FRAGMENT</c> at the start of combat."
+                },
+                "RelicTempPayback": {
+                    "name": "RELIC: TEMP PAYBACK",
+                    "desc": "Gain 1 <c=status>TEMPORARY PAYBACK</c> at the start of combat."
+                },
+                "RelicDroneShift": {
+                    "name": "RELIC: DRONE SHIFT",
+                    "desc": "Gain 1 <c=status>DRONE SHIFT</c> at the start of combat."
+                },
+                "RelicShard": {
+                    "name": "RELIC: SHARD",
+                    "desc": "Gain 1 <c=status>SHARD</c> at the start of combat."
+                },
+                "RelicBoost": {
+                    "name": "RELIC: BOOST",
+                    "desc": "Gain 1 <c=status>BOOST</c> at the start of combat."
+                },
+                "RelicPulsedrive": {
+                    "name": "RELIC: PULSEDRIVE",
+                    "desc": "Gain 1 <c=status>PULSEDRIVE</c> at the start of combat."
+                },
+                "SpaceRelics2": {
+                    "name": "COOL SPACE RELICS",
+                    "desc": "<c=2a767d>Weth</c> found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nEach combat, gain:",
+                    "clair": "<c=keyword>ALL</c> the relic bonuses on the start of first turn."
+                },
+                "SR2Crackling": {
+                    "name": "CRACKLING SPACE RELICS",
+                    "desc": "<c=2a767d>Weth</c> found unstable <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\n<c=keyword>Collect 3 of the same type of relic to upgrade the status!</c>\n<c=downside>Not eligible for: <c=status>EVADE</c>, <c=status>ENERGY FRAGMENT</c>, <c=status>DRONE SHIFT</c>, <c=status>BOOST</c>.</c>\nEach combat, gain:",
+                    "clair": "<c=keyword>ALL</c> the relic bonuses on the start of first turn."
+                },
+                "SR2Subsuming": {
+                    "name": "SUBSUMING SPACE RELICS",
+                    "desc": "<c=2a767d>Weth</c> has collected some <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\nEach turn (<c=keyword>until you run out</c>) gain 1 of:",
+                    "clair": "Each available relic bonus. The amount of relics per status determines the <c=keyword>number of turns</c> the bonus will be given."
+                },
+                "SR2Focused": {
+                    "name": "FOCUSED SPACE RELICS",
+                    "desc": "<c=2a767d>Weth</c> is obsessed with <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!\n<c=keyword>You will always be offered the type of relics you already have.</c>\n<c=downside>You can only have up to 3 different types.</c>\nEach combat, gain:",
+                    "clair": "<c=keyword>ALL</c> the relic bonuses on the start of first turn."
+                },
+                "SuperDriveCollector": {
+                    "name": "SUPER DRIVE COLLECTOR",
+                    "desc": "Increase <c=keyword>all player base damage</c> by the number of turns where all four <c=status>DRIVE</c>s are or were present this combat."
+                },
+                "RelicCollection": {
+                    "name": "RELIC COLLECTION",
+                    "desc": "<c=2a767d>Weth</c> found some cool <c=ba3535>s</c><c=ba6e35>p</c><c=baa735>a</c><c=87ba36>c</c><c=3aba36>e</c> <c=36ba95>r</c><c=36adba>e</c><c=367aba>l</c><c=364aba>i</c><c=6636ba>c</c><c=b436ba>s</c>!"
+                },
+                "AntiqueCell": {
+                    "name": "RELIC: ANTIQUE CELL",
+                    "title": "ANTIQUE CELL",
+                    "label": "Antique Cell",
+                    "flavour": "<c=faint>Despite all odds, it still holds a charge.</c>",
+                    "desc": "Gain <c=keyword>{0}</c> <c=status>ENERGY FRAGMENTS</c> every third turn.",
+                    "extras": "",
+                    "desc_special": "",
+                    "extras_special": ""
+                },
+                "DogCharm": {
+                    "name": "RELIC: DOG CHARM",
+                    "title": "DOG CHARM",
+                    "label": "Dog Charm",
+                    "flavour": "<c=faint>Inexplicably invokes empathy when blown.</c>",
+                    "altFlavour2": "<c=faint>Somehow increases attractiveness when worn.</c>",
+                    "altFlavour": "<c=faint>It's like catnip, but infinitely more profitable and probably fake.</c>",
+                    "desc": "At the start of combat, give enemy <c=keyword>{0}</c> <c=status>UNDERDRIVE</c>.",
+                    "extras": "",
+                    "desc_special": "",
+                    "extras_special": ""
+                },
+                "PewPewGun": {
+                    "name": "RELIC: PEW PEW GUN",
+                    "title": "PEW PEW GUN",
+                    "label": "Pew Pew Gun",
+                    "flavour": "<c=faint>Weth's trusty revolver.</c>",
+                    "desc": "At the start of every combat, the next <c=keyword>{0}</c> <c=2a767d>Weth</c> cards will fire an additional <c=damage>0</c> damage attack.",
+                    "extras": "",
+                    "desc_special": "",
+                    "extras_special": ""
+                },
+                "ShockStack": {
+                    "name": "RELIC: SHOCK STACK",
+                    "title": "SHOCK STACK",
+                    "label": "Shock Stack",
+                    "flavour": "<c=faint>You never know when they'll go off!</c>",
+                    "desc": "At random intervals of enemy hull loss (up to <c=keyword>{0}</c> times per combat), gain 1 <c=status>STUN CHARGE</c>.",
+                    "extras": "At the start of every combat, assigns random numbers ranging from <c=keyword>1 to enemy max hull</c> where reducing the enemy hull below each number gives 1 <c=status>STUN CHARGE</c>. All assigned numbers are unique.\n<c=keyword>Status indicator becomes brighter if enemy hull is one away from next shock stack.</c>",
+                    "desc_special": "",
+                    "extras_special": ""
+                },
+                "UsefulScrap": {
+                    "name": "RELIC: USED HULL PATCH",
+                    "title": "USED HULL PATCH",
+                    "label": "Used Hull Patch",
+                    "flavour": "<c=faint>Works well enough, with the help of speed tape.</c>",
+                    "desc": "Immediately on pickup, <c=hull>heal <c=keyword>{0}</c></c> hull.",
+                    "extras": "Increases the value of this healing amount <c=keyword>every time you pick up this relic</c>.",
+                    "desc_special": "",
+                    "extras_special": ""
+                },
+                "Omnimote": {
+                    "name": "RELIC: OMNIMOTE",
+                    "title": "OMNIMOTE",
+                    "label": "Omnimote",
+                    "flavour": "<c=faint>A universal remote, but better cuz' space!</c>",
+                    "desc": "For the next <c=keyword>{0}</c> turns every combat, gain 1 <c=status>DRONE SHIFT</c>.",
+                    "extras": "",
+                    "desc_special": "",
+                    "extras_special": ""
+                },
+                "StubbornDrill": {
+                    "name": "RELIC: STUBBORN DRILL",
+                    "title": "STUBBORN DRILL",
+                    "label": "Stubborn Drill",
+                    "flavour": "<c=faint>It's what Weth always wanted... maybe not in a half broken state.</c>",
+                    "desc": "Whenever you destroy a <c=midrow>midrow object</c>, add 1 <c=card>Safety Override</c> to your draw pile.",
+                    "extras": "",
+                    "desc_special": "Whenever you destroy a <c=midrow>midrow object</c>, add 1 <c=keyword>playable</c> <c=card>Safety Override</c> to your draw pile.",
+                    "extras_special": ""
+                },
+                "DeadFish": {
+                    "name": "RELIC: DEADFISH",
+                    "title": "DEADFISH",
+                    "label": "Deadfish",
+                    "flavour": "<c=faint>Hard to get used to the eternal smell...</c>",
+                    "desc": "At the start of combat, gain 1 <c=status>POWERDRIVE</c> <c=downside>and 5 <c=status>UNDERDRIVE</c></c>.",
+                    "extras": "",
+                    "desc_special": "At the start of combat, gain 1 <c=status>POWERDRIVE</c> <c=downside>and 2 <c=status>UNDERDRIVE</c></c>.",
+                    "extras_special": ""
+                },
+                "PageantRibbon": {
+                    "name": "RELIC: PAGEANT RIBBON",
+                    "title": "PAGEANT RIBBON",
+                    "label": "Pageant Ribbon",
+                    "flavour": "<c=faint>Given to those who at least showed up to the Pageant contest.</c>",
+                    "desc": "At the start of combat, launch a random <c=midrow>missile</c>.\n<c=downside>Every other combat, spawn the <c=midrow>missile</c> backwards.</c>",
+                    "extras": "Switches between the two every combat.",
+                    "desc_special": "At the start of combat, launch a random <c=midrow>missile</c>.",
+                    "extras_special": ""
+                },
+                "AstroGrass": {
+                    "name": "RELIC: ASTRO-GRASS",
+                    "title": "ASTRO-GRASS",
+                    "label": "Astro-GrassTM",
+                    "flavour": "<c=faint>It can't get any GreenerTM than this.</c>",
+                    "desc": "<c=action>Splitshots</c> do +1 damage if it hits <c=midrow>midrow objects</c>.\n<c=downside><c=action>Splitshots</c> that don't split deal -1 damage.</c>",
+                    "extras": "",
+                    "desc_special": "<c=action>Splitshots</c> do +1 damage if it hits <c=midrow>midrow objects</c>.",
+                    "extras_special": ""
+                },
+                "StructuralStone": {
+                    "name": "RELIC: STRUCTURAL FOOT",
+                    "title": "STRUCTURAL FOOT",
+                    "label": "Structural Foot",
+                    "flavour": "<c=faint>Increases structural rigidity, at the cost of extra damage from stubbing your toe.</c>",
+                    "desc": "<c=downside>Lose all but 1 hull</c> and permanently gain that amount as <c=hull>max hull</c>.",
+                    "extras": "Only counts hull you currently have, and <c=keyword>NOT</c> the hull you've already lost.",
+                    "desc_special": "Permanently double max hull, <c=downside>lose all but 1 hull</c>.",
+                    "extras_special": ""
+                },
+                "SpaceUrchin": {
+                    "name": "RELIC: SPACE URCHIN",
+                    "title": "SPACE URCHIN",
+                    "label": "Space Urchin",
+                    "flavour": "<c=faint>It will hurt you in the most physical way possible.</c>",
+                    "desc": "Your spawned <c=midrow>asteroids</c> are now <c=midrow>mines</c> disguised as asteroids.\n<c=heal>You take 1 less damage from mines.</c>",
+                    "extras": "It looks, feels, and acts like an asteroid... with a spicy twist.",
+                    "desc_special": "Your spawned <c=midrow>asteroids</c> are now <c=midrow>big mines</c> disguised as asteroids.\n<c=heal>You take 1 less damage from mines.</c>\n<c=keyword>Splitshots will ignore self-damage from these hidden mines.</c>",
+                    "extras_special": "It looks, feels, and acts like an asteroid... with a spicy twist.\nRemember to defuse it with a Splitshot."
+                },
+                "HeraldNihility": {
+                    "name": "RELIC: HERALD OF NIHILITY",
+                    "title": "HERALD OF NIHILITY",
+                    "label": "Herald of Nihility",
+                    "flavour": "<c=faint>There's something so familiar about it to the space dog... but she can't figure out why.</c>",
+                    "desc": "After every combat, select a card to upgrade from <c=keyword>base to A</c>, swap <c=keyword>A to B</c>, or downgrade from <c=keyword>B to base</c>.\n<c=downside>The type of operation will be chosen randomly.</c>",
+                    "extras": "If card has upgrade A but has only one upgrade path, it will downgrade from <c=keyword>A to base</c>.",
+                    "desc_special": "After every combat, select a card to upgrade from <c=keyword>base to A</c>, swap <c=keyword>A to B</c>, or downgrade from <c=keyword>B to base</c>.\n<c=downside>The type of operation will be chosen randomly.</c>\n<c=keyword>Skippable if dissatisfied.</c>",
+                    "extras_special": "If card has upgrade A but has only one upgrade path, it will downgrade from <c=keyword>A to base</c>.",
+                    "desc_old": "After every combat, randomly picks a card to upgrade from <c=keyword>base to A</c>, swap <c=keyword>A to B</c>, or downgrade from <c=keyword>B to base</c>."
+                },
+                "RelicTemplate": {
+                    "name": "RELIC:",
+                    "title": "",
+                    "label": "",
+                    "flavour": "<c=faint></c>",
+                    "desc": "",
+                    "extras": "",
+                    "desc_special": "",
+                    "extras_special": ""
+                }
+            },
+            "Tooltips": {
+                "TerminusReward": "Your reward is available!",
+                "TerminusAltReward": "Your alternative reward is available!",
+                "JauntActive" : "One of the enemy's parts will grant you a reward if struck!",
+                "JauntInactive" : "None of the enemy's parts will grant you a reward.",
+                "JauntReward" : "You hit the jackpot! Finish the battle to collect your relic!",
+                "JauntAltReward" : "You hit the jackpot! Finish the battle to collect your artifact!",
+                "MilestoneStart" : "You have yet to receive:",
+                "Milestone" : 
+                {
+                    "0" : "<c=keyword>3</c>:  1 of 2 Common Artifacts",
+                    "1" : "<c=keyword>6</c>:  1 of 3 Common Artifacts",
+                    "2" : "<c=keyword>10</c>: 1 of 2 Boss Artifacts",
+                    "3" : "<c=keyword>14</c>: 1 of 3 Boss Artifacts"
+                },
+                "MilestoneEnd" : "You've got them all! Any additional advancements will give you <c=2a767d>WETH</c> relics."
+            }
+        },
+        "card": {
+            "Common": {
+                "TripleTap": {
+                    "name": "Triple Tap"
+                },
+                "Puckshot": {
+                    "name": "Puckshot"
+                },
+                "TrashDispenser": {
+                    "name": "Trash Dispenser"
+                },
+                "Splitshot": {
+                    "name": "Splitshot"
+                },
+                "CargoBlaster": {
+                    "name": "Cargo Blaster"
+                },
+                "Pulsedrive": {
+                    "name": "Pulsedrive"
+                },
+                "GiantTrash": {
+                    "name": "Giant Trash"
+                },
+                "DoubleBlast": {
+                    "name": "Double Blast"
+                },
+                "Overcompensator": {
+                    "name": "Compensate"
+                },
+                "WethEXE": {
+                    "name": "Weth.EXE"
+                },
+                "MilkSoda": {
+                    "name": "Milk Soda",
+                    "desc": "Shake to <c=keyword>potentially</c> gain more <c=status>Pulsedrive</c>! <c=status>(<c=boldPink>{0}</c>)</c>\n<c=downside>Caution:</c> May have a chance to explode! <c=downside>(<c=boldPink>{1:p}</c>)</c>",
+                    "desca": "Shake to <c=keyword>potentially</c> gain more <c=status>Pulsedrive</c>! <c=status>(<c=boldPink>{0}</c>)</c>\n<c=downside>Caution:</c> May have a <c=keyword>low</c> chance to explode! <c=downside>(<c=boldPink>{1:p}</c>)</c>",
+                    "descb": "Shake to gain more <c=status>Pulsedrive</c>! <c=status>(<c=boldPink>{0}</c>)</c>\n<c=downside>Caution:</c> May have a <c=keyword>very high</c> chance to explode! <c=downside>(<c=boldPink>{1:p}</c>)</c>",
+                    "descc": "You've shaken the soda <c=boldPink>{0}</c> times.",
+                    "desce": "Oh no! It exploded!\n\n<c=downside>Take 2 hull damage.</c>",
+                    "descf": "<c=downside>Take 2 hull damage if it explodes.</c> Also refund energy spent.",
+                    "descp": "Every shake increases chance of explosion by {0}%.",
+                    "descu": "It's empty..."
+                },
+                "Feral": {
+                    "name": "Feral"
+                }
+            },
+            "Uncommon": {
+                "DoubleTap": {
+                    "name": "Double Tap"
+                },
+                "Disabler": {
+                    "name": "Disabler"
+                },
+                "ScatterTrash": {
+                    "name": "Scatter Trash"
+                },
+                "Discovery": {
+                    "name": "Discovery",
+                    "desc": "Add 1 of {0} <c=card>Goodie</c> to your hand.",
+                    "descA": "Add 1 of {0} <c=card>Goodie A</c> to your hand."
+                },
+                "Powershot": {
+                    "name": "Powershot"
+                },
+                "Spreadshot": {
+                    "name": "Strewshot"
+                },
+                "Bloom": {
+                    "name": "Bloom"
+                },
+                "FeralBlast": {
+                    "name": "Feral Blast"
+                },
+                "MirageBlast": {
+                    "name": "Mirage Blast"
+                }
+            },
+            "Rare": {
+                "UnstoppableForce": {
+                    "name": "Unstoppable Force"
+                },
+                "PearlDispenser": {
+                    "name": "Pearl Dispenser"
+                },
+                "CrisisCall": {
+                    "name": "Crisis Call",
+                    "desc": "Give 3 <c=status>PULSEDRIVE</c> on play,\n<c=downside>forcibly  exhausted on discard.</c>",
+                    "descB": "Give 7 <c=status>PULSEDRIVE</c> on play,\n<c=downside>forcibly  exhausted on discard.</c>"
+                },
+                "PowPow": {
+                    "name": "Pow Pow"
+                },
+                "ExtremeViolence": {
+                    "name": "Extreme Violence"
+                }
+            },
+            "Token": {
+                "Ahtack": {
+                    "name": "_tt_ck"
+                },
+                "Duhfend": {
+                    "name": "Bl_ck"
+                },
+                "Evado": {
+                    "name": "_v_d_"
+                },
+                "Swaparoo": {
+                    "name": "Sw_p"
+                },
+                "Mime": {
+                    "name": "M_n_"
+                },
+                "Mizzile": {
+                    "name": "M_ss_l_"
+                },
+                "Captain": {
+                    "name": "C_p_c_ty"
+                },
+                "Hell": {
+                    "name": "H_ll"
+                },
+                "Flox": {
+                    "name": "Fl_x"
+                },
+                "Dodger": {
+                    "name": "D_dg_"
+                },
+                "NRG": {
+                    "name": "_n_rg_"
+                },
+                "Shoulder": {
+                    "name": "Sh__ld"
+                },
+                "Bauble": {
+                    "name": "B_bbl_"
+                },
+                "Placeholder": {
+                    "name": "___"
+                },
+                "JourneyV": {
+                    "name": "Journey: Track V",
+                    "play": "Flip to Play/Resume Song",
+                    "pause": "Flip to Stop/Pause Song"
+                },
+                "IncompetentB": {
+                    "name": "Incompetent Baffoon"
+                },
+                "FullCommit": {
+                    "name": "Full Commitment"
+                },
+                "MilkSoda": {
+                    "name": "Milk Soda",
+                    "desc": "Gives <c=boldPink>{{amount}}</c> <c=status>Pulsedrive</c>.\n<c=downside>Has a <c=keyword>{{explode}}%</c> chance to explode.</c>",
+                    "tooltip": "Shake to gain more <c=status>PULSEDRIVE</c>!\n\nYou've shaken the soda <c=boldPink>{{amount}}</c> times.\n<c=downside>Caution:</c> each shake increases the explosion chance by <c=keyword>{{rate}}</c>%",
+                    "tooltipC": "Shake to gain more <c=status>PULSEDRIVE</c>!\n\nYou've shaken the soda <c=boldPink>{{amount}}</c> times.\n<c=downside>Caution:</c> each shake increases the explosion chance logarithmically by <c=keyword>50</c>%, never reaching 100%",
+                    "flip": "Has a chance to explode, or will if it reaches 100%. Gives you <c=keyword>{{shaker}}</c> <c=status>SHAKEN</c> and refunds energy if it does.",
+                    "exploded": "Oh no! It exploded!\n\n<c=downside>Gain <c=keyword>{{shaker}}</c> <c=status>SHAKEN</c>.</c>",
+                    "spent": "\n\n\nIt's empty...",
+                    "demo": "Shake to increase <c=status>Pulsedrive</c>, <c=downside>but also raise explosion chance by <c=keyword>{{rate}}%</c></c>",
+                    "demoC": "Shake to add <c=status>Pulsedrive</c>, <c=downside>but also add explosion chance by <c=keyword>{{rate}}% logarithmically</c>.</c>",
+                    "empty": "There's nothing left...\n\nNo longer does anything until next combat."
+                }
+
+            }
         }
     }
 }

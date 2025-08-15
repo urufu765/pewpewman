@@ -27,7 +27,7 @@ public static class LoseWethArtifact
                     {
                         __result[x] = new Choice
                         {
-                            label = string.Format(ModEntry.Instance.Localizations.Localize(["event", "LoseCharacterRelic_Yes", "desc"]), ModEntry.Instance.WethDeck.Configuration.Definition.color, ModEntry.Instance.Localizations.Localize(["artifact", "Unreleased", workingRelic.GetType().Name, "label"])),
+                            label = string.Format(ModEntry.Instance.Localizations.Localize(["Weth", "event", "LoseCharacterRelic_Yes", "desc"]), ModEntry.Instance.WethDeck.Configuration.Definition.color, ModEntry.Instance.Localizations.Localize(["Weth", "artifact", "Unreleased", workingRelic.GetType().Name, "label"])),
                             key = $"LoseCharacterRelic_{AmWeth}",
                             actions =
                             {

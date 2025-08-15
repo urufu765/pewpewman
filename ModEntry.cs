@@ -100,7 +100,7 @@ internal partial class ModEntry : SimpleMod
 
             DefaultCardArt = StableSpr.cards_Cannon,
             BorderSprite = RegisterSprite(package, "assets/Borders/frame_weth.png").Sprite,
-            Name = AnyLocalizations.Bind(["character", "Weth", "name"]).Localize,
+            Name = AnyLocalizations.Bind(["Weth", "deck", "Weth", "name"]).Localize,
             ShineColorOverride = _ => new Color(0, 0, 0),
         });
         WethCommon = RegisterSprite(package, "assets/Borders/frame_wethcommon.png").Sprite;
@@ -142,7 +142,7 @@ internal partial class ModEntry : SimpleMod
 
             DefaultCardArt = StableSpr.cards_MultiBlast,
             BorderSprite = RegisterSprite(package, "assets/Borders/frame_goodies.png").Sprite,
-            Name = AnyLocalizations.Bind(["character", "Goodie", "name"]).Localize,
+            Name = AnyLocalizations.Bind(["Weth", "deck", "Goodie", "name"]).Localize,
             //ShineColorOverride = _ => new Color(0, 0, 0),
         });
         GoodieCrystal = RegisterSprite(package, "assets/Borders/frame_goodiescrystal.png").Sprite;
@@ -210,7 +210,7 @@ internal partial class ModEntry : SimpleMod
                     new TreasureHunter()
                 ]
             },
-            Description = AnyLocalizations.Bind(["character", "Weth", "desc"]).Localize,
+            Description = AnyLocalizations.Bind(["Weth", "deck", "Weth", "desc"]).Localize,
             SoloStarters = new StarterDeck
             {
                 cards = [
@@ -234,7 +234,7 @@ internal partial class ModEntry : SimpleMod
         //     Starters = new StarterDeck
         //     {
         //     },
-        //     Description = AnyLocalizations.Bind(["character", "Weth", "desc"]).Localize,
+        //     Description = AnyLocalizations.Bind(["Weth", "deck", "Weth", "desc"]).Localize,
         // });
 
         MoreDifficultiesApi?.RegisterAltStarters(WethDeck.Deck, new StarterDeck
@@ -262,8 +262,8 @@ internal partial class ModEntry : SimpleMod
                 color = new Color("4ab3ff"),
                 icon = ModEntry.RegisterSprite(package, "assets/Icon/pulsedrive.png").Sprite
             },
-            Name = AnyLocalizations.Bind(["status", "Pulsedrive", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "Pulsedrive", "desc"]).Localize
+            Name = AnyLocalizations.Bind(["Weth", "status", "Pulsedrive", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["Weth", "status", "Pulsedrive", "desc"]).Localize
         });
         UnknownStatus = helper.Content.Statuses.RegisterStatus("UnknStatrus", new StatusConfiguration
         {
@@ -274,8 +274,8 @@ internal partial class ModEntry : SimpleMod
                 color = new Color("4ab3ff"),
                 icon = ModEntry.RegisterSprite(package, "assets/Icon/unknownlol.png").Sprite
             },
-            Name = AnyLocalizations.Bind(["status", "Unknown", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "Unknown", "desc"]).Localize
+            Name = AnyLocalizations.Bind(["Weth", "status", "Unknown", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["Weth", "status", "Unknown", "desc"]).Localize
         });
         JauntSlapSound = helper.Content.Audio.RegisterSound("spaceSlap", package.PackageRoot.GetRelativeFile("assets/SFX/SpaceSlap.ogg"));
         SodaOpening = helper.Content.Audio.RegisterSound("sodaopening", package.PackageRoot.GetRelativeFile("assets/SFX/sodaopening.wav"));
@@ -290,13 +290,13 @@ internal partial class ModEntry : SimpleMod
         // AutoSUSpr = RegisterSprite(package, "assets/autoplaysingle.png").Sprite;
         // AutoSU = helper.Content.Cards.RegisterTrait("AutoSU", new CardTraitConfiguration
         // {
-        //     Name = AnyLocalizations.Bind(["trait", "Autousedestroy", "name"]).Localize,
+        //     Name = AnyLocalizations.Bind(["Weth", "trait", "Autousedestroy", "name"]).Localize,
         //     Tooltips = (state, card) =>
         //     {
         //         return [new GlossaryTooltip($"cardtrait.{MethodBase.GetCurrentMethod()!.DeclaringType!.Namespace!}::AutoSU")
         //         {
-        //             Title = ModEntry.Instance.Localizations?.Localize(["trait", "Autousedestroy", "name"]),
-        //             Description = ModEntry.Instance.Localizations?.Localize(["trait", "Autousedestroy", "desc"]),
+        //             Title = ModEntry.Instance.Localizations?.Localize(["Weth", "trait", "Autousedestroy", "name"]),
+        //             Description = ModEntry.Instance.Localizations?.Localize(["Weth", "trait", "Autousedestroy", "desc"]),
         //             TitleColor = Colors.cardtrait,
         //             Icon = AutoSUSpr
         //         },
@@ -325,8 +325,8 @@ internal partial class ModEntry : SimpleMod
                 color = new Color("036192"),
                 icon = NewRelicIcons[typeof(AntiqueCell)]
             },
-            Name = AnyLocalizations.Bind(["status", "RelicAntiqueCell", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "RelicAntiqueCell", "desc"]).Localize
+            Name = AnyLocalizations.Bind(["Weth", "status", "RelicAntiqueCell", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["Weth", "status", "RelicAntiqueCell", "desc"]).Localize
         });
         NewRelicStatuses[typeof(AntiqueCell)] = Relic_AntiqueCell.Status;
         _ = new AntiqueCellStatus();
@@ -340,8 +340,8 @@ internal partial class ModEntry : SimpleMod
                 color = new Color("036192"),
                 icon = NewRelicIcons[typeof(PewPewGun)]
             },
-            Name = AnyLocalizations.Bind(["status", "RelicPewPewGun", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "RelicPewPewGun", "desc"]).Localize
+            Name = AnyLocalizations.Bind(["Weth", "status", "RelicPewPewGun", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["Weth", "status", "RelicPewPewGun", "desc"]).Localize
         });
         NewRelicStatuses[typeof(PewPewGun)] = Relic_PewPewGun.Status;
         _ = new PewPewGunStatus();
@@ -355,8 +355,8 @@ internal partial class ModEntry : SimpleMod
                 color = new Color("036192"),
                 icon = NewRelicIcons[typeof(ShockStack)]
             },
-            Name = AnyLocalizations.Bind(["status", "RelicShockStack", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "RelicShockStack", "desc"]).Localize
+            Name = AnyLocalizations.Bind(["Weth", "status", "RelicShockStack", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["Weth", "status", "RelicShockStack", "desc"]).Localize
         });
         NewRelicStatuses[typeof(ShockStack)] = Relic_ShockStack.Status;
         _ = new ShockStackStatus();
@@ -370,8 +370,8 @@ internal partial class ModEntry : SimpleMod
                 color = new Color("036192"),
                 icon = NewRelicIcons[typeof(Omnimote)]
             },
-            Name = AnyLocalizations.Bind(["status", "RelicOmnimote", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "RelicOmnimote", "desc"]).Localize
+            Name = AnyLocalizations.Bind(["Weth", "status", "RelicOmnimote", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["Weth", "status", "RelicOmnimote", "desc"]).Localize
         });
         NewRelicStatuses[typeof(Omnimote)] = Relic_Omnimote.Status;
         _ = new OmnimoteStatus();
