@@ -80,6 +80,8 @@ internal partial class ModEntry : SimpleMod
             new CurrentLocaleOrEnglishLocalizationProvider<IReadOnlyList<string>>(AnyLocalizations)
         );
 
+
+        #region WETH
         /*
          * A deck only defines how cards should be grouped, for things such as codex sorting and Second Opinions.
          * A character must be defined with a deck to allow the cards to be obtainable as a character's cards.
@@ -381,7 +383,7 @@ internal partial class ModEntry : SimpleMod
         _ = new Pulsedriving();
         //_ = new Otherdriving();
 
-        // Artifact Section (except for version 3 space relics)
+        // Artifact Section (except for version 3&4 space relics)
         foreach (Type ta in WethArtifactTypes)
         {
             Deck deck = WethDeck.Deck;
@@ -433,6 +435,103 @@ internal partial class ModEntry : SimpleMod
         SprMegaAsteroid = RegisterSprite(package, "assets/Drone/megaasteroid.png").Sprite;
         SprGiantAsteroidIcon = RegisterSprite(package, "assets/Icon/giantasteroidicon.png").Sprite;
         SprMegaAsteroidIcon = RegisterSprite(package, "assets/Icon/megaasteroidicon.png").Sprite;
+        #endregion
+
+        #region Tarmauc
+        RoadkillDeck = helper.Content.Decks.RegisterDeck("roadkill", new DeckConfiguration
+        {
+            Definition = new DeckDef
+            {
+                /*
+                 * This color is used in a few places:
+                 * TODO On cards, it dictates the sheen on higher rarities, as well as influences the color of the energy cost.
+                 * If this deck is given to a playable character, their name will be this color, and their mini will have this color as their border.
+                 */
+                color = new Color("79709a"),
+
+                titleColor = new Color("93c4c8").addClarityBright()
+            },
+
+            DefaultCardArt = StableSpr.cards_Cannon,
+            BorderSprite = RegisterSprite(package, "assets/Borders/frame_roadkill.png").Sprite,
+            Name = AnyLocalizations.Bind(["Roadkill", "deck", "Tarmauc", "name"]).Localize,
+            ShineColorOverride = _ => new Color(0, 0, 0),  // Maybe don't remove shine for the base "replace" cards
+        });
+        BurnStatus = helper.Content.Statuses.RegisterStatus("BurnBabyBurn", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = false,
+                color = new Color("FF0000"),
+                icon = StableSpr.icons_heat  // TODO: Replace
+            },
+            Name = AnyLocalizations.Bind(["Roadkill", "status", "Burn", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["Roadkill", "status", "Burn", "desc"]).Localize
+        });
+        BlisterStatus = helper.Content.Statuses.RegisterStatus("BlisterBlister", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = false,
+                color = new Color("FF0000"),
+                icon = StableSpr.icons_heat  // TODO: Replace
+            },
+            Name = AnyLocalizations.Bind(["Roadkill", "status", "Blister", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["Roadkill", "status", "Blister", "desc"]).Localize
+        });
+        RoadkillWow = helper.Content.Characters.V2.RegisterPlayableCharacter("roadkill", new PlayableCharacterConfigurationV2
+        {
+            Deck = RoadkillDeck.Deck,
+            BorderSprite = StableSpr.panels_char_colorless,  // TODO: REPLACE
+            Starters = new StarterDeck
+            {
+                cards = [
+                    new OptInPacer(),
+                    new HeatedShot()
+                ],
+                artifacts = [
+                ]
+            },
+            Description = AnyLocalizations.Bind(["Roadkill", "deck", "Tarmauc", "desc"]).Localize,
+            SoloStarters = new StarterDeck
+            {
+                cards = [
+                ],
+                artifacts = [
+                ]
+            },
+            //ExeCardType = typeof(RoadkillExe)
+        });
+
+        MoreDifficultiesApi?.RegisterAltStarters(RoadkillDeck.Deck, new StarterDeck
+        {
+            cards = [
+                new HullBlister(),
+                new QuickBoosters()
+            ],
+            artifacts =
+            [
+            ]
+        });
+
+        foreach (Type ta in RoadkillArtifactTypes)
+        {
+            Deck deck = RoadkillDeck.Deck;
+            if (RoadkillDuoArtifacts.Contains(ta))
+            {
+                if (DuoArtifactsApi is null)
+                {
+                    continue;
+                }
+                else
+                {
+                    deck = DuoArtifactsApi.DuoArtifactVanillaDeck;
+                }
+            }
+            helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite, deck));
+        }
+
+        #endregion
 
         /*
          * All the IRegisterable types placed into the static lists at the start of the class are initialized here.

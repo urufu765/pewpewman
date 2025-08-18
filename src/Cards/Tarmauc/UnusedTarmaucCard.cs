@@ -14,17 +14,6 @@ public enum ZealType
     Ragebait
 }
 
-public enum TarmaucTheme
-{
-    Jumper,
-    Wraith,
-    Infinity,
-    Fool,
-    Trance,
-    Magician,
-    Lover
-}
-
 /// <summary>
 /// Tarmauc Card that uses Zeal. Unused.
 /// </summary>

@@ -10,6 +10,7 @@ namespace Weth.Conversation;
 
 /// <summary>
 /// Tries to replace the foreign card giver with a relic, but doesn't work since you can't give character specific relics to ship.
+/// TODO: Replace with foreign RoadKill offering
 /// </summary>
 public static class ForeignRelicOffering
 {

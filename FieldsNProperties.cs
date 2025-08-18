@@ -17,12 +17,25 @@ internal partial class ModEntry : SimpleMod
 {
     internal static ModEntry Instance { get; private set; } = null!;
     internal static IPlayableCharacterEntryV2 WethTheSnep { get; private set; } = null!;
+    internal static IPlayableCharacterEntryV2 RoadkillWow { get; private set; } = null!;
     internal string UniqueName { get; private set; }
     internal Harmony Harmony;
     internal IKokoroApi KokoroApi;
     internal IDeckEntry WethDeck;
     internal IDeckEntry GoodieDeck;
-    public bool modDialogueInited;
+    internal IDeckEntry RoadkillDeck;
+    //internal IDeckEntry TaurmacDeck;
+
+    public bool modDialogueInited;  // What's this even for?
+    internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
+    internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
+    internal IMoreDifficultiesApi? MoreDifficultiesApi { get; private set; } = null!;
+    internal IDuoArtifactsApi? DuoArtifactsApi { get; private set; } = null!;
+    public LocalDB localDB { get; set; } = null!;
+    
+
+
+    #region WETH
     private int _loadFrameBuffer = 3;
     public bool WethFrameLoadAllowed
     {
@@ -30,6 +43,7 @@ internal partial class ModEntry : SimpleMod
     }
     internal IStatusEntry PulseStatus { get; private set; } = null!;
     internal IStatusEntry UnknownStatus { get; private set; } = null!;
+    internal IStatusEntry VetoStatus { get; private set; } = null!;
     internal IModSoundEntry JauntSlapSound { get; private set; }
     internal IModSoundEntry SodaOpening { get; private set; }
     internal IModSoundEntry SodaOpened { get; private set; }
@@ -186,12 +200,6 @@ internal partial class ModEntry : SimpleMod
         // {typeof(StructuralStone), 0}
     };
 
-    internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
-    internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
-    internal IMoreDifficultiesApi? MoreDifficultiesApi { get; private set; } = null!;
-    internal IDuoArtifactsApi? DuoArtifactsApi { get; private set; } = null!;
-    public LocalDB localDB { get; set; } = null!;
-    
     /*
      * The following lists contain references to all types that will be registered to the game.
      * All cards and artifacts must be registered before they may be used in the game.
@@ -323,9 +331,6 @@ internal partial class ModEntry : SimpleMod
         typeof(CardDialogue),
         typeof(MemoryDialogue)
     ];
-    private readonly static IEnumerable<Type> AllRegisterableTypes =
-        WethCardTypes
-            .Concat(WethDialogues);
 
     private static List<string> Weth1Anims = [
         "crystallized",
@@ -432,6 +437,77 @@ internal partial class ModEntry : SimpleMod
             .Concat(Weth4Anims)
             .Concat(Weth5Anims)
             .Concat(Weth6Anims);
+    #endregion
 
-    public static bool Patch_EnemyPack {get; private set;}
+    #region ROADKILL
+    internal IStatusEntry BurnStatus { get; private set; } = null!;
+    internal IStatusEntry BlisterStatus { get; private set; } = null!;
+
+    private readonly static List<Type> RoadkillCommonCardTypes = [
+        typeof(OptInPacer),
+        typeof(HeatedShot),
+        typeof(HullBlister),
+        typeof(QuickBoosters),
+        typeof(Whisk),
+        typeof(QuickFlip),
+        typeof(SpaceSalt),
+        typeof(HeatCannon),
+    ];
+    private readonly static List<Type> RoadkillUncommonCardTypes = [
+        typeof(StutterShift),
+        // typeof(RugPull),
+        typeof(HeatEqualizer),
+        typeof(JogWheel),
+        typeof(SaltedSalt),
+        typeof(OuttaHere),
+    ];
+    private readonly static List<Type> RoadkillRareCardTypes = [
+        typeof(HeatBurst),
+        typeof(SuperBurn),
+        typeof(Rapiburner),
+        typeof(BlastTime),
+    ];
+    private readonly static List<Type> RoadkillSpecialCardTypes = [
+        typeof(CrankBase),
+        typeof(BilkBase),
+        typeof(DumperBase),
+        //typeof(ChaCha),
+        //typeof(RubberBand),
+        //typeof(FourHunts),
+    ];
+
+    private readonly static IEnumerable<Type> RoadkillCardTypes =
+        RoadkillCommonCardTypes
+            .Concat(RoadkillUncommonCardTypes)
+            .Concat(RoadkillRareCardTypes)
+            .Concat(RoadkillSpecialCardTypes);
+
+
+    private readonly static List<Type> RoadkillCommonArtifacts = [
+        //typeof(DoubleBlind),
+        typeof(DelayedControlAid),
+        typeof(BattleWeld),
+        //typeof(HeatSaturation),
+    ];
+    private readonly static List<Type> RoadkillBossArtifacts = [
+        typeof(Pyrotactics),
+        //typeof(ChemicalFire),
+        typeof(Pyroforger),
+    ];
+    private readonly static List<Type> RoadkillEventArtifacts = [
+    ];
+    private readonly static List<Type> RoadkillDuoArtifacts = [
+    ];
+    private readonly static IEnumerable<Type> RoadkillArtifactTypes =
+        RoadkillCommonArtifacts
+            .Concat(RoadkillBossArtifacts)
+            .Concat(RoadkillEventArtifacts)
+            .Concat(RoadkillDuoArtifacts);
+    #endregion
+
+    private readonly static IEnumerable<Type> AllRegisterableTypes =
+        WethCardTypes
+            .Concat(RoadkillCardTypes)
+            .Concat(WethDialogues);
+    public static bool Patch_EnemyPack { get; private set; }
 }

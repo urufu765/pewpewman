@@ -214,7 +214,7 @@ internal class MemoryDialogue : IRegisterable
                     new(new Wait{secs = 9})
                 ]
             }},
-            #if false
+            #if true
             // Tarmauc Memories
             { "Tarmauc_Memory_1", new(){
                 type = NodeType.@event,
@@ -343,7 +343,7 @@ internal class MemoryDialogue : IRegisterable
             }},
             {"Tarmauc_Memory_2_End_04", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemoryHermit",  // ???
+                bg = "BGPastTarmaucMemoryEvanescent",  // ???
                 dialogue = [
                     new(new SetBG{bg = "BGTarmaucShipAfter"}),
                 ]
@@ -364,7 +364,7 @@ internal class MemoryDialogue : IRegisterable
             }},
             {"Tarmauc_Memory_2_End_07", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemoryInfinity",  // ???
+                bg = "BGPastTarmaucMemoryIsekai",  // NANIIII
                 dialogue = [
                     new(new SetBG{bg = "BGTarmaucShipAfter"}),
                 ]
@@ -391,7 +391,7 @@ internal class MemoryDialogue : IRegisterable
             }},
             {"Tarmauc_Memory_2_End_10", new(){
                 type = NodeType.@event,
-                bg = "BGPastTarmaucMemoryJumper",  // True
+                bg = "BGPastTarmaucMemoryInfinity",  // True
                 dialogue = [
                     new(AmTarmauc, "teenneutral", "See you on the other side."),
                     new(AmWeth, "teentongueout", "Blegh, what a cliche line.", flipped:true),

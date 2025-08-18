@@ -727,5 +727,225 @@
 
             }
         }
+    },
+    "Roadkill": {
+        "deck": {
+            "Tarmauc":
+            {
+                "name": "Tarmauc",
+                "desc": "<c=79709a>TARMAUC</c>\nA pro space journeyman. His cards <c=keyword>accumulate damage</c> while giving sufficient <c=keyword>movement</c>. He also loves to <c=downside>play with fire</c>."
+            },
+            "Specials":
+            {
+                "name": "Tarmauc?",
+                "desc": "A special gift from another side..."
+            }
+        },
+        "trait": {
+            "Withal": {
+                "name": "Withal",
+                "desc": "On draw, draws another card."
+            }
+        },
+        "status": {
+            "Burn": {
+                "name": "Burn",
+                "desc": "Deals <c=damage>1</c> (+1 per <c=status>HEAT</c>) damage at the end of turn. Decreases by 1 at end of turn.\nCapped at 3. Any excess <c=status>BURN</c> is instead converted to 1 <c=status>BLISTER</c>.",
+                "real_desc": "Deals <c=damage>{{dmg}}</c> (+1 per <c=status>HEAT</c>) damage at the end of turn. Decreases by 1 at end of turn.\nCapped at 3. Any excess <c=status>BURN</c> is instead converted to 1 <c=status>BLISTER</c>."
+            },
+            "Blister": {
+                "name": "Blister",
+                "desc": "Take <c=damage>1</c> (+1 per <c=status>HEAT</c>) additional damage from attacks. Decreases by 1 at end of turn.",
+                "real_desc": "Take <c=damage>{{dmg}}</c> (+1 per <c=status>HEAT</c>) additional damage from attacks. Decreases by 1 at end of turn."
+            },
+            "Veto": {
+                "name": "Move Veto",
+                "desc": "Return to previous spot in {0} turns.\n<c=keyword>Triggers early if Move Veto is renewed.</c>"
+            }
+        },
+        "event": {
+            "ForeignCardOffering_Tarmauc": {
+                "locked": "Obtain one of {2} <c={0}>???</c> cards.",
+                "unlocked": "Obtain one of {2} <c={0}>{1}</c> cards."
+            },
+            "CrystallizedFriendEvent_Tarmauc": {
+                "desc": "Replace <c={0}>{1}</c> with <c={2}>{3}</c>"
+            }
+        },
+        "artifact": {
+            "Common": {
+                "DoubleBlind": {
+                    "name": "DOUBLE-BLIND",
+                    "desc": "Every turn, your first movement <c=keyword>right</c> gives 2 <c=status>TEMP SHIELD</c>, <c=downside>while your first movement <c=keyword>left</c> does 1 blockable hurt</c>."
+                },
+                "DelayedControlAid": {
+                    "name": "DELAYED CONTROL AID",
+                    "desc": "On the 10th turn of combat, gain 1 <c=status>TABLEFLIP</c>."
+                },
+                "BattleWeld": {
+                    "name": "BATTLE WELD",
+                    "desc": "<c=healing>+2</c> to heal amount when you heal during the first 10 turns of combat.\n<c=downside>-1 heal amount when healing outside combat.</c>"
+                },
+                "HeatSaturation": {
+                    "name": "HEAT SATURATOR",
+                    "desc": "Once per turn, reduce incoming or outgoing <c=status>HEAT</c> by 1."
+                }
+            },
+            "Boss": {
+                "Pyrotactics": {
+                    "name": "PYROTACTICS",
+                    "desc": "+2 overheat limit for all ships. <c=downside>Permanently lose 1 max hull when you overheat.</c>\n<c=keyword><c=artifact>PYROFORGER</c> cannot be obtained if you have <c=artifact>PYROTACTICS</c>.</c>"
+                },
+                "Pyroforger": {
+                    "name": "PYROFORGER",
+                    "desc": "Once per combat, gain 2 max hull when you overheat. <c=downside>-1 <c=status>BURN</c> and <c=status>BLISTER</c> base damage.</c>\n<c=keyword><c=artifact>PYROTACTICS</c> cannot be obtained if you have <c=artifact>PYROFORGER</c>.</c>"
+                },
+                "ChemicalFire":{
+                    "name": "CHEMICAL FIRE",
+                    "desc": "Overheating gives 1 <c=status>BURN</c>."
+                }
+            },
+            "EventOnly": {
+                "Catsup": {
+                    "name": "SPACE CATSUP",
+                    "desc": "+1 <c=status>EVADE</c> every turn as long as you don't spill it.\nIt's precariously balanced on the dashboard so make sure <c=keyword>not to move too fast</c>.",
+                    "desc_alt": "Ugh, it's everywhere now. Who's gonna clean it up?"
+                },
+                "TacticalGoggles": {
+                    "name": "TACTICAL GOGGLES",
+                    "desc": "Once per combat, 1 <c=status>OVERDRIVE</c> when you lose hull <c=keyword>while at full hull</c>.",
+                    "flavour": "<c=faint>With these on, danger became Tarmauc's middle name.</c>",
+                    "modifier": "You may be offered <c=keys>aggressive, energy efficient, yet dangerous</c> cards.",
+                    "first_time": "You get an ominous feeling that <c=keys>powerful, yet dangerous cards</c> may enter your deck."
+                },
+                "SoothingMask": {
+                    "name": "SOOTHING MASK",
+                    "desc": "Heal 1 hull at the end of combat if your hull is lower than 3.",
+                    "flavour": "<c=faint>Despite what the design might imply, these aren't for robbery.</c>",
+                    "modifier": "You may be offered <c=forcefield>less aggressive, better survival, yet limited</c> cards.",
+                    "first_time": "You get the feeling someone <c=forcefield>wants you to survive</c>, maybe adding such help to your deck."
+                },
+                "MagicalMonocle": {
+                    "name": "MAGICAL MONOCLE",
+                    "desc": "Once per combat, if you drew less than 5 cards by the end of the turn, gain 1 <c=status>DRAWNEXTTURN</c>.",
+                    "flavour": "<c=faint>Very fancy and premium, comes with a +3.0 prescription.</c>",
+                    "modifier": "You may be offered <c=7e51ce>always-shuffling, redrawing, yet riskier B upgrade</c> cards",
+                    "first_time": "You feel as though a <c=7e51ce>little bit of sleight of hand</c> may be added to your deck."
+                },
+                "HeartShapedGlasses": {
+                    "name": "HEART-SHAPED GLASSES",
+                    "desc": "At the start of <c=keyword>boss</c> combat, one random 1 cost card in hand gains <c=cardtrait>cheap</c>.",
+                    "flavour": "<c=faint>Wear only on occasions of either silly or silly romance.</c>",
+                    "modifier": "You may be offered <c=mapinfo>initially unplayable, unlockable through condition, yet stronger utility</c> cards",
+                    "first_time": "You feel a bit <c=mapinfo>more dependent on something or somebody</c> with what may be appended to the deck."
+                },
+                "VisionsNihility": {
+                    "name": "VISIONS OF NIHILITY",
+                    "desc": "<c=damage>+1 Hull and Max Hull for every battle you win.</c>\n<c=ff5165>+1 Base damage for every ship you destroy.</c>\n<c=redd>+1 Burn damage for every hope you crush.</c>\n<c=ff0000>+1 Blister damage for every life you extinguish.</c>\n<c=c92c66>Stacks indefinitely until you reach your goal.</c>",
+                    "flavour": "<c=faint>Show your selfish greed to make the past last forever. Show them that you're not messing around.</c>",
+                    "modifier": "You will be offered <c=></c> cards",
+                    "first_time": ""
+                }
+            }
+        },
+        "card": {
+            "common": {
+                "OptInPacer": {
+                    "name": "Opt-In Pacer"
+                },
+                "HeatedShot": {
+                    "name": "Heated Shot"
+                },
+                "HullBlister": {
+                    "name": "Hull Blister"
+                },
+                "QuickBoosters": {
+                    "name": "Quick Boosters"
+                },
+                "Whisk": {
+                    "name": "Whisk!"
+                },
+                "QuickFlip": {
+                    "name": "Quick Flip"
+                },
+                "SpaceSalt": {
+                    "name": "Space Salt"
+                },
+                "HeatCannon": {
+                    "name": "Heat Cannon"
+                }
+            },
+            "uncommon": {
+                "StutterShift": {
+                    "name": "Stutter-Shift"
+                },
+                "RugPull": {
+                    "name": "Rug Pull"
+                },
+                "HeatEqualizer": {
+                    "name": "Heat Equalizer"
+                },
+                "JogWheel": {
+                    "name": "Jogwheel"
+                },
+                "SaltedSalt": {
+                    "name": "Salted Salt"
+                },
+                "OuttaHere": {
+                    "name": "Outta Here!",
+                    "desc": "Move {{direction}} {{amount}}{{extra}}.\n1 <c=status>HEAT</c>.\n+{{addition}} move per intent on enemy ship.",
+                    "l": "left",
+                    "r": "right",
+                    "plus": "(+{{moar}})"
+                }
+            },
+            "rare": {
+                "HeatBurst": {
+                    "name": "HeatBurst"
+                },
+                "SuperBurn": {
+                    "name": "SuperBurn"
+                },
+                "Rapiburner": {
+                    "name": "Rapi-burn-r",
+                    "desc": "Fire <c=keyword>{{mult}}X</c> {{attack}} dmg 1 <c=status>{{modifier}}</c> attacks.\n+1 mult whenever this card is used this turn.",
+                    "heat": "HEAT",
+                    "burn": "BURN"
+                },
+                "BlastTime": {
+                    "name": "Blast of a Time"
+                }
+            },
+            "token": {
+                "Crank": {
+                    "name": "Crank It!",
+                    "love_desc": "\n\nHit the enemy <c=keyword>3</c> times to unlock this card."
+                },
+                "Bilk": {
+                    "name": "Bilk!",
+                    "love_desc": "\n\nStun an intent to unlock this card."
+                },
+                "Dumper": {
+                    "name": "Heat Dumper!",
+                    "love_desc": "\n\n\n\nDeal a total of 6 damage to unlock."
+                },
+                "ChaCha": {
+                    "name": "Cha Cha!",
+                    "desc": "{{damage}} atk {{move}} Move {{direction}}.\nFlip all cards in deck whenever this is played.",
+                    "l": "left",
+                    "r": "right"
+                },
+                "RubberBand": {
+                    "name": "Rubber Band",
+                    "desc": "3 <c=status>EVADE</c>.\nSave current position. After {{turns}} turns, return to this position."
+                },
+                "FourHunts": {
+                    "name": "4 Hunts",
+                    "desc": "<c=damage>{{attack}}</c> Attack.\nHunt 4 enemies with this to upgrade a chosen card.\nSelf-destructs after {{condition}}.",
+                    "upgrade": "upgrade",
+                    "uses": "10 uses"
+                }
+            }
+        }
     }
 }
