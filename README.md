@@ -10,6 +10,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
   * **dev.1**: en.json regrouping, file restructuring
   * **dev.2x**: (most of) Tarmauc cards
   * **dev.3x**: (most of) Tarmauc artifacts
+  * **dev.4x**: (most of) statuses except for Veto and one more card
   * *TODO 1*: Find a way to randomly assign which of the special deck ends up in Tarmauc's deck
   * *TODO 2*: Splitshot code stuff (Aattack subclass migration?)
   * *TODO 3*: Terminus: Surge
@@ -19,6 +20,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
   * *TODO 7*: Option to use older V2 relics
   * *TODO 8*: Fix piercing splitshot tooltip for clarification
   * *TODO 9*: Show Shockstack stuff on health bar
+  * *TODO 10*: Buff antique battery
 
 ### Release 1.1.0: Relic overhaul
 
