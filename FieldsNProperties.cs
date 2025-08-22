@@ -484,17 +484,22 @@ internal partial class ModEntry : SimpleMod
 
 
     private readonly static List<Type> RoadkillCommonArtifacts = [
-        //typeof(DoubleBlind),
+        typeof(DoubleBlind),
         typeof(DelayedControlAid),
         typeof(BattleWeld),
-        //typeof(HeatSaturation),
+        typeof(HeatSaturation),
     ];
     private readonly static List<Type> RoadkillBossArtifacts = [
         typeof(Pyrotactics),
-        //typeof(ChemicalFire),
+        typeof(ChemicalFire),
         typeof(Pyroforger),
     ];
     private readonly static List<Type> RoadkillEventArtifacts = [
+        typeof(TacticalGoggles),
+        typeof(SoothingMask),
+        typeof(MagicalMonocle),
+        typeof(HeartShapedGlasses),
+        typeof(VisionsNihility)
     ];
     private readonly static List<Type> RoadkillDuoArtifacts = [
     ];

@@ -42,6 +42,7 @@ public static class Artifacthider
     {
         try
         {
+            #region WETH
             if (!s.EnumerateAllArtifacts().Any(a => a is TreasureHunter) || s.EnumerateAllArtifacts().Any(a => a is TreasureSeeker))
             {
                 __result.Add(typeof(TreasureSeeker));
@@ -89,6 +90,18 @@ public static class Artifacthider
                     }
                 }
             }
+            #endregion
+
+            #region ROADKILL
+            if (s.EnumerateAllArtifacts().Any(a => a is Pyrotactics))
+            {
+                __result.Add(typeof(Pyroforger));
+            }
+            if (s.EnumerateAllArtifacts().Any(a => a is Pyroforger))
+            {
+                __result.Add(typeof(Pyrotactics));
+            }
+            #endregion
         }
         catch (Exception err)
         {

@@ -153,5 +153,24 @@ internal partial class ModEntry : SimpleMod
             original: typeof(State).GetMethod(nameof(State.SendArtifactToChar), AccessTools.all),
             postfix: new HarmonyMethod(typeof(WethRelicFourHelpers), nameof(WethRelicFourHelpers.DontAddFakeRelic))
         );
+
+        // DoubleBlind helper
+        harmony.Patch(
+            original: typeof(CardAction).GetMethod(nameof(CardAction.BeginOrRouteHelper), AccessTools.all),
+            postfix: new HarmonyMethod(typeof(DoubleBlindHelper), nameof(DoubleBlindHelper.CheckMovementAndAct))
+        );
+
+        // HeatSaturation helper
+        harmony.Patch(
+            original: typeof(AStatus).GetMethod(nameof(AStatus.Begin), AccessTools.all),
+            prefix: new HarmonyMethod(typeof(HeatSaturationHelper), nameof(HeatSaturationHelper))
+        );
+
+        // ChemicalFire helper
+        harmony.Patch(
+            original: typeof(AOverheat).GetMethod(nameof(AOverheat.Begin), AccessTools.all),
+            prefix: new HarmonyMethod(typeof(ChemicalFireHelper), nameof(ChemicalFireHelper.CheckOverheat)),
+            postfix: new HarmonyMethod(typeof(ChemicalFireHelper), nameof(ChemicalFireHelper.GiveBurnOnOverheat))
+        );
     }
 }

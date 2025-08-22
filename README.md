@@ -9,6 +9,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 * **(2.0.0)**: Introduces a new unlockable character: Tarmauc
   * **dev.1**: en.json regrouping, file restructuring
   * **dev.2x**: (most of) Tarmauc cards
+  * **dev.3x**: (most of) Tarmauc artifacts
   * *TODO 1*: Find a way to randomly assign which of the special deck ends up in Tarmauc's deck
   * *TODO 2*: Splitshot code stuff (Aattack subclass migration?)
   * *TODO 3*: Terminus: Surge
