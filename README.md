@@ -6,6 +6,8 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### Release 1.1.0: Relic overhaul
 
+* **(1.1.3)**: Unfixed the artifact removal bug
+
 * **(1.1.2)**: Code Cleanup + relic background transparent again + Piercing splitshot now has a "different" name + namespace fixes + fixed a crash in minefield event and the description + fixed Omnimote status going to the negatives
 
 * **(1.1.1)**: Space Urchin balance + hidden event adjustments + typo fixes
