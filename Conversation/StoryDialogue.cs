@@ -186,7 +186,32 @@ internal class StoryDialogue : IRegisterable
                     new(AmBooks, "Yes ma'am!", true)
                 ]
             }},
-
+            {"Weth_Roadkill_1", new(){
+                type = NodeType.@event,
+                lookup = ["zone_first"],
+                bg = "BGRunStart",
+                allPresent = [AmWeth, AmTarmauc],
+                priority = true,
+                once = true,
+                dialogue = [
+                    new(AmWeth, "tired", "..."),
+                    new(AmWeth, "squint", "Wow, the vertigo is insane on this one..."),
+                    new(AmTarmauc, "stare", "...", true),
+                    new(AmWeth, "neutral", "Umm hi?"),
+                    new(AmTarmauc, "offframe", "...", true),
+                    new(AmWeth, "hugsurprise", "!!!"),
+                    new(AmWeth, "hugweirdedout", "Uhh thanks?"),
+                    new(AmTarmauc, "hugweirdedout", "Sorry... gimme a moment..."),
+                    new(AmWeth, "hugweirdedout", "Uhh sure..."),
+                    new(AmWeth, "hugweirdedout", "..."),
+                    new(AmWeth, "hugpush", "Okay get off of me."),
+                    new(AmWeth, "pushhold", "... are you crying?"),
+                    new(AmTarmauc, "rubeyes", "*Sniff* No.", true),
+                    new(AmWeth, "squint", "Right."),
+                    new(AmTarmauc, "sad", "Sorry...", true),
+                    new(AmWeth, "dontcare", "Well as long as you apologize.")
+                ]
+            }},
         });
     }
 }

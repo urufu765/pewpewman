@@ -474,6 +474,54 @@ internal class MemoryDialogue : IRegisterable
                     new(AmTarmauc, "squint", "But there's nothing here.")
                 ]
             }},
+            {"Tarmauc_Memory_4", new(){
+                type = NodeType.@event,
+                introDelay = false,
+                bg = "BGTarmaucShip",
+                lookup = [
+                    "vault", $"vault_{AmTarmauc}"
+                ],
+                requiredScenes = [
+                    "Tarmauc_Memory_2", "Tarmauc_Memory_2_End_10"
+                ],
+                dialogue = [
+                    new("T+3 days"),
+                    new(new Wait{secs = 2}),
+                    new(title: null),
+                    new(new Wait{secs = 3}),
+                    // Show skippable artifact select screen if player dies or quits before completing the memory, where skipping just plays the dialogue below and selecting brings you straight to the battle and map. temporarily replace flavor text with "It welcomes you back"
+                    // Warps only to find the place surrounded by galactic police
+                    // Galactic police warn Tarmauc to back away
+                    // Tarmauc becoming unreasonable
+                    // Galactic police just telling Tarmauc to back off or else
+                    // A card slowly emerges from the bottom, shaking. It has one attack action and the number keeps changing randomly. Play to continue
+                    // Shoot the ship and blow it up.
+                    // Screen glitches
+                    // Find the unknown Nihilist artifact
+                    // Commense battle with police
+                    // A whole map containing mostly galactic police and some weird crystal glitch versions of the usual enemies
+                    // Multi-ship battle boss
+                    // Aftermath
+                    new(new BGAction{action = "TarmaucGoesOutAirLock"}),
+                    new(new BGAction{action = "TarmaucDriftsToWeth"}),
+                    new(new BGAction{action = "TarmaucHugs"}),
+                    new(new BGAction{action = "SlowFadeStartSoftPiano"}),  // Blackout lasts for 15
+                    new(new Wait{secs = 13}),
+                    new(new BGAction{action = "DistortTeleport"}),  // within 1 sec
+                    new(new Wait{secs = 2}),
+                    new(new SetBG{bg = "BGBeforeTheWorm"}),  // Piano continues playing, looping
+                    new("T-PERIKIDYEARS"),
+                    new(new Wait{secs = 2}),
+                    new(title: null),
+                    new(new Wait{secs = 3}),
+                    // Story about how Tarmauc got "chosen" as a candidate to be sent into a wormhole, being another one who is sacrificed for the greater good. Of course, being kids, the two have no idea of the real intention of the wormwhole traveler, while they talk about finding cool shit
+                    new(new BGAction{action = "Blackout"}),  // Sometime before this, change to nonlooping piano track so it ends right as the story ends
+                    new(new Wait{secs = 5}),
+                    new(AmWeth, "kidneutral", "And we'll be together forever and ever!")
+
+                    // Aaaaand roll credits!
+                ]
+            }},
             #endif
         });
     }
