@@ -5,6 +5,7 @@ using Weth.Actions;
 using StatusLogic = Shockah.Kokoro.IKokoroApi.IV2.IStatusLogicApi;
 using BBB = Weth.API.IArtifactModifyBurnBlisterBaseDamage;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace Weth.Features;
 
@@ -17,10 +18,10 @@ public class RoadkillBurnBlister : StatusLogic.IHook
     {
         ModEntry.Instance.KokoroApi.V2.StatusLogic.RegisterHook(this);
 
-        ModEntry.Instance.Harmony.Patch(
-            original: AccessTools.DeclaredMethod(typeof(Ship), nameof(Ship.OnAfterTurn)),
-            postfix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(CorrodeButBurn))
-        );
+        // ModEntry.Instance.Harmony.Patch(
+        //     original: AccessTools.DeclaredMethod(typeof(Ship), nameof(Ship.OnAfterTurn)),
+        //     postfix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(CorrodeButBurn))
+        // );
         ModEntry.Instance.Harmony.Patch(
             original: AccessTools.DeclaredMethod(typeof(Ship), nameof(Ship.NormalDamage)),
             prefix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(IncreaseNormalDamage))
@@ -30,16 +31,32 @@ public class RoadkillBurnBlister : StatusLogic.IHook
     public bool HandleStatusTurnAutoStep(StatusLogic.IHook.IHandleStatusTurnAutoStepArgs args)
     {
         if (args.Status != Burn && args.Status != Blister) return false;
+        if (args.Status == Burn && args.Timing != StatusLogic.StatusTurnTriggerTiming.TurnEnd) return false;
         if (args.Timing != StatusLogic.StatusTurnTriggerTiming.TurnStart) return false;
         if (args.Amount > 0) args.Amount--;
         return false;
+    }
+
+    public void OnStatusTurnTrigger(StatusLogic.IHook.IOnStatusTurnTriggerArgs args)
+    {
+        if (args.Status != Burn) return;
+        if (args.Timing != StatusLogic.StatusTurnTriggerTiming.TurnEnd) return;
+        if (args.OldAmount > 0)
+        {
+            ModEntry.Instance.Logger.LogInformation("BURN BABY");
+            args.Combat.QueueImmediate(new ABurnDamage
+            {
+                lastHeat = args.Ship.Get(Status.heat),
+                targetPlayer = args.Ship.isPlayerShip
+            });
+        }
     }
 
     public int ModifyStatusChange(StatusLogic.IHook.IModifyStatusChangeArgs args)
     {
         if (args.Status == Burn)
         {
-            if (args.NewAmount < args.OldAmount) return args.NewAmount;
+            //if (args.NewAmount < args.OldAmount) return args.NewAmount;
             if (args.NewAmount > BURN_MAX)
             {
                 int extra = args.NewAmount - BURN_MAX;
@@ -54,11 +71,16 @@ public class RoadkillBurnBlister : StatusLogic.IHook
     {
         if (__instance.Get(Burn) > 0)
         {
+            ModEntry.Instance.Logger.LogInformation("BURN BABY");
             c.QueueImmediate(new ABurnDamage
             {
                 lastHeat = __instance.Get(Status.heat),
                 targetPlayer = __instance.isPlayerShip
             });
+            if (__instance.Get(Status.timeStop) <= 0)
+            {
+                __instance.Add(Burn, -1);
+            }
         }
     }
 

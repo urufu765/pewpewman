@@ -19,7 +19,7 @@ public class HeatSaturation : Artifact
 
     public override Spr GetSprite()
     {
-        return Depleted ? StableSpr.artifacts_TestArtifact : base.GetSprite();
+        return Depleted ? ModEntry.Instance.SprArtHeatSaturationDepleted : base.GetSprite();
     }
 }
 

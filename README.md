@@ -12,7 +12,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
   * **dev.3x**: (most of) Tarmauc artifacts
   * **dev.4x**: (most of) statuses except for Veto and one more card
   * **dev.5x**: Just a bit more dialogue edits
-  * **dev.6*: The theme cards + veto + Placeholder so it's actually playable
+  * **dev.6**: The theme cards + veto + Placeholder so it's actually playable
   * *TODO 1*: Find a way to randomly assign which of the special deck ends up in Tarmauc's deck
   * *TODO 2*: Splitshot code stuff (Aattack subclass migration?)
   * *TODO 3*: Terminus: Surge

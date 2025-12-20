@@ -68,6 +68,6 @@ public class VisionsNihility : Artifact, IArtifactModifyBurnBlisterBaseDamage
     
     public override Spr GetSprite()
     {
-        return GoalReached ? StableSpr.artifacts_TestArtifact : base.GetSprite();
+        return GoalReached ? ModEntry.Instance.SprArtVisionsNihilityOff : base.GetSprite();
     }
 }

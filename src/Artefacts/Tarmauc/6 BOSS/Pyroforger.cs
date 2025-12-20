@@ -32,7 +32,7 @@ public class Pyroforger : Artifact, IArtifactModifyBurnBlisterBaseDamage
 
     public override Spr GetSprite()
     {
-        return Depleted? StableSpr.artifacts_TestArtifact : base.GetSprite();
+        return Depleted? ModEntry.Instance.SprArtPyroforgerDepleted : base.GetSprite();
     }
 
     public int ModifyBurnBaseDamage(State state, Combat combat, bool targetPlayer)

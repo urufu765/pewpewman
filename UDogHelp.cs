@@ -49,7 +49,7 @@ public static class UhDuhHundo
                 character.artifacts.RemoveAll(a => a.Key() == artifactType);
             }
         }
-        state.UpdateArtifactCache();
+        //state.UpdateArtifactCache();
     }
 
     public static void ArtifactRemover(State state, Artifact ar)
@@ -77,7 +77,7 @@ public static class UhDuhHundo
                 character.artifacts.RemoveAll(a => a.GetType() == ar.GetType());
             }
         }
-        state.UpdateArtifactCache();
+        //state.UpdateArtifactCache();
         // ModEntry.Instance.Logger.LogInformation("Grah");
     }
 

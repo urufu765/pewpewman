@@ -332,6 +332,11 @@ internal partial class ModEntry : SimpleMod
         typeof(MemoryDialogue)
     ];
 
+    public readonly static Dictionary<int, List<string>> WethRKStoryAnims = new()
+    {
+        
+    };
+
     private static List<string> Weth1Anims = [
         "crystallized",
         "feraldie",
@@ -443,6 +448,12 @@ internal partial class ModEntry : SimpleMod
     internal IStatusEntry BurnStatus { get; private set; } = null!;
     internal IStatusEntry BlisterStatus { get; private set; } = null!;
 
+    public Spr SprArtHeatSaturationDepleted { get; private set; }
+    public Spr SprArtMagicalMonocleDepleted { get; private set; }
+    public Spr SprArtPyroforgerDepleted { get; private set; }
+    public Spr SprArtTacticalGogglesDepleted { get; private set; }
+    public Spr SprArtVisionsNihilityOff { get; private set; }
+
     private readonly static List<Type> RoadkillCommonCardTypes = [
         typeof(OptInPacer),
         typeof(HeatedShot),
@@ -455,7 +466,7 @@ internal partial class ModEntry : SimpleMod
     ];
     private readonly static List<Type> RoadkillUncommonCardTypes = [
         typeof(StutterShift),
-        // typeof(RugPull),
+        typeof(RugPull),
         typeof(HeatEqualizer),
         typeof(JogWheel),
         typeof(SaltedSalt),
@@ -508,6 +519,16 @@ internal partial class ModEntry : SimpleMod
             .Concat(RoadkillBossArtifacts)
             .Concat(RoadkillEventArtifacts)
             .Concat(RoadkillDuoArtifacts);
+
+    public readonly static Dictionary<int, List<string>> RoadkillAnims = new()
+    {
+        {1, [
+            "mini",
+            "neutral",
+            "gameover",
+            "squint"
+        ]}
+    };
     #endregion
 
     private readonly static IEnumerable<Type> AllRegisterableTypes =

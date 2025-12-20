@@ -316,7 +316,7 @@ internal partial class ModEntry : SimpleMod
             helper.Content.Artifacts.RegisterArtifact(relic.Key.ToString(), UhDuhHundo.ArtifactRegistrationHelper(relic.Key, NewRelicSprites[relic.Key], WethDeck.Deck));
             helper.Content.Artifacts.RegisterArtifact(relic.Value.ToString(), UhDuhHundo.ArtifactRegistrationHelper(relic.Value, NewRelicSprites[relic.Key], WethDeck.Deck, relic.Key.Name));
         }
-        
+
         // Statuses for visual representation purposes.
         Relic_AntiqueCell = helper.Content.Statuses.RegisterStatus("RelicAntiqueCellStatus", new StatusConfiguration
         {
@@ -457,13 +457,21 @@ internal partial class ModEntry : SimpleMod
             Name = AnyLocalizations.Bind(["Roadkill", "deck", "Tarmauc", "name"]).Localize,
             ShineColorOverride = _ => new Color(0, 0, 0),  // Maybe don't remove shine for the base "replace" cards
         });
+
+        foreach (KeyValuePair<int, List<string>> anims in RoadkillAnims)
+        {
+            foreach (string anim in anims.Value)
+            {
+                RegisterAnimation(RoadkillDeck.Deck, package, anim, $"assets/Animation/roadkill_{anim}", anims.Key);
+            }
+        }
         BurnStatus = helper.Content.Statuses.RegisterStatus("BurnBabyBurn", new StatusConfiguration
         {
             Definition = new StatusDef
             {
                 isGood = false,
                 color = new Color("FF0000"),
-                icon = StableSpr.icons_heat  // TODO: Replace
+                icon = RegisterSprite(package, "assets/Icon/Blaze.png").Sprite
             },
             Name = AnyLocalizations.Bind(["Roadkill", "status", "Burn", "name"]).Localize,
             Description = AnyLocalizations.Bind(["Roadkill", "status", "Burn", "desc"]).Localize
@@ -473,8 +481,8 @@ internal partial class ModEntry : SimpleMod
             Definition = new StatusDef
             {
                 isGood = false,
-                color = new Color("FF0000"),
-                icon = StableSpr.icons_heat  // TODO: Replace
+                color = new Color("FFAA00"),
+                icon = RegisterSprite(package, "assets/Icon/Blister.png").Sprite
             },
             Name = AnyLocalizations.Bind(["Roadkill", "status", "Blister", "name"]).Localize,
             Description = AnyLocalizations.Bind(["Roadkill", "status", "Blister", "desc"]).Localize
@@ -482,7 +490,7 @@ internal partial class ModEntry : SimpleMod
         RoadkillWow = helper.Content.Characters.V2.RegisterPlayableCharacter("roadkill", new PlayableCharacterConfigurationV2
         {
             Deck = RoadkillDeck.Deck,
-            BorderSprite = StableSpr.panels_char_colorless,  // TODO: REPLACE
+            BorderSprite = RegisterSprite(package, "assets/Frames/char_frame_roadkill.png").Sprite,
             Starters = new StarterDeck
             {
                 cards = [
@@ -530,6 +538,13 @@ internal partial class ModEntry : SimpleMod
             }
             helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite, deck));
         }
+        SprArtHeatSaturationDepleted = RegisterSprite(package, "assets/Artifact/HeatSaturationDepleted.png").Sprite;
+        SprArtMagicalMonocleDepleted = RegisterSprite(package, "assets/Artifact/MagicalMonocleDepleted.png").Sprite;
+        SprArtPyroforgerDepleted = RegisterSprite(package, "assets/Artifact/PyroforgerDepleted.png").Sprite;
+        SprArtTacticalGogglesDepleted = RegisterSprite(package, "assets/Artifact/TacticalGogglesDepleted.png").Sprite;
+        SprArtVisionsNihilityOff = RegisterSprite(package, "assets/Artifact/VisionsNihilityOff.png").Sprite;
+
+        _ = new RoadkillBurnBlister();
 
         #endregion
 
@@ -576,5 +591,18 @@ internal partial class ModEntry : SimpleMod
                 .ToImmutableList()
         });
     }
+
+    public static ICharacterAnimationEntryV2 RegisterAnimation(Deck deck, IPluginPackage<IModManifest> package, string tag, string dir, int frames)
+    {
+        return Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
+        {
+            CharacterType = deck.Key(),
+            LoopTag = tag,
+            Frames = Enumerable.Range(0, frames)
+                .Select(i => RegisterSprite(package, dir + i + ".png").Sprite)
+                .ToImmutableList()
+        });
+    }
+
 }
 

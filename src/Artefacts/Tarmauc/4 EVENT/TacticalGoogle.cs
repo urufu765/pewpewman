@@ -31,7 +31,7 @@ public class TacticalGoggles : Artifact
 
     public override Spr GetSprite()
     {
-        return CanTactical || DemoMode ? base.GetSprite() : StableSpr.artifacts_TestArtifact;
+        return CanTactical || DemoMode ? base.GetSprite() : ModEntry.Instance.SprArtTacticalGogglesDepleted;
     }
 
     public override void OnPlayerLoseHull(State state, Combat combat, int amount)

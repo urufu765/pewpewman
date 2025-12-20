@@ -163,7 +163,7 @@ internal partial class ModEntry : SimpleMod
         // HeatSaturation helper
         harmony.Patch(
             original: typeof(AStatus).GetMethod(nameof(AStatus.Begin), AccessTools.all),
-            prefix: new HarmonyMethod(typeof(HeatSaturationHelper), nameof(HeatSaturationHelper))
+            prefix: new HarmonyMethod(typeof(HeatSaturationHelper), nameof(HeatSaturationHelper.HeatReducer))
         );
 
         // ChemicalFire helper

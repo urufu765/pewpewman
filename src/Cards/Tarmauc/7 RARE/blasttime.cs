@@ -20,14 +20,13 @@ public class BlastTime : TarmaucCard, IRegisterable
                 deck = ModEntry.Instance.RoadkillDeck.Deck
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Roadkill", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, $"assets/card/7/{MethodBase.GetCurrentMethod()!.DeclaringType!.Name}.png").Sprite
+            //Art = ModEntry.RegisterSprite(package, $"assets/card/7/{MethodBase.GetCurrentMethod()!.DeclaringType!.Name}.png").Sprite
         });
     }
 
 
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        int b = c.otherShip.Get(Status_burn) + c.otherShip.Get(Status_blister);
         return upgrade switch
         {
             Upgrade.B =>

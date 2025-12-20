@@ -27,7 +27,7 @@ public class Rapiburner : TarmaucCard, IRegisterable, IHasCustomCardTraits
                 deck = ModEntry.Instance.RoadkillDeck.Deck
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Roadkill", "card", rare.ToString(), CallMe, "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, $"assets/card/7/{CallMe}.png").Sprite
+            //Art = ModEntry.RegisterSprite(package, $"assets/card/7/{CallMe}.png").Sprite
         });
     }
 

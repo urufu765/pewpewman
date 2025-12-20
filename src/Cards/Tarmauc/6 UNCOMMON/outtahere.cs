@@ -22,7 +22,7 @@ public class OuttaHere : TarmaucCard, IRegisterable, IHasCustomCardTraits
                 deck = ModEntry.Instance.RoadkillDeck.Deck
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Roadkill", "card", rare.ToString(), CallMe, "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, $"assets/card/6/{CallMe}.png").Sprite
+            //Art = ModEntry.RegisterSprite(package, $"assets/card/6/{CallMe}.png").Sprite
         });
         ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.None, 2);
         ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.A, 2);

@@ -21,7 +21,7 @@ public class OptInPacer : TarmaucCard, IRegisterable
                 deck = ModEntry.Instance.RoadkillDeck.Deck
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Roadkill", "card", rare.ToString(), MethodBase.GetCurrentMethod()!.DeclaringType!.Name, "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, $"assets/card/5/{MethodBase.GetCurrentMethod()!.DeclaringType!.Name}.png").Sprite
+            //Art = ModEntry.RegisterSprite(package, $"assets/card/5/{MethodBase.GetCurrentMethod()!.DeclaringType!.Name}.png").Sprite
         });
         fourSlot = StableSpr.cards_colorless;
     }

@@ -44,20 +44,20 @@ public abstract class TarmaucCard : Card
     /// <param name="v"></param>
     public override void ExtraRender(G g, Vec v)
     {
-        double rarity_xOffset = -8.0;
-        double rarity_yOffset = -9.0;
-        CardMeta cm = GetMeta();
-        DeckDef dd = DB.decks[cm.deck];
-        // Rarity drawing portion
-        Draw.Sprite(
-            cm.rarity switch
-            {
-                _ => StableSpr.cardShared_rare,
-            },
-            v.x + rarity_xOffset,
-            v.y + rarity_yOffset,
-            color: dd.color.gain(0.4)
-        );
+        // double rarity_xOffset = -8.0;
+        // double rarity_yOffset = -9.0;
+        // CardMeta cm = GetMeta();
+        // DeckDef dd = DB.decks[cm.deck];
+        // // Rarity drawing portion
+        // Draw.Sprite(
+        //     cm.rarity switch
+        //     {
+        //         _ => StableSpr.cardShared_rare,
+        //     },
+        //     v.x + rarity_xOffset,
+        //     v.y + rarity_yOffset,
+        //     color: dd.color.gain(0.4)
+        // );
     }
 
     /// <summary>

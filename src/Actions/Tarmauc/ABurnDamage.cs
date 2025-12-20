@@ -1,4 +1,5 @@
 using FSPRO;
+using Microsoft.Extensions.Logging;
 using System.Linq;
 using BBB = Weth.API.IArtifactModifyBurnBlisterBaseDamage;
 
@@ -11,6 +12,7 @@ public class ABurnDamage : CardAction
 
     public override void Begin(G g, State s, Combat c)
     {
+        ModEntry.Instance.Logger.LogInformation("BWAAAH");
         timer *= 2;  // ACorrode does it so why shouldn't this?
         Ship ship = targetPlayer ? s.ship : c.otherShip;
         if (ship is null) return;
@@ -22,7 +24,7 @@ public class ABurnDamage : CardAction
         }
 
         // Bonus damage from heat
-        damage += lastHeat ?? ship.Get(Status.heat);
+        damage += lastHeat ?? ship.Get(Status.heat);  // Likely redundant since lastHeat is always set?
         // Maybe change formula to
         // damage += ship.Get(Status.heat) == 0? lastHeat ?? 0 : ship.Get(Status.heat)
         // Or instead of seeing if zero, compare with lastHeat and pick the bigger of the two
