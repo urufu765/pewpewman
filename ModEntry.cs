@@ -66,7 +66,7 @@ internal partial class ModEntry : SimpleMod
         };
         helper.Events.OnLoadStringsForLocale += (_, thing) =>
         {
-            foreach (KeyValuePair<string, string> entry in localDB.GetLocalizationResults())
+            foreach (KeyValuePair<string, string> entry in localDB.GetLocalizationResults(thing.Locale))
             {
                 thing.Localizations[entry.Key] = entry.Value;
             }

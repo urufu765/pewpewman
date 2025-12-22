@@ -758,6 +758,26 @@ internal class CombatDialogue : IRegisterable, IDialogueRegisterable
                     new(AmWeth, "explain", "I'd actually rather not.")
                 ]
             }},
+            {"TheyGotTarnished_Weth_0", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                allPresent = [AmWeth],
+                lastTurnEnemyStatusNames = ["urufudoggo.Illeana::Tarnish"],
+                dialogue = [
+                    new(AmWeth, "lockedin", "Oh I am SO on board with 'everything is a brittle spot'!")
+                ]
+            }},
+            {"IlleanaJustUsedTheOnlyAttackCardInHerDeck_0", new(){
+                type = NodeType.combat,
+                allPresent = [AmIlleana, AmWeth],
+                oncePerCombatTags = ["DidIlleanaJustUseTheOnlyAttackCardInHerEntireFrigginDeckOrSomethingAndMissWithItLikeWowWhatAStupidSnekAmIRight"],
+                playerShotJustMissed = true,
+                whoDidThatName = AmIlleana,
+                dialogue = [
+                    new(AmWeth, "explain", "Hey, why don't you leave the shooting to the gal with the gun?"),
+                    new(AmIlleana, "squint", "Do you want a face full of acid?")
+                ]
+            }}
         });
     }
 

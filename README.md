@@ -29,6 +29,7 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
   - **dev.*: Scrollable choices (and undo the event choice replacements)
   - **dev.*: Roadkill abstract card with different Energy API integration
   - **dev.*: Move Terminus artifacts out of boss and into boot options!
+  - **dev.2**: Some artifact file reorganization, DialogueMachine 0.21 -> Added support for deck or status finding by UniqueName
   - **dev.1**: en.json regrouping, file restructuring
 
 ### Release 1.1.0: Relic overhaul
