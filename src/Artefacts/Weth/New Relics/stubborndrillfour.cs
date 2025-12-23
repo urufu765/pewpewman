@@ -33,7 +33,7 @@ public class StubbornDrill : WethRelicFour
     }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly])]
 public class StubbornDrillFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(StubbornDrill);

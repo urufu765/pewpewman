@@ -60,7 +60,7 @@ public class SpaceUrchin : WethRelicFour
     }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased, ArtifactPool.Boss])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly, ArtifactPool.Boss])]
 public class SpaceUrchinFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(SpaceUrchin);

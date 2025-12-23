@@ -36,7 +36,7 @@ public class StructuralStone : WethRelicFour
     }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased, ArtifactPool.Boss])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly, ArtifactPool.Boss])]
 public class StructuralStoneFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(StructuralStone);

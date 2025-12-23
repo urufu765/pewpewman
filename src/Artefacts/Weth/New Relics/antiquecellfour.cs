@@ -10,6 +10,7 @@ public class AntiqueCell : WethRelicFour
 {
     public const int TURNS = 3;
 
+    // Special: Every two turns instead of three
 
     public override void OnTurnStart(State state, Combat combat)
     {
@@ -18,7 +19,7 @@ public class AntiqueCell : WethRelicFour
             combat.QueueImmediate(new AStatus
             {
                 status = Status.energyFragment,
-                statusAmount = Amount,
+                statusAmount = GetAmount(),
                 targetPlayer = true,
                 artifactPulse = Key(),
                 statusPulse = ModEntry.Instance.NewRelicStatuses[GetType()]
@@ -34,7 +35,7 @@ public class AntiqueCell : WethRelicFour
     }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly])]
 public class AntiqueCellFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(AntiqueCell);

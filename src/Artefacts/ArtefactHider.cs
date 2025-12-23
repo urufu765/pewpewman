@@ -59,7 +59,7 @@ public static class Artifacthider
             NewRelicCounterparts.Keys: All the "real" relics (the ones that store the relic stacks)
             NewSpecialRelicCounterparts.Values: All the special fake relics (since they shouldn't be able to be drawn normally)
             */
-            __result = [.. __result, .. hideByDefault, .. ModEntry.NewRelicCounterparts.Keys, .. ModEntry.NewSpecialRelicCounterparts.Values];
+            __result = [.. __result, .. hideByDefault, .. ModEntry.NewRelicCounterparts.Keys, .. ModEntry.NewSpecialRelicCounterparts.Values, typeof(SpaceCrystalFake)];
 
             // Hide Space Relics version 2 relics if version 2 is not present. (basically has to be cheated in)
             if (!s.EnumerateAllArtifacts().Any(a => a is SpaceRelics2))

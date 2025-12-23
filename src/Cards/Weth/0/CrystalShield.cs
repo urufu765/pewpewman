@@ -23,6 +23,7 @@ public class CryShield : Card, IRegisterable
                 deck = ModEntry.Instance.GoodieDeck.Deck,
                 rarity = Rarity.rare,
                 dontOffer = true,
+                unreleased = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Weth", "card", "Token", "Shoulder", "name"]).Localize,
             Art = StableSpr.cards_BoostCapacitors

@@ -21,6 +21,7 @@ public class CryAhtack : Card, IRegisterable
                 rarity = Rarity.common,
                 upgradesTo = [Upgrade.A],
                 dontOffer = true,
+                unreleased = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Weth", "card", "Token", "Ahtack", "name"]).Localize,
             Art = StableSpr.cards_Cannon

@@ -6,6 +6,8 @@ namespace Weth.Artifacts;
 [ArtifactMeta(pools = [ArtifactPool.Unreleased])]
 public class UsefulScrap : WethRelicFour
 {
+    // special: Gain 1 max hull every 3 scraps collected
+
     public override void GainStack(State state, bool? special = null)
     {
         base.GainStack(state, special);
@@ -18,7 +20,7 @@ public class UsefulScrap : WethRelicFour
     }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly])]
 public class UsefulScrapFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(UsefulScrap);

@@ -7,7 +7,6 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 ### Expansion 2.0.0: From Another Reality
 
 - **(2.0.0)**: Introducing the new unlockable character: Codename ROADKILL
-  - **dev.*: Show Shockstack stuff on health bar
   - **dev.*: Option to use older V2 relics
   - **dev.*: Difficulty based relic power adjustment
   - **dev.*: Allow the Terminus Jaunt to affect Combat QoL
@@ -23,12 +22,23 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
   - **dev.*: Special upgrade C (theme cards)
   - **dev.*: Roadkill General Artifacts
   - **dev.*: Electrostatic status
-  - **dev.*: Relic now shows up in the Codex
+  - **dev.*: Relic now shows up in the Codex in a separate section
   - **dev.*: Even more relics!
-  - **dev.*: Weth card balance changes
   - **dev.*: Scrollable choices (and undo the event choice replacements)
   - **dev.*: Roadkill abstract card with different Energy API integration
-  - **dev.*: Move Terminus artifacts out of boss and into boot options!
+  - **dev.3**: Removal of all goodies, in comes the more relic focused stuff of a CRYSTAL WETH!
+    - All goodies are now in the trash (but the dialogues remain for now)
+    - Terminus artifacts are no longer offered as boss artifacts, and instead offered as a zone 1 boss reward
+    - Bloom nerf
+      - Base: Are now setters both to 1
+      - A: No longer retains
+      - B: Sets minidrive to 1
+    - Crisis Call
+      - Now Uncommon, costs 0 across the board, no longer gives goodies, A now retains
+    - Discovery
+      - Gone.
+    - New Rare Card: Crystal Surprise! Get a Crystal Surprise stackable artifact that goes away at the end of combat.
+    - Fixed the wrong loopTag being used in one dialogue, and the dialogue not being flipped in another.
   - **dev.2**: Some artifact file reorganization, DialogueMachine 0.21 -> Added support for deck or status finding by UniqueName
   - **dev.1**: en.json regrouping, file restructuring
 

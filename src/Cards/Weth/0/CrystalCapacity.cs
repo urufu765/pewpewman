@@ -21,6 +21,7 @@ public class CryCapacity : Card, IRegisterable
                 rarity = Rarity.uncommon,
                 upgradesTo = [Upgrade.A],
                 dontOffer = true,
+                unreleased = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Weth", "card", "Token", "Captain", "name"]).Localize,
             Art = StableSpr.cards_BoostCapacitors

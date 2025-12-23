@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using OneOf.Types;
+using Weth.Actions;
+using Weth.Cards;
+
+
+namespace Weth.Artifacts;
+
+[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
+public class TreasureSeekerOld : TreasureHunterOld
+{
+    public override bool GetAdvanced()
+    {
+        return true;
+    }
+
+    public override string GetArtifactKey()
+    {
+        return Key();
+    }
+
+    public override bool CanBeDepleted()
+    {
+        return true;
+    }
+
+    public override int GetHitsRequired()
+    {
+        return 5;
+    }
+
+    public override Upgrade GetUpgrade()
+    {
+        return Upgrade.A;
+    }
+
+    public override void OnReceiveArtifact(State state)
+    {
+        UhDuhHundo.ArtifactRemover(ref state, typeof(TreasureHunter).Name);
+    }
+}

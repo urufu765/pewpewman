@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nickel;
 using OneOf.Types;
 using Weth.Actions;
 using Weth.API;
@@ -10,42 +9,8 @@ using Weth.Cards;
 
 namespace Weth.Artifacts;
 
-
-public enum WethEventState
-{
-    /// <summary>
-    /// For repeatable events with no limits
-    /// </summary>
-    Repeatable,
-    /// <summary>
-    /// For events that can only be done once
-    /// </summary>
-    OneTime,
-    /// <summary>
-    /// If one time event is active
-    /// </summary>
-    Active,
-    /// <summary>
-    /// If one time event's requirements are fulfilled and is ready for reward
-    /// </summary>
-    Success,
-    /// <summary>
-    /// If one time event is done and finished
-    /// </summary>
-    Complete,
-    /// <summary>
-    /// If one time event's fail condition is met
-    /// </summary>
-    Failed,
-    /// <summary>
-    /// If event is not available
-    /// </summary>
-    Unavailable
-}
-
-
-[ArtifactMeta(pools = [ArtifactPool.EventOnly])]
-public class TreasureHunter : Artifact
+[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
+public class TreasureHunterOld : Artifact, IArtifactWethGoodieUncommonRestrictor
 {
     public static class WethEvents
     {
@@ -60,9 +25,11 @@ public class TreasureHunter : Artifact
     public int noStardogMissiles = 0;
     public int stoneAwakeTurnsTaken = 0;
 
+    public int SuccessfulHits { get; set; }
+    public bool Depleted { get; set; }
     public Dictionary<string, WethEventState> SpecialEvents { get; set; } = new Dictionary<string, WethEventState>
     {
-        {WethEvents.Crystal, WethEventState.Unavailable},
+        {WethEvents.Crystal, WethEventState.Repeatable},
         {WethEvents.Duncan, WethEventState.OneTime},
         {WethEvents.AquaticLifeform, WethEventState.OneTime},
         {WethEvents.Stardog, WethEventState.OneTime},
@@ -75,6 +42,16 @@ public class TreasureHunter : Artifact
     /// Null = normal, False = Elite, True = Boss
     /// </summary>
     public bool? isBossNotElite;
+
+    public override int? GetDisplayNumber(State s)
+    {
+        return SuccessfulHits;
+    }
+
+    public virtual int GetHitsRequired()
+    {
+        return 10;
+    }
 
     /// <summary>
     /// Either allow just Boss rewards, or both Boss and Elite rewards
@@ -90,8 +67,44 @@ public class TreasureHunter : Artifact
         return Key();
     }
 
+    public virtual bool CanBeDepleted()
+    {
+        return true;
+    }
+
+    public virtual Upgrade GetUpgrade()
+    {
+        return Upgrade.None;
+    }
+
+    public override Spr GetSprite()
+    {
+        return SuccessfulHits >= GetHitsRequired() ? ModEntry.Instance.SprArtTHDepleted : base.GetSprite();
+    }
+
     public override void OnEnemyGetHit(State state, Combat combat, Part? part)
     {
+        if (SuccessfulHits < GetHitsRequired()) SuccessfulHits++;
+        if (SuccessfulHits >= GetHitsRequired() && !Depleted)
+        {
+            combat.QueueImmediate(
+                new AGiveGoodieLikeAGoodBoy
+                {
+                    fromArtifact = true,
+                    artifactKey = GetArtifactKey(),
+                    upgrade = GetUpgrade(),
+                    betterOdds = GetAdvanced()
+                }
+            );
+            if (CanBeDepleted())
+            {
+                Depleted = true;
+            }
+            else
+            {
+                SuccessfulHits = 0;
+            }
+        }
         EnemyGetHitEventUpdater(state, combat, part);
     }
 
@@ -120,46 +133,56 @@ public class TreasureHunter : Artifact
                 CurrentEvent = type;
             }
         }
-        if (state?.map?.markers[state.map.currentLocation]?.contents is MapBattle mb)
-        {
-            isBossNotElite = mb.battleType switch
-            {
-                BattleType.Elite => false,
-                BattleType.Boss => true,
-                _ => null
-            };
-        }
+        // if (state?.map?.markers[state.map.currentLocation]?.contents is MapBattle mb)
+        // {
+        //     isBossNotElite = mb.battleType switch
+        //     {
+        //         BattleType.Elite => false,
+        //         BattleType.Boss => true,
+        //         _ => null
+        //     };
+        // }
     }
 
     public override void OnCombatEnd(State state)
     {
-        if (isCrystal && isBossNotElite is true && !PlayerHasTerminus(state))
-        {
-            state.rewardsQueue.QueueImmediate(new AWethMultipleArtifactOffering
-            {
-                artifacts = [new TerminusJaunt(), new TerminusMilestone()]
-            });
-        }
+        SuccessfulHits = 0;
+        Depleted = false;
         DoHiddenEvent(state);
-    }
-
-    public static bool PlayerHasTerminus(State state)
-    {
-        if (state.EnumerateAllArtifacts().Any(a => a is TerminusJaunt or TerminusMilestone)) return true;
-        return false;
     }
 
     public override List<Tooltip>? GetExtraTooltips()
     {
-        return 
-        [
-            new GlossaryTooltip("TreasureHunterTerminus")
-            {
-                Title = ModEntry.Instance.Localizations.Localize(["Weth", "artifact", "Unreleased", "TerminusPlaceholder", "name"]),
-                TitleColor = Colors.artifact,
-                Description = ModEntry.Instance.Localizations.Localize(["Weth", "artifact", "Unreleased", "TerminusPlaceholder", "desc"])
-            }
-        ];
+        return isCrystal ?
+            [
+                new TTCard
+                {
+                    card = new CryPlaceholder
+                    {
+                        upgrade = GetUpgrade()
+                    },
+                    showCardTraitTooltips = true
+                }] :
+            [
+                new TTCard
+                {
+                    card = new MechPlaceholder
+                    {
+                        upgrade = GetUpgrade()
+                    },
+                    showCardTraitTooltips = true
+                }
+            ];
+    }
+
+    public bool DoIImposeGoodieUncommonRestriction()
+    {
+        return true;
+    }
+
+    public bool DoIOverrideGoodieUncommonRestriction()
+    {
+        return false;
     }
 
 

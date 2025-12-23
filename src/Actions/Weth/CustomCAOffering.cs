@@ -87,6 +87,36 @@ public class AWethSingleArtifactOffering : CardAction
         return base.GetTooltips(s);
     }
 }
+public class AWethMultipleArtifactOffering : CardAction
+{
+    public required List<Artifact> artifacts;
+    public bool canSkip = true;
+    public bool showTooltips = true;
+
+    public override Route? BeginWithRoute(G g, State s, Combat c)
+    {
+        timer = 0.0;
+        return new ArtifactReward
+        {
+            artifacts = [.. artifacts],
+            canSkip = this.canSkip
+        };
+    }
+
+    public override List<Tooltip> GetTooltips(State s)
+    {
+        if (showTooltips)
+        {
+            List<Tooltip> tt = [];
+            foreach(Artifact a in artifacts)
+            {
+                tt.AddRange(a.GetTooltips());
+            }
+            return tt;
+        }
+        return base.GetTooltips(s);
+    }
+}
 
 
 public class AWethRandomSingleCardCycleUpgrade : CardAction

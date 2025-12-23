@@ -29,3 +29,4 @@ public class ALoseRelic : CardAction
         return relic.GetTooltips();
     }
 }
+

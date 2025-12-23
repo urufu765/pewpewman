@@ -48,7 +48,7 @@ public class HeraldNihility : WethRelicFour
     }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased, ArtifactPool.Boss])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly, ArtifactPool.Boss])]
 public class HeraldNihilityFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(HeraldNihility);

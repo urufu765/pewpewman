@@ -10,21 +10,44 @@ namespace Weth.Artifacts;
 public class ShockStack : WethRelicFour
 {
     public List<int> ShockPoints { get; set; } = [];
+    public int OldAmount {get;set;}
 
+    // Shock stack visible in HP bar
 
     public override void OnCombatStart(State state, Combat combat)
     {
+        OldAmount = GetAmount();
         ShockPoints = [];
         if (combat.otherShip is not null && combat.otherShip.hullMax > 1)
         {
             ShockPoints = [
-                .. Enumerable.Range(0, Amount)
+                .. Enumerable.Range(0, GetAmount())
                 .Select(_ => (int)Math.Floor(state.rngActions.Next() * (combat.otherShip.hullMax - 2)) + 1)
                 .Distinct()
             ];
         }
 
         state.ship.Set(ModEntry.Instance.NewRelicStatuses[GetType()], ShockPoints.Count);
+    }
+
+    public override void UpdateStack(State state, bool? special = null, int uncounted = 0)
+    {
+        if (state.route is Combat c && c.otherShip.hull > 1)
+        {
+            for (int x = 0; x < GetAmount() + uncounted - OldAmount; x++)
+            {
+                for (int attempt = 0; attempt < 3; attempt++)
+                {
+                    int tryShock = (int)Math.Floor(state.rngActions.Next() * (c.otherShip.hull - 2)) + 1;
+                    if (!ShockPoints.Contains(tryShock))
+                    {
+                        ShockPoints.Add(tryShock);
+                        break;
+                    }
+                }
+            }
+        }
+        base.UpdateStack(state, special, uncounted);
     }
 
 
@@ -67,7 +90,7 @@ public class ShockStack : WethRelicFour
 }
 
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly])]
 public class ShockStackFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(ShockStack);

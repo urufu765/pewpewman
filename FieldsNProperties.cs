@@ -121,7 +121,8 @@ internal partial class ModEntry : SimpleMod
         {typeof(PewPewGun), typeof(PewPewGunFake)},
         {typeof(ShockStack), typeof(ShockStackFake)},
         {typeof(UsefulScrap), typeof(UsefulScrapFake)},
-        {typeof(Omnimote), typeof(OmnimoteFake)}
+        {typeof(Omnimote), typeof(OmnimoteFake)},
+        {typeof(SpaceCrystal), typeof(SpaceCrystalFake)}
     };
 
     public static Dictionary<Type, Type> NewSpecialRelicCounterparts { get; private set; } = new Dictionary<Type, Type>
@@ -153,7 +154,8 @@ internal partial class ModEntry : SimpleMod
         {typeof(DeadFish), 0},
         {typeof(PageantRibbon), 0},
         {typeof(AstroGrass), 0},
-        {typeof(StructuralStone), 0}
+        {typeof(StructuralStone), 0},
+        {typeof(SpaceCrystal), 0}
     };
 
     public Dictionary<Type, Spr> NewRelicIcons { get; set; } = new Dictionary<Type, Spr>
@@ -168,7 +170,8 @@ internal partial class ModEntry : SimpleMod
         {typeof(DeadFish), 0},
         {typeof(PageantRibbon), 0},
         {typeof(AstroGrass), 0},
-        {typeof(StructuralStone), 0}
+        {typeof(StructuralStone), 0},
+        {typeof(SpaceCrystal), 0}
     };
 
     public Dictionary<Type, Status> NewRelicStatuses { get; set; } = new Dictionary<Type, Status>
@@ -215,19 +218,20 @@ internal partial class ModEntry : SimpleMod
         typeof(DoubleTap),
         typeof(Disabler),
         typeof(ScatterTrash),
-        typeof(Discovery),
+        //typeof(Discovery),
         typeof(Powershot),
         typeof(Spreadshot),
         typeof(Bloom),
+        typeof(CrisisCall),
         typeof(FeralBlast),
         typeof(MirageBlast)
     ];
     private readonly static List<Type> WethRareCardTypes = [
         typeof(UnstoppableForce),
         typeof(PearlDispenser),
-        typeof(CrisisCall),
         typeof(PowPow),
-        typeof(ExtremeViolence)
+        typeof(ExtremeViolence),
+        typeof(CrystalSurprise)
     ];
     private readonly static List<Type> WethSpecialCardTypes = [
         typeof(CryAhtack),

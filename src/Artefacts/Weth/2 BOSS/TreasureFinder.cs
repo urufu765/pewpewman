@@ -8,7 +8,7 @@ using Weth.Cards;
 
 namespace Weth.Artifacts;
 
-[ArtifactMeta(pools = [ArtifactPool.Common])]
+[ArtifactMeta(pools = [ArtifactPool.Boss])]
 public class TreasureSeeker : TreasureHunter
 {
     public override bool GetAdvanced()
@@ -19,21 +19,6 @@ public class TreasureSeeker : TreasureHunter
     public override string GetArtifactKey()
     {
         return Key();
-    }
-
-    public override bool CanBeDepleted()
-    {
-        return true;
-    }
-
-    public override int GetHitsRequired()
-    {
-        return 5;
-    }
-
-    public override Upgrade GetUpgrade()
-    {
-        return Upgrade.A;
     }
 
     public override void OnReceiveArtifact(State state)

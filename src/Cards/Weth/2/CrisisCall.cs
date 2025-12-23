@@ -9,7 +9,7 @@ namespace Weth.Cards;
 /// <summary>
 /// Oh No!
 /// </summary>
-public class CrisisCall : WCRare, IRegisterable
+public class CrisisCall : WCUncommon, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -19,10 +19,10 @@ public class CrisisCall : WCRare, IRegisterable
             Meta = new CardMeta
             {
                 deck = ModEntry.Instance.WethDeck.Deck,
-                rarity = Rarity.rare,
+                rarity = Rarity.uncommon,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["Weth", "card", "Rare", "CrisisCall", "name"]).Localize,
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["Weth", "card", "Uncommon", "CrisisCall", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/3/crisiscall.png").Sprite
         });
     }
@@ -64,20 +64,7 @@ public class CrisisCall : WCRare, IRegisterable
                     status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Pulsedrive,
                     statusAmount = 2,
                     targetPlayer = true
-                },
-                ModEntry.Instance.KokoroApi.V2.SpoofedActions.MakeAction(
-                    new AAddCard
-                    {
-                        card = name.ToLower().Contains("crystal")? new CryPlaceholder() : new MechPlaceholder(),
-                        destination = CardDestination.Discard,
-                        amount = 2,
-                    },
-                    new AGiveGoodieLikeAGoodBoy
-                    {
-                        amount = 2,
-                        destination = CardDestination.Discard
-                    }
-                ).AsCardAction
+                }
             ],
         };
     }
@@ -98,21 +85,22 @@ public class CrisisCall : WCRare, IRegisterable
                 cost = 0,
                 singleUse = true,
                 artTint = "4ab3ff",
-                artOverlay = ModEntry.Instance.WethRare
+                artOverlay = ModEntry.Instance.WethUncommon
             },
             Upgrade.A => new CardData
             {
                 cost = 0,
                 exhaust = true,
+                retain = true,
                 artTint = "4ab3ff",
-                artOverlay = ModEntry.Instance.WethRare
+                artOverlay = ModEntry.Instance.WethUncommon
             },
             _ => new CardData
             {
-                cost = 1,
+                cost = 0,
                 exhaust = true,
                 artTint = "4ab3ff",
-                artOverlay = ModEntry.Instance.WethRare
+                artOverlay = ModEntry.Instance.WethUncommon
             }
         };
     }

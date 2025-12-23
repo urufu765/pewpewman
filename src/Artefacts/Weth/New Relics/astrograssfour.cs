@@ -12,7 +12,7 @@ public class AstroGrass : WethRelicFour
     }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased, ArtifactPool.Boss])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly, ArtifactPool.Boss])]
 public class AstroGrassFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(AstroGrass);

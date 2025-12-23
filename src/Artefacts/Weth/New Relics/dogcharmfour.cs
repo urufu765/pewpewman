@@ -13,7 +13,7 @@ public class DogCharm : WethRelicFour
             combat.QueueImmediate(new AStatus
             {
                 status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Underdrive,
-                statusAmount = Amount,
+                statusAmount = GetAmount(),
                 targetPlayer = false,
                 artifactPulse = Key()
             });
@@ -28,7 +28,7 @@ public class DogCharm : WethRelicFour
     }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly])]
 public class DogCharmFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(DogCharm);

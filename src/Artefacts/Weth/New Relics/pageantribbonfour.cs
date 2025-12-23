@@ -55,7 +55,7 @@ public class PageantRibbon : WethRelicFour
     }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased, ArtifactPool.Boss])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly, ArtifactPool.Boss])]
 public class PageantRibbonFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(PageantRibbon);

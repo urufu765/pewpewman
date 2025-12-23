@@ -10,7 +10,7 @@ public class Omnimote : WethRelicFour
 {
     public override void OnTurnStart(State state, Combat combat)
     {
-        if (combat.turn <= Amount)
+        if (combat.turn <= GetAmount())
         {
             combat.QueueImmediate(new AStatus
             {
@@ -31,7 +31,7 @@ public class Omnimote : WethRelicFour
     }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly])]
 public class OmnimoteFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(Omnimote);

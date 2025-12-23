@@ -42,10 +42,11 @@ public class Bloom : WCUncommon, IRegisterable
                 {
                     status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Minidrive,
                     statusAmount = 1,
-                    targetPlayer = true
+                    targetPlayer = true,
+                    mode = AStatusMode.Set
                 }
             ],
-            _ => 
+            Upgrade.A => 
             [
                 new AStatus
                 {
@@ -60,6 +61,23 @@ public class Bloom : WCUncommon, IRegisterable
                     targetPlayer = true
                 }
             ],
+            _ => 
+            [
+                new AStatus
+                {
+                    status = Status.stunCharge,
+                    statusAmount = 1,
+                    targetPlayer = true,
+                    mode = AStatusMode.Set
+                },
+                new AStatus
+                {
+                    status = ModEntry.Instance.KokoroApi.V2.DriveStatus.Minidrive,
+                    statusAmount = 1,
+                    targetPlayer = true,
+                    mode = AStatusMode.Set
+                }
+            ],
         };
     }
 
@@ -68,14 +86,6 @@ public class Bloom : WCUncommon, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.A => new CardData
-            {
-                cost = 1,
-                infinite = true,
-                retain = true,
-                artTint = "ffc47b",
-                artOverlay = ModEntry.Instance.WethUncommon
-            },
             _ => new CardData
             {
                 cost = 1,

@@ -21,6 +21,7 @@ public class MechSwap : Card, IRegisterable
                 rarity = Rarity.common,
                 upgradesTo = [Upgrade.A],
                 dontOffer = true,
+                unreleased = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Weth", "card", "Token", "Swaparoo", "name"]).Localize,
             Art = StableSpr.cards_QuickThinking

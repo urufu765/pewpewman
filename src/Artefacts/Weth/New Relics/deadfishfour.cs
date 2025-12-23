@@ -42,7 +42,7 @@ public class DeadFish : WethRelicFour
     }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased, ArtifactPool.Boss])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly, ArtifactPool.Boss])]
 public class DeadFishFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(DeadFish);

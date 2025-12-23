@@ -20,6 +20,7 @@ public class MechHull : Card, IRegisterable
                 deck = ModEntry.Instance.GoodieDeck.Deck,
                 rarity = Rarity.rare,
                 dontOffer = true,
+                unreleased = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Weth", "card", "Token", "Hell", "name"]).Localize,
             Art = StableSpr.cards_BoostCapacitors

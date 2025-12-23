@@ -10,10 +10,14 @@ public class PewPewGun : WethRelicFour
 {
     public int ShotsLeft { get; set; }
 
+    public int OldAmount {get;set;}
+
+    // Special: Increase attack damage by 1
+
     public override void OnCombatStart(State state, Combat combat)
     {
         base.OnCombatStart(state, combat);
-        ShotsLeft = Amount;
+        ShotsLeft = OldAmount = GetAmount();
     }
 
     public override void OnPlayerPlayCard(int energyCost, Deck deck, Card card, State state, Combat combat, int handPosition, int handCount)
@@ -30,9 +34,19 @@ public class PewPewGun : WethRelicFour
             ShotsLeft--;
         }
     }
+
+    public override void UpdateStack(State state, bool? special = null, int uncounted = 0)
+    {
+        if (state.route is Combat)
+        {
+            ShotsLeft += GetAmount() + uncounted - OldAmount;
+            OldAmount = GetAmount() + uncounted;
+        }
+        base.UpdateStack(state, special, uncounted);
+    }
 }
 
-[ArtifactMeta(pools = [ArtifactPool.Unreleased])]
+[ArtifactMeta(pools = [ArtifactPool.EventOnly])]
 public class PewPewGunFake : WethRelicFourFake
 {
     public override Type RealRelicType => typeof(PewPewGun);

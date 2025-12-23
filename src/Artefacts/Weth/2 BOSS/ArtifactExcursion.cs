@@ -11,7 +11,7 @@ using Weth.Cards;
 namespace Weth.Artifacts;
 
 
-[ArtifactMeta(pools = [ ArtifactPool.Boss ])]
+[ArtifactMeta(pools = [ ArtifactPool.EventOnly ])]
 public class TerminusMilestone : TheTerminus
 {
     public int Stage {get; set;}

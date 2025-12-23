@@ -12,7 +12,7 @@ using Weth.Cards;
 namespace Weth.Artifacts;
 
 
-[ArtifactMeta(pools = [ ArtifactPool.Boss ])]
+[ArtifactMeta(pools = [ ArtifactPool.EventOnly ])]
 public class TerminusJaunt : TheTerminus
 {
     private const int Goal = 5;

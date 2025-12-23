@@ -11,8 +11,14 @@ namespace Weth.Artifacts;
 public abstract class WethRelicFour : Artifact
 {
     public int Amount { get; set; }
+    public int BonusAmount {get;set;}
     public bool Special { get; set; }
     public string? firstStack;
+
+    public virtual int GetAmount()
+    {
+        return Amount + BonusAmount;
+    }
 
     public virtual void GainStack(State state, bool? special = null)
     {
@@ -23,9 +29,25 @@ public abstract class WethRelicFour : Artifact
         }
     }
 
+    public virtual void UpdateStack(State state, bool? special = null, int uncounted = 0)
+    {
+        if (ModEntry.Instance.NewRelicStatuses.ContainsKey(GetType()))
+        {
+            state.ship.Set(ModEntry.Instance.NewRelicStatuses[GetType()], GetAmount() + uncounted);
+        }
+    }
+
     public override int? GetDisplayNumber(State s)
     {
-        return Amount;
+        if (s.EnumerateAllArtifacts().Find(a => a is SpaceCrystal) is SpaceCrystal sc)
+        {
+            BonusAmount = sc.Amount;
+        }
+        else
+        {
+            BonusAmount = 0;
+        }
+        return GetAmount();
     }
 
     public override Spr GetSprite()
@@ -45,7 +67,7 @@ public abstract class WethRelicFour : Artifact
     {
         if (ModEntry.Instance.NewRelicStatuses.ContainsKey(GetType()))
         {
-            state.ship.Set(ModEntry.Instance.NewRelicStatuses[GetType()], Amount);
+            state.ship.Set(ModEntry.Instance.NewRelicStatuses[GetType()], GetAmount());
         }
     }
 
@@ -55,6 +77,11 @@ public abstract class WethRelicFour : Artifact
         {
             GainStack(state);
         }
+    }
+
+    public override void OnCombatEnd(State state)
+    {
+        BonusAmount = 0;
     }
 }
 
@@ -119,7 +146,7 @@ public static class WethRelicFourHelpers
         }
         else if (__instance is WethRelicFour wrfx)
         {
-            __result[0] = RelicTooltip(wrfx.GetType(), wrfx.Amount, false, special:wrfx.Special);
+            __result[0] = RelicTooltip(wrfx.GetType(), wrfx.GetAmount(), false, special:wrfx.Special);
         }
     }
 

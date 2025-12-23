@@ -1078,7 +1078,7 @@ internal class ArtifactDialogue : IRegisterable
                 lookup = ["wethStimuliActive"],
                 allPresent = [AmWeth],
                 dialogue = [
-                    new(AmWeth, "lockedon", "Aww yeah! Let's blow stuff up!")
+                    new(AmWeth, "lockedin", "Aww yeah! Let's blow stuff up!")
                 ]
             }},
             { "ArtifactCalculatedWhiffWeth_Multi_0", new(){

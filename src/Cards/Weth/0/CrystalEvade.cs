@@ -21,6 +21,7 @@ public class CryEvade : Card, IRegisterable
                 rarity = Rarity.common,
                 upgradesTo = [Upgrade.A],
                 dontOffer = true,
+                unreleased = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Weth", "card", "Token", "Evado", "name"]).Localize,
             Art = StableSpr.cards_Dodge

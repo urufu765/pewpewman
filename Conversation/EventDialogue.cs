@@ -23,7 +23,7 @@ internal class EventDialogue : IRegisterable
                 bg = "BGBootSequence",
                 dialogue = [
                     new(AmWeth, "surprise", "ACK! Ow?!"),
-                    new(AmVoid, "You have been a good girl. Have a crystal."),
+                    new(AmVoid, "You have been a good girl. Have a crystal.", true),
                     new(AmWeth, "crystallolipop", "Oh. Yay!"),
                     new(AmCat, "Energy readings are back to normal.")
                 ]

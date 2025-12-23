@@ -20,7 +20,9 @@ public class Discovery : WCUncommon, IRegisterable
             {
                 deck = ModEntry.Instance.WethDeck.Deck,
                 rarity = Rarity.uncommon,
-                upgradesTo = [Upgrade.A, Upgrade.B]
+                upgradesTo = [Upgrade.A, Upgrade.B],
+                dontOffer = true,
+                unreleased = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["Weth", "card", "Uncommon", "Discovery", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/2/discovery.png").Sprite
