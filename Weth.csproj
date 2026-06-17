@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Weth</RootNamespace>
-		<Version>2.0.0-dev.3</Version>
+		<Version>1.2.0-dev.4</Version>
 
 		<TargetFramework>net8.0</TargetFramework>
 		<LangVersion>12.0</LangVersion>
@@ -16,7 +16,7 @@
 	<ItemGroup>
 		<ModFiles Include="assets/**" />
 		<ModFiles Include="i18n/**" />
-		<PackageReference Include="Nickel.ModBuildConfig" Version="2.1.0" />
+		<PackageReference Include="Nickel.ModBuildConfig" Version="2.1.2" />
 		<PackageReference Include="EnumByNameSourceGenerator" Version="1.1.2" />
 	</ItemGroup> 
 	<ItemGroup>

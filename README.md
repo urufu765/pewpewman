@@ -6,16 +6,13 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
 
 ### Expansion 2.0.0: From Another Reality
 
-- **(2.0.0)**: Introducing the new unlockable character: Codename ROADKILL
+- **(2.0.0)*: Introducing the new unlockable character: Codename ROADKILL
   - **dev.*: Option to use older V2 relics
   - **dev.*: Difficulty based relic power adjustment
   - **dev.*: Allow the Terminus Jaunt to affect Combat QoL
   - **dev.*: Option to change some regular asteroids in asteroid belts to giant/mega asteroids using option
   - **dev.*: Terminus: Surge
   - **dev.*: Splitshot code stuff (Aattack subclass migration?)
-  - **dev.*: DialogueMachine 0.20 migration
-  - **dev.*: Splitshot balance changes (no more three split pierce), Hyper Caliber Round artifact gives that effect instead
-  - **dev.*: Relic balance changes (antique battery)
   - **dev.*: Roadkill Story
   - **dev.*: Roadkill Dialogue (milksoda cat laugh don't forget)
   - **dev.*: Roadkill Sprites
@@ -23,9 +20,24 @@ A treasure hunter who just so happens to arm himself with a heavy machine gun.
   - **dev.*: Roadkill General Artifacts
   - **dev.*: Electrostatic status
   - **dev.*: Relic now shows up in the Codex in a separate section
-  - **dev.*: Even more relics!
-  - **dev.*: Scrollable choices (and undo the event choice replacements)
   - **dev.*: Roadkill abstract card with different Energy API integration
+
+### Expansion 1.2.0: The Enfocusening
+
+- **(1.2.0)**:
+  - **dev.*: What if a super rock that is invincible for 1 turn, then explodes itself?
+  - **dev.*: DialogueMachine 0.20 migration
+  - **dev.*: Relic balance changes (antique battery)
+  - **dev.*: Even more relics!
+    - Damage Deescalator
+    - Rock Enbiggener
+    - Boo Boo Bandage
+  - **dev.*: Scrollable choices (and undo the event choice replacements)
+  - **dev.*: Removal of Terminus (for now), Treasure Hunter/Seeker instead give a relic after every 10/5 combat wins
+  - **dev.*: The Nihility needs a title
+  - **dev.*: Madcap charge tooltip
+  - **dev.*: Some relics need tooltip
+  - **dev.4**: Splitshot balance changes (no more three split pierce), Hyper Caliber Round artifact gives that effect instead
   - **dev.3**: Removal of all goodies, in comes the more relic focused stuff of a CRYSTAL WETH!
     - All goodies are now in the trash (but the dialogues remain for now)
     - Terminus artifacts are no longer offered as boss artifacts, and instead offered as a zone 1 boss reward
